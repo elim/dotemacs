@@ -6,6 +6,6 @@
 	(progn
 	  (setq flavor 'emacs21)
 	  (add-to-list 'load-path
-		       "/usr/local/share/emacs/21.3/site-lisp")
+		       "/usr/local/share/emacs/site-lisp")
 	  (debian-startup 'emacs21)
 	  (debian-startup 'emacs21))))

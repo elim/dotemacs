@@ -1,16 +1,15 @@
-;-*- emcs-lisp -*-
+;-*- emacs-lisp -*-
+;-*- encoding: iso-2022-jp -*-
 ;$Id$
-;language-env が生成してくれたものを分離.
-; 日本語環境
-(set-language-environment "Japanese")
-(set-default-coding-systems 'euc-japan-unix)
-(set-keyboard-coding-system 'euc-japan-unix)
-(if (not window-system) (set-terminal-coding-system 'euc-japan-unix))
+;(set-language-environment "Japanese")
+;(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
 
-; 日本語 info が文字化けしないように
-(auto-compression-mode t)
+(setq default-buffer-file-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
 
-; 日本語 grep
-(if (file-exists-p "/usr/bin/jgrep")
-    (setq grep-command "jgrep -n -e ")
-)
+(set-keyboard-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(setq prefer-coding-system 'utf-8)
+
+

@@ -1,4 +1,5 @@
 ;-*- emcs-lisp -*-
+;
 (autoload 'wl "wl" "Wanderlust" t)
 (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
 (autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
@@ -14,6 +15,15 @@
 ; サマリで送り先を表示するフォルダ
 (setq wl-summary-showto-folder-regexp "^\\%INBOX.Sent$")
 (setq wl-demo-background-color "#ccccff")
+
+
+(eval-after-load
+    "mime-edit"
+  '(let ((text (assoc "text" mime-content-types)))
+     (set-alist 'text "plain"
+                '(("charset" "" "ISO-2022-JP" "US-ASCII"
+                   "ISO-8859-1" "ISO-8859-8" "UTF-8")))
+     (set-alist 'mime-content-types "text" (cdr text))))
 
 ; emacs の defualt MUA に。
 ;(autoload 'wl-user-agent-compose "wl-draft" nil t)
