@@ -1,10 +1,10 @@
 ;-*- emcs-lisp -*-
-
+; $Id$
 ; Xでのカラー表示
 (require 'font-lock)
 (if (not (featurep 'xemacs))
-    (global-font-lock-mode t)
-)
+    (global-font-lock-mode t))
+
 ;; goto-line
 (global-set-key "\C-cg" 'goto-line)
 
@@ -28,10 +28,6 @@
 
 ;; バッファの最後で newline で新規行を追加するのを禁止する
 (setq next-line-add-newlines nil)
-
-;; browse-url
-(global-set-key [(hyper m)] 'browse-url-at-point)
-(global-set-key "\C-xm" 'browse-url-at-point)
 
 ;; 同一ファイル名のバッファ名を分かりやすく
 (require 'uniquify)

@@ -4,4 +4,4 @@
 (setq tdiary-diary-list '(("l" "http://localhost/%7Etakeru/private_log/")
 			  ("x" "http://elim.s27.xrea.com/LifeLog/" "index.cgi" "update.cgi")))
 
-(setq html-helper-build-new-buffer nil)
+(setq psgml-html-build-new-buffer nil)

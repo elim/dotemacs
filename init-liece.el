@@ -1,4 +1,5 @@
 ;-*- emcs-lisp -*-
+;$Id;
 (setq liece-ask-for-nickname t)
 (setq liece-ask-for-password t)
 (setq liece-beep-on-bells nil)

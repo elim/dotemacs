@@ -1,9 +1,10 @@
 ;-*- emcs-lisp -*-
+; $Id$
 (add-hook 'html-helper-mode-hook
 	  '(lambda () (set-file-coding-system *euc-jp-unix*)))
 
 (setq html-helper-do-write-file-hooks   t
-      html-helper-build-new-buffer      t
+      html-helper-build-new-buffer      nil
       html-helper-basic-offset          1
       html-helper-item-continue-indent  2
       html-helper-address-string        "elim@teroknor.org")

@@ -1,4 +1,6 @@
 ;-*- emcs-lisp -*-
+;$Id$
+;language-env が生成してくれたものを分離.
 ; 日本語環境
 (set-language-environment "Japanese")
 (set-default-coding-systems 'euc-japan-unix)
