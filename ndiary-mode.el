@@ -63,7 +63,7 @@
 ;;   このモードでM-x ndiary-upload (C-cC-u) すればuploadもできます. 
 ;;   (ああ、もちろんuploadするツールの設定は自分でやってくださいね. )
 ;; ----------------------------------------------------------------------
-;; $Id: ndiary-mode.el,v 1.12 2003/01/31 16:33:05 neko Exp $
+;; $Id$
 
 ;; ndiary-mode requires APEL.
 (require 'path-util)

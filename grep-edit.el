@@ -1,6 +1,6 @@
 ;; -*- Mode: Emacs-Lisp -*-
 
-;;  $Id: grep-edit.el,v 1.9 2004/01/13 11:34:53 akihisa Exp $
+;;  $Id$
 
 ;; Author: Matsushita Akihisa <akihisa@mail.ne.jp>
 ;; Keywords: grep edit
