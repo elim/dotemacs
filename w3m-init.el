@@ -1,4 +1,4 @@
-;-*- emcs-lisp -*-
+;$Id$ -*- emcs-lisp -*-
 (setq w3m-tab-width 4)
 (setq w3m-use-cookies t)
 (setq w3m-use-toolbar t)
