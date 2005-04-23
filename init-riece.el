@@ -1,6 +1,6 @@
 ;-*- emcs-lisp -*-
 ; $Id$
-(setq riece-server-alist '(("Tiarra" :host "logic.fascinating.lan")))
+(setq riece-server-alist '(("Tiarra" :host "elim.teroknor.org")))
 (setq riece-server "Tiarra")
 (setq riece-channel-buffer-mode 't)
 (setq riece-user-list-buffer-mode 't)

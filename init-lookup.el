@@ -1,5 +1,6 @@
 ;-*- emcs-lisp -*-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; $Id$
+
 (autoload 'lookup "lookup" nil t)
 (autoload 'lookup-word "lookup" nil t)
 (autoload 'lookup-region "lookup" nil t)
@@ -20,5 +21,5 @@
 	(vertical-scroll-bars . nil)))
 
 (setq lookup-search-agents
-      '((ndtp "localhost")
+      '((ndtp "elim.teroknor.org")
 	(ndspell)))

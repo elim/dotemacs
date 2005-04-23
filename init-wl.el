@@ -1,31 +1,23 @@
 ;-*- emcs-lisp -*-
-;
+;-*- encoding: iso-2022-jp -*-
+;$Id$;
 (autoload 'wl "wl" "Wanderlust" t)
 (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
 (autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
 
-;;ø∂§Í ¨§±Ω‡»˜
+;;$B?6$jJ,$1=`Hw(B
 (autoload 'elmo-split "elmo-split" "Split messages on the folder." t)
-; procmail §À•–•»•Û•ø•√•¡°£
+; procmail $B$K%P%H%s%?%C%A!#(B
 
 (setq wl-biff-check-folder-list '("%INBOX")
       wl-biff-check-interval 30
       wl-biff-notify-hook '(ding))
 
-; •µ•ﬁ•Í§«¡˜§Í¿Ë§Ú…Ωº®§π§Î•’•©•Î•¿
+; $B%5%^%j$GAw$j@h$rI=<($9$k%U%)%k%@(B
 (setq wl-summary-showto-folder-regexp "^\\%INBOX.Sent$")
 (setq wl-demo-background-color "#ccccff")
 
-
-(eval-after-load
-    "mime-edit"
-  '(let ((text (assoc "text" mime-content-types)))
-     (set-alist 'text "plain"
-                '(("charset" "" "ISO-2022-JP" "US-ASCII"
-                   "ISO-8859-1" "ISO-8859-8" "UTF-8")))
-     (set-alist 'mime-content-types "text" (cdr text))))
-
-; emacs §Œ defualt MUA §À°£
+; emacs $B$N(B defualt MUA $B$K!#(B
 ;(autoload 'wl-user-agent-compose "wl-draft" nil t)
 ;; (if (boundp 'mail-user-agent)
 ;;     (setq mail-user-agent 'wl-user-agent))

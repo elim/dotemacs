@@ -3,6 +3,11 @@
 
 ;; @@ 基本の設定
 
+(setq skk-count-private-jisyo-candidates-exactly t)
+(setq skk-server-jisyo "/usr/local/share/skk/SKK-JISYO.L")
+(setq skk-server-prog "/cygwin/usr/local/sbin/skkserv.rb")
+(setq skk-share-private-jisyo t)
+
 ;; Mule 2.3 (Emacs 19) を使っている場合は必要
 ;; (require 'skk-setup)
 

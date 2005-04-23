@@ -4,7 +4,7 @@
 (setq w3m-tab-width 4)
 (setq w3m-use-cookies t)
 (setq w3m-use-toolbar t)
-(setq w3m-home-page "http://localhost/%7Etakeru/antenna/index.html")
+(setq w3m-home-page "http://elim.teroknor.org/%7Etakeru/pukiwiki/")
 (setq w3m-weather-default-area "道央・石狩")
 
 (global-set-key "\C-cs" 'w3m-search)
