@@ -35,5 +35,9 @@
 (load "init-wget.el")
 (load "init-wl.el")
 
-;(load "ndiary-mode-init.el")
+(if (featurep 'meadow)
+    (load "init-meadow.el")
+  nil)
+
 ;(load "fontset-init.el")
+;(load "ndiary-mode-init.el")

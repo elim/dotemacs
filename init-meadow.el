@@ -1,6 +1,13 @@
 ;-*- emcs-lisp -*-
 ; $Id: init-ddskk.el 69 2004-12-06 13:36:24Z takeru $
 
+(setq-default line-spacing 2)
+
+(require 'riece)
+(require 'skk-setup)
+(require 'skk)
+(load "~/dot.files/.skk")
+
 (w32-add-font
  "BDF M+"
  '((strict-spec
@@ -20,4 +27,26 @@
      (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus_j12i.bdf"))
     ((:char-spec japanese-jisx0208 :height any :weight bold :slant italic)
      (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus_j12bi.bdf")))))
-(set-default-font "BDF M+")
+
+
+(w32-add-font
+ "shinonome 14"
+ '((strict-spec
+    ((:char-spec ascii :height any)
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnm7x14r.bdf"))
+    ((:char-spec ascii :height any :weight bold)
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnm7x14rb.bdf"))
+    ((:char-spec ascii :height any :slant italic)
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnm7x14ri.bdf"))
+    ((:char-spec ascii :height any :weight  bold :slant italic)
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnm7x14rbi.bdf"))
+    ((:char-spec japanese-jisx0208 :height any)
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnmk14.bdf"))
+    ((:char-spec japanese-jisx0208 :height any :weight bold)
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnmk14b.bdf"))
+    ((:char-spec japanese-jisx0208 :height any :slant italic)
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnmk14i.bdf"))
+    ((:char-spec japanese-jisx0208 :height any :weight bold :slant italic)
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnmk14bi.bdf")))))
+
+(set-default-font "shinonome 14")

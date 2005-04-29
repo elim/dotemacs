@@ -6,5 +6,7 @@
 
 (setq browse-url-browser-display nil)
 (setq browse-url-browser-function 'browse-url-generic)
-(setq browse-url-generic-program "/home/takeru/bin/firefox")
+(if (featurep 'meadow)
+    (setq browse-url-generic-program "c:/Program Files/Mozilla Firefox/firefox.exe")
+  (setq browse-url-generic-program "/home/takeru/bin/firefox"))
 (setq browse-url-new-window-flag nil)
