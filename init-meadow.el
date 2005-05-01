@@ -1,10 +1,12 @@
 ;-*- emcs-lisp -*-
-; $Id: init-ddskk.el 69 2004-12-06 13:36:24Z takeru $
+; $Id$
 
 (setq-default line-spacing 2)
 
-(require 'riece)
+(autoload 'riece "riece" nil t)
 (require 'skk-setup)
+(require 'w3m-load)
+(require 'lookup)
 (require 'skk)
 (load "~/dot.files/.skk")
 

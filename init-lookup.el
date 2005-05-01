@@ -21,5 +21,5 @@
 	(vertical-scroll-bars . nil)))
 
 (setq lookup-search-agents
-      '((ndtp "elim.teroknor.org")
+      '((ndtp "elim.teroknor.org" :port 2010)
 	(ndspell)))
