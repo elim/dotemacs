@@ -1,4 +1,4 @@
-;-*- emcs-lisp -*-
+;-*- emacs-lisp -*-
 ; $Id$
 
 (autoload 'lookup "lookup" nil t)
@@ -19,6 +19,13 @@
 	(width . 80) (height . 35)
 	(top . 5) (left . -10)
 	(vertical-scroll-bars . nil)))
+
+(if (featurep 'meadow)
+    (progn(setq ndspell-ispell-program
+		"c:/Cygwin/opt/ispell-3.3.01/bin/ispell.exe")
+	  (setq ndspell-grep-program
+		"c:/Cygwin/usr/bin/grep.exe"))
+  nil)
 
 (setq lookup-search-agents
       '((ndtp "elim.teroknor.org" :port 2010)

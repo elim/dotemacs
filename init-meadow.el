@@ -6,7 +6,6 @@
 (autoload 'riece "riece" nil t)
 (require 'skk-setup)
 (require 'w3m-load)
-(require 'lookup)
 (require 'skk)
 (load "~/dot.files/.skk")
 
