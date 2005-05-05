@@ -1,14 +1,6 @@
 ;-*- emcs-lisp -*-
 ; $Id$
 
-(setq-default line-spacing 2)
-
-(autoload 'riece "riece" nil t)
-(require 'skk-setup)
-(require 'w3m-load)
-(require 'skk)
-(load "~/dot.files/.skk")
-
 (w32-add-font
  "BDF M+"
  '((strict-spec

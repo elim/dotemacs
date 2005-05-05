@@ -1,5 +1,8 @@
 ;-*- emcs-lisp -*-
 ; $Id$
+
+(autoload 'riece "riece" nil t)
+
 (setq riece-server-alist '(("Tiarra" :host "elim.teroknor.org")))
 (setq riece-server "Tiarra")
 (setq riece-channel-buffer-mode 't)
@@ -15,9 +18,6 @@
 
 (setq riece-keywords '("Elim" "elim" "えりむ" "エリム"
 		       "えろり" "えろむ" "女の敵"))
-
-
-
 
 (if (featurep 'meadow)
     nil

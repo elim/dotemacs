@@ -6,6 +6,8 @@
 
 (load "init-japanese.el")
 
+(load "init-color.el")
+
 (load "auto-save-buffers.el")
 (load "completions-highlight.el")
 (load "make-file-executable.el")

@@ -26,6 +26,8 @@
 ;; 桁番号を表示する
 (column-number-mode t)
 
+(setq-default line-spacing 2)
+
 ;; バッファの最後で newline で新規行を追加するのを禁止する
 (setq next-line-add-newlines nil)
 
