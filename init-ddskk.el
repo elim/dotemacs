@@ -12,6 +12,8 @@
 (autoload 'skk-isearch-mode-setup "skk-isearch" nil t)
 (autoload 'skk-isearch-mode-cleanup "skk-isearch" nil t)
 
+(setq skk-indicator-use-cursor-color nil)
+
 (if (featurep 'meadow)
     (setq skk-init-file (expand-file-name "~/dot.files/.skk")) nil)
 

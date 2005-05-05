@@ -1,12 +1,12 @@
 ;-*- emacs-lisp -*-
 ; $Id$
-(setq custom-file "~/lib/site-lisp/customize.el")
+(setq custom-file
+      (expand-file-name "~/lib/site-lisp/customize.el"))
 
 (load "init-emacs-cvs.el")
 
 (load "init-japanese.el")
 
-(load "init-color.el")
 
 (load "auto-save-buffers.el")
 (load "completions-highlight.el")
@@ -41,5 +41,6 @@
     (load "init-meadow.el")
   nil)
 
+(load "init-color.el")
 ;(load "fontset-init.el")
 ;(load "ndiary-mode-init.el")
