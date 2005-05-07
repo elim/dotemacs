@@ -26,6 +26,13 @@
 ;; 桁番号を表示する
 (column-number-mode t)
 
+;; メニューを消す
+(menu-bar-mode nil)
+
+;; スクロールバーを消す
+(scroll-bar-mode nil)
+
+;; window system では行間を空ける
 (setq-default line-spacing 2)
 
 ;; バッファの最後で newline で新規行を追加するのを禁止する

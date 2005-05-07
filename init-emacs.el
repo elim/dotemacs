@@ -7,7 +7,6 @@
 
 (load "init-japanese.el")
 
-
 (load "auto-save-buffers.el")
 (load "completions-highlight.el")
 (load "make-file-executable.el")
@@ -18,6 +17,7 @@
 (load "init-ddskk.el")
 (load "init-develock.el")
 (load "init-dired-mode.el")
+(load "init-elscreen.el")
 (load "init-howm.el")
 (load "init-html-helper-mode.el")
 (load "init-liece.el")
