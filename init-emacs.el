@@ -7,12 +7,14 @@
 
 (load "init-japanese.el")
 
+(load "eval-safe.el")
 (load "auto-save-buffers.el")
 (load "completions-highlight.el")
 (load "make-file-executable.el")
 
 (load "init-auto-save-buffers.el")
 (load "init-browse-url.el")
+(load "init-browse-kill-ring.el")
 (load "init-css-mode.el")
 (load "init-ddskk.el")
 (load "init-develock.el")

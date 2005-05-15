@@ -14,8 +14,11 @@
 ;; C-h キーでカーソルの左の文字が消えるようにする。
 (global-set-key "\C-h" 'backward-delete-char)
 
-;;スクロールバーを右に。
-(set-scroll-bar-mode 'right)
+;;補完時に大文字と小文字を区別させない
+(setq completion-ignore-case t)
+
+;; ヘルプ等の window を可変にする
+(temp-buffer-resize-mode 1)
 
 ;; visible-bell
 (setq visible-bell t)
@@ -31,6 +34,9 @@
 
 ;; スクロールバーを消す
 (scroll-bar-mode nil)
+
+;;スクロールバーを右に
+(set-scroll-bar-mode 'right)
 
 ;; window system では行間を空ける
 (setq-default line-spacing 2)
@@ -50,12 +56,8 @@
 ;;
 (require 'grep-edit)
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; browse-kill-ring
-;;
-(define-key ctl-x-map "\C-y" 'browse-kill-ring)
-
+;;kill-ring に同じ内容の文字列を複数入れない
+(defadvice kill-new (before ys:no-kill-new-duplicates activate)
+  (setq kill-ring (delete (ad-get-arg 0) kill-ring)))
 
 (setq x-select-enable-clipboard t)
