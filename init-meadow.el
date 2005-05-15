@@ -5,22 +5,21 @@
  "BDF M+"
  '((strict-spec
     ((:char-spec ascii :height any)
-     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus_f12r.bdf"))
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus/mplus_f12r.bdf"))
     ((:char-spec ascii :height any :weight bold)
-     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus_f12b.bdf"))
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus/mplus_f12b.bdf"))
     ((:char-spec ascii :height any :slant italic)
-     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus_f12i.bdf"))
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus/mplus_f12i.bdf"))
     ((:char-spec ascii :height any :weight  bold :slant italic)
-     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus_f12bi.bdf"))
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus/mplus_f12bi.bdf"))
     ((:char-spec japanese-jisx0208 :height any)
-     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus_j12r.bdf"))
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus/mplus_j12r.bdf"))
     ((:char-spec japanese-jisx0208 :height any :weight bold)
-     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus_j12b.bdf"))
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus/mplus_j12b.bdf"))
     ((:char-spec japanese-jisx0208 :height any :slant italic)
-     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus_j12i.bdf"))
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus/mplus_j12i.bdf"))
     ((:char-spec japanese-jisx0208 :height any :weight bold :slant italic)
-     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus_j12bi.bdf")))))
-
+     (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/mplus/mplus_j12bi.bdf")))))
 
 (w32-add-font
  "shinonome 14"
