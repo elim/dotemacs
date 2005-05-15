@@ -32,11 +32,11 @@
 ;; メニューを消す
 (menu-bar-mode nil)
 
-;; スクロールバーを消す
-(scroll-bar-mode nil)
-
 ;;スクロールバーを右に
 (set-scroll-bar-mode 'right)
+
+;; スクロールバーを消す
+(scroll-bar-mode nil)
 
 ;; window system では行間を空ける
 (setq-default line-spacing 2)

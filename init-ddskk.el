@@ -1,4 +1,4 @@
-;-*- emcs-lisp -*-
+;-*- emacs-lisp -*-
 ; $Id$
 
 (autoload 'skk "skk" nil t)

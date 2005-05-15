@@ -1,4 +1,4 @@
-;-*- emcs-lisp -*-
+;-*- emacs-lisp -*-
 (create-fontset-from-fontset-spec
     "-mplus-*-mplus-r-normal--10-*-*-*-*-*-fontset-mplus_10r,
     ascii:-mplus-gothic-medium-r-normal--10-*-iso8859-1,
