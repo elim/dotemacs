@@ -20,14 +20,15 @@
 (setq riece-keywords '("Elim" "elim" "えりむ" "エリム"
 		       "えろり" "えろむ" "女の敵"))
 
-(if (featurep 'meadow)
-    nil
-  (add-hook 'riece-notify-keyword-functions
-	    (lambda (keyword) (start-process "call me" "*scratch*" "esdplay"
-					     "/home/takeru/sounds/notify.wav"))))
+(add-hook 'riece-notify-keyword-functions
+	  (lambda (keyword)
+	    (eval-safe
+	     (start-process "call me." "*Messages*" "esdplay"
+			    "/home/takeru/sounds/notify.wav"))))
 
 (add-hook 'riece-startup-hook
 	  (lambda ()
 	    (define-key riece-command-mode-map "\C-xn"
 	      'riece-command-enter-message-as-notice)))
+
 

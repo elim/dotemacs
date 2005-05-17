@@ -5,18 +5,14 @@
 
 ;;
 (load "eval-safe.el")
-
-(load "init-fonts.el")
-(load "init-color.el")
-
-(load "init-emacs-cvs.el")
-
-(load "init-japanese.el")
-
 (load "auto-save-buffers.el")
 (load "completions-highlight.el")
 (load "make-file-executable.el")
 
+(load "init-fonts.el")
+(load "init-color.el")
+(load "init-emacs-cvs.el")
+(load "init-japanese.el")
 (load "init-auto-save-buffers.el")
 (load "init-browse-url.el")
 (load "init-browse-kill-ring.el")
@@ -43,6 +39,3 @@
 (load "init-w3m.el")
 (load "init-wget.el")
 (load "init-wl.el")
-
-;(load "fontset-init.el")
-;(load "ndiary-mode-init.el")
