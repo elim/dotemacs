@@ -1,4 +1,4 @@
-;-*- emcs-lisp -*-
+;-*- emacs-lisp -*-
 ; $Id$
 (add-hook 'html-helper-mode-hook
 	  '(lambda () (set-file-coding-system *euc-jp-unix*)))

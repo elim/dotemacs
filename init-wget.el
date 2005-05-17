@@ -1,4 +1,4 @@
-; -*- emcs-lisp -*-
+; -*- emacs-lisp -*-
 ; $Id$
 
 (autoload 'wget "wget" "wget interface for Emacs." t)

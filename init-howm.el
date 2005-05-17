@@ -1,4 +1,4 @@
-;-*- emcs-lisp -*-
+;-*- eamcs-lisp -*-
 
 ;(setq howm-menu-lang 'en)
 (setq howm-menu-lang 'ja)

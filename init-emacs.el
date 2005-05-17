@@ -3,11 +3,16 @@
 (setq custom-file
       (expand-file-name "~/lib/site-lisp/customize.el"))
 
+;;
+(load "eval-safe.el")
+
+(load "init-fonts.el")
+(load "init-color.el")
+
 (load "init-emacs-cvs.el")
 
 (load "init-japanese.el")
 
-(load "eval-safe.el")
 (load "auto-save-buffers.el")
 (load "completions-highlight.el")
 (load "make-file-executable.el")
@@ -39,10 +44,5 @@
 (load "init-wget.el")
 (load "init-wl.el")
 
-(if (featurep 'meadow)
-    (load "init-meadow.el")
-  nil)
-
-(load "init-color.el")
 ;(load "fontset-init.el")
 ;(load "ndiary-mode-init.el")

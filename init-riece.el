@@ -1,4 +1,4 @@
-;-*- emcs-lisp -*-
+;-*- emacs-lisp -*-
 ; $Id$
 
 (autoload 'riece "riece" nil t)
@@ -9,11 +9,12 @@
 (setq riece-user-list-buffer-mode 't)
 (setq riece-layout '"middle-left")
 
-(setq riece-addons '(riece-alias riece-button
-				 riece-ctcp riece-guess riece-highlight
-				 riece-history riece-icon riece-keyword
-				 riece-menu riece-skk-kakutei riece-unread
-				 riece-url))
+(setq riece-addons
+      '(riece-alias riece-button
+		    riece-ctcp riece-guess riece-highlight
+		    riece-history riece-icon riece-keyword
+		    riece-menu riece-skk-kakutei riece-unread
+		    riece-url))
 (setq riece-ndcc-server-address "localhost")
 
 (setq riece-keywords '("Elim" "elim" "えりむ" "エリム"

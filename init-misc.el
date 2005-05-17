@@ -1,4 +1,4 @@
-;-*- emcs-lisp -*-
+;-*- emacs-lisp -*-
 ; $Id$
 ; Xでのカラー表示
 (require 'font-lock)
@@ -31,6 +31,9 @@
 
 ;; メニューを消す
 (menu-bar-mode nil)
+
+;; ツールバーを消す
+(tool-bar-mode nil)
 
 ;;スクロールバーを右に
 (set-scroll-bar-mode 'right)

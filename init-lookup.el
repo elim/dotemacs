@@ -27,6 +27,10 @@
 		"c:/Cygwin/usr/bin/grep.exe"))
   nil)
 
-(setq lookup-search-agents
-      '((ndtp "elim.teroknor.org" :port 2010)
-	(ndspell)))
+(if (featurep 'meadow)
+    (setq lookup-search-agents
+	  '((ndtp "localhost" :port 12010)
+	    (ndspell)))
+  (setq lookup-search-agents
+	'((ndtp "elim.teroknor.org" :port 2010)
+	  (ndspell))))

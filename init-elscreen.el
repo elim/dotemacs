@@ -1,5 +1,6 @@
-; -*- emcs-lisp -*-
+; -*- eamcs-lisp -*-
 ; $Id$
+(eval-safe
+ (require 'elscreen))
 
-(autoload 'elscreen "elscreen" "starting elscreen." t)
 

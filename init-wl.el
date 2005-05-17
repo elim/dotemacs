@@ -1,4 +1,4 @@
-;-*- emcs-lisp -*-
+;-*- emacs-lisp -ffff*-
 ;-*- encoding: iso-2022-jp -*-
 ;$Id$;
 (autoload 'wl "wl" "Wanderlust" t)
