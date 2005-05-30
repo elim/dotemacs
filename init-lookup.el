@@ -13,7 +13,7 @@
 
 (setq lookup-use-bitmap nil)
 
-(setq lookup-open-function 'lookup-other-frame)
+;(setq lookup-open-function 'lookup-other-frame)
 (setq lookup-frame-alist
       '((menu-bar-lines . 0)
 	(width . 80) (height . 35)

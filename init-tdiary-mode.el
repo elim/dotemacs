@@ -9,11 +9,15 @@
 
 (setq tdiary-passwd-file (expand-file-name "~/.tdiary-password"))
 (setq tdiary-diary-list
-      '(("private log"
+      '(("p"
 	 "http://elim.teroknor.org/%7Etakeru/private_log/")
-	("life log"
+	("pl"
+	 "http://localhost/%7Etakeru/private_log/")
+	("l"
 	 "http://elim.teroknor.org/%7Etakeru/life_log/")
-	("xrea"
+	("ll"
+	 "http://localhost/%7Etakeru/life_log/")
+	("x"
 	 "http://elim.s27.xrea.com/LifeLog/" "index.cgi" "update.cgi")))
 
 (setq psgml-html-build-new-buffer nil)

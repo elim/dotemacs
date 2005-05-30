@@ -23,6 +23,7 @@
 (load "init-elscreen.el")
 (load "init-howm.el")
 (load "init-html-helper-mode.el")
+(load "init-iswitchb.el")
 (load "init-liece.el")
 (load "init-lookup.el")
 (load "init-misc.el")
