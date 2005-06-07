@@ -3,27 +3,28 @@
 (setq custom-file
       (expand-file-name "~/lib/site-lisp/customize.el"))
 
-;;
 (load "eval-safe.el")
+
 (load "auto-save-buffers.el")
 (load "completions-highlight.el")
 (load "make-file-executable.el")
 
-(load "init-fonts.el")
-(load "init-color.el")
 (load "init-emacs-cvs.el")
-(load "init-japanese.el")
+
 (load "init-auto-save-buffers.el")
 (load "init-browse-url.el")
 (load "init-browse-kill-ring.el")
+(load "init-color.el")
 (load "init-css-mode.el")
 (load "init-ddskk.el")
 (load "init-develock.el")
 (load "init-dired-mode.el")
 (load "init-elscreen.el")
+(load "init-fonts.el")
 (load "init-howm.el")
 (load "init-html-helper-mode.el")
 (load "init-iswitchb.el")
+(load "init-japanese.el")
 (load "init-liece.el")
 (load "init-lookup.el")
 (load "init-misc.el")

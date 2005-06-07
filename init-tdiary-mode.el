@@ -23,4 +23,3 @@
 (setq psgml-html-build-new-buffer nil)
 
 (setq tdiary-browser-function 'browse-url)
-
