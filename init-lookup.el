@@ -27,10 +27,19 @@
 		"c:/Cygwin/usr/bin/grep.exe"))
   nil)
 
-(if (featurep 'meadow)
+(let ((system-name (system-name)))
+  (cond
+   ;; systemA または systemB で実行中の場合
+   ((string-match "^NAITO" system-name)
     (setq lookup-search-agents
 	  '((ndtp "localhost" :port 12010)
-	    (ndspell)))
-  (setq lookup-search-agents
-	'((ndtp "elim.teroknor.org" :port 2010)
-	  (ndspell))))
+	    (ndspell))))
+
+   ;; 指定されていないマシンで実行中の場合
+   (t
+    (progn (message (concat "Unknown Host: " system-name)
+	     (setq lookup-search-agents
+		   '((ndtp "elim.teroknor.org" :port 2010)
+		     (ndspell))))))))
+
+
