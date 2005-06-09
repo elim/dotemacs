@@ -1,7 +1,6 @@
 ;-*- emacs-lisp -*-
-;-*- encoding: iso-2022-jp -*-
 ;$Id$
-;(set-language-environment "Japanese")
+
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 
@@ -11,5 +10,8 @@
 (set-keyboard-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (setq prefer-coding-system 'utf-8)
+
+(if (featurep 'meadow)
+    (set-clipboard-coding-system 'shift_jis-dos))
 
 
