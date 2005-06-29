@@ -27,6 +27,7 @@
 (load "init-japanese.el")
 (load "init-liece.el")
 (load "init-lookup.el")
+(load "init-navi2ch.el")
 (load "init-misc.el")
 (load "init-mpg123.el")
 (load "init-mwheel.el")

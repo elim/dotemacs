@@ -10,6 +10,13 @@
 	    (define-key iswitchb-mode-map "\C-f" 'iswitchb-next-match)
 	    (define-key iswitchb-mode-map "\C-b" 'iswitchb-prev-match)))
 
-(add-to-list 'iswitchb-buffer-ignore
-	     "\\`[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\.howm\\'"
-	     "\\`\\.keys\\'")
+(setq iswitchb-buffer-ignore
+      (append
+       '("\\`[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\.howm\\'"
+	 "\\.howm-keys"
+	 "\\*WL.*"
+	 "\\*Channel.*"
+	 ".*skk.*"
+	 "^\\*.*"
+	 "'\\*\\(IMAP|NNTP|SMTP\\).*)'"
+	 iswitchb-buffer-ignore)))
