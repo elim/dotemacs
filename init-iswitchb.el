@@ -17,6 +17,5 @@
 	 "\\*WL.*"
 	 "\\*Channel.*"
 	 ".*skk.*"
-	 "^\\*.*"
-	 "'\\*\\(IMAP|NNTP|SMTP\\).*)'"
+	 "\\*\\(IMAP|NNTP|SMTP\\).*"
 	 iswitchb-buffer-ignore)))
