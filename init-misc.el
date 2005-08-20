@@ -47,6 +47,9 @@
 ;; バッファの最後で newline で新規行を追加するのを禁止する
 (setq next-line-add-newlines nil)
 
+;; サーバモードで動かす
+(server-mode t)
+
 ;; 同一ファイル名のバッファ名を分かりやすく
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)

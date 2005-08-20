@@ -5,6 +5,11 @@
 (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
 (autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
 
+;;vars
+(setq wl-auto-save-drafts-interval 0)
+(setq wl-draft-use-frame t)
+
+
 ;;振り分け準備
 (autoload 'elmo-split "elmo-split" "Split messages on the folder." t)
 ; procmail にバトンタッチ。
