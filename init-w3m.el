@@ -11,6 +11,14 @@
    (autoload 'w3m-weather "w3m-weather" "*Display weather report." t)
    (autoload 'w3m-antenna "w3m-antenna" "*Report chenge of WEB sites." t)))
 
+(eval-after-load "w3m-search"
+  '(add-to-list
+    'w3m-search-engine-alist
+    '("google-ja"
+      "http://www.google.com/search?q=%s&hl=ja&lr=lang_ja&ie=UTF-8"
+      utf-8)))
+
+(setq w3m-search-default-engine "google-ja")
 (setq w3m-pop-up-frames nil)
 (setq w3m-tab-width 4)
 (setq w3m-use-cookies t)
@@ -18,6 +26,7 @@
 (setq w3m-use-toolbar t)
 (setq w3m-home-page "http://elim.teroknor.org/%7Etakeru/pukiwiki/")
 (setq w3m-weather-default-area "道央・石狩")
+
 
 (if (featurep 'meadow)
     (progn(setq w3m-command "c:/cygwin/opt/w3m-0.5.1/bin/w3m.exe")

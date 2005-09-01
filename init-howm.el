@@ -47,9 +47,6 @@
      (define-key howm-mode-map
        "\C-c\C-c" 'my-save-and-kill-buffer)))
 
-
-(global-set-key "\C-c\C-c" 'my-save-and-kill-buffer)
-
 (add-hook 'howm-view-open-hook
 	  (lambda ()
 	    (setq buffer-file-coding-system 'utf-8-unix)))
@@ -63,7 +60,9 @@
 (let ((system-name (system-name)))
   (cond
    ((string-match "^LOGIC" system-name)
-    (setq howm-directory "h:/howm/"))))
+    (if (featurep 'meadow)
+	(setq howm-directory "h:/howm/"))))
+
 
 ;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
 (eval-after-load "calendar"
