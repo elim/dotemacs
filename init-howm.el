@@ -61,7 +61,7 @@
   (cond
    ((string-match "^LOGIC" system-name)
     (if (featurep 'meadow)
-	(setq howm-directory "h:/howm/"))))
+	(setq howm-directory "h:/howm/")))))
 
 
 ;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
