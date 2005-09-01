@@ -48,7 +48,8 @@
 (setq next-line-add-newlines nil)
 
 ;; サーバモードで動かす
-(server-mode t)
+(eval-safe
+ (server-mode t))
 
 ;; 同一ファイル名のバッファ名を分かりやすく
 (require 'uniquify)
