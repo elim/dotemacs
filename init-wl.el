@@ -1,13 +1,14 @@
-;-*- emacs-lisp -ffff*-
+;-*- emacs-lisp -*-
 ;-*- encoding: iso-2022-jp -*-
 ;$Id$;
+
 (autoload 'wl "wl" "Wanderlust" t)
 (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
 (autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
 
 ;;vars
-(setq wl-auto-save-drafts-interval 0)
-(setq wl-draft-use-frame t)
+(setq wl-auto-save-drafts-interval 30)
+(setq wl-draft-use-frame nil)
 
 
 ;;振り分け準備

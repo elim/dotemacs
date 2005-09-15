@@ -1,4 +1,4 @@
-;-*- eamcs-lisp -*-
+;-*- emacs-lisp -*-
 ; $Id$
 
 (global-set-key [(hyper m)] 'browse-url-at-point)
