@@ -10,5 +10,5 @@
     (setq browse-url-generic-program
 	  "c:/Program Files/Mozilla Firefox/firefox.exe")
   (setq browse-url-generic-program
-	"/home/takeru/bin/firefox"))
+	"~/bin/firefox"))
 (setq browse-url-new-window-flag nil)
