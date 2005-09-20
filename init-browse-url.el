@@ -14,6 +14,6 @@
  ((featurep 'carbon-emacs-package)
   (setq browse-url-generic-program
 	"open"))
- ((t)
+ (t
   (setq browse-url-generic-program "~/bin/firefox")))
 (setq browse-url-new-window-flag nil)
