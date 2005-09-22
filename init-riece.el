@@ -24,7 +24,7 @@
 	  (lambda (keyword)
 	    (eval-safe
 	     (start-process "call me." "*Messages*" "esdplay"
-			    "/home/takeru/sounds/notify.wav"))))
+			    (expand-file-name "~/sounds/notify.wav")))))
 
 (add-hook 'riece-startup-hook
 	  (lambda ()

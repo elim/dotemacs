@@ -4,7 +4,7 @@
       (expand-file-name "~/lib/site-lisp/customize.el"))
 
 (load "eval-safe.el")
-
+(load "autoload-if-found.el")
 (load "auto-save-buffers.el")
 (load "completions-highlight.el")
 (load "make-file-executable.el")

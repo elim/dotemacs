@@ -1,5 +1,8 @@
 ; -*- emacs-lisp -*-
 ; $Id$
 
-(setq cssm-indent-function #'cssm-c-style-indenter)
+(when (autoload-if-found 'css-mode "css-mode" nil t nil)
+  (setq auto-mode-alist
+	(cons '("\\.css\\'" . css-mode) auto-mode-alist))
+  (setq cssm-indent-function #'cssm-c-style-indenter))
 

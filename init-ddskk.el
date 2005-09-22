@@ -1,35 +1,35 @@
 ;-*- emacs-lisp -*-
 ; $Id$
 
-(autoload 'skk "skk" nil t)
-(autoload 'skk-setup "skk-setup" nil t)
-(autoload 'skk-mode "skk" nil t)
-(autoload 'skk-auto-fill-mode "skk" nil t)
-(autoload 'skk-tutorial "skk-tut" nil t)
-(autoload 'skk-check-jisyo "skk-tools" nil t)
-(autoload 'skk-merge "skk-tools" nil t)
-(autoload 'skk-diff "skk-tools" nil t)
-(autoload 'skk-isearch-mode-setup "skk-isearch" nil t)
-(autoload 'skk-isearch-mode-cleanup "skk-isearch" nil t)
+(when (autoload-if-found 'skk "skk" nil t)
+  (autoload 'skk-setup "skk-setup" nil t)
+  (autoload 'skk-mode "skk" nil t)
+  (autoload 'skk-auto-fill-mode "skk" nil t)
+  (autoload 'skk-tutorial "skk-tut" nil t)
+  (autoload 'skk-check-jisyo "skk-tools" nil t)
+  (autoload 'skk-merge "skk-tools" nil t)
+  (autoload 'skk-diff "skk-tools" nil t)
+  (autoload 'skk-isearch-mode-setup "skk-isearch" nil t)
+  (autoload 'skk-isearch-mode-cleanup "skk-isearch" nil t))
 
 (setq skk-indicator-use-cursor-color nil)
 
-(if (featurep 'meadow)
-    (setq skk-init-file (expand-file-name "~/dot.files/.skk")) nil)
-
+  (if (featurep 'meadow)
+      (cond
+       (setq skk-init-file (expand-file-name "~/dot.files/.skk"))
+       (setq skk-server-jisyo "/usr/local/share/skk/SKK-JISYO.L")
+       (setq skk-server-prog "/cygwin/usr/local/sbin/skkserv.rb")))
 
 (global-set-key "\C-x\C-j" 'skk-mode)
-;(global-set-key "\C-xj" 'skk-auto-fill-mode)
+;; (global-set-key "\C-xj" 'skk-auto-fill-mode)
 (global-set-key "\C-xj" nil)
-;(global-set-key "\C-xt" 'skk-tutorial)
+;; (global-set-key "\C-xt" 'skk-tutorial)
 (global-set-key "\C-xt" nil)
-
+  
 
 ;; @@ 基本の設定
 
 (setq skk-count-private-jisyo-candidates-exactly t)
-(setq skk-server-jisyo "/usr/local/share/skk/SKK-JISYO.L")
-(setq skk-server-prog "/cygwin/usr/local/sbin/skkserv.rb")
 (setq skk-share-private-jisyo t)
 
 ;; Mule 2.3 (Emacs 19) を使っている場合は必要
@@ -81,3 +81,13 @@
 	    (require 'skk)
 	    (setq skk-kutouten-type 'en)))
 
+;; 辞書を 10 分毎に自動保存
+(defvar skk-auto-save-jisyo-interval 600)
+(defun skk-auto-save-jisyo ()
+  (skk-save-jisyo)
+  (skk-bayesian-save-history)
+  (skk-bayesian-corpus-save))
+(run-with-idle-timer skk-auto-save-jisyo-interval
+                     skk-auto-save-jisyo-interval
+                     'skk-auto-save-jisyo)
+;;(cancel-function-timers 'skk-auto-save-jisyo)

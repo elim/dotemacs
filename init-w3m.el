@@ -2,8 +2,8 @@
 ; $Id$
 
 (eval-safe
- (load "w3m-load")
  (progn
+   (require 'w3m-load)  ;; この節に成功した場合のみ progn が続行される.
    (autoload 'w3m "w3m" "*Interface for w3m on Emacs." t)
    (autoload 'w3m-find-file "w3m" "*w3m interface function for local file." t)
    (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)

@@ -1,5 +1,6 @@
-;-*- emacs-lisp -*-
-;id;
+; -*- emacs-lisp -*-
+; $Id$
+
 (setq dired-bind-jump nil)
 (add-hook 'dired-load-hook
 	  (lambda ()

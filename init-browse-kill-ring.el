@@ -1,8 +1,8 @@
 ;-*- emacs-lisp -*-
 ; $Id: init-emacs.el 101 2005-05-07 13:40:20Z takeru $
 (eval-safe
- (require 'browse-kill-ring)
  (progn
+   (require 'browse-kill-ring)
    (define-key ctl-x-map "\C-y" 'browse-kill-ring)
    ;; kill-ring を一行で表示
    ;; (setq browse-kill-ring-display-style 'one-line)
