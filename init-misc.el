@@ -1,57 +1,65 @@
 ;-*- emacs-lisp -*-
 ; $Id$
-; X$B$G$N%+%i!<I=<((B
+
+
+;; Xでのカラー表示
 (require 'font-lock)
 (if (not (featurep 'xemacs))
     (global-font-lock-mode t))
 
+;; Mac 関係
+;; http://pc7.2ch.net/test/read.cgi/mac/1084714251/175
+;; > CarbonEmacsに限って言えば、mac-pass-control-to-system を nil に
+;; > すれば AquaSKK の Ascii モードでも問題なく使えると思うよ。
+(setq mac-pass-control-to-system nil)
+
 ;; goto-line
 (global-set-key "\C-cg" 'goto-line)
 
-;; Delete$B%-!<$G%+!<%=%k0LCV$NJ8;z$,>C$($k$h$&$K$9$k(B
+;; Deleteキーでカーソル位置の文字が消えるようにする
 (global-set-key [delete] 'delete-char)
 
-;; C-h $B%-!<$G%+!<%=%k$N:8$NJ8;z$,>C$($k$h$&$K$9$k!#(B
+;; C-h キーでカーソルの左の文字が消えるようにする。
 (global-set-key "\C-h" 'backward-delete-char)
 
-;;$BJd40;~$KBgJ8;z$H>.J8;z$r6hJL$5$;$J$$(B
+;;補完時に大文字と小文字を区別させない
 (setq completion-ignore-case t)
 
-;; $B%X%k%WEy$N(B window $B$r2DJQ$K$9$k(B
+;; ヘルプ等の window を可変にする
 (temp-buffer-resize-mode 1)
 
 ;; visible-bell
 (setq visible-bell t)
 
-;; $B9THV9f$rI=<($9$k(B
+;; 行番号を表示する
 (line-number-mode t)
 
-;; $B7eHV9f$rI=<($9$k(B
+;; 桁番号を表示する
 (column-number-mode t)
 
-;; $B%a%K%e!<$r>C$9(B
+;; メニューを消す
 (menu-bar-mode nil)
 
-;; $B%D!<%k%P!<$r>C$9(B
+;; ツールバーを消す
 (tool-bar-mode nil)
 
-;;$B%9%/%m!<%k%P!<$r1&$K(B
+;;スクロールバーを右に
 (set-scroll-bar-mode 'right)
 
-;; $B%9%/%m!<%k%P!<$r>C$9(B
+;; スクロールバーを消す
 (scroll-bar-mode nil)
 
-;; window system $B$G$O9T4V$r6u$1$k(B
+;; window system では行間を空ける
 (setq-default line-spacing 2)
 
-;; $B%P%C%U%!$N:G8e$G(B newline $B$G?75,9T$rDI2C$9$k$N$r6X;_$9$k(B
+;; バッファの最後で newline で新規行を追加するのを禁止する
 (setq next-line-add-newlines nil)
 
-;; $B%5!<%P%b!<%I$GF0$+$9(B
+;; サーバモードで動かす
 (eval-safe
  (server-mode t))
 
-;; $BF10l%U%!%$%kL>$N%P%C%U%!L>$rJ,$+$j$d$9$/(B
+;; 同一ファイル名のバッファ名を分かりやすく
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 (setq uniquify-ignore-buffers-re "*[^*]+*")
@@ -63,7 +71,7 @@
 ;;
 (require 'grep-edit)
 
-;;kill-ring $B$KF1$8FbMF$NJ8;zNs$rJ#?tF~$l$J$$(B
+;;kill-ring に同じ内容の文字列を複数入れない
 (defadvice kill-new (before ys:no-kill-new-duplicates activate)
   (setq kill-ring (delete (ad-get-arg 0) kill-ring)))
 
