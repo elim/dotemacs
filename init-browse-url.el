@@ -7,6 +7,17 @@
 (setq browse-url-browser-display nil)
 (setq browse-url-browser-function 'browse-url-generic)
 
+
+;;http://cgi.netlaputa.ne.jp/~kose/diary/?200209b&to=200209125#200209125
+(defadvice thing-at-point-url-at-point
+  (after thing-at-point-url-at-point-after activate)
+  "http://ttp:// to http://"
+  (setq ad-return-value
+	(if (string-match "http://ttp:\\(.*\\)" ad-return-value)
+	    (concat "http:" (substring ad-return-value 
+				       (match-beginning 1) (match-end 1)))
+	  ad-return-value)))
+
 (cond
  ((featurep 'meadow)
   (setq browse-url-generic-program

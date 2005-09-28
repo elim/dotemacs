@@ -14,3 +14,8 @@
 	       ;(left . 10)
 	       )
 	     default-frame-alist))))
+
+(eval-safe
+ (progn
+  (set-active-alpha 0.9)
+  (set-inactive-alpha 0.95)))
