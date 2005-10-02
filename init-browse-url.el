@@ -8,7 +8,7 @@
 (setq browse-url-browser-function 'browse-url-generic)
 
 
-;;http://cgi.netlaputa.ne.jp/~kose/diary/?200209b&to=200209125#200209125
+;; http://cgi.netlaputa.ne.jp/~kose/diary/?200209b&to=200209125#200209125
 (defadvice thing-at-point-url-at-point
   (after thing-at-point-url-at-point-after activate)
   "http://ttp:// to http://"

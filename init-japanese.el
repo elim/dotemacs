@@ -7,7 +7,13 @@
 (set-keyboard-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (setq default-buffer-file-coding-system 'utf-8)
-(prefer-coding-system 'euc-jp-unix)
+
+;; coding 判定の順を指定. 
+;; 実行毎に先頭に追加される. 
+(prefer-coding-system 'shift_jis)
+(prefer-coding-system 'iso-2022-jp)
+(prefer-coding-system 'euc-jp)
+
 
 (if (featurep 'meadow)
     (progn
