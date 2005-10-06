@@ -13,6 +13,7 @@
 (prefer-coding-system 'shift_jis)
 (prefer-coding-system 'iso-2022-jp)
 (prefer-coding-system 'euc-jp)
+(prefer-coding-system 'utf-8)
 
 
 (if (featurep 'meadow)
