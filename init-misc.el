@@ -11,9 +11,7 @@
 ;; http://pc7.2ch.net/test/read.cgi/mac/1084714251/175
 ;; > CarbonEmacsに限って言えば、mac-pass-control-to-system を nil に
 ;; > すれば AquaSKK の Ascii モードでも問題なく使えると思うよ。
-
-;; AquaSKK 側で対処された. 
-; (setq mac-pass-control-to-system nil)
+(setq mac-pass-control-to-system nil)
 
 ;; goto-line
 (global-set-key "\C-cg" 'goto-line)
@@ -58,8 +56,7 @@
 (setq next-line-add-newlines nil)
 
 ;; サーバモードで動かす
-(eval-safe
- (server-mode t))
+(eval-safe (server-mode t))
 
 ;; 同一ファイル名のバッファ名を分かりやすく
 (require 'uniquify)
