@@ -10,6 +10,12 @@
 (eval-safe (require 'elscreen-w3m))
 (eval-safe (require 'elscreen-dired))
 
+(setq elscreen-mode-to-nickname-alist
+      (append
+       '(("^howm-" . "howm")
+	 ("^riece-" . "riece")
+	 ("^navi2ch-" . "navi2ch")) 
+       elscreen-mode-to-nickname-alist))
 
 (add-hook
  'wl-draft-mode-hook

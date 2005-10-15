@@ -46,3 +46,5 @@
 (eval-safe (load "init-w3m.el"))
 (eval-safe (load "init-wget.el"))
 (eval-safe (load "init-wl.el"))
+
+(eval-safe (howm-menu))

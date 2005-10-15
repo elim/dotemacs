@@ -11,7 +11,9 @@
 ;; http://pc7.2ch.net/test/read.cgi/mac/1084714251/175
 ;; > CarbonEmacsに限って言えば、mac-pass-control-to-system を nil に
 ;; > すれば AquaSKK の Ascii モードでも問題なく使えると思うよ。
-(setq mac-pass-control-to-system nil)
+
+;; AquaSKK 側で対処された. 
+; (setq mac-pass-control-to-system nil)
 
 ;; goto-line
 (global-set-key "\C-cg" 'goto-line)
