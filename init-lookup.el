@@ -12,7 +12,6 @@
 ;; (define-key ctl-x-map "\C-y" 'lookup-pattern)
 
 (setq lookup-use-bitmap nil)
-
 ;; (setq lookup-open-function 'lookup-other-frame)
 (setq lookup-frame-alist
       '((menu-bar-lines . 0)
@@ -31,10 +30,10 @@
 (cond
  ((string-match "fascinating.local$" system-name)
   (setq my-ndtp-server-definition
-	'(ndtp "idea" :port 2010))
+	'(ndtp "idea" :port 2010)))
   (t
-  (setq my-ndtp-server-definition
-	'(ndtp "localhost" :port 2010))
+   (setq my-ndtp-server-definition
+	'(ndtp "localhost" :port 2010))))
 
 (setq lookup-search-agents
       (list
