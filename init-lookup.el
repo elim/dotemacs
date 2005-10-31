@@ -9,37 +9,34 @@
 (define-key ctl-x-map "l" 'lookup)
 (define-key ctl-x-map "e" 'lookup-word)
 (define-key ctl-x-map "y" 'lookup-region)
-;(define-key ctl-x-map "\C-y" 'lookup-pattern)
+;; (define-key ctl-x-map "\C-y" 'lookup-pattern)
 
 (setq lookup-use-bitmap nil)
 
-;(setq lookup-open-function 'lookup-other-frame)
+;; (setq lookup-open-function 'lookup-other-frame)
 (setq lookup-frame-alist
       '((menu-bar-lines . 0)
-	(width . 80) (height . 35)
-	(top . 5) (left . -10)
+	(width . 80)
+	(height . 35)
+	(top . 5)
+	(left . -10)
 	(vertical-scroll-bars . nil)))
 
 (if (featurep 'meadow)
     (progn(setq ndspell-ispell-program
 		"c:/Cygwin/opt/ispell-3.3.01/bin/ispell.exe")
 	  (setq ndspell-grep-program
-		"c:/Cygwin/usr/bin/grep.exe"))
-  nil)
+		"c:/Cygwin/usr/bin/grep.exe"))  nil)
 
-(let ((system-name (system-name)))
-  (cond
-   ;; systemA または systemB で実行中の場合
-   ((string-match "^NAITO" system-name)
-    (setq lookup-search-agents
-	  '((ndtp "localhost" :port 12010)
-	    (ndspell))))
+(cond
+ ((string-match "fascinating.local$" system-name)
+  (setq my-ndtp-server-definition
+	'(ndtp "idea" :port 2010))
+  (t
+  (setq my-ndtp-server-definition
+	'(ndtp "localhost" :port 2010))
 
-   ;; 指定されていないマシンで実行中の場合
-   (t
-    (progn (message (concat "Unknown Host: " system-name)
-	     (setq lookup-search-agents
-		   '((ndtp "elim.teroknor.org" :port 2010)
-		     (ndspell))))))))
-
-
+(setq lookup-search-agents
+      (list
+       my-ndtp-server-definition
+       '(ndspell)))
