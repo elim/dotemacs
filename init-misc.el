@@ -38,16 +38,16 @@
 (column-number-mode t)
 
 ;; メニューを消す
-(menu-bar-mode nil)
+(menu-bar-mode -1)
 
 ;; ツールバーを消す
-(tool-bar-mode nil)
+(tool-bar-mode -1)
 
 ;;スクロールバーを右に
 (set-scroll-bar-mode 'right)
 
 ;; スクロールバーを消す
-(scroll-bar-mode nil)
+(scroll-bar-mode -1)
 
 ;; window system では行間を空ける
 (setq-default line-spacing 2)
