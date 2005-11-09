@@ -17,6 +17,8 @@
 ;; 全メモ一覧時にタイトル表示
 (setq howm-list-all-title t)
 
+;; 日付の新しい順
+(setq howm-list-normalizer 'howm-view-sort-by-reverse-date)
 
 ;; いちいち消すのも面倒なので
 ;; 内容が 0 ならファイルごと削除する
