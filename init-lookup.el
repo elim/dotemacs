@@ -24,8 +24,9 @@
 (if (featurep 'meadow)
     (progn(setq ndspell-ispell-program
 		"c:/Cygwin/opt/ispell-3.3.01/bin/ispell.exe")
-	  (setq ndspell-grep-program
-		"c:/Cygwin/usr/bin/grep.exe"))  nil)
+;; 	  (setq ndspell-grep-program
+;; 		"c:/Cygwin/usr/bin/grep.exe")
+)  nil)
 
 (cond
  ((string-match "fascinating.local$" system-name)

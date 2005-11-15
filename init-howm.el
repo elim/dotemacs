@@ -14,6 +14,14 @@
 ;; 「最近のメモ」一覧時にタイトル表示
 (setq howm-list-recent-title t)
 
+(setq howm-view-use-grep nil)
+(cond
+ ((locate-library "grep" nil exec-path)
+    (setq howm-view-use-grep t))
+ ((locate-library "grep.exe" nil exec-path)
+  (setq howm-view-use-grep t)))
+
+
 ;; 全メモ一覧時にタイトル表示
 (setq howm-list-all-title t)
 
