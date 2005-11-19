@@ -23,7 +23,7 @@
 (add-hook 'riece-notify-keyword-functions
 	  (lambda (keyword)
 	    (eval-safe
-	     (start-process "call me." "*Messages*" "esdplay"
+	     (start-process "You were called." "*Messages*" "esdplay"
 			    (expand-file-name "~/sounds/notify.wav")))))
 
 (add-hook 'riece-startup-hook
