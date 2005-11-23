@@ -59,6 +59,11 @@
 ;; バッファの最後で newline で新規行を追加するのを禁止する
 (setq next-line-add-newlines nil)
 
+;; フレームタイトルを 「バッファ名 (フルパスのファイル名)」とする。
+(setq frame-title-format
+      `(" %b " (buffer-file-name "( %f )")))
+
+
 ;; サーバモードで動かす
 (eval-safe (server-mode t))
 
