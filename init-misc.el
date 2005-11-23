@@ -41,6 +41,10 @@
 ;; 桁番号を表示する
 (column-number-mode t)
 
+;;; 時刻を24時間制でモードラインに表示する。
+(setq display-time-24hr-format t)
+(display-time)
+
 ;; メニューを消す
 (menu-bar-mode -1)
 

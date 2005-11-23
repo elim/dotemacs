@@ -28,6 +28,22 @@
 ;; 日付の新しい順
 (setq howm-list-normalizer 'howm-view-sort-by-reverse-date)
 
+;; 日記を書く
+(defun my-howm-diary-edit ()
+  "説明文"
+  (interactive)
+  (let ((my-diary-file
+	(expand-file-name
+	 (concat howm-directory
+		 (format-time-string "/%Y/%m/%Y-%m-%d.howm" (current-time))))))
+  (if (file-exists-p my-diary-file)
+      (find-file my-diary-file)
+    (progn
+      (find-file my-diary-file)
+      (insert "= diary\n")))
+  (howm-mode)))
+
+
 ;; いちいち消すのも面倒なので
 ;; 内容が 0 ならファイルごと削除する
 (if (not (memq 'delete-file-if-no-contents after-save-hook))
@@ -55,24 +71,25 @@
 (eval-after-load "howm-mode"
   '(progn
      (define-key howm-mode-map
-       "\C-c\C-c" 'my-save-and-kill-buffer)))
+       "\C-c\C-c" 'my-save-and-kill-buffer)
+     (define-key howm-mode-map
+       ;; howm-insert-date を上書き.
+       ;; howm-insert-dtime を使って下さい. 
+       "\C-c,d" 'my-howm-diary-edit)))
 
+;; default-buffer-file-coding-system が utf-8 じゃない環境でも utf-8 を強制
 (add-hook 'howm-view-open-hook
 	  (lambda ()
 	    (setq buffer-file-coding-system 'utf-8-unix)))
 
 (add-hook 'howm-create-file-hook
 	  (lambda ()
-;	    (insert "= 予定")
 	    (setq buffer-file-coding-system 'utf-8-unix)))
 
-
-(let ((system-name (system-name)))
-  (cond
-   ((string-match "^LOGIC" system-name)
-    (if (featurep 'meadow)
-	(setq howm-directory "h:/howm/")))))
-
+(if (and
+     (string-match "fascinating.local$" system-name)
+     (featurep 'meadow))
+    (setq howm-directory "h:/howm/"))
 
 ;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
 (eval-after-load "calendar"
