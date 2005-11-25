@@ -41,8 +41,8 @@
     (progn
       (find-file my-diary-file)
       (insert "= diary\n")))
+  (goto-char (point-max))
   (howm-mode)))
-
 
 ;; いちいち消すのも面倒なので
 ;; 内容が 0 ならファイルごと削除する
@@ -72,7 +72,7 @@
   '(progn
      (define-key howm-mode-map
        "\C-c\C-c" 'my-save-and-kill-buffer)
-     (define-key howm-mode-map
+     (global-set-key
        ;; howm-insert-date を上書き.
        ;; howm-insert-dtime を使って下さい. 
        "\C-c,d" 'my-howm-diary-edit)))
