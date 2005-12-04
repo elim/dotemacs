@@ -72,9 +72,11 @@
   '(progn
      (define-key howm-mode-map
        "\C-c\C-c" 'my-save-and-kill-buffer)
-     (global-set-key
        ;; howm-insert-date を上書き.
        ;; howm-insert-dtime を使って下さい. 
+     (define-key howm-mode-map
+       "\C-c,d" 'my-howm-diary-edit)
+     (global-set-key
        "\C-c,d" 'my-howm-diary-edit)))
 
 ;; default-buffer-file-coding-system が utf-8 じゃない環境でも utf-8 を強制
