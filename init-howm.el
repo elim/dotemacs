@@ -32,18 +32,25 @@
 (defun my-howm-diary-edit ()
   "説明文"
   (interactive)
-  (let ((my-diary-file
-	(expand-file-name
-	 (concat howm-directory
-		 (format-time-string "/%Y/%m/%Y-%m-%d.howm" (current-time))))))
-  (if (file-exists-p my-diary-file)
-      (find-file my-diary-file)
-    (progn
-      (find-file my-diary-file)
-      (insert "= diary\n")))
-  (goto-char (point-max))
-  (howm-mode)))
+  (let ((my-diary-directory
+	 (expand-file-name
+	  (concat howm-directory 
+		  (format-time-string "/%Y/%m" (current-time))))))
+    (if (not (file-exists-p my-diary-directory))
+	(make-directory my-diary-directory)))
 
+  (let ((my-diary-file
+	 (expand-file-name
+	  (concat howm-directory
+		  (format-time-string "/%Y/%m/%Y-%m-%d.howm" (current-time))))))
+    (if (file-exists-p my-diary-file)
+	(find-file my-diary-file)
+      (progn
+	(find-file my-diary-file)
+	(insert "= diary\n")))
+    (howm-mode)
+    (goto-char (point-max))))
+  
 ;; いちいち消すのも面倒なので
 ;; 内容が 0 ならファイルごと削除する
 (if (not (memq 'delete-file-if-no-contents after-save-hook))

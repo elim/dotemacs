@@ -41,7 +41,7 @@
 ;; 桁番号を表示する
 (column-number-mode t)
 
-;;; 時刻を24時間制でモードラインに表示する。
+;;; 時刻を24時間制でモードラインに表示する
 (setq display-time-24hr-format t)
 (display-time)
 
@@ -63,7 +63,10 @@
 ;; バッファの最後で newline で新規行を追加するのを禁止する
 (setq next-line-add-newlines nil)
 
-;; フレームタイトルを 「バッファ名 (フルパスのファイル名)」とする。
+;;対応する括弧を表示するか
+(show-paren-mode -1)
+
+;; フレームタイトルを 「バッファ名 (フルパスのファイル名)」とする
 (setq frame-title-format
       `(" %b " (buffer-file-name "( %f )")))
 

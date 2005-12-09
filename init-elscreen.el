@@ -4,11 +4,15 @@
 (eval-safe
  (unload-feature 'elscreen))
 
-(setq elscreen-prefix-key "\C-l")
+(setq elscreen-prefix-key "\C-l"
+      elscreen-display-tab "nil")
+
 (eval-safe (require 'elscreen))
-(eval-safe (require 'elscreen-wl))
-(eval-safe (require 'elscreen-w3m))
 (eval-safe (require 'elscreen-dired))
+(eval-safe (require 'elscreen-howm))
+(eval-safe (require 'elscreen-server))
+(eval-safe (require 'elscreen-w3m))
+(eval-safe (require 'elscreen-wl))
 
 (setq elscreen-mode-to-nickname-alist
       (append
@@ -27,5 +31,3 @@
 	'wl-draft-highlight-and-recenter)
       (define-key (current-local-map) "\C-c\C-l"
 	'wl-draft-highlight-and-recenter))))
-
-
