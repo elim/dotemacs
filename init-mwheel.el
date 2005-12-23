@@ -1,4 +1,5 @@
 ;-*- emacs-lisp -*-
 ;$Id$
 
-(setq mwheel-follow-mouse t)
+(when (require 'mwheel)
+  (setq mwheel-follow-mouse t))

@@ -1,14 +1,13 @@
 ;-*- emacs-lisp -*-
 ; $Id$
-;http://namazu.org/%7Esatoru/unimag/12/
+;; http://namazu.org/%7Esatoru/unimag/12/
 ;;
-;; ¤³¤Î¥³¡¼¥É¤Ï»³²¬¹îÈş»á¤¬½ñ¤¤¤Æ¤¯¤À¤µ¤Ã¤¿ (ELF:01128)
+;; ã“ã®ã‚³ãƒ¼ãƒ‰ã¯å±±å²¡å…‹ç¾æ°ãŒæ›¸ã„ã¦ãã ã•ã£ãŸ (ELF:01128)
 ;;
 ;; (require 'auto-save-buffers)
-;; (run-with-idle-timer 0.5 t 'auto-save-buffers) ; ¥¢¥¤¥É¥ë0.5ÉÃ¤ÇÊİÂ¸
-;;
+;; (run-with-idle-timer 0.5 t 'auto-save-buffers) ; ã‚¢ã‚¤ãƒ‰ãƒ«0.5ç§’ã§ä¿å­˜
 
-;; auto-save-buffers ¤ÇÂĞ¾İ¤È¤¹¤ë¥Õ¥¡¥¤¥ë¤ÎÀµµ¬É½¸½
+;; auto-save-buffers ã§å¯¾è±¡ã¨ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®æ­£è¦è¡¨ç¾
 (defvar auto-save-buffers-regexp ""
   "*Regexp that matches `buffer-file-name' to be auto-saved.")
 

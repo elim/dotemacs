@@ -1,5 +1,7 @@
-; -*- emacs-lisp -*-
-; $Id$
+;; -*- emacs-lisp -*-
+;; $Id$
 
-(autoload 'wget "wget" "wget interface for Emacs." t)
-(autoload 'wget-web-page "wget" "wget interface to download whole web page." t)
+(autoload-if-found
+ 'wget "wget" "wget interface for Emacs." t)
+(autoload-if-found
+ 'wget-web-page "wget" "wget interface to download whole web page." t)

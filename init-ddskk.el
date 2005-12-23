@@ -1,93 +1,89 @@
 ;-*- emacs-lisp -*-
 ; $Id$
 
-(when (autoload-if-found 'skk "skk" nil t)
-  (autoload 'skk-setup "skk-setup" nil t)
-  (autoload 'skk-mode "skk" nil t)
-  (autoload 'skk-auto-fill-mode "skk" nil t)
-  (autoload 'skk-tutorial "skk-tut" nil t)
-  (autoload 'skk-check-jisyo "skk-tools" nil t)
-  (autoload 'skk-merge "skk-tools" nil t)
-  (autoload 'skk-diff "skk-tools" nil t)
-  (autoload 'skk-isearch-mode-setup "skk-isearch" nil t)
-  (autoload 'skk-isearch-mode-cleanup "skk-isearch" nil t))
+(when (require 'skk-setup)
+  (global-set-key "\C-x\C-j" 'skk-mode)
+  ;; (global-set-key "\C-xj" 'skk-auto-fill-mode)
+  (global-set-key "\C-xj" nil)
+  ;; (global-set-key "\C-xt" 'skk-tutorial)
+  (global-set-key "\C-xt" nil)
 
-(setq skk-indicator-use-cursor-color nil)
+  (autoload-if-found 'skk "skk" nil t)
+  (autoload-if-found 'skk-mode "skk" nil t)
+  (autoload-if-found 'skk-auto-fill-mode "skk" nil t)
+  (autoload-if-found 'skk-check-jisyo "skk-tools" nil t)
+  (autoload-if-found 'skk-merge "skk-tools" nil t)
+  (autoload-if-found 'skk-diff "skk-tools" nil t)
+  (autoload-if-found 'skk-isearch-mode-setup "skk-isearch" nil t)
+  (autoload-if-found 'skk-isearch-mode-cleanup "skk-isearch" nil t)
 
-  (if (featurep 'meadow)
-      (cond
-       (setq skk-init-file (expand-file-name "~/dot.files/.skk"))
-       (setq skk-server-jisyo "/usr/local/share/skk/SKK-JISYO.L")
-       (setq skk-server-prog "/cygwin/usr/local/sbin/skkserv.rb")))
+  (when (featurep 'meadow)
+    (setq
+     skk-init-file (expand-file-name "~/dot.files/.skk")
+     skk-server-jisyo "c:/cygwin/usr/local/share/skk/SKK-JISYO.L"
+     skk-server-prog "c:/cygwin/usr/local/sbin/skkserv.rb"))
 
-(global-set-key "\C-x\C-j" 'skk-mode)
-;; (global-set-key "\C-xj" 'skk-auto-fill-mode)
-(global-set-key "\C-xj" nil)
-;; (global-set-key "\C-xt" 'skk-tutorial)
-(global-set-key "\C-xt" nil)
-  
+  ;; @@ åŸºæœ¬ã®è¨­å®š
 
-;; @@ ´ğËÜ¤ÎÀßÄê
+  (setq skk-count-private-jisyo-candidates-exactly t)
+  (setq skk-share-private-jisyo t)
 
-(setq skk-count-private-jisyo-candidates-exactly t)
-(setq skk-share-private-jisyo t)
+  ;; Mule 2.3 (Emacs 19) ã‚’ä½¿ã£ã¦ã„ã‚‹å ´åˆã¯å¿…è¦
+  ;; (require 'skk-setup)
 
-;; Mule 2.3 (Emacs 19) ¤ò»È¤Ã¤Æ¤¤¤ë¾ì¹ç¤ÏÉ¬Í×
-;; (require 'skk-setup)
+  ;; ã‚«ã‚¿ã‚«ãƒŠ/ã²ã‚‰ãŒãª ã‚­ãƒ¼ã§ SKK ã‚’èµ·å‹•ã™ã‚‹
+  ;(global-set-key [hiragana-katakana] 'skk-mode)
 
-;; ¥«¥¿¥«¥Ê/¤Ò¤é¤¬¤Ê ¥­¡¼¤Ç SKK ¤òµ¯Æ°¤¹¤ë
-;(global-set-key [hiragana-katakana] 'skk-mode)
+  ;; ~/.skk ã«ã„ã£ã±ã„è¨­å®šã‚’æ›¸ã„ã¦ã„ã‚‹ã®ã§ãƒã‚¤ãƒˆã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã—ãŸã„
+  ;(setq skk-byte-compile-init-file t)
+  ;; æ³¨) ç•°ãªã‚‹ç¨®é¡ã® Emacsen ã‚’ä½¿ã£ã¦ã„ã‚‹å ´åˆã¯ nil ã«ã—ã¾ã™
 
-;; ~/.skk ¤Ë¤¤¤Ã¤Ñ¤¤ÀßÄê¤ò½ñ¤¤¤Æ¤¤¤ë¤Î¤Ç¥Ğ¥¤¥È¥³¥ó¥Ñ¥¤¥ë¤·¤¿¤¤
-;(setq skk-byte-compile-init-file t)
-;; Ãí) °Û¤Ê¤ë¼ïÎà¤Î Emacsen ¤ò»È¤Ã¤Æ¤¤¤ë¾ì¹ç¤Ï nil ¤Ë¤·¤Ş¤¹
+  ;; SKK ã‚’ Emacs ã® input method ã¨ã—ã¦ä½¿ç”¨ã™ã‚‹
+  (setq default-input-method "japanese-skk")
 
-;; SKK ¤ò Emacs ¤Î input method ¤È¤·¤Æ»ÈÍÑ¤¹¤ë
-(setq default-input-method "japanese-skk")
+  ;; SKK ã‚’èµ·å‹•ã—ã¦ã„ãªãã¦ã‚‚ã€ã„ã¤ã§ã‚‚ skk-isearch ã‚’ä½¿ã†
+  (add-hook 'isearch-mode-hook 'skk-isearch-mode-setup)
+  (add-hook 'isearch-mode-end-hook 'skk-isearch-mode-cleanup)
 
-;; SKK ¤òµ¯Æ°¤·¤Æ¤¤¤Ê¤¯¤Æ¤â¡¢¤¤¤Ä¤Ç¤â skk-isearch ¤ò»È¤¦
-(add-hook 'isearch-mode-hook 'skk-isearch-mode-setup)
-(add-hook 'isearch-mode-end-hook 'skk-isearch-mode-cleanup)
+  ;; @@ å¿œç”¨çš„ãªè¨­å®š
 
-;; @@ ±şÍÑÅª¤ÊÀßÄê
+  ;; ~/.skk* ãªãƒ•ã‚¡ã‚¤ãƒ«ãŒãŸãã•ã‚“ã‚ã‚‹ã®ã§æ•´ç†ã—ãŸã„
+  ;(if (not (file-directory-p "~/.ddskk"))
+  ;    (make-directory "~/.ddskk"))
+  ;(setq skk-init-file "~/.ddskk/init.el"
+  ;      skk-custom-file "~/.ddskk/custom.el"
+  ;      skk-emacs-id-file "~/.ddskk/emacs-id"
+  ;      skk-record-file "~/.ddskk/record"
+  ;      skk-jisyo "~/.ddskk/jisyo"
+  ;      skk-backup-jisyo "~/.ddskk/jisyo.bak")
+  ;; æ³¨) SKK ã®å€‹äººè¾æ›¸ã¯ skkinput ãªã©ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã§ã‚‚å‚ç…§ã—ã¾ã™ã‹ã‚‰ã€
+  ;;     ä¸Šè¨˜ã®è¨­å®šã‚’ã—ãŸå ´åˆã¯ãã‚Œã‚‰ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã‚‚æ›¸ã
+  ;;     ã‹ãˆã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
 
-;; ~/.skk* ¤Ê¥Õ¥¡¥¤¥ë¤¬¤¿¤¯¤µ¤ó¤¢¤ë¤Î¤ÇÀ°Íı¤·¤¿¤¤
-;(if (not (file-directory-p "~/.ddskk"))
-;    (make-directory "~/.ddskk"))
-;(setq skk-init-file "~/.ddskk/init.el"
-;      skk-custom-file "~/.ddskk/custom.el"
-;      skk-emacs-id-file "~/.ddskk/emacs-id"
-;      skk-record-file "~/.ddskk/record"
-;      skk-jisyo "~/.ddskk/jisyo"
-;      skk-backup-jisyo "~/.ddskk/jisyo.bak")
-;; Ãí) SKK ¤Î¸Ä¿Í¼­½ñ¤Ï skkinput ¤Ê¤É¤Î¥×¥í¥°¥é¥à¤Ç¤â»²¾È¤·¤Ş¤¹¤«¤é¡¢
-;;     ¾åµ­¤ÎÀßÄê¤ò¤·¤¿¾ì¹ç¤Ï¤½¤ì¤é¤Î¥×¥í¥°¥é¥à¤ÎÀßÄê¥Õ¥¡¥¤¥ë¤â½ñ¤­
-;;     ¤«¤¨¤ëÉ¬Í×¤¬¤¢¤ê¤Ş¤¹¡£
+  ;; migemo ã‚’ä½¿ã†ã‹ã‚‰ skk-isearch ã«ã¯ãŠã¨ãªã—ãã—ã¦ã„ã¦æ¬²ã—ã„
+  ;; (setq skk-isearch-start-mode 'latin)
 
-;; migemo ¤ò»È¤¦¤«¤é skk-isearch ¤Ë¤Ï¤ª¤È¤Ê¤·¤¯¤·¤Æ¤¤¤ÆÍß¤·¤¤
-;; (setq skk-isearch-start-mode 'latin)
+  ;; super-smart-find ã®ãŸã‚ã®è¨­å®š (æ„å‘³ã‚ã‚‹ã‹ãªï¼Ÿ)
+  (setq super-smart-find-self-insert-command-list
+	'(canna-self-insert-command
+	  egg-self-insert-command
+	  self-insert-command
+	  tcode-self-insert-command-maybe
+	  skk-insert))
 
-;; super-smart-find ¤Î¤¿¤á¤ÎÀßÄê (°ÕÌ£¤¢¤ë¤«¤Ê¡©)
-(setq super-smart-find-self-insert-command-list
-      '(canna-self-insert-command
-	egg-self-insert-command
-	self-insert-command
-	tcode-self-insert-command-maybe
-	skk-insert))
+  ;; YaTeX ã®ã¨ãã ã‘å¥èª­ç‚¹ã‚’å¤‰æ›´ã—ãŸã„
+  (add-hook 'yatex-mode-hook
+	    (lambda ()
+	      (require 'skk)
+	      (setq skk-kutouten-type 'en)))
 
-;; YaTeX ¤Î¤È¤­¤À¤±¶çÆÉÅÀ¤òÊÑ¹¹¤·¤¿¤¤
-(add-hook 'yatex-mode-hook
-	  (lambda ()
-	    (require 'skk)
-	    (setq skk-kutouten-type 'en)))
-
-;; ¼­½ñ¤ò 10 Ê¬Ëè¤Ë¼«Æ°ÊİÂ¸
-(defvar skk-auto-save-jisyo-interval 600)
-(defun skk-auto-save-jisyo ()
-  (skk-save-jisyo)
-  (skk-bayesian-save-history)
-  (skk-bayesian-corpus-save))
-(run-with-idle-timer skk-auto-save-jisyo-interval
-                     skk-auto-save-jisyo-interval
-                     'skk-auto-save-jisyo)
-;;(cancel-function-timers 'skk-auto-save-jisyo)
+  ;; è¾æ›¸ã‚’ 10 åˆ†æ¯ã«è‡ªå‹•ä¿å­˜
+  (defvar skk-auto-save-jisyo-interval 600)
+  (defun skk-auto-save-jisyo ()
+    (skk-save-jisyo)
+    (skk-bayesian-save-history)
+    (skk-bayesian-corpus-save))
+  (run-with-idle-timer skk-auto-save-jisyo-interval
+		       skk-auto-save-jisyo-interval
+		       'skk-auto-save-jisyo))
+  ;;(cancel-function-timers 'skk-auto-save-jisyo)

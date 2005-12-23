@@ -1,7 +1,6 @@
-;-*- emacs-lisp -*-
-; $Id$
+;; -*- emacs-lisp -*-
+;; $Id$
 
-(eval-safe
- (require 'develock)
- (set-face-foreground 'develock-reachable-mail-address-face "DarkGreen")
- (set-face-background 'develock-reachable-mail-address-face "black"))
+(when (require 'develock)
+  (set-face-foreground 'develock-reachable-mail-address-face "DarkGreen")
+  (set-face-background 'develock-reachable-mail-address-face "black"))

@@ -1,7 +1,7 @@
 ;-*- emacs-lisp -*-
 ; $Id$
 
-;; XWindow System
+;; X Window System
 (eval-safe
  (progn
    (set-face-font 'default
@@ -34,3 +34,11 @@
       (bdf-font "c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnmk14bi.bdf")))))
 
  (set-default-font "shinonome 14"))
+
+;; Carbon Emacs
+(if (require 'carbon-font)
+    (add-to-list
+     'initial-frame-alist
+     '(font . "fontset-osaka")))
+;;   '(font . "fontset-hiraginomaru")))
+;;   '(font . "-*-*-medium-r-normal--10-*-*-*-*-*-fontset-hiraginomaru")))

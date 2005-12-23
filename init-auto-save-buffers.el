@@ -1,6 +1,4 @@
 ;-*- emacs-lisp -*-
 ;$Id$
-(eval-safe
- (progn
-   (require 'auto-save-buffers)
-   (run-with-idle-timer 2 t 'auto-save-buffers))) ; ¥¢¥¤¥É¥ë 2 ÉÃ¤ÇÊİÂ¸
+(when (require 'auto-save-buffers)
+  (run-with-idle-timer 2 t 'auto-save-buffers)) ; ã‚¢ã‚¤ãƒ‰ãƒ« 2 ç§’ã§ä¿å­˜

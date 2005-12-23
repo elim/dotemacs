@@ -1,5 +1,5 @@
-; -*- emacs-lisp -*-
-; $Id$
+;; -*- emacs-lisp -*-
+;; $Id$
 
 (when (autoload-if-found 'css-mode "css-mode" nil t nil)
   (setq auto-mode-alist

@@ -1,9 +1,7 @@
-;-*- emacs-lisp -*-
-;$Id$
+;; -*- emacs-lisp -*-
+; $Id$
 
-(autoload 'ruby-mode "ruby-mode" nil t)
-
-(setq auto-mode-alist
-      (cons (cons "\\.rb$" 'ruby-mode) auto-mode-alist))
-
-(setq ruby-indent-level 3)
+(when (autoload-if-found 'ruby-mode "ruby-mode" nil t)
+  (setq auto-mode-alist
+	(cons (cons "\\.rb$" 'ruby-mode) auto-mode-alist))
+  (setq ruby-indent-level 3))

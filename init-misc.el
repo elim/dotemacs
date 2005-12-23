@@ -1,11 +1,10 @@
-;-*- emacs-lisp -*-
-; $Id$
-
+;; -*- emacs-lisp -*-
+;; $Id$
 
 ;; Xでのカラー表示
-(require 'font-lock)
-(if (not (featurep 'xemacs))
-    (global-font-lock-mode t))
+(when (require 'font-lock)
+  (when (not (featurep 'xemacs))
+    (global-font-lock-mode t)))
 
 ;; Mac 関係
 ;; http://pc7.2ch.net/test/read.cgi/mac/1084714251/175
@@ -22,7 +21,7 @@
 ;; C-h キーでカーソルの左の文字が消えるようにする。
 ;; (global-set-key "\C-h" 'backward-delete-char)
 
-;; C-h を C-? (Backspace) にする. 
+;; C-h を C-? (Backspace) にする.
 (keyboard-translate ?\C-h ?\C-?)
 ;; (global-set-key "\C-h" nil)
 
@@ -70,21 +69,17 @@
 (setq frame-title-format
       `(" %b " (buffer-file-name "( %f )")))
 
-
 ;; サーバモードで動かす
 (eval-safe (server-mode t))
 
 ;; 同一ファイル名のバッファ名を分かりやすく
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
-(setq uniquify-ignore-buffers-re "*[^*]+*")
-(setq uniquify-min-dir-content 1)
+(when (require 'uniquify)
+  (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+  (setq uniquify-ignore-buffers-re "*[^*]+*")
+  (setq uniquify-min-dir-content 1))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
 ;; grep-edit
-;;
-(require 'grep-edit)
+(eval-safe (require 'grep-edit))
 
 ;;kill-ring に同じ内容の文字列を複数入れない
 (defadvice kill-new (before ys:no-kill-new-duplicates activate)

@@ -1,21 +1,19 @@
-;-*- emacs-lisp -*-
-; $Id$
+;; -*- emacs-lisp -*-
+;; $Id$
 
-(if window-system
-    (progn
-      (setq default-frame-alist
-	    (append
-	     '((foreground-color . "gray")
-	       (background-color . "black")
-	       (cursor-color  . "blue")
-	       (width . 100)
-	       (height . 40)
-	       ;(top . 10)
-	       ;(left . 10)
-	       )
-	     default-frame-alist))))
+(when window-system
+  (setq default-frame-alist
+	(append
+	 '((foreground-color . "gray")
+	   (background-color . "black")
+	   (cursor-color  . "blue")
+	   ;(top . 10)
+	   ;(left . 10)
+	   (width . 100)
+	   (height . 40))
+	 default-frame-alist)))
 
 (eval-safe
  (progn
-  (set-active-alpha 0.9)
-  (set-inactive-alpha 0.95)))
+  (set-active-alpha 0.8)
+  (set-inactive-alpha 0.9)))

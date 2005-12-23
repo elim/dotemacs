@@ -1,42 +1,41 @@
-;-*- emacs-lisp -*-
-; $Id$
+;; -*- emacs-lisp -*-
+;; $Id$
 
-(autoload 'lookup "lookup" nil t)
-(autoload 'lookup-word "lookup" nil t)
-(autoload 'lookup-region "lookup" nil t)
-(autoload 'lookup-pattern "lookup" nil t)
+(when (autoload-if-found 'lookup "lookup" nil t)
+  (autoload-if-found 'lookup-word "lookup" nil t)
+  (autoload-if-found 'lookup-region "lookup" nil t)
+  (autoload-if-found 'lookup-pattern "lookup" nil t)
 
-(define-key ctl-x-map "l" 'lookup)
-(define-key ctl-x-map "e" 'lookup-word)
-(define-key ctl-x-map "y" 'lookup-region)
-;; (define-key ctl-x-map "\C-y" 'lookup-pattern)
+  (define-key ctl-x-map "l" 'lookup)
+  (define-key ctl-x-map "e" 'lookup-word)
+  (define-key ctl-x-map "y" 'lookup-region)
+  ;; (define-key ctl-x-map "\C-y" 'lookup-pattern)
 
-(setq lookup-use-bitmap nil)
-;; (setq lookup-open-function 'lookup-other-frame)
-(setq lookup-frame-alist
-      '((menu-bar-lines . 0)
-	(width . 80)
-	(height . 35)
-	(top . 5)
-	(left . -10)
-	(vertical-scroll-bars . nil)))
+  ;;   (when window-system
+  ;;     (setq lookup-use-bitmap t))
+  (setq lookup-use-bitmap nil)
+  ;; (setq lookup-open-function 'lookup-other-frame)
+  (setq lookup-frame-alist
+	'((menu-bar-lines . 0)
+	  (width . 80)
+	  (height . 35)
+	  (top . 5)
+	  (left . -10)
+	  (vertical-scroll-bars . nil)))
 
-(if (featurep 'meadow)
-    (progn(setq ndspell-ispell-program
-		"c:/Cygwin/opt/ispell-3.3.01/bin/ispell.exe")
-;; 	  (setq ndspell-grep-program
-;; 		"c:/Cygwin/usr/bin/grep.exe")
-)  nil)
+  (when (featurep 'meadow)
+    (setq ndspell-ispell-program
+	  "c:/Cygwin/opt/ispell-3.3.01/bin/ispell.exe"))
 
-(cond
- ((string-match "fascinating.local$" system-name)
-  (setq my-ndtp-server-definition
-	'(ndtp "idea" :port 2010)))
-  (t
-   (setq my-ndtp-server-definition
-	'(ndtp "localhost" :port 2010))))
+  (cond
+   ((string-match "fascinating.local$" system-name)
+    (setq my-ndtp-server-definition
+	  '(ndtp "idea" :port 2010)))
+   (t
+    (setq my-ndtp-server-definition
+	  '(ndtp "localhost" :port 2010))))
 
-(setq lookup-search-agents
-      (list
-       my-ndtp-server-definition
-       '(ndspell)))
+  (setq lookup-search-agents
+	(list
+	 my-ndtp-server-definition
+	 '(ndspell))))
