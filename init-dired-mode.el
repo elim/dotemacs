@@ -8,7 +8,8 @@
 
 ;; wdired
 ;; dired バッファを編集して，その変更を適用することができます．
-(when (require 'wdired)
+(when (locate-library "wdired")
+  (require 'wdired)
   (define-key dired-mode-map "r" 'wdired-change-to-wdired-mode))
 
 (setq dired-bind-jump nil)

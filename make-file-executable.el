@@ -1,5 +1,6 @@
-;-*- emacs-lisp -*-
-;http://www.namazu.org/~tsuchiya/elisp/#chmod
+;; -*- emacs-lisp -*-
+; http://www.namazu.org/~tsuchiya/elisp/#chmod
+
 (defun make-file-executable ()
   "Make the file of this buffer executable, when it is a script source."
   (save-restriction

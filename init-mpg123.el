@@ -2,8 +2,8 @@
 ;; $Id$
 
 (when (autoload-if-found 'mpg123 "mpg123" nil t)
-  (setq mpg123-mpg123-command "mpg321") ; mpg123¤Î¥³¥Ş¥ó¥ÉÌ¾
-  (setq mpg123-startup-volume 70)       ; µ¯Æ°»ş¤Î²»ÎÌ
-  (setq mpg123-default-repeat -1)       ; ·«¤êÊÖ¤·²ó¿ô¡£-1¤Ï±Ê±ó¤Ë·«¤êÊÖ¤¹¡£
-  (setq mpg123-default-dir              ; µ¯Æ°»ş¤Î¥Ç¥£¥ì¥¯¥È¥ê
+  (setq mpg123-mpg123-command "mpg321") ; mpg123ã®ã‚³ãƒãƒ³ãƒ‰å
+  (setq mpg123-startup-volume 70)       ; èµ·å‹•æ™‚ã®éŸ³é‡
+  (setq mpg123-default-repeat -1)       ; ç¹°ã‚Šè¿”ã—å›æ•°ã€‚-1ã¯æ°¸é ã«ç¹°ã‚Šè¿”ã™ã€‚
+  (setq mpg123-default-dir              ; èµ·å‹•æ™‚ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 	(expand-file-name "/opt/share/iTunes/iTunes Music/")))

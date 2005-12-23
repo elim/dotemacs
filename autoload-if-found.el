@@ -1,6 +1,6 @@
-; -*- emacs-lisp -*-
-; $Id: init-w3m.el 126 2005-09-01 11:03:02Z takeru $
-; http://www.sodan.org/~knagano/emacs/dotemacs.html
+;; -*- emacs-lisp -*-
+;; $Id$
+;; http://www.sodan.org/~knagano/emacs/dotemacs.html
 
 (defun autoload-if-found (function file &optional docstring interactive type)
   "set autoload iff. FILE has found."

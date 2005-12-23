@@ -8,7 +8,8 @@
 (setq elscreen-prefix-key "\C-l"
       elscreen-display-tab "nil")
 
-(when (require 'elscreen)
+(when (locate-library "elscreen")
+  (require 'elscreen)
   (setq elscreen-mode-to-nickname-alist
 	(append
 	 '(("^howm-" . "howm")
@@ -21,7 +22,7 @@
   (eval-safe (require 'elscreen-w3m))
   (eval-safe (require 'elscreen-wl)))
 
-;; elscreen が無くとも変更. 慣れたので.
+;; elscreen-wl が無くとも変更. 慣れたので.
 (add-hook
  'wl-draft-mode-hook
  '(lambda ()

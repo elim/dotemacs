@@ -17,35 +17,35 @@
     (setq howm-view-use-grep nil))
 
   ;; elscreen{,-howm}を使えなければ自前で用意
-  (if (not (and (locate-library "elscreen")
-		(locate-library "elscreen-howm")))
-      (;; いちいち消すのも面倒なので
-       ;; 内容が 0 ならファイルごと削除する
-       (if (not (memq 'delete-file-if-no-contents after-save-hook))
-	   (setq after-save-hook
-		 (cons 'delete-file-if-no-contents after-save-hook)))
-       (defun delete-file-if-no-contents ()
-	 (when (and
-		(buffer-file-name (current-buffer))
-		(string-match "\\.howm" (buffer-file-name (current-buffer)))
-		(= (point-min) (point-max)))
-	   (delete-file
-	    (buffer-file-name (current-buffer)))))
+  (when (not (and (locate-library "elscreen")
+		  (locate-library "elscreen-howm")))
+    ;; いちいち消すのも面倒なので
+    ;; 内容が 0 ならファイルごと削除する
+    (if (not (memq 'delete-file-if-no-contents after-save-hook))
+	(setq after-save-hook
+	      (cons 'delete-file-if-no-contents after-save-hook)))
+    (defun delete-file-if-no-contents ()
+      (when (and
+	     (buffer-file-name (current-buffer))
+	     (string-match "\\.howm" (buffer-file-name (current-buffer)))
+	     (= (point-min) (point-max)))
+	(delete-file
+	 (buffer-file-name (current-buffer)))))
 
-       ;; http://howm.sourceforge.jp/cgi-bin/hiki/hiki.cgi?SaveAndKillBuffer
-       ;; C-cC-c で保存してバッファをキルする
-       (defun my-save-and-kill-buffer ()
-	 (interactive)
-	 (when (and
-		(buffer-file-name)
-		(string-match "\\.howm"
-			      (buffer-file-name)))
-	   (save-buffer)
-	   (kill-buffer nil)))
+    ;; http://howm.sourceforge.jp/cgi-bin/hiki/hiki.cgi?SaveAndKillBuffer
+    ;; C-cC-c で保存してバッファをキルする
+    (defun my-save-and-kill-buffer ()
+      (interactive)
+      (when (and
+	     (buffer-file-name)
+	     (string-match "\\.howm"
+			   (buffer-file-name)))
+	(save-buffer)
+	(kill-buffer nil)))
 
-       (eval-after-load "howm-mode"
-	 (define-key howm-mode-map
-	   "\C-c\C-c" 'my-save-and-kill-buffer))))
+    (eval-after-load "howm-mode"
+      (define-key howm-mode-map
+	"\C-c\C-c" 'my-save-and-kill-buffer)))
 
   ;; 日記を書く
   (defun my-howm-diary-edit ()
@@ -55,8 +55,8 @@
 	   (expand-file-name
 	    (concat howm-directory
 		    (format-time-string "/%Y/%m" (current-time))))))
-      (if (not (file-exists-p my-diary-directory))
-	  (make-directory my-diary-directory)))
+      (when (not (file-exists-p my-diary-directory))
+	(make-directory my-diary-directory)))
 
     (let ((my-diary-file
 	   (expand-file-name
@@ -69,8 +69,8 @@
 	(find-file my-diary-file))
       (howm-mode)
 
-      (if (not (file-exists-p my-diary-file))
-	  (insert "= diary\n"))
+      (when (not (file-exists-p my-diary-file))
+	(insert "= diary\n"))
       (goto-char (point-max))))
 
   (eval-after-load "howm-mode"
@@ -98,17 +98,17 @@
       (setq howm-directory "h:/howm/"))
 
   ;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
-  (eval-after-load "calendar"
-    '(progn
-       (define-key calendar-mode-map
-	 "\C-m" 'my-insert-day)
-       (defun my-insert-day ()
-	 (interactive)
-	 (let ((day nil)
-	       (calendar-date-display-form
-		'("[" year "-" (format "%02d" (string-to-int month))
-		  "-" (format "%02d" (string-to-int day)) "]")))
-	   (setq day (calendar-date-string
-		      (calendar-cursor-to-date t)))
-	   (exit-calendar)
-	   (insert day))))))
+(eval-after-load "calendar"
+  '(progn
+     (define-key calendar-mode-map
+       "\C-m" 'my-insert-day)
+     (defun my-insert-day ()
+       (interactive)
+       (let ((day nil)
+	     (calendar-date-display-form
+	      '("[" year "-" (format "%02d" (string-to-int month))
+		"-" (format "%02d" (string-to-int day)) "]")))
+	 (setq day (calendar-date-string
+		    (calendar-cursor-to-date t)))
+	 (exit-calendar)
+	 (insert day))))))

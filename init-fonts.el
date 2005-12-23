@@ -36,9 +36,10 @@
  (set-default-font "shinonome 14"))
 
 ;; Carbon Emacs
-(if (require 'carbon-font)
-    (add-to-list
-     'initial-frame-alist
-     '(font . "fontset-osaka")))
+(when (locate-library "carbon-font")
+  (require 'carbon-font)
+  (add-to-list
+   'initial-frame-alist
+   '(font . "fontset-osaka")))
 ;;   '(font . "fontset-hiraginomaru")))
 ;;   '(font . "-*-*-medium-r-normal--10-*-*-*-*-*-fontset-hiraginomaru")))

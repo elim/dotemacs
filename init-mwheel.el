@@ -1,5 +1,6 @@
 ;-*- emacs-lisp -*-
 ;$Id$
 
-(when (require 'mwheel)
+(when (locate-library "mwheel")
+  (require 'mwheel)
   (setq mwheel-follow-mouse t))

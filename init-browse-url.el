@@ -1,7 +1,8 @@
 ;; -*- emacs-lisp -*-
 ;; $Id$
 
-(when (require 'browse-url)
+(when (locate-library "browse-url")
+  (require 'browse-url)
   (global-set-key [(hyper m)] 'browse-url-at-point)
   (global-set-key "\C-xm" 'browse-url-at-point)
   (setq browse-url-browser-display nil)

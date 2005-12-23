@@ -12,7 +12,7 @@
   ((featurep 'meadow)
    'sjis-dos)
   (t
-   'utf-8))
+   'utf-8)))
 
 (set-clipboard-coding-system
  (cond
@@ -21,14 +21,14 @@
   ((featurep 'meadow)
    'sjis-dos)
   (t
-   'utf-8))
+   'utf-8)))
 
 (setq file-name-coding-system
       (cond
        ((featurep 'meadow)
 	'sjis-dos)
        (t
-	'utf-8))
+	'utf-8)))
 
 (setq default-buffer-file-coding-system 'utf-8)
 

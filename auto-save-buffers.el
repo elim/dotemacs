@@ -1,5 +1,5 @@
-;-*- emacs-lisp -*-
-; $Id$
+;; -*- emacs-lisp -*-
+;; $Id$
 ;; http://namazu.org/%7Esatoru/unimag/12/
 ;;
 ;; このコードは山岡克美氏が書いてくださった (ELF:01128)

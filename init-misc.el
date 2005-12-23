@@ -73,13 +73,15 @@
 (eval-safe (server-mode t))
 
 ;; 同一ファイル名のバッファ名を分かりやすく
-(when (require 'uniquify)
+(when (locate-library "uniquify")
+  (require 'uniquify)
   (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
   (setq uniquify-ignore-buffers-re "*[^*]+*")
   (setq uniquify-min-dir-content 1))
 
 ;; grep-edit
-(eval-safe (require 'grep-edit))
+(when (locate-library "grep-edit")
+  (require 'grep-edit))
 
 ;;kill-ring に同じ内容の文字列を複数入れない
 (defadvice kill-new (before ys:no-kill-new-duplicates activate)

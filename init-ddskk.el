@@ -1,7 +1,8 @@
 ;-*- emacs-lisp -*-
 ; $Id$
 
-(when (require 'skk-setup)
+(when (locate-library "skk")
+  (require 'skk-setup)
   (global-set-key "\C-x\C-j" 'skk-mode)
   ;; (global-set-key "\C-xj" 'skk-auto-fill-mode)
   (global-set-key "\C-xj" nil)
@@ -86,4 +87,4 @@
   (run-with-idle-timer skk-auto-save-jisyo-interval
 		       skk-auto-save-jisyo-interval
 		       'skk-auto-save-jisyo))
-  ;;(cancel-function-timers 'skk-auto-save-jisyo)
+ ;;(cancel-function-timers 'skk-auto-save-jisyo)

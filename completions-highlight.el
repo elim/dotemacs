@@ -1,5 +1,5 @@
-;-*- emacs-lisp -*-
-;http://homepage1.nifty.com/blankspace/emacs/tips.html
+;; -*- emacs-lisp -*-
+;; http://homepage1.nifty.com/blankspace/emacs/tips.html
 (defadvice display-completion-list (after display-completion-list-highlight activate)
   (let* ((str-list (mapcar (lambda(x) (cond ((stringp x) x)
 					    ((symbolp x) (symbol-name x))
