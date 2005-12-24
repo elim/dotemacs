@@ -1,17 +1,7 @@
 ;; -*- emacs-lisp -*-
 ;; $Id$
 
-(when (locate-library "dired-x")
-  (add-hook 'dired-load-hook
-	    (lambda ()
-	      (load "dired-x"))))
-
-;; wdired
-;; dired バッファを編集して，その変更を適用することができます．
-(when (locate-library "wdired")
-  (require 'wdired)
-  (define-key dired-mode-map "r" 'wdired-change-to-wdired-mode))
-
+;; vars
 (setq dired-bind-jump nil)
 (setq dired-recursive-copies 'always)
 (setq dired-recursive-deletes 'always)
@@ -31,8 +21,24 @@
 	 (if (eq system-type 'windows-nt)
 	     "fiber" "ggv"))))
 
+
+;; dired-x
+;; dired-x があれば使う.
+(when (locate-library "dired-x")
+  (add-hook 'dired-load-hook
+	    (lambda ()
+	      (load "dired-x"))))
+
+;; wdired
+;; dired バッファを編集して，その変更を適用することができます．
+(when (locate-library "wdired")
+  (require 'wdired)
+  (add-hook 'dired-mode-hook
+	    (lambda ()
+	      (define-key (current-local-map) "r"
+		'wdired-change-to-wdired-mode))))
+
 ;; スペースでマークする (FD like)
-(define-key dired-mode-map " " 'dired-toggle-mark)
 (defun dired-toggle-mark (arg)
   "Toggle the current (or next ARG) files."
   ;; S.Namba Sat Aug 10 12:20:36 1996
@@ -43,6 +49,11 @@
 	     dired-marker-char ?\040)))
     (dired-mark arg)
     (dired-previous-line 1)))
+
+(add-hook 'dired-mode-hook
+	  (lambda ()
+	    (define-key (current-local-map) " "
+	      'dired-toggle-mark)))
 
 ;;; dired を使って、一気にファイルの coding system (漢字) を変換する
 ;; dired で m でマークを付け，T とします．これで，マークを付けたファイルの
