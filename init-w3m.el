@@ -1,8 +1,7 @@
 ; -*- emacs-lisp -*-
 ; $Id$
 
-(when (locate-library "w3m-load")
-  (require 'w3m-load)
+(when (require 'w3m-load nil t)
   (autoload-if-found
    'w3m "w3m" "*Interface for w3m on Emacs." t)
   (autoload-if-found
@@ -16,8 +15,7 @@
   (autoload-if-found
    'w3m-antenna "w3m-antenna" "*Report chenge of WEB sites." t)
 
-  (when (locate-library "w3m-weather")
-    (require 'w3m-wget))
+  (require 'w3m-wget nil t)
 
   (setq w3m-search-default-engine "google-ja")
   (setq w3m-pop-up-frames nil)

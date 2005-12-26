@@ -1,5 +1,5 @@
-;-*- emacs-lisp -*-
-; $Id$
+;; -*- emacs-lisp -*-
+;; $Id$
 
 ;; X Window System
 (eval-safe
@@ -36,8 +36,7 @@
  (set-default-font "shinonome 14"))
 
 ;; Carbon Emacs
-(when (locate-library "carbon-font")
-  (require 'carbon-font)
+(when (require 'carbon-font nil t)
   (add-to-list
    'initial-frame-alist
    '(font . "fontset-osaka")))

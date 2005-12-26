@@ -1,8 +1,7 @@
 ;; -*- emacs-lisp -*-
 ;; $Id$
 
-(when (locate-library "iswitchb")
-  (require 'iswitchb)
+(when (require 'iswitchb nil t)
   (iswitchb-mode 1)
   (setq iswitchb-buffer-ignore
 	(append

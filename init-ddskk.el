@@ -1,8 +1,8 @@
 ;-*- emacs-lisp -*-
 ; $Id$
 
-(when (locate-library "skk")
-  (require 'skk-setup)
+(when (require 'skk-setup nil t)
+  (setq skk-indicator-use-cursor-color nil)
   (global-set-key "\C-x\C-j" 'skk-mode)
   ;; (global-set-key "\C-xj" 'skk-auto-fill-mode)
   (global-set-key "\C-xj" nil)

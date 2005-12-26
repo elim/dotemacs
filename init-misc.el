@@ -2,7 +2,7 @@
 ;; $Id$
 
 ;; Xでのカラー表示
-(when (require 'font-lock)
+(when (require 'font-lock nil t)
   (when (not (featurep 'xemacs))
     (global-font-lock-mode t)))
 
@@ -73,15 +73,13 @@
 (eval-safe (server-mode t))
 
 ;; 同一ファイル名のバッファ名を分かりやすく
-(when (locate-library "uniquify")
-  (require 'uniquify)
+(when (require 'uniquify nil t)
   (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
   (setq uniquify-ignore-buffers-re "*[^*]+*")
   (setq uniquify-min-dir-content 1))
 
 ;; grep-edit
-(when (locate-library "grep-edit")
-  (require 'grep-edit))
+(require 'grep-edit nil t)
 
 ;;kill-ring に同じ内容の文字列を複数入れない
 (defadvice kill-new (before ys:no-kill-new-duplicates activate)

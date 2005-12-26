@@ -8,19 +8,18 @@
 (setq elscreen-prefix-key "\C-l"
       elscreen-display-tab "nil")
 
-(when (locate-library "elscreen")
-  (require 'elscreen)
+(when (require 'elscreen nil t)
+  (require 'elscreen-dired nil t)
+  (require 'elscreen-howm nil t)
+  (require 'elscreen-server nil t)
+  (require 'elscreen-w3m nil t)
+  (require 'elscreen-wl nil t))
   (setq elscreen-mode-to-nickname-alist
 	(append
 	 '(("^howm-" . "howm")
 	   ("^riece-" . "riece")
 	   ("^navi2ch-" . "navi2ch"))
 	 elscreen-mode-to-nickname-alist))
-  (eval-safe (require 'elscreen-dired))
-  (eval-safe (require 'elscreen-howm))
-  (eval-safe (require 'elscreen-server))
-  (eval-safe (require 'elscreen-w3m))
-  (eval-safe (require 'elscreen-wl)))
 
 ;; elscreen-wl が無くとも変更. 慣れたので.
 (add-hook

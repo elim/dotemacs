@@ -1,8 +1,7 @@
 ;; -*- emacs-lisp -*-
 ;; $Id$
 
-(when (locate-library "browse-kill-ring")
-  (require 'browse-kill-ring)
+(when (require 'browse-kill-ring nil t)
   (define-key ctl-x-map "\C-y" 'browse-kill-ring)
   ;; browse-kill-ring-display-style 'one-line
   (setq browse-kill-ring-display-style 'separated)
