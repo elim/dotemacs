@@ -18,10 +18,10 @@
 ;; Deleteキーでカーソル位置の文字が消えるようにする
 (global-set-key [delete] 'delete-char)
 
-;; C-h キーでカーソルの左の文字が消えるようにする。
+;; C-h キーでカーソルの左の文字が消えるようにする
 ;; (global-set-key "\C-h" 'backward-delete-char)
 
-;; C-h を C-? (Backspace) にする.
+;; C-h を C-? (Backspace) にする
 (keyboard-translate ?\C-h ?\C-?)
 ;; (global-set-key "\C-h" nil)
 
@@ -78,6 +78,9 @@
   (setq uniquify-ignore-buffers-re "*[^*]+*")
   (setq uniquify-min-dir-content 1))
 
+;; minibuf-isearch
+(require 'minibuf-isearch nil t)
+
 ;; grep-edit
 (require 'grep-edit nil t)
 
@@ -85,4 +88,15 @@
 (defadvice kill-new (before ys:no-kill-new-duplicates activate)
   (setq kill-ring (delete (ad-get-arg 0) kill-ring)))
 
+;; history から重複したのを消す
+(when (require 'cl nil t)
+  (defun minibuffer-delete-duplicate ()
+    (let (list)
+      (dolist (elt (symbol-value minibuffer-history-variable))
+	(unless (member elt list)
+	  (push elt list)))
+      (set minibuffer-history-variable (nreverse list))))
+  (add-hook 'minibuffer-setup-hook 'minibuffer-delete-duplicate))
+
+;; yank した文字列を X11 の cut buffer に送る
 (setq x-select-enable-clipboard t)
