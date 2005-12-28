@@ -23,7 +23,6 @@
 
 ;; C-h を C-? (Backspace) にする
 (keyboard-translate ?\C-h ?\C-?)
-;; (global-set-key "\C-h" nil)
 
 ;;補完時に大文字と小文字を区別させない
 (setq completion-ignore-case t)

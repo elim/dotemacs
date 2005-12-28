@@ -10,16 +10,19 @@
 
 (when (require 'elscreen nil t)
   (require 'elscreen-dired nil t)
-  (require 'elscreen-howm nil t)
   (require 'elscreen-server nil t)
-  (require 'elscreen-w3m nil t)
-  (require 'elscreen-wl nil t))
+  (when (locate-library "howm")
+    (require 'elscreen-howm nil t))
+  (when (locate-library "w3m")
+    (require 'elscreen-w3m nil t))
+  (when (locate-library "wl")
+    (require 'elscreen-wl nil t))
   (setq elscreen-mode-to-nickname-alist
 	(append
 	 '(("^howm-" . "howm")
 	   ("^riece-" . "riece")
 	   ("^navi2ch-" . "navi2ch"))
-	 elscreen-mode-to-nickname-alist))
+	 elscreen-mode-to-nickname-alist)))
 
 ;; elscreen-wl が無くとも変更. 慣れたので.
 (add-hook
