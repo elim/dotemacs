@@ -27,13 +27,12 @@
     (setq ndspell-ispell-program
 	  "c:/Cygwin/opt/ispell-3.3.01/bin/ispell.exe"))
 
-  (cond
-   ((string-match "fascinating.local$" system-name)
-    (setq my-ndtp-server-definition
-	  '(ndtp "idea" :port 2010)))
-   (t
-    (setq my-ndtp-server-definition
-	  '(ndtp "localhost" :port 2010))))
+  (setq my-ndtp-server-definition
+	(list 'ndtp (cond
+		     ((string-match "fascinating.local$" system-name)
+		      "idea")
+		     (t
+		      "localhost")) :port 2010))
 
   (setq lookup-search-agents
 	(list

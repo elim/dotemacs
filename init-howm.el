@@ -44,8 +44,9 @@
 	(kill-buffer nil)))
 
     (eval-after-load "howm-mode"
-      (define-key howm-mode-map
-	"\C-c\C-c" 'my-save-and-kill-buffer)))
+      '(progn
+	 (define-key howm-mode-map
+	   "\C-c\C-c" 'my-save-and-kill-buffer))))
 
   ;; 日記を書く
   (defun my-howm-diary-edit ()
