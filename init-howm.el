@@ -55,24 +55,23 @@
     (let ((my-diary-directory
 	   (expand-file-name
 	    (concat howm-directory
-		    (format-time-string "/%Y/%m" (current-time))))))
-      (when (not (file-exists-p my-diary-directory))
-	(make-directory my-diary-directory)))
-
-    (let ((my-diary-file
+		    (format-time-string "/%Y/%m"))))
+	  (my-diary-file
 	   (expand-file-name
 	    (concat howm-directory
-		    (format-time-string
-		     "/%Y/%m/%Y-%m-%d.howm" (current-time))))))
+		    (format-time-string "/%Y/%m/%Y-%m-%d.howm")))))
 
-      (if (locate-library "elscreen")
+      (when (not (file-exists-p my-diary-directory))
+	(make-directory my-diary-directory))
+
+      (if (functionp 'elscreen-find-file)
 	  (elscreen-find-file my-diary-file)
 	(find-file my-diary-file))
-      (howm-mode)
 
       (when (not (file-exists-p my-diary-file))
 	(insert "= diary\n"))
-      (goto-char (point-max))))
+      (goto-char (point-max))
+      (howm-mode t)))
 
   (eval-after-load "howm-mode"
     '(progn
