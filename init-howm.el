@@ -1,5 +1,5 @@
-;-*- emacs-lisp -*-
-; $Id$
+;; -*- emacs-lisp -*-
+;; $Id$
 
 (when (autoload-if-found 'howm "howm" "Hitori Otegaru Wiki Modoki" t)
   (global-set-key "\C-c,," 'howm-menu)
@@ -49,17 +49,34 @@
 	   "\C-c\C-c" 'my-save-and-kill-buffer))))
 
   ;; 日記を書く
-  (defun my-howm-diary-edit ()
-    "説明文"
-    (interactive)
-    (let ((my-diary-directory
-	   (expand-file-name
-	    (concat howm-directory
-		    (format-time-string "/%Y/%m"))))
-	  (my-diary-file
-	   (expand-file-name
-	    (concat howm-directory
-		    (format-time-string "/%Y/%m/%Y-%m-%d.howm")))))
+  (defun my-howm-diary-edit (&optional my-diary-date-offset)
+    "The diary is written by using howm.
+Diary buffer after the numelic day is generated with C-u numelic M-x.
+Offset is demanded when calling with C-u M-x."
+    (interactive "P")
+    (when (equal my-diary-date-offset '(4)) ;; C-u M-x で呼ばれたなら
+      (while (not (number-or-marker-p       ;; 数値を要求する
+		   (setq my-diary-date-offset
+			 (read-from-minibuffer
+			  "Date Offset is: " nil nil t nil "0"))))))
+    (let*
+     ((my-diary-time
+       (if (not (number-or-marker-p my-diary-date-offset))
+	   (current-time)
+	 (apply 'encode-time
+		   (nconc
+		    (list
+		     (nth 0 (decode-time))
+		     (nth 1 (decode-time))
+		     (nth 2 (decode-time))
+		     (+ (nth 3 (decode-time)) my-diary-date-offset))
+		    (nthcdr 4 (decode-time))))))
+	 (my-diary-directory
+	  (concat howm-directory
+		  (format-time-string "%Y/%m" my-diary-time)))
+	 (my-diary-file
+	  (concat my-diary-directory
+		  (format-time-string "/%Y-%m-%d.howm" my-diary-time))))
 
       (when (not (file-exists-p my-diary-directory))
 	(make-directory my-diary-directory))

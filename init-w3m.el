@@ -38,9 +38,9 @@
 	'("wdic"
 	  "http://www.wdic.org/?word=%s"
 	  euc-japan))
-	'(add-to-list
-	  'w3m-uri-replace-alist
-	  '("\\`wdic:" w3m-search-uri-replace "wdic"))))
+      '(add-to-list
+	'w3m-uri-replace-alist
+	'("\\`wdic:" w3m-search-uri-replace "wdic"))))
 
   (when (autoload-if-found 'mime-w3m-preview-text/html "mime-w3m")
     (setq mime-setup-enable-inline-html t)
