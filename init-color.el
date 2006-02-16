@@ -13,9 +13,8 @@
 	   (height . 40))
 	 default-frame-alist)))
 
-
-(when (eq window-system 'mac)
-  (when (functionp 'set-active-alpha)
-    (set-active-alpha 0.9))
-  (when (functionp 'set-iactive-alpha)
-    (set-inactive-alpha 0.8)))
+;; (when (eq window-system 'mac)
+;;   (when (functionp 'set-active-alpha)
+;;     (set-active-alpha 0.9))
+;;   (when (functionp 'set-iactive-alpha)
+;;     (set-inactive-alpha 0.8))))

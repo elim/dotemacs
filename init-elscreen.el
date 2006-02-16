@@ -5,8 +5,11 @@
 (eval-safe
  (unload-feature 'elscreen))
 
-(setq elscreen-prefix-key "\C-l"
-      elscreen-display-tab "nil")
+(setq elscreen-prefix-key "\C-l")
+(setq elscreen-display-tab
+      (cond
+       ((string-match "fascinating.local$" system-name)  t)
+       (t  nil)))
 
 (when (require 'elscreen nil t)
   (require 'elscreen-dired nil t)
