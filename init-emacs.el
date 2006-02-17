@@ -1,7 +1,7 @@
 ;-*- emacs-lisp -*-
 ; $Id$
 (setq custom-file
-      (expand-file-name "~/lib/site-lisp/customize.el"))
+      (expand-file-name (concat my-lisp-path "/customize.el")))
 
 ;; 必ず最初に読み込む
 (load "eval-safe.el")
