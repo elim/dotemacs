@@ -16,12 +16,7 @@
   (setq lookup-use-bitmap nil)
   (setq lookup-open-function 'lookup-other-frame)
   (setq lookup-frame-alist
-	'((menu-bar-lines . 0)
-	  (width . 80)
-	  (height . 35)
-	  (top . 5)
-	  (left . -10)
-	  (vertical-scroll-bars . nil)))
+	default-frame-alist)
 
   (when (featurep 'meadow)
     (setq ndspell-ispell-program

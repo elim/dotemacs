@@ -45,9 +45,9 @@
   ;; @@ 応用的な設定
 
   ;; ~/.skk* なファイルがたくさんあるので整理したい
-  (setq my-ddskk-path (expand-file-name (concat my-lisp-path "/ddskk"))
-  (when (not (file-directory-p my-ddskk-path)
-	     (make-directory my-ddskk-path)))
+  (setq my-ddskk-path (expand-file-name (concat my-lisp-path "/ddskk")))
+  (when (not (file-directory-p my-ddskk-path))
+	     (make-directory my-ddskk-path))
   (setq skk-init-file (expand-file-name (concat my-ddskk-path "/init.el"))
 	skk-custom-file (expand-file-name (concat my-ddskk-path "/custom.el"))
 	skk-emacs-id-file (expand-file-name (concat my-ddskk-path "/emacs-id"))

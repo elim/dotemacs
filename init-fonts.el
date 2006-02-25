@@ -2,15 +2,14 @@
 ;; $Id$
 
 ;; X Window System
-(when (eq window-system 'x)
-  (eval-safe
-   (progn
-     (set-face-font 'default
-		    "-shinonome-gothic-medium-r-normal--14-0-0-0-c-0-*-*")
-     (set-face-font 'bold
-		    "-shinonome-gothic-bold-r-normal--14-0-0-0-c-0-*-*")
-     (set-face-font 'bold-italic
-		    "-shinonome-gothic-bold-i-normal--14-0-0-0-c-0-*-*"))))
+(when (and (eq window-system 'x) (x-list-fonts "*shinonome*"))
+  (progn
+    (set-face-font 'default
+		   "-shinonome-gothic-medium-r-normal--14-0-0-0-c-0-*-*")
+    (set-face-font 'bold
+		   "-shinonome-gothic-bold-r-normal--14-0-0-0-c-0-*-*")
+    (set-face-font 'bold-italic
+		    "-shinonome-gothic-bold-i-normal--14-0-0-0-c-0-*-*")))
 
 ;; Meadow 2.x
 (when (functionp 'w32-add-font)
@@ -49,6 +48,9 @@
   (require 'carbon-font nil t)
   (add-to-list
    'initial-frame-alist
+   '(font . "fontset-osaka"))
+  (add-to-list
+   'default-frame-alist
    '(font . "fontset-osaka")))
 ;;   '(font . "fontset-hiraginomaru")))
 ;;   '(font . "-*-*-medium-r-normal--10-*-*-*-*-*-fontset-hiraginomaru")))

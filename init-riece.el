@@ -2,8 +2,15 @@
 ;; $Id$
 
 (when (autoload-if-found 'riece "riece" nil t)
-  (setq riece-server-alist '(("Tiarra" :host "elim.teroknor.org")))
-  (setq riece-server "Tiarra")
+  (setq riece-server-alist
+	'(("idea" :host "idea")
+	  ("localhost" :host "localhost" :service 16667)))
+  (setq riece-server
+	(cond
+	 ((string-match my-domestic-domain system-name)
+	  "idea")
+	 (t
+	  "localhost")))
   (setq riece-channel-buffer-mode 't)
   (setq riece-user-list-buffer-mode 't)
   (setq riece-layout '"middle-left")
