@@ -2,13 +2,13 @@
 ;; $Id$
 
 ;; for Debian package.
-(eval-safe
- (unload-feature 'elscreen))
+(when (featurep 'elscreen)
+  (unload-feature 'elscreen))
 
 (setq elscreen-prefix-key "\C-l")
 (setq elscreen-display-tab
       (cond
-       ((string-match "fascinating.local$" system-name)  t)
+       ((string-match my-domestic-domain system-name)  t)
        (t  nil)))
 
 (when (require 'elscreen nil t)

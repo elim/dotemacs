@@ -1,5 +1,5 @@
-;-*- emacs-lisp -*-
-;$Id$;
+;; -*- emacs-lisp -*-
+;; $Id$;
 
 (when (autoload-if-found 'wl "wl" "Wanderlust" t)
   (autoload-if-found 'wl-other-frame "wl" "Wanderlust on new frame." t)
@@ -14,11 +14,18 @@
   (setq wl-biff-check-interval 30)
   (setq wl-biff-notify-hook '(ding))
 
-;; 振り分け準備 ( procmail にバトンタッチ)
-;(autoload 'elmo-split "elmo-split"
-;  "Split messages on the folder." t)
+  (setq my-wl-path (expand-file-name (concat my-lisp-path "/wl")))
+  (setq wl-init-file (expand-file-name (concat my-wl-path "/.wl")))
+  (setq wl-address-file (expand-file-name (concat my-wl-path "/.addresses")))
+  (setq wl-folders-file (expand-file-name (concat my-wl-path "/.folders")))
 
-;; emacs の defualt MUA に
+;;(setq signature-file-name "~/.signature")
+
+;;; 振り分け準備 (procmail にバトンタッチ)
+;;  (autoload 'elmo-split "elmo-split"
+;;    "Split messages on the folder." t)
+
+;;;  emacs の defualt MUA に
   (autoload-if-found 'wl-user-agent-compose "wl-draft" nil t)
   (if (boundp 'mail-user-agent)
       (setq mail-user-agent 'wl-user-agent))

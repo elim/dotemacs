@@ -18,11 +18,7 @@
   (autoload-if-found 'skk-isearch-mode-setup "skk-isearch" nil t)
   (autoload-if-found 'skk-isearch-mode-cleanup "skk-isearch" nil t)
 
-  (when (featurep 'meadow)
-    (setq
-     skk-init-file (expand-file-name "~/dot.files/.skk")
-     skk-server-jisyo "c:/cygwin/usr/local/share/skk/SKK-JISYO.L"
-     skk-server-prog "c:/cygwin/usr/local/sbin/skkserv.rb"))
+  (setq skk-init-file (expand-file-name (concat my-lisp-path "/.skk")))
 
   ;; @@ 基本の設定
 
@@ -49,13 +45,14 @@
   ;; @@ 応用的な設定
 
   ;; ~/.skk* なファイルがたくさんあるので整理したい
-  ;(if (not (file-directory-p "~/.ddskk"))
-  ;    (make-directory "~/.ddskk"))
-  ;(setq skk-init-file "~/.ddskk/init.el"
-  ;      skk-custom-file "~/.ddskk/custom.el"
-  ;      skk-emacs-id-file "~/.ddskk/emacs-id"
-  ;      skk-record-file "~/.ddskk/record"
-  ;      skk-jisyo "~/.ddskk/jisyo"
+  (setq my-ddskk-path (expand-file-name (concat my-lisp-path "/ddskk"))
+  (when (not (file-directory-p my-ddskk-path)
+	     (make-directory my-ddskk-path)))
+  (setq skk-init-file (expand-file-name (concat my-ddskk-path "/init.el"))
+	skk-custom-file (expand-file-name (concat my-ddskk-path "/custom.el"))
+	skk-emacs-id-file (expand-file-name (concat my-ddskk-path "/emacs-id"))
+	skk-record-file (expand-file-name (concat my-ddskk-path "/record")))
+  ;	skk-jisyo "~/.ddskk/jisyo"
   ;      skk-backup-jisyo "~/.ddskk/jisyo.bak")
   ;; 注) SKK の個人辞書は skkinput などのプログラムでも参照しますから、
   ;;     上記の設定をした場合はそれらのプログラムの設定ファイルも書き

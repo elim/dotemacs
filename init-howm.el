@@ -109,12 +109,8 @@ Offset is demanded when calling with C-u M-x."
 	    (lambda ()
 	      (setq buffer-file-coding-system 'utf-8-unix)))
 
-  (if (and
-       (string-match "fascinating.local$" system-name)
-       (featurep 'meadow))
-      (setq howm-directory "h:/howm/"))
 
-  ;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
+;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
 (eval-after-load "calendar"
   '(progn
      (define-key calendar-mode-map

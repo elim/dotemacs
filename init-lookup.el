@@ -14,7 +14,7 @@
   ;;   (when window-system
   ;;     (setq lookup-use-bitmap t))
   (setq lookup-use-bitmap nil)
-  ;; (setq lookup-open-function 'lookup-other-frame)
+  (setq lookup-open-function 'lookup-other-frame)
   (setq lookup-frame-alist
 	'((menu-bar-lines . 0)
 	  (width . 80)
@@ -29,7 +29,7 @@
 
   (setq my-ndtp-server-definition
 	(list 'ndtp (cond
-		     ((string-match "fascinating.local$" system-name)
+		     ((string-match my-domestic-domain system-name)
 		      "idea")
 		     (t
 		      "localhost")) :port 2010))
