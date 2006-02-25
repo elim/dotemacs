@@ -56,7 +56,7 @@
 ;(setq system-name "elim.teroknor.org")
 
 (cond
- ((not (string-match "fascinating.local$" system-name))
+ ((not (string-match my-domestic-domain system-name))
   (setq wl-local-domain "elim.teroknor.org")))
 
 ;; Message-ID のドメインパートを強制的に指定
@@ -73,7 +73,7 @@
 ;;; [[ サーバの設定 ]]
 (setq my-wl-server-name
  (cond
-  ((string-match "fascinating.local$" system-name)
+  ((string-match my-domestic-domain system-name)
    "idea")
   (t
    "localhost")))
@@ -103,7 +103,7 @@
 ;; IMAP サーバのポート
 ;; IMAP サーバとの通信方式
 (cond
- ((string-match "fascinating.local$" system-name)
+ ((string-match my-domestic-domain system-name)
   (setq elmo-imap4-default-port 993)
   (setq elmo-imap4-default-stream-type 'ssl))
   (t
