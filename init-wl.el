@@ -1,9 +1,16 @@
 ;; -*- emacs-lisp -*-
 ;; $Id$;
 
-(when (autoload-if-found 'wl "wl" "Wanderlust" t)
-  (autoload-if-found 'wl-other-frame "wl" "Wanderlust on new frame." t)
-  (autoload-if-found 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
+
+(when (locate-library "wl")
+  (autoload 'wl "wl" "Wanderlust" t)
+  (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
+  (autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
+
+  (setq my-wl-path (expand-file-name (concat my-lisp-path "/wl")))
+  (setq wl-init-file (expand-file-name (concat my-wl-path "/.wl")))
+  (setq wl-address-file (expand-file-name (concat my-wl-path "/.addresses")))
+  (setq wl-folders-file (expand-file-name (concat my-wl-path "/.folders")))
 
   (setq wl-summary-showto-folder-regexp "^\\%Sent$")
   (setq wl-demo-background-color "#ccccff")
@@ -13,11 +20,6 @@
   (setq wl-biff-check-folder-list '("%INBOX"))
   (setq wl-biff-check-interval 30)
   (setq wl-biff-notify-hook '(ding))
-
-  (setq my-wl-path (expand-file-name (concat my-lisp-path "/wl")))
-  (setq wl-init-file (expand-file-name (concat my-wl-path "/.wl")))
-  (setq wl-address-file (expand-file-name (concat my-wl-path "/.addresses")))
-  (setq wl-folders-file (expand-file-name (concat my-wl-path "/.folders")))
 
 ;;(setq signature-file-name "~/.signature")
 
