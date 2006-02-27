@@ -4,7 +4,7 @@
 (when (autoload-if-found 'riece "riece" nil t)
   (setq riece-server-alist
 	'(("idea" :host "idea")
-	  ("localhost" :host "localhost" :service 16667)))
+	  ("localhost" :host "localhost")))
   (setq riece-server
 	(cond
 	 ((string-match my-domestic-domain system-name)

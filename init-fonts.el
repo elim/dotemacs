@@ -40,7 +40,10 @@
       ((:char-spec japanese-jisx0208 :height any :weight bold :slant italic)
        (bdf-font
 	"c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnmk14bi.bdf")))))
-  (set-default-font "shinonome 14"))
+  (set-default-font "shinonome 14")
+  (add-to-list
+   'default-frame-alist
+   '(font . "shinonome 14")))
 
 ;; Carbon Emacs
 
