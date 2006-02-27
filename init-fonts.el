@@ -54,6 +54,6 @@
    '(font . "fontset-osaka"))
   (add-to-list
    'default-frame-alist
-   '(font . "fontset-osaka")))
-;;   '(font . "fontset-hiraginomaru")))
+;;   '(font . "fontset-osaka")))
+   '(font . "fontset-hiraginomaru")))
 ;;   '(font . "-*-*-medium-r-normal--10-*-*-*-*-*-fontset-hiraginomaru")))
