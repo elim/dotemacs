@@ -40,6 +40,7 @@
 (load "init-riece.el")
 (load "init-ruby.el")
 (load "init-session.el")
+(load "init-server.el")
 (load "init-shimbun.el")
 (load "init-tdiary-mode.el")
 (load "init-tiarra-conf.el")

@@ -30,14 +30,14 @@
 
 ;; ヘルプ等の window を可変にする
 (when (functionp 'temp-buffer-resize-mode)
-  temp-buffer-resize-mode t))
+  (temp-buffer-resize-mode t))
 
 ;; visible-bell
 (setq visible-bell t)
 
 ;; 行番号を表示する
 (when (functionp 'line-number-mode)
-  (line-number-mode t)
+  (line-number-mode t))
 
 ;; 桁番号を表示する
 (when (functionp 'column-number-mode)
@@ -77,12 +77,6 @@
 ;; フレームタイトルを 「バッファ名 (フルパスのファイル名)」とする
 (setq frame-title-format
       `(" %b " (buffer-file-name "( %f )")))
-
-;; サーバモードで動かす
-(when (and (functionp 'server-start)
-	   (not (featurep 'meadow)))
-  (setq server-window 'pop-to-buffer)
-  (server-start))
 
 ;; 同一ファイル名のバッファ名を分かりやすく
 (when (require 'uniquify nil t)
