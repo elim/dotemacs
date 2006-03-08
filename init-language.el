@@ -1,6 +1,12 @@
 ;; -*- emacs-lisp -*-
-; $Id$
+;; $Id$
 
+;;; Mule-UCS の設定
+(when (string-match "21.2" emacs-version)
+  (require 'un-define nil t) ; Unicode
+  (require 'jisx0213 nil t))  ; JIS X 0213
+
+;;; 日本語環境設定
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 (set-buffer-file-coding-system 'utf-8)

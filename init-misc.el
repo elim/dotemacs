@@ -22,38 +22,47 @@
 ;; (global-set-key "\C-h" 'backward-delete-char)
 
 ;; C-h を C-? (Backspace) にする
-(keyboard-translate ?\C-h ?\C-?)
+(when (functionp 'keyboard-translate)
+  (keyboard-translate ?\C-h ?\C-?))
 
 ;;補完時に大文字と小文字を区別させない
 (setq completion-ignore-case t)
 
 ;; ヘルプ等の window を可変にする
-(temp-buffer-resize-mode 1)
+(when (functionp 'temp-buffer-resize-mode)
+  temp-buffer-resize-mode t))
 
 ;; visible-bell
 (setq visible-bell t)
 
 ;; 行番号を表示する
-(line-number-mode t)
+(when (functionp 'line-number-mode)
+  (line-number-mode t)
 
 ;; 桁番号を表示する
-(column-number-mode t)
+(when (functionp 'column-number-mode)
+  (column-number-mode t))
 
 ;;; 時刻を24時間制でモードラインに表示する
-(setq display-time-24hr-format t)
-(display-time)
+(when (functionp 'display-time)
+  (setq display-time-24hr-format t)
+  (display-time))
 
 ;; メニューを消す
-(menu-bar-mode -1)
+(when (functionp 'menu-bar-mode)
+  (menu-bar-mode -1))
 
 ;; ツールバーを消す
-(tool-bar-mode -1)
+(when (functionp 'tool-bar-mode)
+  (tool-bar-mode -1))
 
 ;;スクロールバーを右に
-(set-scroll-bar-mode 'right)
+(when (functionp 'set-scroll-bar-mode)
+  (set-scroll-bar-mode 'right))
 
 ;; スクロールバーを消す
-(scroll-bar-mode -1)
+(when (functionp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
 
 ;; window system では行間を空ける
 (setq-default line-spacing 2)
@@ -62,14 +71,18 @@
 (setq next-line-add-newlines nil)
 
 ;;対応する括弧を表示するか
-(show-paren-mode -1)
+(when (functionp 'show-paren-mode)
+  (show-paren-mode -1))
 
 ;; フレームタイトルを 「バッファ名 (フルパスのファイル名)」とする
 (setq frame-title-format
       `(" %b " (buffer-file-name "( %f )")))
 
 ;; サーバモードで動かす
-(eval-safe (server-mode t))
+(when (and (functionp 'server-start)
+	   (not (featurep 'meadow)))
+  (setq server-window 'pop-to-buffer)
+  (server-start))
 
 ;; 同一ファイル名のバッファ名を分かりやすく
 (when (require 'uniquify nil t)

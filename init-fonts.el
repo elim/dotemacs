@@ -46,14 +46,12 @@
    '(font . "shinonome 14")))
 
 ;; Carbon Emacs
-
 (when (and (eq window-system 'mac) (locate-library "carbon-font"))
+  (setq-default line-spacing 2)
   (require 'carbon-font nil t)
   (add-to-list
-   'initial-frame-alist
-   '(font . "fontset-osaka"))
-  (add-to-list
    'default-frame-alist
-;;   '(font . "fontset-osaka")))
    '(font . "fontset-hiraginomaru")))
-;;   '(font . "-*-*-medium-r-normal--10-*-*-*-*-*-fontset-hiraginomaru")))
+;;"fontset-hiraginomaru"
+;;"fontset-osaka"
+;;"-*-*-medium-r-normal--10-*-*-*-*-*-fontset-hiraginomaru"

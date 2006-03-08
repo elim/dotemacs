@@ -1,5 +1,5 @@
-;-*- emacs-lisp -*-
-; $Id$
+;; -*- emacs-lisp -*-
+;; $Id$
 (setq custom-file
       (expand-file-name (concat my-lisp-path "/customize.el")))
 
@@ -28,7 +28,7 @@
 (load "init-howm.el")
 (load "init-html-helper-mode.el")
 (load "init-iswitchb.el")
-(load "init-japanese.el")
+(load "init-language.el")
 (load "init-liece.el")
 (load "init-lookup.el")
 (load "init-navi2ch.el")
@@ -48,4 +48,5 @@
 (load "init-wget.el")
 (load "init-wl.el")
 
-(eval-safe (howm-menu))
+(when (functionp 'howm-menu)
+  (howm-menu))

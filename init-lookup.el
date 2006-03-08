@@ -15,8 +15,7 @@
   ;;     (setq lookup-use-bitmap t))
   (setq lookup-use-bitmap nil)
   (setq lookup-open-function 'lookup-other-frame)
-  (setq lookup-frame-alist
-	default-frame-alist)
+  (setq lookup-frame-alist default-frame-alist)
 
   (when (featurep 'meadow)
     (setq ndspell-ispell-program
