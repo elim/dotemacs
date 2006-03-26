@@ -47,11 +47,32 @@
 
 ;; Carbon Emacs
 (when (and (eq window-system 'mac) (locate-library "carbon-font"))
-  (setq-default line-spacing 2)
-  (require 'carbon-font nil t)
-  (add-to-list
-   'default-frame-alist
-   '(font . "fontset-hiraginomaru")))
-;;"fontset-hiraginomaru"
-;;"fontset-osaka"
-;;"-*-*-medium-r-normal--10-*-*-*-*-*-fontset-hiraginomaru"
+  (when (require 'carbon-font nil t)
+    (setq mac-allow-anti-aliasing nil)
+    (add-to-list
+     'default-frame-alist
+     '(font . "-*-*-medium-r-normal--14-*-*-*-*-*-fontset-hiraginokaku"))))
+
+;;     (if (x-list-fonts "*sazanami*")
+;; 	(progn
+;; 	  (setq-default line-spacing 6)
+;; 	  (setq carbon-font-encode-family-list-sazanami
+;; 		'((ascii . "sazanami gothic")
+;; 		  (japanese-jisx0208 . "sazanami gothic")
+;; 		  (katakana-j2222isx0201 . "sazanami gothic")
+;; 		  (thai-tis620 . "ayuthaya")
+;; 		  (chinese-gb2312 . "stheiti*")
+;; 		  (chinese-big5-1 . "lihei pro*")
+;; 		  (korean-ksc5601 . "applegothic*")))
+;; 	  (carbon-font-create-fontset "sazanami"
+;; 				      carbon-font-defined-sizes
+;; 				      carbon-font-encode-family-list-sazanami)
+;; 	  (add-to-list
+;; 	   'default-frame-alist
+;; 	   '(font . "-*-*-medium-r-normal--14-*-*-*-*-*-fontset-sazanami")))
+;;       (progn
+;; 	(setq-default line-spacing 2)
+;; 	(setq mac-allow-anti-aliasing t)
+;; 	(add-to-list
+;; 	 'default-frame-alist
+;; 	 '(font . "-*-*-medium-r-normal--14-*-*-*-*-*-fontset-hiraginokaku"))))))

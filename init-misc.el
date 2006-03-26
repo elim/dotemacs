@@ -7,10 +7,9 @@
     (global-font-lock-mode t)))
 
 ;; Mac 関係
-;; http://pc7.2ch.net/test/read.cgi/mac/1084714251/175
-;; > CarbonEmacsに限って言えば、mac-pass-control-to-system を nil に
-;; > すれば AquaSKK の Ascii モードでも問題なく使えると思うよ。
 (setq mac-pass-control-to-system nil)
+(setq mac-pass-command-to-system nil)
+(setq mac-option-modifier 'meta)
 
 ;; goto-line
 (global-set-key "\C-cg" 'goto-line)

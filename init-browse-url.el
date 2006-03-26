@@ -11,7 +11,7 @@
 	(cond
 	 ((featurep 'meadow)
 	  "c:/Program Files/Mozilla Firefox/firefox.exe")
-	 ((featurep 'carbon-emacs-package)
+	 ((featurep 'mac-carbon)
 	  "open")
 	 (t
 	  "~/bin/firefox"))))

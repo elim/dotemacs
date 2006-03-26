@@ -1,7 +1,7 @@
 ;; -*- emacs-lisp -*-
 ;; $Id$
 
-(when (autoload-if-found 'howm "howm" "Hitori Otegaru Wiki Modoki" t)
+(when (autoload-if-found 'howm-menu "howm" "Hitori Otegaru Wiki Modoki" t)
   (global-set-key "\C-c,," 'howm-menu)
   (setq  howm-menu-lang 'ja)
   ;; 「最近のメモ」一覧時にタイトル表示
@@ -10,6 +10,7 @@
   (setq howm-list-all-title t)
   ;; 日付の新しい順
   (setq howm-list-normalizer 'howm-view-sort-by-reverse-date)
+  (setq howm-todo-menu-types "[-+~!]")
 
   (if (or (locate-library "grep" nil exec-path)
 	  (locate-library "grep.exe" nil exec-path))
