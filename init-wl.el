@@ -6,6 +6,9 @@
   (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
   (autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
 
+  (when (autoload 'x-face-decode-message-header "x-face-e21" t)
+    (setq wl-highlight-x-face-function 'x-face-decode-message-header))
+
   (setq my-wl-path (expand-file-name (concat my-lisp-path "/wl")))
   (setq wl-init-file (expand-file-name (concat my-wl-path "/.wl")))
   (setq wl-address-file (expand-file-name (concat my-wl-path "/.addresses")))

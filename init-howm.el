@@ -17,6 +17,15 @@
       (setq howm-view-use-grep t)
     (setq howm-view-use-grep nil))
 
+    (when (locate-library "elscreen")
+      (eval-after-load "howm-menu"
+	'(progn
+	   (defun my-howm-menu ()
+	     (interactive)
+	     (elscreen-jump-0)
+	     (howm-menu))
+	   (global-set-key "\C-c,," 'my-howm-menu))))
+        
   ;; elscreen{,-howm}を使えなければ自前で用意
   (when (not (and (locate-library "elscreen")
 		  (locate-library "elscreen-howm")))
@@ -45,9 +54,8 @@
 	(kill-buffer nil)))
 
     (eval-after-load "howm-mode"
-      '(progn
-	 (define-key howm-mode-map
-	   "\C-c\C-c" 'my-save-and-kill-buffer))))
+      '(define-key howm-mode-map
+	 "\C-c\C-c" 'my-save-and-kill-buffer)))
 
   ;; 日記を書く
   (defun my-howm-diary-edit (&optional my-diary-date-offset)
@@ -59,7 +67,7 @@ Offset is demanded when calling with C-u M-x."
       (while (not (number-or-marker-p       ;; 数値を要求する
 		   (setq my-diary-date-offset
 			 (read-from-minibuffer
-			  "Date Offset is: " nil nil t nil "0"))))))
+			  "Date offset is: " nil nil t nil "0"))))))
     (let*
      ((my-diary-time
        (if (not (number-or-marker-p my-diary-date-offset))
@@ -100,7 +108,6 @@ Offset is demanded when calling with C-u M-x."
        (global-set-key
 	"\C-c,d" 'my-howm-diary-edit)))
 
-
   ;; default-buffer-file-coding-system が utf-8 じゃない環境でも utf-8 を強制
   (add-hook 'howm-view-open-hook
 	    (lambda ()
@@ -110,19 +117,18 @@ Offset is demanded when calling with C-u M-x."
 	    (lambda ()
 	      (setq buffer-file-coding-system 'utf-8-unix)))
 
-
-;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
-(eval-after-load "calendar"
-  '(progn
-     (define-key calendar-mode-map
-       "\C-m" 'my-insert-day)
-     (defun my-insert-day ()
-       (interactive)
-       (let ((day nil)
-	     (calendar-date-display-form
-	      '("[" year "-" (format "%02d" (string-to-int month))
-		"-" (format "%02d" (string-to-int day)) "]")))
-	 (setq day (calendar-date-string
-		    (calendar-cursor-to-date t)))
-	 (exit-calendar)
-	 (insert day))))))
+  ;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
+  (eval-after-load "calendar"
+    '(progn
+       (define-key calendar-mode-map
+	 "\C-m" 'my-insert-day)
+       (defun my-insert-day ()
+	 (interactive)
+	 (let ((day nil)
+	       (calendar-date-display-form
+		'("[" year "-" (format "%02d" (string-to-int month))
+		  "-" (format "%02d" (string-to-int day)) "]")))
+	   (setq day (calendar-date-string
+		      (calendar-cursor-to-date t)))
+	   (exit-calendar)
+	   (insert day))))))
