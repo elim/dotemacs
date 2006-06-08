@@ -2,7 +2,7 @@
 ;; $Id$
 
 ;;; Mule-UCS の設定
-(when (string-match "21.2" emacs-version)
+(when (>= 21 emacs-major-version)
   (require 'un-define nil t) ; Unicode
   (require 'jisx0213 nil t))  ; JIS X 0213
 
