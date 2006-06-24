@@ -6,13 +6,14 @@
   (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
   (autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
 
-  (when (autoload 'x-face-decode-message-header "x-face-e21" t)
+  (when (locate-library "x-face-e21")
+    (autoload 'x-face-decode-message-header "x-face-e21" t)
     (setq wl-highlight-x-face-function 'x-face-decode-message-header))
 
   (setq my-wl-path (expand-file-name (concat my-lisp-path "/wl")))
-  (setq wl-init-file (expand-file-name (concat my-wl-path "/.wl")))
-  (setq wl-address-file (expand-file-name (concat my-wl-path "/.addresses")))
-  (setq wl-folders-file (expand-file-name (concat my-wl-path "/.folders")))
+  (setq wl-init-file (expand-file-name (concat my-wl-path "/init.el")))
+  (setq wl-address-file (expand-file-name (concat my-wl-path "/addresses")))
+  (setq wl-folders-file (expand-file-name (concat my-wl-path "/folders")))
 
   (setq wl-summary-showto-folder-regexp "^\\%Sent$")
   (setq wl-demo-background-color "#ccccff")
