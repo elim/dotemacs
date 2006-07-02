@@ -1,7 +1,8 @@
 ;; -*- emacs-lisp -*-
 ;; $Id$
 
-(when (autoload-if-found 'howm-menu "howm" "Hitori Otegaru Wiki Modoki" t)
+(when (locate-library "howm")
+  (autoload 'howm-menu "howm" "Hitori Otegaru Wiki Modoki" t)
   (global-set-key "\C-c,," 'howm-menu)
   (setq  howm-menu-lang 'ja)
   ;; 「最近のメモ」一覧時にタイトル表示
@@ -21,7 +22,6 @@
       (eval-after-load "howm-menu"
 	'(progn
 	   (defun my-howm-menu ()
-	     (interactive)
 	     (elscreen-jump-0)
 	     (delete-other-windows)
 	     (howm-menu))
@@ -52,7 +52,9 @@
 	     (string-match "\\.howm"
 			   (buffer-file-name)))
 	(save-buffer)
-	(kill-buffer nil)))
+	(if (functionp 'elscreen-kill)
+	    (elscreen-kill)
+	  (kill-buffer nil))))
 
     (eval-after-load "howm-mode"
       '(define-key howm-mode-map
@@ -86,7 +88,8 @@ Offset is demanded when calling with C-u M-x."
 		  (format-time-string "%Y/%m" my-diary-time)))
 	 (my-diary-file
 	  (concat my-diary-directory
-		  (format-time-string "/%Y-%m-%d.howm" my-diary-time))))
+		  (downcase
+		   (format-time-string "/%Y-%m-%d-%a.howm" my-diary-time)))))
 
       (when (not (file-exists-p my-diary-directory))
 	(make-directory my-diary-directory))
