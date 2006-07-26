@@ -2,19 +2,24 @@
 ;; $Id$
 
 (when (require 'browse-url nil t)
-  (global-set-key [(hyper m)] 'browse-url-at-point)
   (global-set-key "\C-xm" 'browse-url-at-point)
-  (setq browse-url-browser-display nil)
-  (setq browse-url-browser-function 'browse-url-generic)
+  (setq browse-url-browser-function
+	(cond
+	 ((when window-system t)
+	  'browse-url-generic)
+	 ((functionp 'w3m-browse-url)
+	  'w3m-browse-url)))
+  (setq browse-url-browser-display t)
   (setq browse-url-new-window-flag nil)
   (setq browse-url-generic-program
-	(cond
-	 ((featurep 'meadow)
-	  "c:/Program Files/Mozilla Firefox/firefox.exe")
-	 ((featurep 'mac-carbon)
-	  "open")
-	 (t
-	  "~/bin/firefox"))))
+	    (cond
+	     ((featurep 'meadow)
+	      "cmd /cstart")
+	     ((featurep 'mac-carbon)
+	      "open")
+	     (t
+	      "~/bin/firefox"))))
+
 
 ;; http://cgi.netlaputa.ne.jp/~kose/diary/?200209b&to=200209125#200209125
 (defadvice thing-at-point-url-at-point
