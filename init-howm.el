@@ -121,14 +121,14 @@ Offset is demanded when calling with C-u M-x."
 	    (lambda ()
 	      (setq buffer-file-coding-system 'utf-8-unix)))
 
-  ;; menu を 10 分毎に自動更新 (under construction)1
-  ;;   (defvar howm-auto-menu-refresh-interval 6)
-  ;;   (defun  howm-auto-menu-refresh()
-  ;;     (when (string-match "init" (buffer-name))
-  ;;       (insert "1")))
-  ;;   (run-with-idle-timer howm-auto-menu-refresh-interval
-  ;; 		       howm-auto-menu-refresh-interval
-  ;; 		       'howm-auto-menu-refresh)
+  ;; menu を 5 分毎に自動更新
+  (defvar howm-auto-menu-refresh-interval (* 5 60))
+  (defun  howm-auto-menu-refresh()
+    (when (string-match "howm.*menu" (buffer-name))
+      (howm-menu-refresh)))
+  (run-with-idle-timer howm-auto-menu-refresh-interval
+		       t
+		       'howm-auto-menu-refresh)
   
   ;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
   (eval-after-load "calendar"

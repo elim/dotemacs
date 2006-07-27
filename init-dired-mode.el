@@ -11,9 +11,20 @@
 	("\\.tar\\.bz2\\'" "tar Itvf")
 	("\\.zip\\'" "unzip -l")
 	("\\.\\(g\\|\\) z\\'" "zcat")
-	("\\.mp3\\'" "mpg321")
-	("\\.ogg\\'" "ogg123")
-	("\\.\\(avi\\|mpg\\|asf\\|wmv\\)\\'" "xine")
+	("\\.mp3\\'"
+	 (cond
+	  ((locate-library  "mpg321" nil exec-path)
+	   "mpg321 * 1>/dev/null 2>&1 &")))
+	("\\.ogg\\'"
+	 (cond
+	  ((locate-library  "ogg123" nil exec-path)
+	   "ogg123 * 1>/dev/null 2>&1 &")))
+	("\\.\\(avi\\|mpg\\|asf\\|wmv\\)\\'"
+	 (cond
+	  ((locate-library "mplayer" nil exec-path)
+	   "mplayer * 1>/dev/null 2>&1 &")
+	  ((locate-library "xine" nil exec-path)
+	   "xine * 1>/dev/null 2>&1 &")))
 	("\\.\\(jpg\\|JPG\\|gif\\|GIF\\)\\'"
 	 (if (eq system-type 'windows-nt)
 	     "fiber" "display"))

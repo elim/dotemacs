@@ -82,6 +82,6 @@
     (skk-bayesian-save-history)
     (skk-bayesian-corpus-save))
   (run-with-idle-timer skk-auto-save-jisyo-interval
-		       skk-auto-save-jisyo-interval
+		       t
 		       'skk-auto-save-jisyo))
  ;;(cancel-function-timers 'skk-auto-save-jisyo)
