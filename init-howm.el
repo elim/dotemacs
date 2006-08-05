@@ -112,15 +112,21 @@ Offset is demanded when calling with C-u M-x."
        (global-set-key
 	"\C-c,d" 'my-howm-diary-edit)))
 
-  ;; default-buffer-file-coding-system が utf-8 じゃない環境でも utf-8 を強制
-  (add-hook 'howm-view-open-hook
-	    (lambda ()
-	      (setq buffer-file-coding-system 'utf-8-unix)))
-
-  (add-hook 'howm-create-file-hook
-	    (lambda ()
-	      (setq buffer-file-coding-system 'utf-8-unix)))
-
+  ;; utf-8-unix を選択できるのなら強制する
+  (let (result)
+    (dolist (c coding-system-alist result)
+      (setq result (or
+		    (string-equal (car c) "utf-8-unix")
+		    result)))
+    (when result
+      (add-hook 'howm-view-open-hook
+		(lambda ()
+		  (setq buffer-file-coding-system 'utf-8-unix)))
+    
+      (add-hook 'howm-create-file-hook
+		(lambda ()
+		  (setq buffer-file-coding-system 'utf-8-unix)))))
+  
   ;; menu を 5 分毎に自動更新
   (defvar howm-auto-menu-refresh-interval (* 5 60))
   (defun  howm-auto-menu-refresh()
