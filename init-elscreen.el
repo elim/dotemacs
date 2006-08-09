@@ -1,16 +1,6 @@
 ;; -*- emacs-lisp -*-
 ;; $Id$
 
-;; for Debian package.
-(when (featurep 'elscreen)
-  (unload-feature 'elscreen))
-
-(setq elscreen-prefix-key "\C-l")
-(setq elscreen-display-tab
-      (cond
-       ((string-match my-domestic-domain system-name)  t)
-       (t  nil)))
-
 (when (require 'elscreen nil t)
   (require 'elscreen-dired nil t)
   (require 'elscreen-server nil t)
@@ -20,12 +10,8 @@
     (require 'elscreen-w3m nil t))
   (when (locate-library "wl")
     (require 'elscreen-wl nil t))
-  (setq elscreen-mode-to-nickname-alist
-	(append
-	 '(("^howm-" . "howm")
-	   ("^riece-" . "riece")
-	   ("^navi2ch-" . "navi2ch"))
-	 elscreen-mode-to-nickname-alist)))
+  (elscreen-set-prefix-key "\C-l")
+  (setq elscreen-display-tab t))
 
 ;; elscreen-wl が無くとも変更. 慣れたので.
 (add-hook

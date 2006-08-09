@@ -1,6 +1,8 @@
 ;; -*- emacs-lisp -*-
 ;; $Id$
 
+(setq gc-cons-threshold (* 32 1024 1024))
+
 ;; Xでのカラー表示
 (when (require 'font-lock nil t)
   (when (not (featurep 'xemacs))

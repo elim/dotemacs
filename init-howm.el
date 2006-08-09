@@ -18,48 +18,17 @@
       (setq howm-view-use-grep t)
     (setq howm-view-use-grep nil))
 
-    (when (functionp 'elscreen-jump-0)
-      (eval-after-load "howm-menu"
-	'(progn
-	   (defun my-howm-menu ()
-	     (elscreen-jump-0)
-	     (delete-other-windows)
-	     (howm-menu))
-	   (global-set-key "\C-c,," 'my-howm-menu))))
+  ;; howm-menu は 常に screen 0 で表示
+  (when (functionp 'elscreen-jump-0)
+    (eval-after-load "howm-menu"
+      '(progn
+	 (defun my-howm-menu ()
+	   (interactive)
+	   (elscreen-jump-0)
+	   (delete-other-windows)
+	   (howm-menu))
+	 (global-set-key "\C-c,," 'my-howm-menu))))
         
-  ;; elscreen{,-howm}を使えなければ自前で用意
-  (when (not (and (locate-library "elscreen")
-		  (locate-library "elscreen-howm")))
-    ;; いちいち消すのも面倒なので
-    ;; 内容が 0 ならファイルごと削除する
-    (if (not (memq 'delete-file-if-no-contents after-save-hook))
-	(setq after-save-hook
-	      (cons 'delete-file-if-no-contents after-save-hook)))
-    (defun delete-file-if-no-contents ()
-      (when (and
-	     (buffer-file-name (current-buffer))
-	     (string-match "\\.howm" (buffer-file-name (current-buffer)))
-	     (= (point-min) (point-max)))
-	(delete-file
-	 (buffer-file-name (current-buffer)))))
-
-    ;; http://howm.sourceforge.jp/cgi-bin/hiki/hiki.cgi?SaveAndKillBuffer
-    ;; C-cC-c で保存してバッファをキルする
-    (defun my-save-and-kill-buffer ()
-      (interactive)
-      (when (and
-	     (buffer-file-name)
-	     (string-match "\\.howm"
-			   (buffer-file-name)))
-	(save-buffer)
-	(if (functionp 'elscreen-kill)
-	    (elscreen-kill)
-	  (kill-buffer nil))))
-
-    (eval-after-load "howm-mode"
-      '(define-key howm-mode-map
-	 "\C-c\C-c" 'my-save-and-kill-buffer)))
-
   ;; 日記を書く
   (defun my-howm-diary-edit (&optional my-diary-date-offset)
     "The diary is written by using howm.

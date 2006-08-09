@@ -8,5 +8,5 @@
 				  (file-name-history 255)))
   (setq session-globals-max-size 1024)
   (setq session-globals-max-string 1024)
-  (setq session-save-file (expand-file-name (concat my-lisp-path ".session")))
+  (setq session-save-file (expand-file-name (concat my-lisp-path "session-save.el")))
   (add-hook 'after-init-hook 'session-initialize))
