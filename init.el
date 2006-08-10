@@ -51,6 +51,7 @@
 (load "init-mpg123.el")
 (load "init-mwheel.el")
 (load "init-outline-mode.el")
+(load "init-psvn.el")
 (load "init-pukiwiki-mode.el")
 (load "init-riece.el")
 (load "init-ruby.el")

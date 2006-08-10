@@ -1,6 +1,5 @@
 ;; -*- emacs-lisp -*-
 ;; $Id$
-;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=save%20framesize
 
 (when window-system
   (setq initial-frame-alist
@@ -17,8 +16,9 @@
 ;;     (set-inactive-alpha 0.8))))
 
 
-(setq frame-size-configuration-file "~/.framesize.el")
+(setq frame-size-configuration-file (expand-file-name (concat my-lisp-path "/framesize.el")))
 
+;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=save%20framesize
 (defun window-size-save ()
   (let* ((rlist (frame-parameters (selected-frame)))
          (ilist initial-frame-alist)
