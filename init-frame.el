@@ -7,20 +7,19 @@
 	 '((foreground-color . "gray")
 	   (background-color . "black")
 	   (cursor-color  . "blue"))
-	 default-frame-alist)))
+	 default-frame-alist))
+  
+  ;; (when (eq window-system 'mac)
+  ;;   (when (functionp 'set-active-alpha)
+  ;;     (set-active-alpha 0.9))
+  ;;   (when (functionp 'set-iactive-alpha)
+  ;;     (set-inactive-alpha 0.8))))
 
-;; (when (eq window-system 'mac)
-;;   (when (functionp 'set-active-alpha)
-;;     (set-active-alpha 0.9))
-;;   (when (functionp 'set-iactive-alpha)
-;;     (set-inactive-alpha 0.8))))
 
+  (setq frame-size-configuration-file (expand-file-name (concat my-lisp-path "/framesize.el")))
 
-(setq frame-size-configuration-file (expand-file-name (concat my-lisp-path "/framesize.el")))
-
-;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=save%20framesize
-(defun window-size-save ()
-  (when window-system
+  ;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=save%20framesize
+  (defun window-size-save ()
     (let* ((rlist (frame-parameters (selected-frame)))
 	   (ilist initial-frame-alist)
 	   (nCHeight (frame-height))
@@ -51,17 +50,16 @@
 	       "'(left . " (int-to-string lMargin) ")) "
 	       "initial-frame-alist)) "
 	       "(setq default-frame-alist initial-frame-alist)" ))
-      (save-buffer))))
-
-(defun window-size-load ()
-  (when window-system
+      (save-buffer)))
+  
+  (defun window-size-load ()
     (let* ((file frame-size-configuration-file))
       (if (file-exists-p file)
-	  (load file)))))
+	  (load file))))
+  
+  (window-size-load)
 
-(window-size-load)
-
-;; Call the function above at C-x C-c.
-(defadvice save-buffers-kill-emacs
-  (before save-frame-size activate)
-  (window-size-save))
+  ;; Call the function above at C-x C-c.
+  (defadvice save-buffers-kill-emacs
+    (before save-frame-size activate)
+    (window-size-save)))

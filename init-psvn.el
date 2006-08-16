@@ -1,4 +1,4 @@
-; -*- emacs-lisp -*-
+;; -*- emacs-lisp -*-
 ;; $Id$
 
 (when (require 'psvn nil t)
