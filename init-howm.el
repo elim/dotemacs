@@ -13,6 +13,9 @@
   (setq howm-list-normalizer 'howm-view-sort-by-reverse-date)
   (setq howm-todo-menu-types "[-+~!]")
 
+  (define-key howm-mode-map
+    "\C-c;" 'howm-insert-dtime)
+
   (if (or (locate-library "grep" nil exec-path)
 	  (locate-library "grep.exe" nil exec-path))
       (setq howm-view-use-grep t)
