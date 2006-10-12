@@ -2,6 +2,7 @@
 ;; $Id$
 
 (when (require 'session nil t)
+  (setq history-length t)
   (setq session-initialize '(de-saveplace session keys menus))
   (setq session-globals-include '((kill-ring 255)
 				  (session-file-alist 255 t)

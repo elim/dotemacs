@@ -48,6 +48,7 @@
 (load "init-lookup.el")
 (load "init-navi2ch.el")
 (load "init-misc.el")
+(load "init-mmm.el")
 (load "init-mpg123.el")
 (load "init-mwheel.el")
 (load "init-outline-mode.el")

@@ -8,7 +8,7 @@
   (setq ruby-indent-tabs-mode nil)
 
   (setq auto-mode-alist
-	(append '(("\\.r\\(b\\|html\\)$" . ruby-mode)) auto-mode-alist))
+	(append '(("\\.rb$" . ruby-mode)) auto-mode-alist))
 
   (setq interpreter-mode-alist
 	(append '(("ruby" . ruby-mode)) interpreter-mode-alist))
