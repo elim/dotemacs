@@ -2,9 +2,7 @@
 ;; $Id: init-wl.el 139 2006-06-24 06:07:14Z takeru $;
 
 (when (locate-library "mmm-mode")
-  (autoload 'mmm-mode "mmm-mode" "MMM Mode" t)
-
-  ;;(require 'mmm-auto)
+  (require 'mmm-mode)
   ;;(setq mmm-global-mode t)
   (setq mmm-global-mode 'maybe)
 
@@ -17,7 +15,9 @@
   ;; mmm-modeのフェイスを変更
   ;;(set-face-bold-p 'mmm-default-submode-face t)
   ;;(set-face-background 'mmm-default-submode-face "White")
+
   (progn
+    (set-face-background 'mmm-default-submode-face nil)
     (set-face-background 'mmm-cleanup-submode-face nil)
     (set-face-background 'mmm-code-submode-face nil)
     (set-face-background 'mmm-comment-submode-face nil)
@@ -25,7 +25,7 @@
     (set-face-background 'mmm-init-submode-face nil)
     (set-face-background 'mmm-output-submode-face nil)
     (set-face-background 'mmm-special-submode-face nil))
-
+  
 
   ;; 背景を無くする
   (set-face-background 'mmm-default-submode-face nil)
