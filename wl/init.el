@@ -1,30 +1,12 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
-;; dot.wl -- sample setting file for Wanderlust
+
 ;; [[ 動作に必要な設定 ]]
 
-;; まず、次の設定を ~/.emacs などに書いてください。
-;; XEmacs の package としてインストールされている場合は必要ありません。
-;(autoload 'wl "wl" "Wanderlust" t)
-;(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
-;(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
-
-;; アイコンを置くディレクトリ
-;; XEmacs の package としてインストールされている場合は必要ありません。
-;(setq wl-icon-directory "/usr/local/lib/emacs/etc")
-
-
-;; [[ SEMI の設定 ]]
-
-;; HTML パートを表示するか
-;; mime-setup がロードされる前に記述する必要があります。
-(setq mime-setup-enable-inline-html nil)
-
-;; 大きいメッセージを送信時に分割するか
-(setq mime-edit-split-message nil)
-
-;; 大きいメッセージとみなす行数の設定
-;(setq mime-edit-message-default-max-lines 1000)
+(load "wl/init-semi.el")
+(cond
+ ((not (string-match my-domestic-domain system-name))
+  (setq wl-local-domain "elim.teroknor.org")))
 
 ;;; [[ 個人情報の設定 ]]
 
