@@ -56,6 +56,7 @@
 (load "init-pukiwiki-mode.el")
 (load "init-riece.el")
 (load "init-ruby.el")
+(load "init-semi.el")
 (load "init-session.el")
 (load "init-server.el")
 (load "init-shimbun.el")

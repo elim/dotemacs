@@ -3,7 +3,6 @@
 
 ;; [[ 動作に必要な設定 ]]
 
-(load "wl/init-semi.el")
 (cond
  ((not (string-match my-domestic-domain system-name))
   (setq wl-local-domain "elim.teroknor.org")))
