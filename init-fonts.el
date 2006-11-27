@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*-
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
 ;; X Window System
@@ -51,7 +51,7 @@
     (setq mac-allow-anti-aliasing nil)
     (add-to-list
      'default-frame-alist
-     '(font . "-*-*-medium-r-normal--14-*-*-*-*-*-fontset-hiraginokaku"))))
+     '(font . "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-hiraginokaku"))))
 
 ;;     (if (x-list-fonts "*sazanami*")
 ;; 	(progn

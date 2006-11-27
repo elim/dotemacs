@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*-
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
 (when (autoload-if-found 'ruby-mode "ruby-mode"

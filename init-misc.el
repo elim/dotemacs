@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*-
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
 (setq gc-cons-threshold (* 32 1024 1024))

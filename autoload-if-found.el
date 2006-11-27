@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*-
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 ;; http://www.sodan.org/~knagano/emacs/dotemacs.html
 
@@ -6,10 +6,10 @@
   "set autoload iff. FILE has found."
   (and (locate-library file)
        (autoload function file docstring interactive type)))
-;; »È¤¤Êı
-;; °ú¿ô¤Ï autoload ¤ÈÁ´¤¯Æ±¤¸¤Ç¤¹¡£-if-found ¤òÉÕ¤±¤ë¤À¤±
+;; ä½¿ã„æ–¹
+;; å¼•æ•°ã¯ autoload ã¨å…¨ãåŒã˜ã§ã™ã€‚-if-found ã‚’ä»˜ã‘ã‚‹ã ã‘
 (when (autoload-if-found 'bs-show "bs" "buffer selection" t)
-  ;; autoload ¤ÏÀ®¸ù¤·¤¿¾ì¹ç¤Î¤ß non-nil ¤òÊÖ¤¹¤Î¤Ç¡¢
-  ;; when ¤Î¾ò·ïÉô¤ËÃÖ¤¯¤³¤È¤Ç¡¢°ÍÂ¸´Ø·¸¤Ë¤¢¤ëÀßÄê¹àÌÜ¤ò¼«Á³¤ËÉ½¸½¤Ç¤­¤Ş¤¹¡£
+  ;; autoload ã¯æˆåŠŸã—ãŸå ´åˆã®ã¿ non-nil ã‚’è¿”ã™ã®ã§ã€
+  ;; when ã®æ¡ä»¶éƒ¨ã«ç½®ãã“ã¨ã§ã€ä¾å­˜é–¢ä¿‚ã«ã‚ã‚‹è¨­å®šé …ç›®ã‚’è‡ªç„¶ã«è¡¨ç¾ã§ãã¾ã™ã€‚
   (global-set-key [(control x) (control b)] 'bs-show)
   (setq bs-max-window-height 10))

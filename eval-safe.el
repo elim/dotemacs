@@ -1,6 +1,6 @@
-;-*- emacs-lisp -*-
-; $Id: init-emacs.el 101 2005-05-07 13:40:20Z takeru $
-; http://www.sodan.org/%7Eknagano/emacs/dotemacs.html
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
+;; $Id$
+;; http://www.sodan.org/%7Eknagano/emacs/dotemacs.html
 
 (defmacro eval-safe (&rest body)
   "安全な評価。評価に失敗してもそこで止まらない。"

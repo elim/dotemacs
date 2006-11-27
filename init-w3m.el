@@ -1,5 +1,5 @@
-; -*- emacs-lisp -*-
-; $Id$
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
+;; $Id$
 
 (when (require 'w3m-load nil t)
   (autoload-if-found
@@ -24,7 +24,7 @@
   (setq w3m-use-tab t)
   (setq w3m-use-toolbar t)
   (setq w3m-home-page "about:blank")
-  (setq w3m-weather-default-area "$BF;1{!&@P<m(B")
+  (setq w3m-weather-default-area "道央・石狩")
 
   (global-set-key "\C-cs" 'w3m-search)
 

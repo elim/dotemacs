@@ -1,159 +1,159 @@
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;;; dot.skk --- init file for SKK
-;;;  -*- emacs-lisp -*-
 
 ;;; Commentary:
 
-;; °Ê²¼¤Ï ~/.skk ¤ÎÀßÄêÎã¤Ç¤¹¡£
+;; ä»¥ä¸‹ã¯ ~/.skk ã®è¨­å®šä¾‹ã§ã™ã€‚
 
 ;;; Code:
 
-;; @@ ´ðËÜÃæ¤Î´ðËÜ¤ÎÀßÄê
+;; @@ åŸºæœ¬ä¸­ã®åŸºæœ¬ã®è¨­å®š
 
-;; SKK ¤¬¸¡º÷¤¹¤ë¼­½ñ (¥µ¡¼¥Ð¤ò»È¤ï¤Ê¤¤¤È¤­)
+;; SKK ãŒæ¤œç´¢ã™ã‚‹è¾žæ›¸ (ã‚µãƒ¼ãƒã‚’ä½¿ã‚ãªã„ã¨ã)
 ;; (setq skk-large-jisyo "/usr/share/skk/SKK-JISYO.L")
 
-;; ¥µ¡¼¥Ð¤ò»È¤¦¤¿¤á¤ÎÀßÄê
+;; ã‚µãƒ¼ãƒã‚’ä½¿ã†ãŸã‚ã®è¨­å®š
 (setq skk-server-host "localhost")
 (setq skk-server-portnum 1178)
 
-;; @@ É½¼¨¤ÎÀßÄê
+;; @@ è¡¨ç¤ºã®è¨­å®š
 
-;; ¥á¥Ã¥»¡¼¥¸¤òÆüËÜ¸ì¤ÇÄÌÃÎ¤¹¤ë
+;; ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ—¥æœ¬èªžã§é€šçŸ¥ã™ã‚‹
 (setq skk-japanese-message-and-error t)
 
-;; ÊÑ´¹»þ¤ËÃð¼á (annotation) ¤òÉ½¼¨¤¹¤ë
+;; å¤‰æ›æ™‚ã«è¨»é‡ˆ (annotation) ã‚’è¡¨ç¤ºã™ã‚‹
 (setq skk-show-annotation t)
 
-;; ¥«¡¼¥½¥ë¤Ë¿§¤òÉÕ¤±¤Ê¤¤
+;; ã‚«ãƒ¼ã‚½ãƒ«ã«è‰²ã‚’ä»˜ã‘ãªã„
 ;; (setq skk-use-color-cursor nil)
 
 ;; (when skk-use-color-cursor
-;;   ;; ¥«¡¼¥½¥ë¿§¤òÊÑ¤¨¤Æ¤ß¤ë
+;;   ;; ã‚«ãƒ¼ã‚½ãƒ«è‰²ã‚’å¤‰ãˆã¦ã¿ã‚‹
 ;;   (setq skk-cursor-hiragana-color "blue"
 ;;	   skk-cursor-katakana-color "green"
 ;;	   skk-cursor-abbrev-color "red"
 ;;	   skk-cursor-jisx0208-latin-color "red"
 ;;	   skk-cursor-jisx0201-color "purple"))
 
-;; ¥¤¥ó¥¸¥±¡¼¥¿¤Ë¿§¤òÉÕ¤±¤Ê¤¤
+;; ã‚¤ãƒ³ã‚¸ã‚±ãƒ¼ã‚¿ã«è‰²ã‚’ä»˜ã‘ãªã„
 ;; (setq skk-indicator-use-cursor-color nil)
 
-;; ÊÑ´¹Ãæ¤ÎÊ¸»úÎó¤ò¥Ï¥¤¥é¥¤¥È¤·¤Ê¤¤
+;; å¤‰æ›ä¸­ã®æ–‡å­—åˆ—ã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆã—ãªã„
 ;; (setq skk-use-face nil)
 
 ;; (when skk-use-face
-;;   ;; ÊÑ´¹Ê¸»úÎó¤Î¿§¤òÊÑ¤¨¤Æ¤ß¤ë
+;;   ;; å¤‰æ›æ–‡å­—åˆ—ã®è‰²ã‚’å¤‰ãˆã¦ã¿ã‚‹
 ;;   (skk-make-face 'DimGray/PeachPuff1)
 ;;   (setq skk-henkan-face 'DimGray/PeachPuff1))
 
-;; @@ ´ðËÜÅª¤Ê¥æ¡¼¥¶¡¦¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹
+;; @@ åŸºæœ¬çš„ãªãƒ¦ãƒ¼ã‚¶ãƒ»ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 
-;; Enter ¥­¡¼¤ò²¡¤·¤¿¤È¤­¤Ë¤Ï³ÎÄê¤¹¤ë
+;; Enter ã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã¨ãã«ã¯ç¢ºå®šã™ã‚‹
 ;(setq skk-egg-like-newline t)
 
-;; ¢§¥â¡¼¥É¤Ç BS ¤ò²¡¤·¤¿¤È¤­¤Ë¤Ï³ÎÄê¤·¤Ê¤¤¤ÇÁ°¸õÊä¤òÉ½¼¨¤¹¤ë
+;; â–¼ãƒ¢ãƒ¼ãƒ‰ã§ BS ã‚’æŠ¼ã—ãŸã¨ãã«ã¯ç¢ºå®šã—ãªã„ã§å‰å€™è£œã‚’è¡¨ç¤ºã™ã‚‹
 ;(setq skk-delete-implies-kakutei nil)
 
-;; ÂÐ±þ¤¹¤ëÊÄ³ç¸Ì¤ò¼«Æ°Åª¤ËÁÞÆþ¤¹¤ë
+;; å¯¾å¿œã™ã‚‹é–‰æ‹¬å¼§ã‚’è‡ªå‹•çš„ã«æŒ¿å…¥ã™ã‚‹
 ;;(setq skk-auto-insert-paren t)
 
-;; ¢¦¥â¡¼¥É¤È¢§¥â¡¼¥É»þ¤Î¥¢¥ó¥É¥¥¾ðÊó¤òµ­Ï¿¤·¤Ê¤¤
+;; â–½ãƒ¢ãƒ¼ãƒ‰ã¨â–¼ãƒ¢ãƒ¼ãƒ‰æ™‚ã®ã‚¢ãƒ³ãƒ‰ã‚¥æƒ…å ±ã‚’è¨˜éŒ²ã—ãªã„
 ;; (setq skk-undo-kakutei-word-only t)
 
-;; ¶çÆÉÅÀ¤Ï , . ¤ò»È¤¦
+;; å¥èª­ç‚¹ã¯ , . ã‚’ä½¿ã†
 (setq skk-kuten-touten-alist '(
-    (jp . ("¡£" . "¡¢" ))
+    (jp . ("ã€‚" . "ã€" ))
     (en . (". " . ", "))))
-;; jp ¤Ë¤¹¤ë¤È¡Ö¡£¡¢¡×¤ò»È¤¤¤Þ¤¹
+;; jp ã«ã™ã‚‹ã¨ã€Œã€‚ã€ã€ã‚’ä½¿ã„ã¾ã™
 (setq-default skk-kutouten-type 'en)
 
-;; Æ°Åª¤ÊÊä´°¤ò»È¤¦
+;; å‹•çš„ãªè£œå®Œã‚’ä½¿ã†
 ;; (setq skk-dcomp-activate t)
 
-;; viper ¤ÈÁÈ¤ß¹ç¤ï¤»¤Æ»È¤¦
+;; viper ã¨çµ„ã¿åˆã‚ã›ã¦ä½¿ã†
 ;; (setq skk-use-viper t)
 
-;; ³ÎÄê¤Ë¤Ï C-j ¤Ç¤Ê¤¯¤ÇÊÑ´¹¥­¡¼¤ò»È¤¦
+;; ç¢ºå®šã«ã¯ C-j ã§ãªãã§å¤‰æ›ã‚­ãƒ¼ã‚’ä½¿ã†
 ;; (setq skk-kakutei-key [henkan])
-;; Ãí) ÊÑ´¹¥­¡¼¤Ï¡¢Emacs on XFree86  ¤Ç¤Ï [henkan]
-;;                 XEmacs on XFree86 ¤Ç¤Ï [henkan-mode]
-;;                 Meadow            ¤Ç¤Ï [convert]
+;; æ³¨) å¤‰æ›ã‚­ãƒ¼ã¯ã€Emacs on XFree86  ã§ã¯ [henkan]
+;;                 XEmacs on XFree86 ã§ã¯ [henkan-mode]
+;;                 Meadow            ã§ã¯ [convert]
 
-;; ÀÜÆ¬¡¦ÀÜÈø¼­ÊÑ´¹¤Î¥­¡¼¤òÀßÄê¤¹¤ë
-;; Îã 1) É¸½à¤ÎÀßÄê
+;; æŽ¥é ­ãƒ»æŽ¥å°¾è¾žå¤‰æ›ã®ã‚­ãƒ¼ã‚’è¨­å®šã™ã‚‹
+;; ä¾‹ 1) æ¨™æº–ã®è¨­å®š
 ;; (setq skk-special-midashi-char-list '(?> ?< ??))
-;; Îã 2) ? ¤ÏÉáÄÌ¤ËÆþÎÏ¤·¤¿¤¤¤«¤é³°¤¹
+;; ä¾‹ 2) ? ã¯æ™®é€šã«å…¥åŠ›ã—ãŸã„ã‹ã‚‰å¤–ã™
 ;; (setq skk-special-midashi-char-list '(?> ?<))
-;; Îã 3) Ê¸»ú¥­¡¼¤ÏÉáÄÌ¤ËÆþÎÏ¤·¤¿¤¤¤«¤éÂ¾¤Î¥­¡¼¤ò»È¤¦
+;; ä¾‹ 3) æ–‡å­—ã‚­ãƒ¼ã¯æ™®é€šã«å…¥åŠ›ã—ãŸã„ã‹ã‚‰ä»–ã®ã‚­ãƒ¼ã‚’ä½¿ã†
 ;; (setq skk-special-midashi-char-list nil)
 ;; (define-key skk-j-mode-map [muhenkan] 'skk-process-prefix-or-suffix)
 
-;; @@ ÊÑ´¹Æ°ºî¤ÎÄ´À°
+;; @@ å¤‰æ›å‹•ä½œã®èª¿æ•´
 
-;; Á÷¤ê²¾Ì¾¤¬¸·Ì©¤ËÀµ¤·¤¤¸õÊä¤òÍ¥Àè¤·¤ÆÉ½¼¨¤¹¤ë
+;; é€ã‚Šä»®åãŒåŽ³å¯†ã«æ­£ã—ã„å€™è£œã‚’å„ªå…ˆã—ã¦è¡¨ç¤ºã™ã‚‹
  (setq skk-henkan-strict-okuri-precedence t)
 
-;; ¼­½ñÅÐÏ¿¤Î¤È¤­¡¢Í¾·×¤ÊÁ÷¤ê²¾Ì¾¤òÁ÷¤é¤Ê¤¤¤è¤¦¤Ë¤¹¤ë
+;; è¾žæ›¸ç™»éŒ²ã®ã¨ãã€ä½™è¨ˆãªé€ã‚Šä»®åã‚’é€ã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
  (setq skk-check-okurigana-on-touroku 'auto)
 
-;; @@ ¸¡º÷¤Ë´ØÏ¢¤·¤¿ÀßÄê
+;; @@ æ¤œç´¢ã«é–¢é€£ã—ãŸè¨­å®š
 
-;; look ¥³¥Þ¥ó¥É¤ò»È¤Ã¤¿¸¡º÷¤ò¤¹¤ë
+;; look ã‚³ãƒžãƒ³ãƒ‰ã‚’ä½¿ã£ãŸæ¤œç´¢ã‚’ã™ã‚‹
 ;; (setq skk-use-look t)
 
 ;; (when skk-use-look
-;;   ;; look ¤¬¸«¤Ä¤±¤¿¸ì¤ò¸«½Ð¤·¸ì¤È¤·¤Æ¸¡º÷¤¹¤ë
+;;   ;; look ãŒè¦‹ã¤ã‘ãŸèªžã‚’è¦‹å‡ºã—èªžã¨ã—ã¦æ¤œç´¢ã™ã‚‹
 ;;   (setq skk-look-recursive-search t)
-;;   ;; ispell ¤ò look ¤È°ì½ï¤Ë»È¤¦¤Î¤Ï¤ä¤á¤ë
+;;   ;; ispell ã‚’ look ã¨ä¸€ç·’ã«ä½¿ã†ã®ã¯ã‚„ã‚ã‚‹
 ;;   (setq skk-look-use-ispell nil)
-;;   ;; `skk-abbrev-mode' ¤Ç skk-look ¤ò»È¤Ã¤¿¸¡º÷¤ò¤·¤¿¤È¤­¤Ë³ÎÄê¾ðÊó¤ò
-;;   ;; ¸Ä¿Í¼­½ñ¤Ëµ­Ï¿¤·¤Ê¤¤¤è¤¦¤Ë¤¹¤ë
+;;   ;; `skk-abbrev-mode' ã§ skk-look ã‚’ä½¿ã£ãŸæ¤œç´¢ã‚’ã—ãŸã¨ãã«ç¢ºå®šæƒ…å ±ã‚’
+;;   ;; å€‹äººè¾žæ›¸ã«è¨˜éŒ²ã—ãªã„ã‚ˆã†ã«ã™ã‚‹
 ;;   (setq skk-search-excluding-word-pattern-function
-;;	   ;; KAKUTEI-WORD ¤ò°ú¿ô¤Ë¤·¤Æ¥³¡¼¥ë¤µ¤ì¤ë¤Î¤Ç¡¢ÉÔÍ×¤Ç¤â°ú¿ô¤ò¼è¤ë
-;;	   ;; É¬Í×¤¢¤ê
+;;	   ;; KAKUTEI-WORD ã‚’å¼•æ•°ã«ã—ã¦ã‚³ãƒ¼ãƒ«ã•ã‚Œã‚‹ã®ã§ã€ä¸è¦ã§ã‚‚å¼•æ•°ã‚’å–ã‚‹
+;;	   ;; å¿…è¦ã‚ã‚Š
 ;;	   (lambda (kakutei-word)
 ;;	     (and skk-abbrev-mode
 ;;		  (save-match-data
-;;		    ;; `skk-henkan-key' ¤¬ "*" ¤Ç½ª¤ï¤ë¤È¤­
+;;		    ;; `skk-henkan-key' ãŒ "*" ã§çµ‚ã‚ã‚‹ã¨ã
 ;;		    (string-match "\\*$" skk-henkan-key))))))
 
-;; lookup ¤òÍøÍÑ¤·¤¿ÊÑ´¹¤ò¹Ô¤¦
+;; lookup ã‚’åˆ©ç”¨ã—ãŸå¤‰æ›ã‚’è¡Œã†
 ;; (setq skk-search-prog-list
 ;;       (skk-nunion skk-search-prog-list
 ;;		     '((skk-lookup-search))))
 
-;; Á÷¤ê¤¢¤êÊÑ´¹¤òÁ÷¤ê¤Ê¤·ÊÑ´¹¤ÈÆ±¤¸Áàºî¤Ç¤Ç¤­¤ë¤è¤¦¤Ë¤¹¤ë
+;; é€ã‚Šã‚ã‚Šå¤‰æ›ã‚’é€ã‚Šãªã—å¤‰æ›ã¨åŒã˜æ“ä½œã§ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
 ;; (setq skk-auto-okuri-process t)
 
-;; ¥«¥¿¥«¥Ê¸ì¤òÊÑ´¹¸õÊä¤Ë²Ã¤¨¤ë
+;; ã‚«ã‚¿ã‚«ãƒŠèªžã‚’å¤‰æ›å€™è£œã«åŠ ãˆã‚‹
 ;;(setq skk-search-prog-list
 ;;      (skk-nunion skk-search-prog-list
 ;;		  '((skk-search-katakana))))
 
-;; ¥µ¹ÔÊÑ³Ê³èÍÑ¤ÎÆ°»ì¤âÁ÷¤ê¤¢¤êÊÑ´¹½ÐÍè¤ë¤è¤¦¤Ë¤¹¤ë
+;; ã‚µè¡Œå¤‰æ ¼æ´»ç”¨ã®å‹•è©žã‚‚é€ã‚Šã‚ã‚Šå¤‰æ›å‡ºæ¥ã‚‹ã‚ˆã†ã«ã™ã‚‹
 (setq skk-search-prog-list
       (skk-nunion skk-search-prog-list
 		   '((skk-search-sagyo-henkaku))))
 
-;; @@ ¤«¤ÊÆþÎÏ´ØÏ¢¤ÎÀßÄê
+;; @@ ã‹ãªå…¥åŠ›é–¢é€£ã®è¨­å®š
 
-;; È¾³Ñ¥«¥ÊÆþÎÏ¥á¥½¥Ã¥É¤ò»È¤¦
+;; åŠè§’ã‚«ãƒŠå…¥åŠ›ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ä½¿ã†
 ;; (setq skk-use-jisx0201-input-method t)
 
-;; ¤«¤ÊÇÛÎó¥­¡¼¥Ü¡¼¥É¤ÇÆþÎÏ¤¹¤ë
+;; ã‹ãªé…åˆ—ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã§å…¥åŠ›ã™ã‚‹
 ;; (setq skk-use-kana-keyboard t)
 
 ;; (when skk-use-kana-keyboard
-;;   ;; µì JIS ÇÛÎó¤ò»È¤¦
+;;   ;; æ—§ JIS é…åˆ—ã‚’ä½¿ã†
 ;;   ;; (setq skk-kanagaki-keyboard-type '106-jis)
-;;   ;; ¿Æ»Ø¥·¥Õ¥È¥¨¥ß¥å¥ì¡¼¥·¥ç¥ó¤ò»È¤¦
+;;   ;; è¦ªæŒ‡ã‚·ãƒ•ãƒˆã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ä½¿ã†
 ;;   (setq skk-kanagaki-keyboard-type 'omelet-jis)
-;;   ;; OASYS É÷¤Î¸åÂà¡¦¼è¾Ã¥­¡¼¤ò»È¤¦
+;;   ;; OASYS é¢¨ã®å¾Œé€€ãƒ»å–æ¶ˆã‚­ãƒ¼ã‚’ä½¿ã†
 ;;   (setq skk-nicola-use-koyubi-functions t))
 
-;; @@ ¤½¤ÎÂ¾¤¤¤í¤¤¤í
+;; @@ ãã®ä»–ã„ã‚ã„ã‚
 
-;; Ê£¿ô¤Î Emacsen ¤òµ¯Æ°¤·¤Æ¸Ä¿Í¼­½ñ¤ò¶¦Í­¤¹¤ë
+;; è¤‡æ•°ã® Emacsen ã‚’èµ·å‹•ã—ã¦å€‹äººè¾žæ›¸ã‚’å…±æœ‰ã™ã‚‹
 (setq skk-share-private-jisyo t)
 
 ;;; dot.skk ends here

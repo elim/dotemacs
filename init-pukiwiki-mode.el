@@ -1,5 +1,5 @@
-; -*- emacs-lisp -*-
-; $Id$
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
+;; $Id$
 
 (when (autoload-if-found
        'pukiwiki-mode "pukiwiki" "Mode for editing pukiwiki ." t)

@@ -1,4 +1,4 @@
-;; -*- emas-lisp -*-
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
 (when (autoload-if-found 'mpg123 "mpg123" nil t)

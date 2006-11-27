@@ -1,5 +1,5 @@
-;-*- emacs-lisp -*-
-; $Id$
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
+;; $Id$
 
 (when (autoload-if-found 'tdiary-mode "tdiary-mode" nil t)
   (autoload-if-found 'tdiary-new "tdiary-mode" nil t)

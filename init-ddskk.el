@@ -1,5 +1,5 @@
-;-*- emacs-lisp -*-
-; $Id$
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
+;; $Id$
 
 (when (require 'skk-setup nil t)
   (setq skk-indicator-use-cursor-color nil)

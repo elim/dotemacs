@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*-
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
 (when (locate-library "howm")
@@ -27,7 +27,10 @@
       '(progn
 	 (defun my-howm-menu ()
 	   (interactive)
-	   (elscreen-jump-0)
+	   (unless (elscreen-jump-0)
+	     (progn
+	       (elscreen-create)
+	       (elscreen-jump-0)))
 	   (delete-other-windows)
 	   (howm-menu))
 	 (global-set-key "\C-c,," 'my-howm-menu))))

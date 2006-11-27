@@ -1,21 +1,22 @@
-;; -*- emacs-lisp -*-
-;; $Id: init-wl.el 139 2006-06-24 06:07:14Z takeru $;
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
+;; $Id$;
 
 (when (locate-library "mmm-mode")
   (require 'mmm-mode)
   ;;(setq mmm-global-mode t)
   (setq mmm-global-mode 'maybe)
 
-  ;; mmm-mode¤ò¥«¥é¥Õ¥ë¤Ë
-  ;;(setq mmm-submode-decoration-level 0)
+  ;; mmm-modeã‚’ã‚«ãƒ©ãƒ•ãƒ«ã«
+  (setq mmm-submode-decoration-level 2)
   
-  ;; mmm-mode¤ÎÁ°·Ê¿§¤ÈÇØ·Ê¿§¤òÆş¤ì´¹¤¨¤ë¡£
+  ;; mmm-modeã®å‰æ™¯è‰²ã¨èƒŒæ™¯è‰²ã‚’å…¥ã‚Œæ›ãˆã‚‹ã€‚
   ;;(invert-face 'mmm-default-submode-face)
 
-  ;; mmm-mode¤Î¥Õ¥§¥¤¥¹¤òÊÑ¹¹
+  ;; mmm-modeã®ãƒ•ã‚§ã‚¤ã‚¹ã‚’å¤‰æ›´
   ;;(set-face-bold-p 'mmm-default-submode-face t)
   ;;(set-face-background 'mmm-default-submode-face "White")
 
+  ;; èƒŒæ™¯ã‚’ç„¡ãã™ã‚‹
   (progn
     (set-face-background 'mmm-default-submode-face nil)
     (set-face-background 'mmm-cleanup-submode-face nil)
@@ -25,10 +26,6 @@
     (set-face-background 'mmm-init-submode-face nil)
     (set-face-background 'mmm-output-submode-face nil)
     (set-face-background 'mmm-special-submode-face nil))
-  
-
-  ;; ÇØ·Ê¤òÌµ¤¯¤¹¤ë
-  (set-face-background 'mmm-default-submode-face nil)
   
   ;; eRuby
   (mmm-add-mode-ext-class nil "\\.erb?\\'" 'html-erb)
