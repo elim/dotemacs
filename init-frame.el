@@ -65,7 +65,7 @@
 	       "'(left . " (int-to-string lMargin) ")) "
 	       "initial-frame-alist)) "
 	       "(setq default-frame-alist initial-frame-alist)" ))
-      (save-buffer)))
+      (save-buffer 0)))
   
   (defun window-size-load ()
     (let* ((file frame-size-configuration-file))
