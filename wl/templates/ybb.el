@@ -5,7 +5,7 @@
  'wl-template-alist
  '("Yahoo! BB"
    (wl-smtp-posting-server . "ybbsmtp.mail.yahoo.co.jp")
-   (wl-smtp-posting-port . "25")
+   (wl-smtp-posting-port . 25)
    (wl-smtp-authenticate-type . "plain")
    (wl-smtp-posting-user . "fascinating_logic")
    (wl-from . "Takeru Naito <fascinating_logic@ybb.ne.jp>")
