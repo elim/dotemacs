@@ -1,25 +1,13 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
-;; [[ 動作に必要な設定 ]]
-
-(cond
- ((not (string-match my-domestic-domain system-name))
-  (setq wl-local-domain "elim.teroknor.org")))
-
 ;;; [[ 個人情報の設定 ]]
-
-;; From: の設定
-(setq wl-from "Takeru Naito <fascinating_logic@ybb.ne.jp>")
-
 ;; 自分のメールアドレスのリスト
 (setq wl-user-mail-address-list
       (list (wl-address-header-extract-address wl-from)
 	    "fascinating_logic@ybb.ne.jp"
-	    "a.k.a.elim@gmail.com"
 	    "takeru@at-mac.com"
-	    "elim@TerokNor.org"
-	    "picard@mx12.freecom.ne.jp"))
+	    "elim@teroknor.org"))
 
 ;; 自分の参加しているメーリングリストのリスト
 (setq wl-subscribed-mailing-list
@@ -32,67 +20,56 @@
 	"alib@alib.jp"
 	"share@alib.jp"))
 
-;; (system-name) が FQDN を返さない場合、
-;; `wl-local-domain' にホスト名を除いたドメイン名を設定してください。
-;; (system-name)  "." wl-local-domain が Message-ID に使用されます。
-;(setq system-name "elim.teroknor.org")
+(defun my-wl-defaults ()
+  ;; From: の設定
+  (setq wl-from "Takeru Naito <fascinating_logic@ybb.ne.jp>")
+  (setq wl-local-domain "elim.teroknor.org")
+  (setq wl-message-id-use-wl-from t)
+  (setq wl-insert-message-id t)
+  (setq wl-draft-send-mail-function 'wl-draft-send-mail-with-smtp)
 
-(cond
- ((not (string-match my-domestic-domain system-name))
-  (setq wl-local-domain "elim.teroknor.org")))
+  ;; 環境依存
+  (cond
+   ((string-match my-domestic-domain system-name)
+    (progn
+      (setq my-wl-server-name "idea")
+      (setq my-elmo-imap4-default-port 993)
+      (setq my-elmo-imap4-default-stream-type 'ssl)
+      (setq my-smtp-posting-port 25)))
+    (t
+     (progn
+       (setq my-wl-server-name "localhost")
+       (setq my-elmo-imap4-default-port 10143)
+       (setq my-elmo-imap4-default-stream-type nil)
+       (setq my-smtp-posting-port 10025))))
 
-;; Message-ID のドメインパートを強制的に指定
-(setq wl-message-id-domain "elim.teroknor.org")
+  ;; IMAP サーバの設定
+  (setq elmo-imap4-default-server my-wl-server-name)
+  (setq elmo-imap4-default-authenticate-type 'cram-md5)
+  (setq my-elmo-imap4-default-port my-elmo-imap4-default-port)
+  (setq my-elmo-imap4-default-stream-type my-elmo-imap4-default-stream-type)
+  
+  ;; SMTP サーバの設定
+  (setq wl-smtp-posting-server my-wl-server-name)
+  (setq wl-smtp-posting-user "takeru")
+  (setq wl-smtp-authenticate-type "cram-md5")
+  (setq wl-smtp-connection-type nil)
+  (setq wl-smtp-posting-port my-smtp-posting-port)
 
-;; Message-ID のドメインパートを wl-from から生成します。
-;; globalなIPを持たない場合に使ってください。
-;; wl-local-domain, wl-message-id-domainに優先します。
-(setq wl-message-id-use-wl-from nil)
+  ;; POP サーバの設定
+  (setq elmo-pop3-default-server nil)
+  
+  ;; ニュースサーバの設定
+  (setq elmo-nntp-default-server "news.media.kyoto-u.ac.jp")
+  (setq wl-nntp-posting-server elmo-nntp-default-server)
+  (setq elmo-nntp-default-user "fascinating_logic@ybb.ne.jp")
 
-;; Message-ID を自動付与しない
-;; (setq wl-insert-message-id nil)
+  ;; その他
+  (setq skk-kutouten-type 'en))
 
-;;; [[ サーバの設定 ]]
-(setq my-wl-server-name
- (cond
-  ((string-match my-domestic-domain system-name)
-   "idea")
-  (t
-   "localhost")))
-
-;; IMAP サーバの設定
-(setq elmo-imap4-default-server my-wl-server-name)
-;; POP サーバの設定
-(setq elmo-pop3-default-server my-wl-server-name)
-;; SMTP サーバの設定
-(setq wl-smtp-posting-server my-wl-server-name)
-(setq wl-smtp-posting-user "takeru")
-(setq wl-smtp-authenticate-type "cram-md5")
-;; ニュースサーバの設定
-(setq elmo-nntp-default-server "news.media.kyoto-u.ac.jp")
-;; 投稿先のニュースサーバ
-(setq wl-nntp-posting-server elmo-nntp-default-server)
-;; ニュースサーバのユーザ名
-(setq elmo-nntp-default-user "fascinating_logic@ybb.ne.jp")
-
-;; IMAP サーバの認証方式の設定
-;(setq elmo-imap4-default-authenticate-type 'clear) ; 生パスワード
-(setq elmo-imap4-default-authenticate-type 'cram-md5) ; CRAM-MD5
-
-;; POP-before-SMTP
-;(setq wl-draft-send-mail-function 'wl-draft-send-mail-with-pop-before-smtp)
-
-;; IMAP サーバのポート
-;; IMAP サーバとの通信方式
-(cond
- ((string-match my-domestic-domain system-name)
-  (setq elmo-imap4-default-port 993)
-  (setq elmo-imap4-default-stream-type 'ssl))
-  (t
-   (setq elmo-imap4-default-port 10143)))
+(my-wl-defaults)
 
 ;;; [[ 基本的な設定 ]]
-
 ;; `wl-summary-goto-folder' の時に選択するデフォルトのフォルダ
 (setq wl-default-folder "%INBOX")
 
@@ -123,13 +100,13 @@
 ;; 長い行を切り縮める
 ;(setq wl-message-truncate-lines t)
 ;(setq wl-draft-truncate-lines t)
-;; XEmacs (21.4.6 より前) の場合、以下も必要。
+;; XEmacs (21.4.6 より前) の場合、以下も必要.
 ;(setq truncate-partial-width-windows nil)
 
 ;; ドラフトを新しいフレームで書く
 ;(setq wl-draft-use-frame t)
 
-;; スレッド表示のインデントを無制限にする。
+;; スレッド表示のインデントを無制限にする.
 (setq wl-summary-indent-length-limit nil)
 (setq wl-summary-width nil)
 
@@ -162,7 +139,6 @@
 
 
 ;;; [[ ネットワーク ]]
-
 ;; フォルダ種別ごとのキャッシュの設定
 ;; (localdir, localnews, maildir はキャッシュできない)
 ;(setq elmo-archive-use-cache nil)
@@ -173,9 +149,9 @@
 ;; オフライン(unplugged)操作を有効にする(現在はIMAPフォルダのみ)
 (setq elmo-enable-disconnected-operation t)
 
-;; unplugged 状態で送信すると，キュー(`wl-queue-folder')に格納する
+;; unplugged 状態で送信すると, キュー(`wl-queue-folder')に格納する
 (setq wl-draft-enable-queuing t)
-;; unplugged から plugged に変えたときに，キューにあるメッセージを送信する
+;; unplugged から plugged に変えたときに, キューにあるメッセージを送信する
 (setq wl-auto-flush-queue t)
 
 ;; 起動時はオフライン状態にする
@@ -206,12 +182,12 @@
 
 ;; サマリ表示関数を変更する
 
-;; `elmo-msgdb-overview-entity-get-extra-field' で参照したいフィールド。
-;; 自動リファイルで参照したいフィールドも設定する。
+;; `elmo-msgdb-overview-entity-get-extra-field' で参照したいフィールド.
+;; 自動リファイルで参照したいフィールドも設定する.
 (setq elmo-msgdb-extra-fields
       '("reply-to"))
 
-;; ML のメッセージであれば，サマリの Subject 表示に
+;; ML のメッセージであれば, サマリの Subject 表示に
 ;; ML名 や MLにおけるメッセージ番号も表示する
 (setq wl-summary-line-format "%n%T%P%M/%D(%W)%h:%m %t%[%17(%c %f%) %] %#%~%s")
 ;; フォルダ毎にサマリの表示形式を変える設定
@@ -222,9 +198,9 @@
 ;	("^+" . "%n%T%P%M/%D %h:%m %-4S %[ %17f %] %t%C%s")))
 
 ;; imput により非同期で送信する
-;; (utils/im-wl.el をインストールしておく必要があります。
-;;  また，~/.im/Config の設定(Smtpservers)を忘れないことと，
-;;  wl-draft-enable-queuing の機能が働かなくなることに注意。)
+;; (utils/im-wl.el をインストールしておく必要があります.
+;;  また, ~/.im/Config の設定(Smtpservers)を忘れないことと,
+;;  wl-draft-enable-queuing の機能が働かなくなることに注意. )
 ;(autoload 'wl-draft-send-with-imput-async "im-wl")
 ;(setq wl-draft-send-function 'wl-draft-send-with-imput-async)
 
@@ -232,8 +208,6 @@
 ;; 短い User-Agent: フィールドを使う
 ;(setq wl-generate-mailer-string-function
 ;      'wl-generate-user-agent-string-1)
-
-
 
 ;; メールDBにcontent-typeを加える
 (setq elmo-msgdb-extra-fields
@@ -244,7 +218,7 @@
       (append wl-summary-line-format-spec-alist
 	      '((?@ (wl-summary-line-attached)))))
 
-;; 変更されたドラフトがあれば 20 秒ごとに自動保存する。
+;; 変更されたドラフトがあれば 20 秒ごとに自動保存する.
 ;; (defun my-wl-auto-save-draft-buffers ()
 ;;   (let ((buffers (wl-collect-draft)))
 ;;     (save-excursion
@@ -258,54 +232,42 @@
 ;;; [[ テンプレート ]]
 
 ;; テンプレートの設定
-(setq wl-template-alist
-      '(("default"
-	 (wl-smtp-posting-server . "ybbsmtp.mail.yahoo.co.jp")
-	 (wl-smtp-posting-port . "25")
-	 (wl-smtp-authenticate-type . "plain")
-	 (wl-smtp-posting-user . "fascinating_logic")
-	 ("From" . "Takeru Naito <fascinating_logic@ybb.ne.jp>")
-	 (signature-file-name . "~/.signature"))
-;; 	("gmail"
-;; 	 (wl-smtp-posting-server . "smtp.gmail.com")
-;; 	 (wl-smtp-posting-user . "a.k.a.elim@gmail.com")
-;; 	 (wl-smtp-connection-type . "starttls")
-;; 	 (wl-smtp-posting-port . "587")
-;; 	 (wl-smtp-authenticate-type . "plain")
-;; 	 ("From" . "Takeru Naito  <a.k.a.elim@gmail.com>")
-;; 	 (signature-file-name . "~/.signature.gmail"))
-	("terok"
-	 (wl-smtp-posting-server . "mail.teroknor.org")
-	 (wl-smtp-posting-port . "25")
-	 (wl-smtp-authenticate-type . "plain")
-	 (wl-smtp-posting-user . "elim")
-	 ("From" . "Elim Garak <elim@TerokNor.org>")
-	 (signature-file-name . "~/.signature.terok"))
-	("elim.terok"
-	 (wl-smtp-posting-server . my-wl-server-name)
-	 (wl-smtp-posting-port . "25")
-	 (wl-smtp-authenticate-type . "cram-md5")
-	 (wl-smtp-posting-user . "takeru")
-	 ("From" . "Takeru Naito  <takeru@elim.teroknor.org>")
-	 (signature-file-name . "~/.signature.terok"))))
+(setq my-wl-template-path
+      (expand-file-name (concat my-wl-path "/templates")))
+(setq wl-template-alist nil)
+
+(when (file-accessible-directory-p my-wl-template-path)
+  (dolist (f (directory-files my-wl-template-path))
+    (when (string-match "^[^.].*el$" f)
+      (load (expand-file-name (concat my-wl-template-path "/" f))))))
+
+(defadvice wl-template-select (before before-template-select)
+  (my-wl-defaults))
+
+(ad-activate 'wl-template-select)
+
+;; 署名の設定
+(setq my-wl-signature-path
+      (expand-file-name (concat my-wl-path "/signatures")))
+(setq signature-file-name
+      (expand-file-name (concat my-wl-signature-path "/ybb")))
 
 ;; ドラフトバッファの内容により From や Organization などのヘッダを自
 ;; 動的に変更する
-(setq wl-draft-config-alist
-      '(("^From.*TerokNor"
-;        ドラフト<バッファのヘッダにマッチすれば適用する
-;	 (top-file . "自動挿入の試験です。＼n")	; 本文先頭への挿入
-;	 (setq wl-message-id-domain "mail.TerokNor.org")
-;	 (setq wl-draft-send-mail-function 'wl-draft-send-mail-with-pop-before-smtp)
-;	 (wl-smtp-posting-server . "mail.TerokNor.org")
-;	 (wl-pop-before-smtp-server . "mail.TerokNor.org")
-	)))
+; (setq wl-draft-config-alist nil)
+
 ;; Daredevil SKK の version をヘッダに入れる
 (when (locate-library "skk-version")
   (add-to-list 'wl-draft-config-alist
 	       `(t ("X-Input-Method" . ,(skk-version)))))
 
-;; ドラフト作成時(返信時)に，自動的にヘッダを変更する
+;; ドラフト作成時(返信時)に, Daredevil SKK を始動する
+(when (locate-library "skk")
+  (defadvice wl-draft (after after-wl-draft)
+    (skk-mode t))
+  (ad-activate 'wl-draft))
+
+;; ドラフト作成時(返信時)に, 自動的にヘッダを変更する
 (add-hook 'wl-mail-setup-hook
 	  '(lambda ()
 	     (unless wl-draft-reedit	; 再編集時は適用しない
@@ -317,7 +279,7 @@
 ;; 返信時のウィンドウを広くする
 ;(setq wl-draft-reply-buffer-style 'full)
 
-;; 返信時のヘッダに相手の名前を入れない。
+;; 返信時のヘッダに相手の名前を入れない.
 (setq wl-draft-reply-use-address-with-full-name nil)
 
 ;; メールの返信時に宛先を付ける方針の設定
@@ -326,8 +288,8 @@
 ;;   ('Toフィールド' 'Ccフィールド' 'Newsgroupsフィールド'))
 
 ;; "a" (without-argument)では Reply-To: や From: などで指定された唯一人
-;; または唯一つの投稿先に返信する。また，X-ML-Name: と Reply-To: がつい
-;; ているなら Reply-To: 宛にする。
+;; または唯一つの投稿先に返信する. また, X-ML-Name: と Reply-To: がつい
+;; ているなら Reply-To: 宛にする.
 ;(setq wl-draft-reply-without-argument-list
 ;      '((("X-ML-Name" "Reply-To") . (("Reply-To") nil nil))
 ;	("X-ML-Name" . (("To" "Cc") nil nil))
@@ -337,7 +299,7 @@
 ;	("Mail-Reply-To" . (("Mail-Reply-To") nil nil))
 ;	("From" . (("From") nil nil))))
 
-;; "C-u a" (with-argument)であれば関係する全ての人・投稿先に返信する。
+;; "C-u a" (with-argument)であれば関係する全ての人・投稿先に返信する.
 ;(setq wl-draft-reply-with-argument-list
 ;      '(("Followup-To" . (("From") nil ("Followup-To")))
 ;	("Newsgroups" . (("From") nil ("Newsgroups")))
@@ -366,7 +328,7 @@
 	      (module-installed-p 'x-face))
 	 (autoload 'x-face-xmas-wl-display-x-face "x-face")
 	 (setq wl-highlight-x-face-function 'x-face-xmas-wl-display-x-face))
-
+	
 	;; for Emacs21
 	((and (not (featurep 'xemacs))
 	      (= emacs-major-version 21)
@@ -381,7 +343,7 @@
 	 (setq wl-highlight-x-face-function 'x-face-decode-message-header))))
 
 ;; スコア機能の設定
-;; `wl-score-folder-alist' の設定に関わらず必ず "all.SCORE" は使用される。
+;; `wl-score-folder-alist' の設定に関わらず必ず "all.SCORE" は使用される.
 ;(setq wl-score-folder-alist
 ;      '(("^-comp\\."
 ;	 "news.comp.SCORE"
@@ -401,7 +363,7 @@
 
 ;; 自動リファイルしない永続マークを設定
 ;; 標準では "N" "U" "!" になっており、未読メッセージを自動リファイルし
-;; ません。nil ですべてのメッセージが対象になります。
+;; ません. nil ですべてのメッセージが対象になります.
 ;(setq wl-summary-auto-refile-skip-marks nil)
 
 

@@ -24,8 +24,6 @@
   (setq wl-biff-check-interval 30)
   (setq wl-biff-notify-hook '(ding))
 
-;;(setq signature-file-name "~/.signature")
-
 ;;; 振り分け準備 (procmail にバトンタッチ)
 ;;  (autoload 'elmo-split "elmo-split"
 ;;    "Split messages on the folder." t)
