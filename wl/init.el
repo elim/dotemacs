@@ -262,10 +262,10 @@
 	       `(t ("X-Input-Method" . ,(skk-version)))))
 
 ;; ドラフト作成時(返信時)に, Daredevil SKK を始動する
-(when (locate-library "skk")
-  (defadvice wl-draft (after after-wl-draft)
-    (skk-mode t))
-  (ad-activate 'wl-draft))
+;(when (locate-library "skk")
+;  (defadvice wl-draft (after after-wl-draft)
+;    (skk-mode t))
+;  (ad-activate 'wl-draft))
 
 ;; ドラフト作成時(返信時)に, 自動的にヘッダを変更する
 (add-hook 'wl-mail-setup-hook
