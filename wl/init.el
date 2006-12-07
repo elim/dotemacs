@@ -91,6 +91,13 @@
 ;; メール送信時には確認する
 (setq wl-interactive-send t)
 
+;; To: Cc: には名前も挿入する
+(setq wl-draft-reply-use-address-with-full-name nil)
+
+;; アクセスグループのフォルダを作る基準 (regexp)
+;(setq wl-folder-hierarchy-access-folders
+;      '("^%[^¥¥.]*$"))
+
 ;; スレッドは常に開く
 ;(setq wl-thread-insert-opened t)
 
