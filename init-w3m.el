@@ -42,8 +42,9 @@
 	'w3m-uri-replace-alist
 	'("\\`wdic:" w3m-search-uri-replace "wdic"))))
 
-  (when (autoload-if-found 'mime-w3m-preview-text/html "mime-w3m")
-    (setq mime-setup-enable-inline-html t)
+  (when (and
+	 (require 'mime-view nil t)
+	 (require 'mime-w3m nil t))
     (eval-after-load "mime-view"
       '(progn
 	 (ctree-set-calist-strictly
@@ -53,7 +54,7 @@
 	    (body . visible)
 	    (body-presentation-method . mime-w3m-preview-text/html)))
 	 (set-alist 'mime-view-type-subtype-score-alist
-		  '(text . html) 3))))
+		    '(text . html) 3))))
 
   (when (featurep 'meadow)
     (setq w3m-command "c:/cygwin/opt/w3m-0.5.1/bin/w3m.exe")
