@@ -46,8 +46,8 @@
   ;; IMAP サーバの設定
   (setq elmo-imap4-default-server my-wl-server-name)
   (setq elmo-imap4-default-authenticate-type 'cram-md5)
-  (setq my-elmo-imap4-default-port my-elmo-imap4-default-port)
-  (setq my-elmo-imap4-default-stream-type my-elmo-imap4-default-stream-type)
+  (setq elmo-imap4-default-port my-elmo-imap4-default-port)
+  (setq elmo-imap4-default-stream-type my-elmo-imap4-default-stream-type)
   
   ;; SMTP サーバの設定
   (setq wl-smtp-posting-server my-wl-server-name)
