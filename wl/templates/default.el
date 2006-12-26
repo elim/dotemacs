@@ -9,6 +9,8 @@
    (wl-smtp-authenticate-type . "cram-md5")
    (wl-smtp-posting-user . "takeru")
    (wl-from . "Takeru Naito <fascinating_logic@ybb.ne.jp>")
+   (wl-fcc . "%Sent")
    ("From" . wl-from)
+   ("Fcc" . wl-fcc)
    (signature-file-name . (expand-file-name
 			   (concat my-wl-signature-path "/" "ybb")))))

@@ -43,12 +43,18 @@
        (setq my-elmo-imap4-default-stream-type nil)
        (setq my-smtp-posting-port 10025))))
 
+  ;; Folder Carbon Copy
+  (setq wl-fcc "%Sent")
+
+  ;; draft folder
+  (setq wl-draft-folder "%Drafts")
+
   ;; IMAP サーバの設定
   (setq elmo-imap4-default-server my-wl-server-name)
   (setq elmo-imap4-default-authenticate-type 'cram-md5)
   (setq elmo-imap4-default-port my-elmo-imap4-default-port)
   (setq elmo-imap4-default-stream-type my-elmo-imap4-default-stream-type)
-  
+
   ;; SMTP サーバの設定
   (setq wl-smtp-posting-server my-wl-server-name)
   (setq wl-smtp-posting-user "takeru")
@@ -58,7 +64,7 @@
 
   ;; POP サーバの設定
   (setq elmo-pop3-default-server nil)
-  
+
   ;; ニュースサーバの設定
   (setq elmo-nntp-default-server "news.media.kyoto-u.ac.jp")
   (setq wl-nntp-posting-server elmo-nntp-default-server)
@@ -75,12 +81,6 @@
 
 ;; フォルダ名補完時に使用するデフォルトのスペック
 (setq wl-default-spec "%")
-
-;; Folder Carbon Copy
-(setq wl-fcc "%Sent")
-
-;; draft folder
-(setq wl-draft-folder "%Drafts")
 
 ;; trash folder
 (setq wl-trash-folder "%Trash")
@@ -249,7 +249,9 @@
       (load (expand-file-name (concat my-wl-template-path "/" f))))))
 
 (defadvice wl-template-select (before before-template-select)
-  (my-wl-defaults))
+  (progn
+    (my-wl-defaults)
+    (wl-template-apply "default")))
 
 (ad-activate 'wl-template-select)
 
@@ -335,7 +337,7 @@
 	      (module-installed-p 'x-face))
 	 (autoload 'x-face-xmas-wl-display-x-face "x-face")
 	 (setq wl-highlight-x-face-function 'x-face-xmas-wl-display-x-face))
-	
+
 	;; for Emacs21
 	((and (not (featurep 'xemacs))
 	      (= emacs-major-version 21)
