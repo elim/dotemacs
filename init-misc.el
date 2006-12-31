@@ -13,9 +13,6 @@
 (setq mac-pass-command-to-system nil)
 (setq mac-option-modifier 'meta)
 
-;; goto-line
-(global-set-key "\C-cg" 'goto-line)
-
 ;; Deleteキーでカーソル位置の文字が消えるようにする
 (global-set-key [delete] 'delete-char)
 
