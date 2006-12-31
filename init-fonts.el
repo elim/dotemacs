@@ -2,7 +2,7 @@
 ;; $Id$
 
 ;; X Window System
-(when (and (eq window-system 'x) (x-list-fonts "*shinonome*"))
+(when (and (eq window-system 'x) (x-list-fonts "*shinonome-gothic*"))
   (progn
     (set-face-font 'default
 		   "-shinonome-gothic-medium-r-normal--14-0-0-0-c-0-*-*")
@@ -11,7 +11,7 @@
     (set-face-font 'bold-italic
 		    "-shinonome-gothic-bold-i-normal--14-0-0-0-c-0-*-*")))
 
-;; Meadow 2.x
+;; Meadow 2.x or greater
 (when (functionp 'w32-add-font)
   (w32-add-font
    "shinonome 14"
@@ -51,28 +51,18 @@
     (setq mac-allow-anti-aliasing nil)
     (add-to-list
      'default-frame-alist
-     '(font . "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-hiraginokaku"))))
+     '(font . "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-osaka")))
 
-;;     (if (x-list-fonts "*sazanami*")
-;; 	(progn
-;; 	  (setq-default line-spacing 6)
-;; 	  (setq carbon-font-encode-family-list-sazanami
-;; 		'((ascii . "sazanami gothic")
-;; 		  (japanese-jisx0208 . "sazanami gothic")
-;; 		  (katakana-j2222isx0201 . "sazanami gothic")
-;; 		  (thai-tis620 . "ayuthaya")
-;; 		  (chinese-gb2312 . "stheiti*")
-;; 		  (chinese-big5-1 . "lihei pro*")
-;; 		  (korean-ksc5601 . "applegothic*")))
-;; 	  (carbon-font-create-fontset "sazanami"
-;; 				      carbon-font-defined-sizes
-;; 				      carbon-font-encode-family-list-sazanami)
-;; 	  (add-to-list
-;; 	   'default-frame-alist
-;; 	   '(font . "-*-*-medium-r-normal--14-*-*-*-*-*-fontset-sazanami")))
-;;       (progn
-;; 	(setq-default line-spacing 2)
-;; 	(setq mac-allow-anti-aliasing t)
-;; 	(add-to-list
-;; 	 'default-frame-alist
-;; 	 '(font . "-*-*-medium-r-normal--14-*-*-*-*-*-fontset-hiraginokaku"))))))
+  (when (x-list-fonts "*vl gothic*")
+    (setq carbon-font-encode-family-list-vl
+	  '((ascii . "monaco")
+	    (japanese-jisx0208 . "vl gothic")
+	    (katakana-jisx0201 . "vl gothic")
+	    (thai-tis620 . "ayuthaya")
+	    (chinese-gb2312 . "stheiti*")
+	    (chinese-big5-1 . "lihei pro*")
+	    (korean-ksc5601 . "applegothic*")))
+   
+    (carbon-font-create-fontset "vl"
+				carbon-font-defined-sizes
+				carbon-font-encode-family-list-vl)))
