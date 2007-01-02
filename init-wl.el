@@ -6,7 +6,9 @@
   (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
   (autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
 
-  (when (and window-system (locate-library "x-face-e21"))
+  (when (and window-system
+	     (locate-library "x-face-e21")
+	     (locate-library "compface" nil exec-path))
     (autoload 'x-face-decode-message-header "x-face-e21" t)
     (setq wl-highlight-x-face-function 'x-face-decode-message-header))
 
