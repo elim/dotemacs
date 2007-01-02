@@ -5,20 +5,27 @@
 (setq my-lisp-path (expand-file-name "~/.emacs.d/"))
 (setq my-domestic-domain "fascinating.local$")
 
-(setq load-path
-      (append
-       (list (expand-file-name my-lisp-path))
-       (when (file-accessible-directory-p "/usr/local/share/emacs/site-lisp/")
-	   (list (expand-file-name "/usr/local/share/emacs/site-lisp/")))
-       load-path))
+(defun my-add-path (target-list path-list)
+  (dolist (p (reverse path-list))
+    (when (file-accessible-directory-p p)
+      (add-to-list target-list
+		   (expand-file-name p)))))
 
-(setq exec-path
-      (append
-       (when (file-accessible-directory-p "/sw/bin")
-	 (list (expand-file-name "/sw/bin")))
-       (when (file-accessible-directory-p "/sw/sbin")
-	 (list (expand-file-name "/sw/sbin")))
-       exec-path))
+(my-add-path 'load-path
+	     (list my-lisp-path "/usr/local/share/emacs/site-lisp/"))
+
+(my-add-path 'exec-path
+	     (list "~/bin"
+		   "/usr/local/bin"
+		   "/usr/local/sbin"
+		   "/sw/bin"
+		   "/sw/sbin/"
+		   "/Developer/Tools"
+		   "/usr/games"
+		   "/usr/X11R6/bin"))
+
+(my-add-path 'Info-additional-directory-list
+	     (list "/sw/info" "/sw/share/info"))
 
 (setq custom-file
       (expand-file-name (concat my-lisp-path "/customize.el")))
