@@ -2,9 +2,17 @@
 ;; $Id$
 
 (when (locate-library "howm")
-  (autoload 'howm-menu "howm" "Hitori Otegaru Wiki Modoki" t)
+  (setq howm-menu-lang 'ja)
   (global-set-key "\C-c,," 'howm-menu)
-  (setq  howm-menu-lang 'ja)
+
+  (mapc
+   (lambda (f)
+     (autoload f
+       "howm" "Hitori Otegaru Wiki Modoki" t))
+   '(howm-menu howm-list-all howm-list-recent
+	       howm-list-grep howm-create
+	       howm-keyword-to-kill-ring))
+
   ;; 「最近のメモ」一覧時にタイトル表示
   (setq howm-list-recent-title t)
   ;; 全メモ一覧時にタイトル表示
@@ -12,9 +20,6 @@
   ;; 日付の新しい順
   (setq howm-list-normalizer 'howm-view-sort-by-reverse-date)
   (setq howm-todo-menu-types "[-+~!]")
-
-  (define-key howm-mode-map
-    "\C-c;" 'howm-insert-dtime)
 
   (if (or (locate-library "grep" nil exec-path)
 	  (locate-library "grep.exe" nil exec-path))
@@ -34,7 +39,10 @@
 	   (delete-other-windows)
 	   (howm-menu))
 	 (global-set-key "\C-c,," 'my-howm-menu))))
-        
+
+    (eval-after-load "howm-menu"
+      '(define-key howm-mode-map "\C-c;" 'howm-insert-dtime))
+
   ;; 日記を書く
   (defun my-howm-diary-edit (&optional my-diary-date-offset)
     "The diary is written by using howm.
@@ -97,11 +105,11 @@ Offset is demanded when calling with C-u M-x."
       (add-hook 'howm-view-open-hook
 		(lambda ()
 		  (setq buffer-file-coding-system 'utf-8-unix)))
-    
+
       (add-hook 'howm-create-file-hook
 		(lambda ()
 		  (setq buffer-file-coding-system 'utf-8-unix)))))
-  
+
   ;; menu を 5 分毎に自動更新
   (defvar howm-auto-menu-refresh-interval (* 5 60))
   (defun  howm-auto-menu-refresh()
@@ -110,7 +118,7 @@ Offset is demanded when calling with C-u M-x."
   (run-with-idle-timer howm-auto-menu-refresh-interval
 		       t
 		       'howm-auto-menu-refresh)
-  
+
   ;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
   (eval-after-load "calendar"
     '(progn
