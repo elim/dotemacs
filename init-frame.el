@@ -6,23 +6,24 @@
 	(append
 	 '((foreground-color . "gray")
 	   (background-color . "black")
-	   (cursor-color  . "blue"))
-	 default-frame-alist))
-  
+	   (cursor-color  . "blue")
+	   (alpha  . (90 100))))
+	 default-frame-alist)
+
   ;; http://lists.sourceforge.jp/mailman/archives/macemacsjp-english/2006-April/000569.html
   (when (eq window-system 'mac)
     (when (functionp 'set-active-alpha)
       (set-active-alpha 0.9))
     (when (functionp 'set-iactive-alpha)
       (set-inactive-alpha 0.8))
-    
+
     (defun hide-others ()
       (interactive)
       (do-applescript
        "tell application \"System Events\"
           set visible of every process whose (frontmost is false) and (visible is true) to false
         end tell"))
-    
+
     (defun hide-emacs ()
       (interactive)
       (do-applescript
@@ -66,12 +67,12 @@
 	       "initial-frame-alist)) "
 	       "(setq default-frame-alist initial-frame-alist)" ))
       (save-buffer 0)))
-  
+
   (defun window-size-load ()
     (let* ((file frame-size-configuration-file))
       (if (file-exists-p file)
 	  (load file))))
-  
+
   (window-size-load)
 
   ;; Call the function above at C-x C-c.
