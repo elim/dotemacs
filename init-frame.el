@@ -7,8 +7,8 @@
 	 '((foreground-color . "gray")
 	   (background-color . "black")
 	   (cursor-color  . "blue")
-	   (alpha  . (90 100))))
-	 default-frame-alist)
+	   (alpha  . (90 100)))
+	 default-frame-alist))
 
   ;; http://lists.sourceforge.jp/mailman/archives/macemacsjp-english/2006-April/000569.html
   (when (eq window-system 'mac)
@@ -33,7 +33,8 @@
         end tell")))
 
   ;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=save%20framesize
-  (setq frame-size-configuration-file (expand-file-name (concat my-lisp-path "/framesize.el")))
+  (setq frame-size-configuration-file
+	(expand-file-name (concat my-lisp-path "/framesize.el")))
 
   (defun window-size-save ()
     (let* ((rlist (frame-parameters (selected-frame)))
