@@ -24,6 +24,7 @@
 		   "/usr/games"
 		   "/usr/X11R6/bin"))
 
+(defvar Info-additional-directory-list nil)
 (my-add-path 'Info-additional-directory-list
 	     (list "/sw/info" "/sw/share/info"))
 
