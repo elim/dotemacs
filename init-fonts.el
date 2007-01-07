@@ -12,34 +12,37 @@
 		    "-shinonome-gothic-bold-i-normal--14-0-0-0-c-0-*-*")))
 
 ;; Meadow 2.x or greater
-(when (functionp 'w32-add-font)
+(setq my-w32-font-path "c:/cygwin/home/takeru/lib/X11/fonts/shinonome/")
+(when (and (functionp 'w32-add-font)
+	   (file-accessible-directory-p my-w32-font-path))
   (w32-add-font
    "shinonome 14"
-   '((strict-spec
+   `((strict-spec
       ((:char-spec ascii :height any)
        (bdf-font
-	"c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnm7x14r.bdf"))
+	,(concat my-w32-font-path "shnm7x14r.bdf")))
       ((:char-spec ascii :height any :weight bold)
        (bdf-font
-	"c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnm7x14rb.bdf"))
+	,(concat my-w32-font-path "shnm7x14rb.bdf")))
       ((:char-spec ascii :height any :slant italic)
        (bdf-font
-	"c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnm7x14ri.bdf"))
+	,(concat my-w32-font-path "shnm7x14ri.bdf")))
       ((:char-spec ascii :height any :weight  bold :slant italic)
        (bdf-font
-	"c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnm7x14rbi.bdf"))
+	,(concat my-w32-font-path "shnm7x14rbi.bdf")))
       ((:char-spec japanese-jisx0208 :height any)
        (bdf-font
-	"c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnmk14.bdf"))
+	,(concat my-w32-font-path "shnmk14.bdf")))
       ((:char-spec japanese-jisx0208 :height any :weight bold)
        (bdf-font
-	"c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnmk14b.bdf"))
+	,(concat my-w32-font-path "shnmk14b.bdf")))
       ((:char-spec japanese-jisx0208 :height any :slant italic)
        (bdf-font
-	"c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnmk14i.bdf"))
+	,(concat my-w32-font-path "shnmk14i.bdf")))
       ((:char-spec japanese-jisx0208 :height any :weight bold :slant italic)
        (bdf-font
-	"c:/cygwin/home/takeru/lib/X11/fonts/shinonome/shnmk14bi.bdf")))))
+	,(concat my-w32-font-path "shnmk14bi.bdf"))))))
+
   (set-default-font "shinonome 14")
   (add-to-list
    'default-frame-alist
@@ -62,7 +65,7 @@
 	    (chinese-gb2312 . "stheiti*")
 	    (chinese-big5-1 . "lihei pro*")
 	    (korean-ksc5601 . "applegothic*")))
-   
+
     (carbon-font-create-fontset "vl"
 				carbon-font-defined-sizes
 				carbon-font-encode-family-list-vl)))
