@@ -17,9 +17,9 @@
   (setq lookup-open-function 'lookup-other-frame)
   (setq lookup-frame-alist default-frame-alist)
 
-  (when (featurep 'meadow)
-    (setq ndspell-ispell-program
-	  "c:/Cygwin/opt/ispell-3.3.01/bin/ispell.exe"))
+  (when (or (locate-library "aspell" nil exec-path)
+	    (locate-library "aspell.exe" nil exec-path))
+    (setq ndspell-ispell-program "aspell"))
 
   (setq my-ndtp-server-definition
 	(list 'ndtp (cond
