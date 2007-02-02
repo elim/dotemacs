@@ -10,7 +10,9 @@
    (wl-smtp-posting-user . "takeru")
    (wl-from . "Takeru Naito <fascinating_logic@ybb.ne.jp>")
    (wl-fcc . "%Sent")
+   (wl-organization . nil)
    ("From" . wl-from)
    ("Fcc" . wl-fcc)
+   ("Organization" . wl-organization)
    (signature-file-name . (expand-file-name
 			   (concat my-wl-signature-path "/" "ybb")))))

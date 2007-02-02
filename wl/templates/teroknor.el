@@ -11,4 +11,4 @@
    (wl-from . "elim garak <elim@teroknor.org>")
    ("From" . wl-from)
    (signature-file-name . (expand-file-name
-			   (concat my-wl-signature-path "/" "teroknor")))))
+			   (concat my-wl-signature-path "/" "terok")))))

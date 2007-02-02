@@ -16,8 +16,10 @@
    (wl-pop-before-smtp-stream-type . nil)
    (wl-from . "Takeru Naito <takeru@at-mac.com>")
    (wl-fcc . "%Sent@mail.at-mac.com:143!direct")
+   (wl-organization . "Century Corporation")
    ("From" . wl-from)
    ("Fcc" . wl-fcc)
+   ("Organization" . wl-organization)
    (signature-file-name . (expand-file-name
 			   (concat my-wl-signature-path "/at-mac")))
    (skk-kutouten-type . 'jp)))
