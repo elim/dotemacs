@@ -6,6 +6,9 @@
 (setq my-domestic-domain "fascinating.local$")
 
 (defun my-add-path (target-list path-list)
+  (condition-case err
+	(eval target-list)
+    (error (set target-list (list))))
   (dolist (p (reverse path-list))
     (when (file-accessible-directory-p p)
       (add-to-list target-list
@@ -18,15 +21,24 @@
 	     (list "~/bin"
 		   "/usr/local/bin"
 		   "/usr/local/sbin"
+		   "/opt/local/bin"
+		   "/opt/local/sbin"
 		   "/sw/bin"
 		   "/sw/sbin/"
 		   "/Developer/Tools"
+		   "c:/cygwin/usr/bin"
+		   "c:/cygwin/usr/sbin"
+		   "c:/cygwin/usr/local/bin"
+		   "c:/cygwin/usr/local/sbin"
 		   "/usr/games"
 		   "/usr/X11R6/bin"))
 
-(defvar Info-additional-directory-list nil)
 (my-add-path 'Info-additional-directory-list
-	     (list "/sw/info" "/sw/share/info"))
+	     (list "/opt/local/share/info"
+		   "/sw/info"
+		   "/sw/share/info"
+		   "c:/cygwin/usr/share/info"
+		   "c:/cygwin/usr/local/share/info"))
 
 (setq custom-file
       (expand-file-name (concat my-lisp-path "/customize.el")))
