@@ -31,7 +31,8 @@
 		   "c:/cygwin/usr/local/bin"
 		   "c:/cygwin/usr/local/sbin"
 		   "/usr/games"
-		   "/usr/X11R6/bin"))
+		   "/usr/X11R6/bin"
+		   "C:/Program Files/Mozilla Firefox"))
 
 (my-add-path 'Info-additional-directory-list
 	     (list "/opt/local/share/info"
