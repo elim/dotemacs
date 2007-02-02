@@ -17,7 +17,8 @@
   (setq wl-address-file (expand-file-name (concat my-wl-path "/addresses")))
   (setq wl-folders-file (expand-file-name (concat my-wl-path "/folders")))
 
-  (setq wl-summary-showto-folder-regexp "^\\%Sent$")
+  (setq wl-summary-showto-folder-regexp "^\\%\\(Sent\\|Draft\\).*$")
+  (setq wl-summary-weekday-name-lang "en")
   (setq wl-demo-background-color "#ccccff")
   (setq wl-auto-save-drafts-interval 30)
   (setq wl-draft-use-frame nil)
