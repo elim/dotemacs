@@ -13,12 +13,10 @@
   (setq browse-url-new-window-flag nil)
   (setq browse-url-generic-program
 	    (cond
-	     ((featurep 'meadow)
-	      "cmd /cstart")
 	     ((featurep 'mac-carbon)
 	      "open")
 	     (t
-	      "~/bin/firefox"))))
+	      "firefox"))))
 
 
 ;; http://cgi.netlaputa.ne.jp/~kose/diary/?200209b&to=200209125#200209125
