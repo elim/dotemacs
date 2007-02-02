@@ -54,9 +54,4 @@
 	    (body . visible)
 	    (body-presentation-method . mime-w3m-preview-text/html)))
 	 (set-alist 'mime-view-type-subtype-score-alist
-		    '(text . html) 3))))
-
-  (when (featurep 'meadow)
-    (setq w3m-command "c:/cygwin/opt/w3m-0.5.1/bin/w3m.exe")
-    (setq w3m-imagick-convert-program
-	  "c:/Program Files/ImageMagick-6.2.1-Q16/convert.exe")))
+		    '(text . html) 3)))))
