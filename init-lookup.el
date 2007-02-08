@@ -22,11 +22,9 @@
     (setq ndspell-ispell-program "aspell"))
 
   (setq my-ndtp-server-definition
-	(list 'ndtp (cond
-		     ((string-match my-domestic-domain system-name)
-		      "idea")
-		     (t
-		      "localhost")) :port 2010))
+	(list 'ndtp (if (domestic-network-member-p)
+			"idea"
+		      "localhost") :port 2010))
 
   (setq lookup-search-agents
 	(list

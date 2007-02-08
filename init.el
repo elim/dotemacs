@@ -1,10 +1,7 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
-;; variables
-(setq my-lisp-path (expand-file-name "~/.emacs.d/"))
-(setq my-domestic-domain "fascinating.local$")
-
+;; functions
 (defun my-add-path (target-list path-list)
   (condition-case err
 	(eval target-list)
@@ -13,6 +10,25 @@
     (when (file-accessible-directory-p p)
       (add-to-list target-list
 		   (expand-file-name p)))))
+
+(defun domestic-network-member-p ()
+  (let
+      ((domestic-domain
+	"fascinating.local$")
+       (airport
+	"/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport")
+       (fon-bssid
+	"00:18:84:1a:df:d6"))
+    (or
+     (string-match domestic-domain system-name)
+     (and
+      (string= system-type "darwin")
+      (string-match fon-bssid
+		    (shell-command-to-string
+		     (concat airport " --getinfo | grep BSSID")))))))
+
+;; variables
+(setq my-lisp-path (expand-file-name "~/.emacs.d/"))
 
 (my-add-path 'load-path
 	     (list my-lisp-path "/usr/local/share/emacs/site-lisp/"))

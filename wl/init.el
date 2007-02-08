@@ -29,19 +29,17 @@
   (setq wl-draft-send-mail-function 'wl-draft-send-mail-with-smtp)
 
   ;; 環境依存
-  (cond
-   ((string-match my-domestic-domain system-name)
+  (if (domestic-network-member-p)
+      (progn
+	(setq my-wl-server-name "idea")
+	(setq my-elmo-imap4-default-port 993)
+	(setq my-elmo-imap4-default-stream-type 'ssl)
+	(setq my-smtp-posting-port 25))
     (progn
-      (setq my-wl-server-name "idea")
-      (setq my-elmo-imap4-default-port 993)
-      (setq my-elmo-imap4-default-stream-type 'ssl)
-      (setq my-smtp-posting-port 25)))
-    (t
-     (progn
-       (setq my-wl-server-name "localhost")
-       (setq my-elmo-imap4-default-port 10143)
-       (setq my-elmo-imap4-default-stream-type nil)
-       (setq my-smtp-posting-port 10025))))
+      (setq my-wl-server-name "localhost")
+      (setq my-elmo-imap4-default-port 10143)
+      (setq my-elmo-imap4-default-stream-type nil)
+      (setq my-smtp-posting-port 10025)))
 
   ;; Folder Carbon Copy
   (setq wl-fcc "%Sent")
