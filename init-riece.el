@@ -6,11 +6,9 @@
 	'(("idea" :host "idea")
 	  ("localhost" :host "localhost")))
   (setq riece-server
-	(cond
-	 ((string-match my-domestic-domain system-name)
-	  "idea")
-	 (t
-	  "localhost")))
+	(if (domestic-network-member-p)
+	    "idea"
+	  "localhost"))
   (setq riece-channel-buffer-mode 't)
   (setq riece-user-list-buffer-mode 't)
   (setq riece-layout '"middle-left")
