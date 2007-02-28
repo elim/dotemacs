@@ -18,7 +18,7 @@
   (setq wl-folders-file (expand-file-name (concat my-wl-path "/folders")))
 
   (setq wl-summary-showto-folder-regexp "^\\%\\(Sent\\|Draft\\).*$")
-  (setq wl-summary-weekday-name-lang "en")
+  (setq wl-summary-weekday-name-lang 'en)
   (setq wl-demo-background-color "#ccccff")
   (setq wl-auto-save-drafts-interval 30)
   (setq wl-draft-use-frame nil)
@@ -26,6 +26,20 @@
   (setq wl-biff-check-folder-list '("%INBOX"))
   (setq wl-biff-check-interval 30)
   (setq wl-biff-notify-hook '(ding))
+
+  (defadvice wl-summary-line-day-of-week
+    (after after-wl-summary-line-day-of-week)
+    (when (string-match ad-return-value "?")
+      (setq ad-return-value
+	    (let*
+		((elmo-lang wl-summary-weekday-name-lang)
+		 (day-of-week-name-width
+		  (string-width (elmo-date-get-week 1970 1 1)))
+		 (return-string ""))
+	      (dotimes (r day-of-week-name-width return-string)
+		(setq return-string (concat "?" return-string)))))))
+
+  (ad-activate 'wl-summary-line-day-of-week)
 
 ;;; 振り分け準備 (procmail にバトンタッチ)
 ;;  (autoload 'elmo-split "elmo-split"
