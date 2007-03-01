@@ -65,7 +65,7 @@
     (jp . ("。" . "、" ))
     (en . (". " . ", "))))
 ;; jp にすると「。、」を使います
-(setq-default skk-kutouten-type 'en)
+(setq-default skk-kutouten-type 'jp)
 
 ;; 動的な補完を使う
 ;; (setq skk-dcomp-activate t)
