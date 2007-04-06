@@ -40,8 +40,8 @@
 	   (howm-menu))
 	 (global-set-key "\C-c,," 'my-howm-menu))))
 
-    (eval-after-load "howm-menu"
-      '(define-key howm-mode-map "\C-c;" 'howm-insert-dtime))
+  (eval-after-load "howm-menu"
+    '(define-key howm-mode-map "\C-c;" 'howm-insert-dtime))
 
   ;; 日記を書く
   (defun my-howm-diary-edit (&optional my-diary-date-offset)
@@ -55,10 +55,10 @@ Offset is demanded when calling with C-u M-x."
 			 (read-from-minibuffer
 			  "Date offset is: " nil nil t nil "0"))))))
     (let*
-     ((my-diary-time
-       (if (not (number-or-marker-p my-diary-date-offset))
-	   (current-time)
-	 (apply 'encode-time
+	((my-diary-time
+	  (if (not (number-or-marker-p my-diary-date-offset))
+	      (current-time)
+	    (apply 'encode-time
 		   (nconc
 		    (list
 		     (nth 0 (decode-time))
@@ -84,7 +84,14 @@ Offset is demanded when calling with C-u M-x."
       (when (not (file-exists-p my-diary-file))
 	(insert "= diary\n"))
       (goto-char (point-max))
-      (howm-mode t)))
+      (howm-mode t)
+
+      (when (not (number-or-marker-p my-diary-date-offset))
+	(when (eq (current-column) 1)
+	  (insert "\n"))
+	(dotimes (r 2) (insert "-"))
+	(insert
+	 (concat " \n" (format-time-string "%H:%M" my-diary-time) "\n")))))
 
   (eval-after-load "howm-mode"
     '(progn
