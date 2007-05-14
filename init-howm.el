@@ -2,7 +2,7 @@
 ;; $Id$
 
 (when (locate-library "howm")
-  (setq howm-menu-lang 'ja)
+  (setq howm-menu-lang 'en)
   (global-set-key "\C-c,," 'howm-menu)
 
   (mapc
