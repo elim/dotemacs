@@ -8,8 +8,8 @@
   (autoload-if-found 'pukiwiki-edit-url "pukiwiki-mode" nil t)
 
   (setq pukiwiki-site-list
-	'(("Elim Wiki"
-	   "http://elim.teroknor.org/%7Etakeru/pukiwiki/pukiwiki.php"
+	'(("elim wiki"
+	   "http://elim.teroknor.org/wiki/"
 	   nil
 	   euc-jp-dos)))
 
