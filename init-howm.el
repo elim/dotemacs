@@ -13,6 +13,9 @@
 	       howm-list-grep howm-create
 	       howm-keyword-to-kill-ring))
 
+  (when (featurep 'meadow)
+    (setq system-time-locale "C"))
+
   ;; 「最近のメモ」一覧時にタイトル表示
   (setq howm-list-recent-title t)
   ;; 全メモ一覧時にタイトル表示
