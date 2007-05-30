@@ -22,7 +22,7 @@
 
 (defun my-wl-defaults ()
   ;; From: の設定
-  (setq wl-from "Takeru Naito <fascinating_logic@ybb.ne.jp>")
+  (setq wl-from "Takeru Naito <takeru.naito@gmail.com>")
   (setq wl-local-domain "elim.teroknor.org")
   (setq wl-message-id-use-wl-from t)
   (setq wl-insert-message-id t)
