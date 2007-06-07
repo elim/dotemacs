@@ -69,7 +69,7 @@
   (setq elmo-nntp-default-user "fascinating_logic@ybb.ne.jp")
 
   ;; その他
-  (setq skk-kutouten-type 'en))
+  (setq skk-kutouten-type 'jp))
 
 (my-wl-defaults)
 
@@ -257,7 +257,7 @@
 (setq my-wl-signature-path
       (expand-file-name (concat my-wl-path "/signatures")))
 (setq signature-file-name
-      (expand-file-name (concat my-wl-signature-path "/ybb")))
+      (expand-file-name (concat my-wl-signature-path "/default")))
 
 ;; ドラフトバッファの内容により From や Organization などのヘッダを自
 ;; 動的に変更する
