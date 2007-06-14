@@ -15,4 +15,4 @@
    ("Fcc" . wl-fcc)
    ("Organization" . wl-organization)
    (signature-file-name . (expand-file-name
-			   (concat my-wl-signature-path "/" "gmail")))))
+			   (concat my-wl-signature-path "/" "default")))))
