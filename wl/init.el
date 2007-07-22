@@ -154,6 +154,14 @@
 ;; オフライン(unplugged)操作を有効にする(現在はIMAPフォルダのみ)
 (setq elmo-enable-disconnected-operation t)
 
+;; サマリをチェックする前に接続を遣り直す
+(defadvice wl-folder-check-current-entity
+  (before before-wl-folder-check-current-entity)
+  (wl-toggle-plugged 'off)
+  (wl-toggle-plugged 'on)))
+
+(ad-activate 'wl-folder-check-current-entity)
+
 ;; unplugged 状態で送信すると, キュー(`wl-queue-folder')に格納する
 (setq wl-draft-enable-queuing t)
 ;; unplugged から plugged に変えたときに, キューにあるメッセージを送信する
