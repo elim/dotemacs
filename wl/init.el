@@ -158,7 +158,7 @@
 (defadvice wl-folder-check-current-entity
   (before before-wl-folder-check-current-entity)
   (wl-toggle-plugged 'off)
-  (wl-toggle-plugged 'on)))
+  (wl-toggle-plugged 'on))
 
 (ad-activate 'wl-folder-check-current-entity)
 
