@@ -96,6 +96,7 @@
 (load "init-rails.el")
 (load "init-semi.el")
 (load "init-session.el")
+(load "init-shell-script.el")
 (load "init-server.el")
 (load "init-shimbun.el")
 (load "init-tdiary-mode.el")

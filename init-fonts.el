@@ -29,7 +29,8 @@
 (error (princ err))))
 
 ;; Meadow 2.x or greater
-(setq my-w32-font-path "c:/cygwin/home/takeru/lib/X11/fonts/shinonome/")
+(setq my-w32-font-path
+      (concat (getenv "HOME") "/lib/X11/fonts/shinonome/"))
 (when (and (functionp 'w32-add-font)
 	   (file-accessible-directory-p my-w32-font-path))
   (w32-add-font
