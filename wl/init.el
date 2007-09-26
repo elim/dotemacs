@@ -4,21 +4,11 @@
 ;;; [[ 個人情報の設定 ]]
 ;; 自分のメールアドレスのリスト
 (setq wl-user-mail-address-list
-      (list (wl-address-header-extract-address wl-from)
-	    "fascinating_logic@ybb.ne.jp"
-	    "takeru@at-mac.com"
-	    "elim@teroknor.org"))
+      (list
+       (wl-address-header-extract-address wl-from)))
 
 ;; 自分の参加しているメーリングリストのリスト
-(setq wl-subscribed-mailing-list
-      '("debian-users@debian.or.jp"
-	"ruby-list@ruby-lang.org"
-	"wl@lists.airs.net"
-	"apel-ja@m17n.or"
-	"emacs-mime-ja@m17n.org"
-	"DeepSpace@panda.starfleet.ac"
-	"alib@alib.jp"
-	"share@alib.jp"))
+(setq wl-subscribed-mailing-list nil)
 
 (defun my-wl-defaults ()
   ;; From: の設定
