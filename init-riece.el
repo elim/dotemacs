@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*-
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
 (when (autoload-if-found 'riece "riece" nil t)
@@ -43,18 +43,22 @@
 
   (setq riece-ndcc-server-address "localhost")
 
-  (setq riece-keywords '("Elim" "elim" "$B$($j$`(B" "$B%(%j%`(B"
-			 "$B$($m$j(B" "$B$($m$`(B" "$B=w$NE((B"))
+  (setq riece-keywords '("Elim" "elim" "えりむ" "エリム"
+			 "えろり" "えろむ" "女の敵"))
 
-  (when (and (locate-library "esdplay" nil exec-path)
-	     (file-exists-p (expand-file-name "~/sounds/notify.wav")))
-    (add-hook 'riece-notify-keyword-functions
-	      (lambda (keyword)
-		(start-process "You were called." "*Messages*" "esdplay"
-			       (expand-file-name "~/sounds/notify.wav")))))
+  (let
+      ((my-notify-sound-file (expand-file-name "~/sounds/notify.wav"))
+       (my-notify-sound-player "mplayer"))
+    
+    (when (and (locate-library my-notify-sound-player nil exec-path)
+	       (file-exists-p my-notify-sound-file))
+      
+       (add-hook 'riece-notify-keyword-functions
+		 `(lambda (keyword)
+		    (start-process keyword "*Messages*" ,my-notify-sound-player
+				   (expand-file-name ,my-notify-sound-file))))))
 
   (add-hook 'riece-startup-hook
 	    (lambda ()
 	      (define-key riece-command-mode-map "\C-xn"
 		'riece-command-enter-message-as-notice))))
-
