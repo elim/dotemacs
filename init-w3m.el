@@ -17,7 +17,6 @@
 
   (require 'w3m-wget nil t)
 
-  (setq w3m-search-default-engine "google-ja")
   (setq w3m-pop-up-frames nil)
   (setq w3m-tab-width 4)
   (setq w3m-use-cookies t)
@@ -27,20 +26,6 @@
   (setq w3m-weather-default-area "道央・石狩")
 
   (global-set-key "\C-cs" 'w3m-search)
-
-  (eval-after-load "w3m-search"
-    (progn
-      '(add-to-list
-	'w3m-search-engine-alist
-	'("google-ja"
-	  "http://www.google.com/search?q=%s&hl=ja&lr=lang_ja&ie=UTF-8"
-	  utf-8)
-	'("wdic"
-	  "http://www.wdic.org/?word=%s"
-	  euc-japan))
-      '(add-to-list
-	'w3m-uri-replace-alist
-	'("\\`wdic:" w3m-search-uri-replace "wdic"))))
 
   (when (and
 	 (require 'mime-view nil t)
