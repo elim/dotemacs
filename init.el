@@ -1,6 +1,10 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
+;;; checking and loading Common Lisp extensions.
+(when (not (apropos-macrop 'dolist))
+  (require 'cl nil t))
+
 ;;; path and filenames.
 (setq my-lisp-path (expand-file-name "~/.emacs.d/"))
 (setq custom-file
