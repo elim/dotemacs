@@ -1,47 +1,29 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
-;;; Mule-UCS の設定
+;;; Mule-UCS settings.
 (when (>= 21 emacs-major-version)
   (require 'un-define nil t) ; Unicode
-  (require 'jisx0213 nil t))  ; JIS X 0213
+  (require 'jisx0213 nil t)) ; JIS X 0213
 
-;;; 日本語環境設定
+;;; Japanese environment.
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 (set-buffer-file-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system
- (cond
-  ((eq window-system 'mac)
-   'sjis-mac)
-  ((featurep 'meadow)
-   'sjis-dos)
-  (t
-   'utf-8)))
 
-(set-clipboard-coding-system
- (cond
-  ((eq window-system 'mac)
-   'sjis-mac)
-  ((featurep 'meadow)
-   'sjis-dos)
-  (t
-   'utf-8)))
-
-(setq file-name-coding-system
+(let
+    ((my-default-coding-system
       (cond
-       ((featurep 'meadow)
-	'sjis-dos)
-       (t
-	'utf-8)))
+       ((featurep 'mac-carbon) 'sjis-mac)
+       ((featurep 'meadow)  'sjis-dos)
+       (t 'utf-8))))
+  (progn
+    (set-keyboard-coding-system my-default-coding-system)
+    (set-clipboard-coding-system my-default-coding-system)
+    (set-file-name-coding-system my-default-coding-system)
+    (setq default-buffer-file-coding-system my-default-coding-system)))
 
-(setq default-buffer-file-coding-system 'utf-8)
-
-;; coding 判定の順を指定.
-;; 実行毎に先頭に追加される.
-(prefer-coding-system 'shift_jis)
-(prefer-coding-system 'iso-2022-jp)
-(prefer-coding-system 'euc-jp)
-(prefer-coding-system 'utf-8)
-
+;;; modified coding priority. (low => high)
+(dolist (c (list 'shift_jis 'iso-2022-jp 'euc-jp 'utf-8))
+  (prefer-coding-system c))
