@@ -2,8 +2,9 @@
 ;; $Id$
 
 ;;; checking and loading Common Lisp extensions.
-(when (not (apropos-macrop 'dolist))
-  (require 'cl nil t))
+(when (and (locate-library "apropos" nil t) (require 'apropos))
+  (when (not (apropos-macrop 'dolist))
+    (require 'cl nil t)))
 
 ;;; path and filenames.
 (setq my-lisp-path (expand-file-name "~/.emacs.d/"))
@@ -59,16 +60,16 @@
 	 ((locate-library "traceroute" nil exec-path) "traceroute")
 	 ((locate-library "tracert" nil exec-path) "tracert")
 	 (t nil)))
-       
+
        (return-value
 	(if traceroute
 	    (shell-command-to-string
 	     (concat traceroute " " system-name))
 	  "")))
-    
+
     (string-match "[^0-9]*\\([0-9]+\\(\.[0-9]+\\)+\\)" return-value)
     (match-string 1 return-value)))
-  
+
 (defun domestic-network-member-p ()
   (let
       ((domestic-address "^192.168.119.")
@@ -103,7 +104,7 @@
 	(match-string 1 domestic-router)))
      (normalized-mac-addr "")
      (temporary-char ""))
-  
+
   (dotimes (i (length mac-addr) normalized-mac-addr)
     (setq temporary-char (format "%c" (elt mac-addr i)))
     (unless (string-match ":" temporary-char)
