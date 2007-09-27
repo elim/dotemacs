@@ -3,12 +3,14 @@
 
 (setq gc-cons-threshold (* 32 1024 1024))
 
-;; Xでのカラー表示
+(setq system-time-locale "C")
+
+;; font lock
 (when (require 'font-lock nil t)
   (when (not (featurep 'xemacs))
     (global-font-lock-mode t)))
 
-;; Mac 関係
+;; Carbon Emacs
 (setq mac-pass-control-to-system nil)
 (setq mac-pass-command-to-system nil)
 (setq mac-option-modifier 'meta)
@@ -93,14 +95,13 @@
   (setq kill-ring (delete (ad-get-arg 0) kill-ring)))
 
 ;; history から重複したのを消す
-(when (require 'cl nil t)
-  (defun minibuffer-delete-duplicate ()
-    (let (list)
-      (dolist (elt (symbol-value minibuffer-history-variable))
-	(unless (member elt list)
-	  (push elt list)))
+(defun minibuffer-delete-duplicate ()
+  (let (list)
+    (dolist (elt (symbol-value minibuffer-history-variable))
+      (unless (member elt list)
+	(push elt list)))
       (set minibuffer-history-variable (nreverse list))))
-  (add-hook 'minibuffer-setup-hook 'minibuffer-delete-duplicate))
+(add-hook 'minibuffer-setup-hook 'minibuffer-delete-duplicate))
 
 ;; yank した文字列を X11 の cut buffer に送る
 (setq x-select-enable-clipboard t)
