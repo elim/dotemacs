@@ -24,6 +24,6 @@
     (set-file-name-coding-system my-default-coding-system)
     (setq default-buffer-file-coding-system my-default-coding-system)))
 
-;;; modified coding detection priority. (low => high)
+;;; modified coding priority. (low => high)
 (dolist (c (list 'shift_jis 'iso-2022-jp 'euc-jp 'utf-8))
   (prefer-coding-system c))
