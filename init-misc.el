@@ -15,6 +15,31 @@
 (setq mac-pass-command-to-system nil)
 (setq mac-option-modifier 'meta)
 
+;; Meadow and Cygwin
+;; based upon meadow-users-jp:3050 and
+;; http://mechanics.civil.tohoku.ac.jp/soft/node45.html and
+;; http://meadow.sourceforge.jp/cgi-bin/hiki.cgi?%B0%EC%C8%CC%C5%AA%A4%CA%BE%F0%CA%F3
+(when (featurep 'meadow)
+  (let
+      ((my-shell-file-name
+	(cond
+	 ((locate-library "zsh.exe" nil exec-path) "zsh")
+	 ((locate-library "sh.exe" nil exec-path) "sh")
+	 (t nil))))
+
+    (when my-shell-file-name
+      (setq explicit-shell-file-name my-shell-file-name)
+      (setq shell-file-name my-shell-file-name)
+      (setq shell-command-switch "-c")))
+
+  (add-hook 'shell-mode-hook
+	    (lambda ()
+	      (set-buffer-process-coding-system 'undecided-dos 'sjis-unix)))
+
+  ;; shell-modeでの補完 (for drive letter)
+  (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-"))
+
+
 ;; Deleteキーでカーソル位置の文字が消えるようにする
 (global-set-key [delete] 'delete-char)
 
@@ -101,7 +126,7 @@
       (unless (member elt list)
 	(push elt list)))
       (set minibuffer-history-variable (nreverse list))))
-(add-hook 'minibuffer-setup-hook 'minibuffer-delete-duplicate))
+(add-hook 'minibuffer-setup-hook 'minibuffer-delete-duplicate)
 
 ;; yank した文字列を X11 の cut buffer に送る
 (setq x-select-enable-clipboard t)
