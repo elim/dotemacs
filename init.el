@@ -58,17 +58,14 @@
       ((traceroute
 	(cond
 	 ((locate-library "traceroute" nil exec-path) "traceroute")
-	 ((locate-library "tracert" nil exec-path) "tracert")
-	 (t nil)))
+	 ((locate-library "tracert.exe" nil exec-path) "tracert.exe")
+	 (t nil))))
 
-       (return-value
-	(if traceroute
-	    (shell-command-to-string
-	     (concat traceroute " " system-name))
-	  "")))
-
-    (string-match "[^0-9]*\\([0-9]+\\(\.[0-9]+\\)+\\)" return-value)
-    (match-string 1 return-value)))
+	(with-temp-buffer
+	  (call-process traceroute nil t nil system-name)
+	  (goto-char (point-min))
+	  (if (re-search-forward "[^0-9]*\\([0-9]+\\(\.[0-9]+\\)+\\)" nil t)
+	      (match-string 1)))))
 
 (defun domestic-network-member-p ()
   (let
