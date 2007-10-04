@@ -26,7 +26,7 @@
 		       "-shinonome-gothic-bold-r-normal--14-0-0-0-c-0-*-*")
 	(set-face-font 'bold-italic
 		       "-shinonome-gothic-bold-i-normal--14-0-0-0-c-0-*-*"))
-(error (princ err))))
+    (error (princ err))))
 
 ;; Meadow 2.x or greater
 (setq my-w32-font-path

@@ -1,19 +1,19 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
-;;; checking and loading Common Lisp extensions.
-(when (and (locate-library "apropos" nil t) (require 'apropos))
+;;; checking and/or loading Common Lisp extensions.
+(when (require 'apropos nil t)
   (when (not (apropos-macrop 'dolist))
     (require 'cl nil t)))
 
 ;;; path and filenames.
-(setq my-lisp-path (expand-file-name "~/.emacs.d/"))
+(setq my-lisp-path "~/.emacs.d/")
 (setq custom-file
-      (expand-file-name (concat my-lisp-path "/customize.el")))
+      (expand-file-name "customize.el" my-lisp-path))
 
 (defun my-add-path (target-list path-list)
   (condition-case err
-       (eval target-list)
+      (eval target-list)
     (error (set target-list (list))))
   (dolist (p (reverse path-list))
     (when (file-accessible-directory-p p)
@@ -61,11 +61,11 @@
 	 ((locate-library "tracert.exe" nil exec-path) "tracert.exe")
 	 (t nil))))
 
-	(with-temp-buffer
-	  (call-process traceroute nil t nil system-name)
-	  (goto-char (point-min))
-	  (if (re-search-forward "[^0-9]*\\([0-9]+\\(\.[0-9]+\\)+\\)" nil t)
-	      (match-string 1)))))
+    (with-temp-buffer
+      (call-process traceroute nil t nil system-name)
+      (goto-char (point-min))
+      (if (re-search-forward "[^0-9]*\\([0-9]+\\(\.[0-9]+\\)+\\)" nil t)
+	  (match-string 1)))))
 
 (defun domestic-network-member-p ()
   (let
@@ -86,23 +86,11 @@
 (when (file-accessible-directory-p my-lisp-path)
   (dolist (f (directory-files my-lisp-path))
     (when (string-match "^init-.*el$" f)
-      (load (expand-file-name (concat my-lisp-path "/" f))))))
+      (load (expand-file-name f my-lisp-path)))))
 
 (when (functionp 'howm-menu) (howm-menu))
 
 ;; __END__
 
 ;; fragments.
-(let*
-    ((domestic-router (shell-command-to-string "arp -a"))
-     (mac-addr
-      (progn
-	(string-match "\\([0-9A-Fa-f]+?[:-].*?\\)[\s]" domestic-router)
-	(match-string 1 domestic-router)))
-     (normalized-mac-addr "")
-     (temporary-char ""))
-
-  (dotimes (i (length mac-addr) normalized-mac-addr)
-    (setq temporary-char (format "%c" (elt mac-addr i)))
-    (unless (string-match ":" temporary-char)
-      (setq normalized-mac-addr (concat normalized-mac-addr temporary-char)))))
+(mapconcat 'concat (split-string "foo:bar:baz" ":") "")

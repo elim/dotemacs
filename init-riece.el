@@ -14,13 +14,13 @@
   (setq riece-layout '"middle-left")
 
   (setq riece-directory
-	(expand-file-name (concat my-lisp-path "/riece")))
+	(expand-file-name "riece" my-lisp-path))
   (setq riece-addon-directory
-	(expand-file-name (concat riece-directory "/addons")))
+	(expand-file-name "addons" my-lisp-path))
   (setq riece-saved-variables-file
-	(expand-file-name (concat riece-directory "/save")))
+	(expand-file-name "save" riece-directory))
   (setq riece-variables-file
-	(expand-file-name (concat riece-directory "/init")))
+	(expand-file-name "init" riece-directory))
 
   (setq riece-variables-files
 	(list riece-variables-file

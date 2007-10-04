@@ -18,22 +18,13 @@
   (autoload-if-found 'skk-isearch-mode-setup "skk-isearch" nil t)
   (autoload-if-found 'skk-isearch-mode-cleanup "skk-isearch" nil t)
 
-  (setq skk-init-file (expand-file-name (concat my-lisp-path "/.skk")))
-
   ;; @@ 基本の設定
 
   (setq skk-count-private-jisyo-candidates-exactly t)
   (setq skk-share-private-jisyo t)
 
-  ;; Mule 2.3 (Emacs 19) を使っている場合は必要
-  ;; (require 'skk-setup)
-
-  ;; カタカナ/ひらがな キーで SKK を起動する
-  ;(global-set-key [hiragana-katakana] 'skk-mode)
-
-  ;; ~/.skk にいっぱい設定を書いているのでバイトコンパイルしたい
-  ;(setq skk-byte-compile-init-file t)
-  ;; 注) 異なる種類の Emacsen を使っている場合は nil にします
+  (when (>= 19 emacs-major-version)
+    (require 'skk-setup nil t))
 
   ;; SKK を Emacs の input method として使用する
   (setq default-input-method "japanese-skk")
@@ -41,25 +32,20 @@
   ;; SKK を起動していなくても、いつでも skk-isearch を使う
   (add-hook 'isearch-mode-hook 'skk-isearch-mode-setup)
   (add-hook 'isearch-mode-end-hook 'skk-isearch-mode-cleanup)
+  ;; migemo を使うから skk-isearch にはおとなしくしていて欲しい
+  ;; (setq skk-isearch-start-mode 'latin)
 
   ;; @@ 応用的な設定
 
   ;; ~/.skk* なファイルがたくさんあるので整理したい
-  (setq my-ddskk-path (expand-file-name (concat my-lisp-path "/ddskk")))
-  (when (not (file-directory-p my-ddskk-path))
-	     (make-directory my-ddskk-path))
-  (setq skk-init-file (expand-file-name (concat my-ddskk-path "/init.el"))
-	skk-custom-file (expand-file-name (concat my-ddskk-path "/custom.el"))
-	skk-emacs-id-file (expand-file-name (concat my-ddskk-path "/emacs-id"))
-	skk-record-file (expand-file-name (concat my-ddskk-path "/record")))
+  (setq my-ddskk-path (expand-file-name "ddskk" my-lisp-path))
+  (setq skk-init-file (expand-file-name "init.el" my-ddskk-path)
+	skk-custom-file (expand-file-name "custom.el" my-ddskk-path)
+	skk-emacs-id-file (expand-file-name "emacs-id" my-ddskk-path)
+	skk-record-file (expand-file-name "record" my-ddskk-path))
   ;	skk-jisyo "~/.ddskk/jisyo"
   ;      skk-backup-jisyo "~/.ddskk/jisyo.bak")
-  ;; 注) SKK の個人辞書は skkinput などのプログラムでも参照しますから、
-  ;;     上記の設定をした場合はそれらのプログラムの設定ファイルも書き
-  ;;     かえる必要があります。
 
-  ;; migemo を使うから skk-isearch にはおとなしくしていて欲しい
-  ;; (setq skk-isearch-start-mode 'latin)
 
   ;; super-smart-find のための設定 (意味あるかな？)
   (setq super-smart-find-self-insert-command-list

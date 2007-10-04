@@ -34,7 +34,7 @@
 
   ;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=save%20framesize
   (setq frame-size-configuration-file
-	(expand-file-name (concat my-lisp-path "/framesize.el")))
+	(expand-file-name "framesize.el" my-lisp-path))
 
   (defun window-size-save ()
     (let* ((rlist (frame-parameters (selected-frame)))

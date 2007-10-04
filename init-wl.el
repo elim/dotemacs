@@ -12,10 +12,10 @@
     (autoload 'x-face-decode-message-header "x-face-e21" t)
     (setq wl-highlight-x-face-function 'x-face-decode-message-header))
 
-  (setq my-wl-path (expand-file-name (concat my-lisp-path "/wl")))
-  (setq wl-init-file (expand-file-name (concat my-wl-path "/init.el")))
-  (setq wl-address-file (expand-file-name (concat my-wl-path "/addresses")))
-  (setq wl-folders-file (expand-file-name (concat my-wl-path "/folders")))
+  (setq my-wl-path (expand-file-name "wl" my-lisp-path))
+  (setq wl-init-file (expand-file-name "init.el" my-wl-path))
+  (setq wl-address-file (expand-file-name "addresses" my-wl-path))
+  (setq wl-folders-file (expand-file-name "folders" my-wl-path))
 
   (setq wl-summary-showto-folder-regexp "^\\%\\(Sent\\|Draft\\).*$")
   (setq wl-summary-weekday-name-lang 'en)
