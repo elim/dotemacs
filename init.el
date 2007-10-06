@@ -86,7 +86,7 @@
 (when (file-accessible-directory-p my-lisp-path)
   (dolist (f (directory-files my-lisp-path))
     (when (string-match "^init-.*el$" f)
-      (load (expand-file-name f my-lisp-path)))))
+      (load (expand-file-name f my-lisp-path) nil t))))
 
 (when (functionp 'howm-menu) (howm-menu))
 
