@@ -61,11 +61,13 @@
 	 ((locate-library "tracert.exe" nil exec-path) "tracert.exe")
 	 (t nil))))
 
-    (with-temp-buffer
-      (call-process traceroute nil t nil system-name)
-      (goto-char (point-min))
-      (if (re-search-forward "[^0-9]*\\([0-9]+\\(\.[0-9]+\\)+\\)" nil t)
-	  (match-string 1)))))
+    (if traceroute
+	(with-temp-buffer
+	  (call-process traceroute nil t nil system-name)
+	  (goto-char (point-min))
+	  (if (re-search-forward "[^0-9]*\\([0-9]+\\(\.[0-9]+\\)+\\)" nil t)
+	      (match-string 1)))
+      "unknown")))
 
 (defun domestic-network-member-p ()
   (let
