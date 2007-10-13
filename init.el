@@ -1,6 +1,11 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
+;;provisional measures for cygwin $PWD environment variable.
+(when
+    (not (file-directory-p default-directory))
+  (setq default-directory (getenv "HOME")))
+
 ;;; checking and/or loading Common Lisp extensions.
 (when (require 'apropos nil t)
   (when (not (apropos-macrop 'dolist))
