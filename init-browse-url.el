@@ -23,12 +23,12 @@
 	 ((locate-executable "open")
 	  (setq browse-url-generic-program "open"))))
     (progn
-      ((functionp 'w3m-browse-url)
-      (setq browse-url-browser-function
-	    'w3m-browse-url))))
+      (when (functionp 'w3m-browse-url)
+	(setq browse-url-browser-function
+	      'w3m-browse-url)))))
 
   (setq browse-url-browser-display t)
-  (setq browse-url-new-window-flag nil)))
+  (setq browse-url-new-window-flag nil))
 
 
 ;; http://cgi.netlaputa.ne.jp/~kose/diary/?200209b&to=200209125#200209125
