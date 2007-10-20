@@ -1,14 +1,16 @@
-;; -*- emacs-lisp -*-
+;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
-;; HTML パートを表示するか
-;; mime-setup がロードされる前に記述する必要があります。
+;;; based upon dot.wl
+
+;; Disable inline display of HTML part.
+;; Put before load `mime-setup'
 (setq mime-setup-enable-inline-html t)
 
-;; 大きいメッセージを送信時に分割するか
+;; Don't split large message.
 (setq mime-edit-split-message nil)
 
-;; 大きいメッセージとみなす行数の設定
+;; If lines of message are larger than this value, treat it as `large'.
 ;(setq mime-edit-message-default-max-lines 1000)
 
 (load "mime-setup" t)

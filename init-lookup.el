@@ -17,16 +17,16 @@
   (setq lookup-open-function 'lookup-other-frame)
   (setq lookup-frame-alist default-frame-alist)
 
-  (when (or (locate-library "aspell" nil exec-path)
-	    (locate-library "aspell.exe" nil exec-path))
+  (when (locate-executable "aspell")
     (setq ndspell-ispell-program "aspell"))
 
-  (setq my-ndtp-server-definition
-	(list 'ndtp (if (domestic-network-member-p)
-			"idea"
-		      "localhost") :port 2010))
+  (setq ndtp-server-definition
+	(list 'ndtp
+	      (if (domestic-network-member-p)
+		  "idea" "localhost")
+	      :port 2010))
 
   (setq lookup-search-agents
 	(list
-	 my-ndtp-server-definition
+	 ndtp-server-definition
 	 '(ndspell))))

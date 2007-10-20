@@ -3,7 +3,8 @@
 
 (add-to-list
  'wl-template-alist
- '("at-mac"
+ `(,(file-name-sans-extension
+     (file-name-nondirectory load-file-name))
    (wl-smtp-posting-server . "mail.at-mac.com")
    (wl-smtp-posting-port . 25)
    (wl-smtp-authenticate-type . nil)
@@ -19,7 +20,4 @@
    (wl-organization . "Century Corporation")
    ("From" . wl-from)
    ("Fcc" . wl-fcc)
-   ("Organization" . wl-organization)
-   (signature-file-name . (expand-file-name
-			   (concat my-wl-signature-path "/at-mac")))
-   (skk-kutouten-type . 'jp)))
+   ("Organization" . wl-organization)))

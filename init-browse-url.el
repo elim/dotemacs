@@ -1,22 +1,34 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
-(when (require 'browse-url nil t)
+(when (and (or
+	    (featurep 'mac-carbon)
+	    (featurep 'meadow)
+	    (locate-executable "www-browser")
+	    (locate-executable "firefox")
+       (require 'browse-url nil t))
+
   (global-set-key "\C-xm" 'browse-url-at-point)
-  (setq browse-url-browser-function
+
+  (if window-system
+      (progn
+	(setq browse-url-browser-function
+	      'browse-url-generic)
 	(cond
-	 ((when window-system t)
-	  'browse-url-generic)
-	 ((functionp 'w3m-browse-url)
-	  'w3m-browse-url)))
+	 ((locate-executable "firefox")
+	  (setq browse-url-generic-program "firefox"))
+	 ((locate-executable "cmd")
+	  (setq browse-url-generic-program "cmd"
+		browse-url-generic-args "\/cstart"))
+	 ((locate-executable "open")
+	  (setq browse-url-generic-program "open"))))
+    (progn
+      ((functionp 'w3m-browse-url)
+      (setq browse-url-browser-function
+	    'w3m-browse-url))))
+
   (setq browse-url-browser-display t)
-  (setq browse-url-new-window-flag nil)
-  (setq browse-url-generic-program
-	    (cond
-	     ((featurep 'mac-carbon)
-	      "open")
-	     (t
-	      "firefox"))))
+  (setq browse-url-new-window-flag nil)))
 
 
 ;; http://cgi.netlaputa.ne.jp/~kose/diary/?200209b&to=200209125#200209125

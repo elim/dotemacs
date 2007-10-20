@@ -1,114 +1,99 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
+;;;; based upon dot.wl
 
-;;; [[ 個人情報の設定 ]]
-;; 自分のメールアドレスのリスト
-(setq wl-user-mail-address-list
-      (list
-       (wl-address-header-extract-address wl-from)))
+;;; [[ Private Setting ]]
 
-;; 自分の参加しているメーリングリストのリスト
+;; Header From:
+;; this overwrites in a default template later.
+(setq wl-from "nobody@example.net")
+
+;; User's mail addresses.
+(setq wl-user-mail-address-list nil)
+
+;; Subscribed mailing list.
 (setq wl-subscribed-mailing-list nil)
 
-(defun my-wl-defaults ()
-  ;; From: の設定
-  (setq wl-from "Takeru Naito <takeru.naito@gmail.com>")
-  (setq wl-local-domain "elim.teroknor.org")
-  (setq wl-message-id-use-wl-from t)
-  (setq wl-insert-message-id t)
-  (setq wl-draft-send-mail-function 'wl-draft-send-mail-with-smtp)
+;; If (system-name) does not return FQDN,
+;; set following as a local domain name without hostname.
+;; this overwrites in a default template later.
+(setq wl-local-domain nil)
 
-  ;; 環境依存
-  (if (domestic-network-member-p)
-      (progn
-	(setq my-wl-server-name "idea")
-	(setq my-elmo-imap4-default-port 993)
-	(setq my-elmo-imap4-default-stream-type 'ssl)
-	(setq my-smtp-posting-port 25))
-    (progn
-      (setq my-wl-server-name "localhost")
-      (setq my-elmo-imap4-default-port 10143)
-      (setq my-elmo-imap4-default-stream-type nil)
-      (setq my-smtp-posting-port 10025)))
+;; Use `wl-from' for domain part of Message-ID.
+(setq wl-message-id-use-wl-from t)
 
-  ;; Folder Carbon Copy
-  (setq wl-fcc "%Sent")
+;; Insert Message-ID: field.
+(setq wl-insert-message-id t)
 
-  ;; draft folder
-  (setq wl-draft-folder "%Drafts")
+;; Folder Carbon Copy
+(setq wl-fcc "%Sent")
 
-  ;; IMAP サーバの設定
-  (setq elmo-imap4-default-server my-wl-server-name)
-  (setq elmo-imap4-default-authenticate-type 'cram-md5)
-  (setq elmo-imap4-default-port my-elmo-imap4-default-port)
-  (setq elmo-imap4-default-stream-type my-elmo-imap4-default-stream-type)
+;; draft folder
+(setq wl-draft-folder "%Drafts")
 
-  ;; SMTP サーバの設定
-  (setq wl-smtp-posting-server my-wl-server-name)
-  (setq wl-smtp-posting-user "takeru")
-  (setq wl-smtp-authenticate-type "cram-md5")
-  (setq wl-smtp-connection-type nil)
-  (setq wl-smtp-posting-port my-smtp-posting-port)
+;;; [[ Server Setting ]]
+;; IMAP server
+(setq elmo-imap4-default-server
+      (if (domestic-network-member-p) "idea" "localhost"))
+(setq elmo-imap4-default-port
+      (if (domestic-network-member-p)  143 10143))
+(setq elmo-imap4-default-authenticate-type 'cram-md5)
 
-  ;; POP サーバの設定
-  (setq elmo-pop3-default-server nil)
+;; SMTP server
+;; this overwrites in a default template later.
+(setq wl-smtp-posting-server "example.net")
 
-  ;; ニュースサーバの設定
-  (setq elmo-nntp-default-server "news.media.kyoto-u.ac.jp")
-  (setq wl-nntp-posting-server elmo-nntp-default-server)
-  (setq elmo-nntp-default-user "fascinating_logic@ybb.ne.jp")
+;; POP server
+;; this overwrites in a default template later.
+(setq elmo-pop3-default-server nil)
 
-  ;; その他
-  (setq skk-kutouten-type 'jp))
+;; NNTP server
+(setq elmo-nntp-default-server nil)
+(setq wl-nntp-posting-server elmo-nntp-default-server)
 
-(my-wl-defaults)
-
-;;; [[ 基本的な設定 ]]
-;; `wl-summary-goto-folder' の時に選択するデフォルトのフォルダ
+;;; [[ Basic Setting ]]
+;; Default folder for `wl-summary-goto-folder'.
 (setq wl-default-folder "%INBOX")
 
-;; フォルダ名補完時に使用するデフォルトのスペック
+;; Default string for folder name completion.
 (setq wl-default-spec "%")
 
-;; trash folder
+;; Trash folder
 (setq wl-trash-folder "%Trash")
 
-;; 終了時に確認する
+;; Confirm before exitting Wanderlust.
 (setq wl-interactive-exit t)
 
-;; メール送信時には確認する
+;; Confirm before sending message.
 (setq wl-interactive-send t)
 
-;; To: Cc: には名前も挿入する
-(setq wl-draft-reply-use-address-with-full-name nil)
-
-;; アクセスグループのフォルダを作る基準 (regexp)
+;; Criterion for Access group (regexp)
 ;(setq wl-folder-hierarchy-access-folders
 ;      '("^%[^¥¥.]*$"))
 
-;; スレッドは常に開く
+;; Create opened thread.
 ;(setq wl-thread-insert-opened t)
 
-;; サマリバッファの左にフォルダバッファを表示する (3ペイン表示)
+;; Keep folder window beside summary. (3 pane)
 ;(setq wl-stay-folder-window t)
 
-;; 長い行を切り縮める
+;; Truncate long lines.
 ;(setq wl-message-truncate-lines t)
 ;(setq wl-draft-truncate-lines t)
-;; XEmacs (21.4.6 より前) の場合、以下も必要.
+;; Following line is needed for XEmacs older than 21.4.6.
 ;(setq truncate-partial-width-windows nil)
 
-;; ドラフトを新しいフレームで書く
+;; Open new frame for draft buffer.
 ;(setq wl-draft-use-frame t)
 
-;; スレッド表示のインデントを無制限にする.
+;; Don't limit indent for thread view
 (setq wl-summary-indent-length-limit nil)
 (setq wl-summary-width nil)
 
-;; サブジェクトが変わったらスレッドを切って表示
+;; Divide thread by change of subject.
 ;(setq wl-summary-divide-thread-when-subject-changed t)
 
-;; スレッドの見た目を変える
+;; Change format of thread view
 ;(setq wl-thread-indent-level 2)
 ;(setq wl-thread-have-younger-brother-str "+"
 ;      wl-thread-youngest-child-str	 "+"
@@ -116,185 +101,184 @@
 ;      wl-thread-horizontal-str		 "-"
 ;      wl-thread-space-str		 " ")
 
-;; サマリ移動後に先頭メッセージを表示する
+;; display first message automatically.
 ;(setq wl-auto-select-first t)
 
-;; サマリ内の移動で未読メッセージがないと次のフォルダに移動する
+;; goto next folder when exit from summary.
 ;(setq wl-auto-select-next t)
 
-;; 未読がないフォルダは飛ばす(SPCキーだけで読み進める場合は便利)
+;; skip folder if there is no unread message.
 (setq wl-auto-select-next 'skip-no-unread)
 
-;; 未読メッセージを優先的に読む
+;; jump to unread message in 'N' or 'P'.
 (setq wl-summary-move-order 'unread)
 
-;; 着信通知の設定
+;; notify mail arrival
 (setq wl-biff-check-folder-list '("%INBOX"))
 (setq wl-biff-notify-hook '(ding))
 
-
-;;; [[ ネットワーク ]]
-;; フォルダ種別ごとのキャッシュの設定
-;; (localdir, localnews, maildir はキャッシュできない)
+;;; [[ Network ]]
+;; cache setting.
+;; (messages in localdir, localnews, maildir are not cached.)
 ;(setq elmo-archive-use-cache nil)
 ;(setq elmo-nntp-use-cache t)
 ;(setq elmo-imap4-use-cache t)
 ;(setq elmo-pop3-use-cache t)
 
-;; オフライン(unplugged)操作を有効にする(現在はIMAPフォルダのみ)
+;; Enable disconnected operation in IMAP folder.
 (setq elmo-enable-disconnected-operation t)
 
-;; サマリをチェックする前に接続を遣り直す
+;; Reconnect before summary checking.
 (defadvice wl-folder-check-current-entity
-  (before before-wl-folder-check-current-entity)
+  (before before-wl-folder-check-current-entity activate)
   (wl-toggle-plugged 'off)
   (wl-toggle-plugged 'on))
 
-(ad-activate 'wl-folder-check-current-entity)
-
-;; unplugged 状態で送信すると, キュー(`wl-queue-folder')に格納する
+;; Store draft message in queue folder if message is sent in unplugged status.
 (setq wl-draft-enable-queuing t)
-;; unplugged から plugged に変えたときに, キューにあるメッセージを送信する
+;; when plug status is changed from unplugged to plugged,
+;; queued message is flushed automatically.
 (setq wl-auto-flush-queue t)
 
-;; 起動時はオフライン状態にする
+;; offline at startup.
 ;(setq wl-plugged nil)
-;; 起動時にポートごとのplug状態を変更する
+;; change plug status by server or port at startup.
 ;(add-hook 'wl-make-plugged-hook
 ;	  '(lambda ()
-;	     ;; server,portのplug状態を新規追加もしくは変更する
-;	     (elmo-set-plugged plugged値(t/nil) server port)
-;	     ;; port を省略するとserverの全portが変更される
-;	     ;; (port を省略して新規の追加はできない)
-;	     (elmo-set-plugged plugged値(t/nil) server)
+;	     ;; Add or Change plug status for SERVER and PORT.
+;	     (elmo-set-plugged plugged(t/nil) server port)
+;	     ;; When omit port, SEVERS all port was changes.
+;	     ;; (Can't add plug status without PORT)
+;	     (elmo-set-plugged plugged(t/nil) server)
 ;	     ))
 
+;;; [[ Special Setting ]]
 
-;;; [[ 特殊な設定 ]]
-
-;; サマリでの "b" をメッセージ再送にする (mutt の "b"ounce)
-;(add-hook 'wl-summary-mode-hook
-;	  '(lambda ()
-;	     (define-key wl-summary-mode-map "b" 'wl-summary-resend-message)))
-
-;; グループをcheckした後に未読があるフォルダのグループを自動的に開く
+;; open unread group folder after checking.
 ;(add-hook 'wl-folder-check-entity-hook
 ;	  '(lambda ()
 ;	     (wl-folder-open-unread-folder entity)
 ;	     ))
 
-;; サマリ表示関数を変更する
+;; Jump to unfiltered folder by `wl-summary-exit'. It is useful for people who
+;; use filtered folder as a temporary folder created by `wl-summary-virtual'.
+;(add-hook 'wl-summary-prepared-hook
+;	  '(lambda ()
+;	     (setq wl-summary-buffer-exit-function
+;		   (when (eq 'filter
+;			     (elmo-folder-type-internal wl-summary-buffer-elmo-folder))
+;		     'wl-summary-unvirtual))))
 
-;; `elmo-msgdb-overview-entity-get-extra-field' で参照したいフィールド.
-;; 自動リファイルで参照したいフィールドも設定する.
+;; Change summary display function.
+
+;; Set extra field use with `elmo-message-entity-field'.
+;; And use with auto-refile.
 (setq elmo-msgdb-extra-fields
       '("reply-to"))
 
-;; ML のメッセージであれば, サマリの Subject 表示に
-;; ML名 や MLにおけるメッセージ番号も表示する
+;; ML message displays ML name and ML sequence number in subject.
 (setq wl-summary-line-format "%n%T%P%M/%D(%W)%h:%m %t%[%17(%c %f%) %] %#%~%s")
-;; フォルダ毎にサマリの表示形式を変える設定
+;; Set summary line format according to folder name.
 ;(setq wl-folder-summary-line-format-alist
 ;      '(("^%inbox\\.emacs\\.wl$" .
 ;	 "%-5l%T%P%M/%D %h:%m %-4S %[ %17f %] %t%C%s")
 ;	("^%" . "%T%P%M/%D %h:%m %-4S %[ %17f %] %t%C%s")
 ;	("^+" . "%n%T%P%M/%D %h:%m %-4S %[ %17f %] %t%C%s")))
 
-;; imput により非同期で送信する
-;; (utils/im-wl.el をインストールしておく必要があります.
-;;  また, ~/.im/Config の設定(Smtpservers)を忘れないことと,
-;;  wl-draft-enable-queuing の機能が働かなくなることに注意. )
+;; imput asynchronously.
+;; (utils/im-wl.el is needed to be installed.
+;;  Don't forget setting ~/.im/Config (Smtpservers).
+;;  note that wl-draft-enable-queuing is not valid.)
 ;(autoload 'wl-draft-send-with-imput-async "im-wl")
 ;(setq wl-draft-send-function 'wl-draft-send-with-imput-async)
 
-
-;; 短い User-Agent: フィールドを使う
+;; non-verbose User-Agent: field
 ;(setq wl-generate-mailer-string-function
 ;      'wl-generate-user-agent-string-1)
 
-;; メールDBにcontent-typeを加える
+;; Add content-type to mail DB.
 (setq elmo-msgdb-extra-fields
-    (cons "content-type" elmo-msgdb-extra-fields))
-;; 添付ファイルがある場合は「@」を表示
+      (cons "content-type" elmo-msgdb-extra-fields))
+
+;; Add indicator `@' if attached files included.
 (setq wl-summary-line-format "%n%T%P%1@%M/%D(%W)%h:%m %t%[%17(%c %f%) %] %#%~%s")
 (setq wl-summary-line-format-spec-alist
       (append wl-summary-line-format-spec-alist
 	      '((?@ (wl-summary-line-attached)))))
 
-;; 変更されたドラフトがあれば 20 秒ごとに自動保存する.
-;; (defun my-wl-auto-save-draft-buffers ()
-;;   (let ((buffers (wl-collect-draft)))
-;;     (save-excursion
-;;       (while buffers
-;; 	(set-buffer (car buffers))
-;; 	(if (buffer-modified-p) (wl-draft-save))
-;; 	(setq buffers (cdr buffers))))))
-;; (run-with-idle-timer 20 t 'my-wl-auto-save-draft-buffers)
+;;; [[ Template ]]
 
-
-;;; [[ テンプレート ]]
-
-;; テンプレートの設定
-(setq my-wl-template-path
-      (expand-file-name (concat my-wl-path "/templates")))
+;; templates
+(setq wl-template-directory
+      (expand-file-name "templates" wl-preference-directory))
 (setq wl-template-alist nil)
 
-(when (file-accessible-directory-p my-wl-template-path)
-  (dolist (f (directory-files my-wl-template-path))
-    (when (string-match "^[^.].*el$" f)
-      (load (expand-file-name (concat my-wl-template-path "/" f))))))
+(load-directory-files wl-template-directory "^[^.].*el$")
 
-(defadvice wl-template-select (before before-template-select)
-  (progn
-    (my-wl-defaults)
-    (wl-template-apply "default")))
+(defadvice wl-draft (after wl-draft) activate
+  (wl-template-apply "default")
+  (unless
+      (wl-message-field-exists-p "To")
+    (progn
+      (wl-draft-config-body-goto-header)
+      (goto-char (point-min))
+      (wl-draft-config-sub-eval-insert "To:" 'newline)
+      (goto-char (point-min)))))
 
-(ad-activate 'wl-template-select)
+(defadvice wl-template-select (before before-template-select activate)
+  (wl-template-apply "default")) ;; reset variables.
 
-;; 署名の設定
-(setq my-wl-signature-path
-      (expand-file-name (concat my-wl-path "/signatures")))
-(setq signature-file-name
-      (expand-file-name (concat my-wl-signature-path "/default")))
+;; signatures
+(setq signature-file-name nil)
+(setq wl-signature-directory
+      (expand-file-name "signatures" wl-preference-directory))
 
-;; ドラフトバッファの内容により From や Organization などのヘッダを自
-;; 動的に変更する
-; (setq wl-draft-config-alist nil)
+(defadvice wl-template-set (after after-template-set activate)
+  (setq signature-file-name
+	(expand-file-name
+	 wl-template wl-signature-directory)))
 
-;; Daredevil SKK の version をヘッダに入れる
+;; Change headers in draft sending time.
+;(setq wl-draft-config-alist
+;      '((reply				; see reply buffer
+;	 "^To: .*test-notsend-wl@lists\\.airs\\.net"
+;	 (template . "default"))	; template
+;	("^To: .*test-notsend-wl@lists\\.airs\\.net"
+;	 ding				; function
+;	 ("From" . wl-from)		; variable
+;	 ("Organization" . "organization")) ; string
+;	("^Newsgroups: test.*"
+;	 ("Organization" . "organization for nntp."))
+;	))
+
+;; Insert Daredevil SKK's version to header.
 (when (locate-library "skk-version")
   (add-to-list 'wl-draft-config-alist
 	       `(t ("X-Input-Method" . ,(skk-version)))))
 
-;; ドラフト作成時(返信時)に, Daredevil SKK を始動する
+;; Turn on Daredevil SKK to draft writing.
 ;(when (locate-library "skk")
 ;  (defadvice wl-draft (after after-wl-draft)
 ;    (skk-mode t))
 ;  (ad-activate 'wl-draft))
 
-;; ドラフト作成時(返信時)に, 自動的にヘッダを変更する
+;; Change headers in draft preparation time.
 (add-hook 'wl-mail-setup-hook
 	  '(lambda ()
-	     (unless wl-draft-reedit	; 再編集時は適用しない
+	     (unless wl-draft-reedit	; don't apply when reedit.
 	       (wl-draft-config-exec wl-draft-config-alist))))
 
+;; [[ Reply ]]
+;; header value setting for mail reply.
 
-;;; [[ 返信時の設定 ]]
-
-;; 返信時のウィンドウを広くする
+;; Wide window for draft buffer.
 ;(setq wl-draft-reply-buffer-style 'full)
 
-;; 返信時のヘッダに相手の名前を入れない.
+;; Remove fullname in reply message header.
 (setq wl-draft-reply-use-address-with-full-name nil)
 
-;; メールの返信時に宛先を付ける方針の設定
-;; 下記変数の alist の要素
-;; ("返信元に存在するフィールド" .
-;;   ('Toフィールド' 'Ccフィールド' 'Newsgroupsフィールド'))
-
-;; "a" (without-argument)では Reply-To: や From: などで指定された唯一人
-;; または唯一つの投稿先に返信する. また, X-ML-Name: と Reply-To: がつい
-;; ているなら Reply-To: 宛にする.
+;; "a" (without-argument) reply to author (Reply-To or From).
+;; if 'X-ML-Name' and 'Reply-To' exists, reply to 'Reply-To'.
 ;(setq wl-draft-reply-without-argument-list
 ;      '((("X-ML-Name" "Reply-To") . (("Reply-To") nil nil))
 ;	("X-ML-Name" . (("To" "Cc") nil nil))
@@ -302,19 +286,36 @@
 ;	("Newsgroups" . (nil nil ("Newsgroups")))
 ;	("Reply-To" . (("Reply-To") nil nil))
 ;	("Mail-Reply-To" . (("Mail-Reply-To") nil nil))
+;	(wl-draft-self-reply-p . (("To") ("Cc") nil))
 ;	("From" . (("From") nil nil))))
 
-;; "C-u a" (with-argument)であれば関係する全ての人・投稿先に返信する.
-;(setq wl-draft-reply-with-argument-list
-;      '(("Followup-To" . (("From") nil ("Followup-To")))
-;	("Newsgroups" . (("From") nil ("Newsgroups")))
+;; old defaults < 2.11.0
+;(setq wl-draft-reply-without-argument-list
+;      '(((wl-draft-self-reply-p
+;	  "Followup-To") . (("To") ("Cc") ("Followup-To")))
+;	((wl-draft-self-reply-p
+;	  "Newsgroups") . (("To") ("Cc") ("Newsgroups")))
+;	((wl-draft-self-reply-p
+;	  "From") . (("To") ("Cc") nil))
+;	("Followup-To" . (nil nil ("Followup-To")))
 ;	("Mail-Followup-To" . (("Mail-Followup-To") nil ("Newsgroups")))
+;	("Reply-To" . (("Reply-To") ("To" "Cc" "From") ("Newsgroups")))
 ;	("From" . (("From") ("To" "Cc") ("Newsgroups")))))
 
+;(setq wl-draft-reply-with-argument-list
+;      '(((wl-draft-self-reply-p
+;	  "Followup-To") . (("To") ("Cc") ("Followup-To")))
+;	((wl-draft-self-reply-p
+;	  "Newsgroups") . (("To") ("Cc") ("Newsgroups")))
+;	((wl-draft-self-reply-p
+;	  "From") . (("To") ("Cc") nil))
+;	("Reply-To" . (("Reply-To") nil nil))
+;	("Mail-Reply-To" . (("Mail-Reply-To") nil nil))
+;	("From" . (("From") nil nil))))
 
-;;; [[ メッセージ表示の設定 ]]
+;;; [[ Message Display Settings ]]
 
-;; 隠したいヘッダの設定
+;; Hidden header field in message buffer.
 (setq wl-message-ignored-field-list
       '(".*Received:" ".*Path:" ".*Id:" "^References:"
 	"^Replied:" "^Errors-To:"
@@ -322,12 +323,11 @@
 	"^Content-Type:" "^Precedence:"
 	"^Status:" "^X-VM-.*:"))
 
-;; 表示するヘッダの設定
-;; 'wl-message-ignored-field-list' より優先される
+;; Displayed header field in message buffer.
+;; This value precedes `wl-message-ignored-field-list'
 (setq wl-message-visible-field-list '("^Message-Id:"))
 
-
-;; X-Face を表示する
+;; X-Face
 (when window-system
   (cond ((and (featurep 'xemacs)	; for XEmacs
 	      (module-installed-p 'x-face))
@@ -347,8 +347,8 @@
 	 (autoload 'x-face-decode-message-header "x-face-mule")
 	 (setq wl-highlight-x-face-function 'x-face-decode-message-header))))
 
-;; スコア機能の設定
-;; `wl-score-folder-alist' の設定に関わらず必ず "all.SCORE" は使用される.
+;; Scoring.
+;; "all.SCORE" file is used regardless of wl-score-folder-alist.
 ;(setq wl-score-folder-alist
 ;      '(("^-comp\\."
 ;	 "news.comp.SCORE"
@@ -356,20 +356,48 @@
 ;	("^-"
 ;	 "news.SCORE")))
 
+;; rule for auto refile.
+;(setq wl-refile-rule-alist
+;      '(
+;	("x-ml-name"
+;	 ("^Wanderlust" . "+wl")
+;	 ("^Elisp" . "+elisp"))
+;	("From"
+;	 ("foo@example\\.com" . "+foo"))))
 
-;; 自動リファイルのルール設定
-;; (setq wl-refile-rule-alist '(
-;; 	("Subject"
-;; 	 ("foo" . "+inbox/foo"))
-;; 	("x-ml-name"
-;; 	 ("^Elisp" . "+elisp"))
-;; 	("From"
-;; 	 ("bar" . "+inbox/bar"))))
-
-;; 自動リファイルしない永続マークを設定
-;; 標準では "N" "U" "!" になっており、未読メッセージを自動リファイルし
-;; ません. nil ですべてのメッセージが対象になります.
+;; Marks to skip auto-refile (default is "N" "U" "!").
+;; nil means all message is auto-refiled.
 ;(setq wl-summary-auto-refile-skip-marks nil)
 
+;;; [[ Spam Filter Settings ]]
+
+;; Use bogofilter as a back end.
+;(setq elmo-spam-scheme 'bogofilter)
+
+;(require 'wl-spam)
+
+;; In moving to summary, judge whether a message is a spam.
+;(setq wl-spam-auto-check-folder-regexp-list '("\\+inbox"))
+
+;; Judge *first* whether a message is a spam
+;; when `o' (wl-summary-refile) is performed in a summary buffer.
+;(unless (memq 'wl-refile-guess-by-spam wl-refile-guess-functions)
+;  (setq wl-refile-guess-functions
+;	(cons #'wl-refile-guess-by-spam
+;	      wl-refile-guess-functions)))
+
+;; Judge *first* whether a message is a spam
+;; when `C-o' (wl-summary-auto-refile) is performed in a summary buffer.
+;(unless (memq 'wl-refile-guess-by-spam wl-auto-refile-guess-functions)
+;  (setq wl-auto-refile-guess-functions
+;	(cons #'wl-refile-guess-by-spam
+;	      wl-auto-refile-guess-functions)))
+
+;; When you want to give priority to refile-rule (same as spamfilter-wl.el
+;; or bogofilter-wl.el), please confirm the setup here.
+;(unless (memq 'wl-refile-guess-by-spam wl-auto-refile-guess-functions)
+;  (setq wl-auto-refile-guess-functions
+;	(append wl-auto-refile-guess-functions
+;		'(wl-refile-guess-by-spam))))
 
 ;;; dot.wl ends here

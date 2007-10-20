@@ -1,7 +1,7 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
-;;provisional measures for cygwin $PWD environment variable.
+;;; provisional measures for cygwin $PWD environment variable.
 (when
     (not (file-directory-p default-directory))
   (setq default-directory (getenv "HOME")))
@@ -12,11 +12,15 @@
     (require 'cl nil t)))
 
 ;;; path and filenames.
-(setq my-lisp-path "~/.emacs.d/")
-(setq custom-file
-      (expand-file-name "customize.el" my-lisp-path))
+(setq base-directory "~/.emacs.d")
+(setq preferences-directory "~/.emacs.d")
+(setq libraries-directory
+  (expand-file-name "library" base-directory))
 
-(defun my-add-path (target-list path-list)
+(setq custom-file
+      (expand-file-name "customize.el" base-directory))
+
+(defun coordinate-path (target-list path-list)
   (condition-case err
       (eval target-list)
     (error (set target-list (list))))
@@ -25,41 +29,45 @@
       (add-to-list target-list
 		   (expand-file-name p)))))
 
-(my-add-path 'load-path
-	     (list my-lisp-path "/usr/local/share/emacs/site-lisp/"))
+(coordinate-path 'load-path
+		 (list base-directory
+		       preferences-directory
+		       libraries-directory
+		       "/usr/local/share/emacs/site-lisp/"))
 
-(my-add-path 'exec-path
-	     (list "~/bin"
-		   "/bin/"
-		   "/sbin/"
-		   "/usr/bin/"
-		   "/usr/sbin/"
-		   "/usr/local/bin"
-		   "/usr/local/sbin"
-		   "/opt/local/bin"
-		   "/opt/local/sbin"
-		   "/sw/bin"
-		   "/sw/sbin/"
-		   "/Developer/Tools"
-		   "c:/cygwin/usr/bin"
-		   "c:/cygwin/usr/sbin"
-		   "c:/cygwin/usr/local/bin"
-		   "c:/cygwin/usr/local/sbin"
-		   "/usr/games"
-		   "/usr/X11R6/bin"
-		   "c:/program files/mozilla firefox"))
+(coordinate-path 'exec-path
+		 (list "~/bin"
+		       "/bin/"
+		       "/sbin/"
+		       "/usr/bin/"
+		       "/usr/sbin/"
+		       "/usr/local/bin"
+		       "/usr/local/sbin"
+		       "/opt/local/bin"
+		       "/opt/local/sbin"
+		       "/sw/bin"
+		       "/sw/sbin/"
+		       "/Developer/Tools"
+		       "c:/cygwin/usr/bin"
+		       "c:/cygwin/usr/sbin"
+		       "c:/cygwin/usr/local/bin"
+		       "c:/cygwin/usr/local/sbin"
+		       "/usr/games"
+		       "/usr/X11R6/bin"
+		       "c:/program files/mozilla firefox"))
 
-(my-add-path 'Info-additional-directory-list
-	     (list "/opt/local/share/info"
-		   "/sw/info"
-		   "/sw/share/info"
-		   "c:/cygwin/usr/share/info"
-		   "c:/cygwin/usr/local/share/info"))
+(coordinate-path 'Info-additional-directory-list
+		 (list "/Applications/Emacs.app/Contents/Resources/info/"
+		       "/opt/local/share/info"
+		       "/sw/info"
+		       "/sw/share/info"
+		       "c:/cygwin/usr/share/info"
+		       "c:/cygwin/usr/local/share/info"))
 
 ;;; networking.
 (defun get-ip-address ()
   (interactive)
-  (let*
+  (let
       ((traceroute
 	(cond
 	 ((locate-library "traceroute" nil exec-path) "traceroute")
@@ -82,22 +90,15 @@
      (string-match domestic-address (get-ip-address))
      (string-match domestic-domain-name system-name))))
 
-;; load essential libraries.
-(load "eval-safe.el")
-(load "autoload-if-found.el")
-(load "auto-save-buffers.el")
-(load "completions-highlight.el")
-(load "make-file-executable.el")
+(defun load-directory-files (directory file-regex)
+  (when (file-accessible-directory-p directory)
+    (dolist (f (directory-files directory t file-regex))
+      (load f nil t))))
 
-;; load initialization files.
-(when (file-accessible-directory-p my-lisp-path)
-  (dolist (f (directory-files my-lisp-path))
-    (when (string-match "^init-.*el$" f)
-      (load (expand-file-name f my-lisp-path) nil t))))
+;; load essential libraries.
+(load-directory-files libraries-directory "^.*el$")
+
+;; load preferences.
+(load-directory-files preferences-directory "^init-.*el$")
 
 (when (functionp 'howm-menu) (howm-menu))
-
-;; __END__
-
-;; fragments.
-(mapconcat 'concat (split-string "foo:bar:baz" ":") "")

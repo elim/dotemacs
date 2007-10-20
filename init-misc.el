@@ -10,35 +10,35 @@
   (when (not (featurep 'xemacs))
     (global-font-lock-mode t)))
 
-;; Carbon Emacs
+;; carbon emacs
 (setq mac-pass-control-to-system nil)
 (setq mac-pass-command-to-system nil)
 (setq mac-option-modifier 'meta)
 
-;; Meadow and Cygwin
+;; meadow and cygwin
 ;; based upon meadow-users-jp:3050 and
 ;; http://mechanics.civil.tohoku.ac.jp/soft/node45.html and
 ;; http://meadow.sourceforge.jp/cgi-bin/hiki.cgi?%B0%EC%C8%CC%C5%AA%A4%CA%BE%F0%CA%F3
+
 (when (featurep 'meadow)
   (let
-      ((my-shell-file-name
-	(cond
-	 ((locate-library "zsh.exe" nil exec-path) "zsh")
-	 ((locate-library "sh.exe" nil exec-path) "sh")
-	 (t nil))))
+      ((my-shell-file-name nil))
+
+    (dolist (e (list nil "zsh" "sh"))
+      (unless my-shell-file-name
+	(setq my-shell-file-name (locate-executable e))))
 
     (when my-shell-file-name
       (setq explicit-shell-file-name my-shell-file-name)
       (setq shell-file-name my-shell-file-name)
-      (setq shell-command-switch "-c")))
+      (setq shell-command-switch "-c"))
 
-  (add-hook 'shell-mode-hook
-	    (lambda ()
-	      (set-buffer-process-coding-system 'undecided-dos 'sjis-unix)))
+    (add-hook 'shell-mode-hook
+	      (lambda ()
+		(set-buffer-process-coding-system 'undecided-dos 'sjis-unix)))
 
-  ;; shell-modeでの補完 (for drive letter)
-  (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-"))
-
+    ;; shell-modeでの補完 (for drive letter)
+    (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-")))
 
 ;; Deleteキーでカーソル位置の文字が消えるようにする
 (global-set-key [delete] 'delete-char)
@@ -105,9 +105,9 @@
 
 ;; 同一ファイル名のバッファ名を分かりやすく
 (when (require 'uniquify nil t)
-  (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
-  (setq uniquify-ignore-buffers-re "*[^*]+*")
-  (setq uniquify-min-dir-content 1))
+  (setq uniquify-buffer-name-style 'post-forward-angle-brackets
+	uniquify-ignore-buffers-re "*[^*]+*"
+	uniquify-min-dir-content 1))
 
 ;; minibuf-isearch
 (require 'minibuf-isearch nil t)

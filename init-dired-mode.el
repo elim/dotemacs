@@ -6,35 +6,13 @@
 (setq dired-recursive-copies 'always)
 (setq dired-recursive-deletes 'always)
 (setq dired-guess-shell-alist-user
-      '(("\\.tar\\.gz\\'"  "tar ztvf")
+      '(("\\.tar\\.gz\\'"  "tar tzvf")
 	("\\.taz\\'" "tar ztvf")
-	("\\.tar\\.bz2\\'" "tar Itvf")
+	("\\.tar\\.bz2\\'" "tar tjvf")
 	("\\.zip\\'" "unzip -l")
-	("\\.\\(g\\|\\) z\\'" "zcat")
-	("\\.mp3\\'"
-	 (cond
-	  ((locate-library  "mpg321" nil exec-path)
-	   "mpg321 * 1>/dev/null 2>&1 &")))
-	("\\.ogg\\'"
-	 (cond
-	  ((locate-library  "ogg123" nil exec-path)
-	   "ogg123 * 1>/dev/null 2>&1 &")))
-	("\\.\\(avi\\|mpg\\|asf\\|wmv\\)\\'"
-	 (cond
-	  ((locate-library "mplayer" nil exec-path)
-	   "mplayer * 1>/dev/null 2>&1 &")
-	  ((locate-library "xine" nil exec-path)
-	   "xine * 1>/dev/null 2>&1 &")))
-	("\\.\\(jpg\\|JPG\\|gif\\|GIF\\)\\'"
-	 (if (eq system-type 'windows-nt)
-	     "fiber" "display"))
-	("\\.ps\\'"
-	 (if (eq system-type 'windows-nt)
-	     "fiber" "ggv"))))
-
+	("\\.\\(g\\|\\) z\\'" "zcat")))
 
 ;; dired-x
-;; dired-x があれば使う.
 (when (locate-library "dired-x")
   (add-hook 'dired-load-hook
 	    (lambda ()

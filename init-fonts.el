@@ -30,36 +30,37 @@
 
 ;; Meadow 2.x or greater
 (setq my-w32-font-path
-      (concat (getenv "HOME") "/lib/X11/fonts/shinonome/"))
+      (expand-file-name "lib/X11/fonts/shinonome/" (getenv "HOME")))
 (when (and (functionp 'w32-add-font)
 	   (file-accessible-directory-p my-w32-font-path))
-  (w32-add-font
-   "shinonome 14"
-   `((strict-spec
-      ((:char-spec ascii :height any)
-       (bdf-font
-	,(concat my-w32-font-path "shnm7x14r.bdf")))
-      ((:char-spec ascii :height any :weight bold)
-       (bdf-font
-	,(concat my-w32-font-path "shnm7x14rb.bdf")))
-      ((:char-spec ascii :height any :slant italic)
-       (bdf-font
-	,(concat my-w32-font-path "shnm7x14ri.bdf")))
-      ((:char-spec ascii :height any :weight  bold :slant italic)
-       (bdf-font
-	,(concat my-w32-font-path "shnm7x14rbi.bdf")))
-      ((:char-spec japanese-jisx0208 :height any)
-       (bdf-font
-	,(concat my-w32-font-path "shnmk14.bdf")))
-      ((:char-spec japanese-jisx0208 :height any :weight bold)
-       (bdf-font
-	,(concat my-w32-font-path "shnmk14b.bdf")))
-      ((:char-spec japanese-jisx0208 :height any :slant italic)
-       (bdf-font
-	,(concat my-w32-font-path "shnmk14i.bdf")))
-      ((:char-spec japanese-jisx0208 :height any :weight bold :slant italic)
-       (bdf-font
-	,(concat my-w32-font-path "shnmk14bi.bdf"))))))
+  (when (not (w32-list-fonts "shinonome 14"))
+    (w32-add-font
+     "shinonome 14"
+     `((strict-spec
+	((:char-spec ascii :height any)
+	 (bdf-font
+	  ,(expand-file-name "shnm7x14r.bdf" my-w32-font-path)))
+	((:char-spec ascii :height any :weight bold)
+	 (bdf-font
+	  ,(expand-file-name "shnm7x14rb.bdf" my-w32-font-path)))
+	((:char-spec ascii :height any :slant italic)
+	 (bdf-font
+	  ,(expand-file-name "shnm7x14ri.bdf" my-w32-font-path)))
+	((:char-spec ascii :height any :weight  bold :slant italic)
+	 (bdf-font
+	  ,(expand-file-name "shnm7x14rbi.bdf" my-w32-font-path)))
+	((:char-spec japanese-jisx0208 :height any)
+	 (bdf-font
+	  ,(expand-file-name "shnmk14.bdf" my-w32-font-path)))
+	((:char-spec japanese-jisx0208 :height any :weight bold)
+	 (bdf-font
+	  ,(expand-file-name "shnmk14b.bdf" my-w32-font-path)))
+	((:char-spec japanese-jisx0208 :height any :slant italic)
+	 (bdf-font
+	  ,(expand-file-name "shnmk14i.bdf" my-w32-font-path)))
+	((:char-spec japanese-jisx0208 :height any :weight bold :slant italic)
+	 (bdf-font
+	  ,(expand-file-name "shnmk14bi.bdf" my-w32-font-path)))))))
 
   (set-default-font "shinonome 14")
   (add-to-list

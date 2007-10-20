@@ -38,11 +38,16 @@
   ;; @@ 応用的な設定
 
   ;; ~/.skk* なファイルがたくさんあるので整理したい
-  (setq my-ddskk-path (expand-file-name "ddskk" my-lisp-path))
-  (setq skk-init-file (expand-file-name "init.el" my-ddskk-path)
-	skk-custom-file (expand-file-name "custom.el" my-ddskk-path)
-	skk-emacs-id-file (expand-file-name "emacs-id" my-ddskk-path)
-	skk-record-file (expand-file-name "record" my-ddskk-path))
+  (setq ddskk-preference-directory
+	(expand-file-name "ddskk" base-directory))
+  (setq skk-init-file
+	(expand-file-name "init.el" ddskk-preference-directory)
+	skk-custom-file
+	(expand-file-name "custom.el" ddskk-preference-directory)
+	skk-emacs-id-file
+	(expand-file-name "emacs-id" ddskk-preference-directory)
+	skk-record-file
+	(expand-file-name "record" ddskk-preference-directory))
   ;	skk-jisyo "~/.ddskk/jisyo"
   ;      skk-backup-jisyo "~/.ddskk/jisyo.bak")
 
