@@ -6,13 +6,13 @@
 (defun locate-executable (basename)
   (let
       ((suffix (list nil ".exe" ".com" ".cmd" ".bat"))
-       (exist-flag nil)
        (return-value nil))
+
     (dolist (s suffix)
-      (unless exist-flag
-	(setq return-value
-	      (locate-library (concat basename s) nil exec-path))
+      (setq return-value
+	    (or return-value
+		(locate-library (concat basename s) nil exec-path)))
 	(when return-value
-	  (when (file-executable-p return-value)
-	    (setq exist-flag t)))))
+	  (unless (file-executable-p return-value)
+	    (setq return-value nil))))
     return-value))
