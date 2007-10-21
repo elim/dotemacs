@@ -69,14 +69,19 @@
   (interactive)
   (let
       ((traceroute
-	(cond
-	 ((locate-library "traceroute" nil exec-path) "traceroute")
-	 ((locate-library "tracert.exe" nil exec-path) "tracert.exe")
-	 (t nil))))
+	(or
+	 (locate-library "traceroute" nil exec-path)
+	 (locate-library "tracert.exe" nil exec-path)))
+       (host-name
+	(if (isPlainHostName system-name)
+	  system-name
+	  (progn
+	    (string-match "\\(.+?\\)\\." system-name)
+	    (match-string-no-properties 1 system-name)))))
 
     (if traceroute
 	(with-temp-buffer
-	  (call-process traceroute nil t nil system-name)
+	  (call-process traceroute nil t nil host-name)
 	  (goto-char (point-min))
 	  (if (re-search-forward "[^0-9]*\\([0-9]+\\(\.[0-9]+\\)+\\)" nil t)
 	      (match-string 1)))
@@ -96,9 +101,9 @@
       (load f nil t))))
 
 ;; load essential libraries.
-(load-directory-files libraries-directory "^.*el$")
+(load-directory-files libraries-directory "^.+el$")
 
 ;; load preferences.
-(load-directory-files preferences-directory "^init-.*el$")
+(load-directory-files preferences-directory "^init-.+el$")
 
 (when (functionp 'howm-menu) (howm-menu))

@@ -213,7 +213,7 @@
       (expand-file-name "templates" wl-preference-directory))
 (setq wl-template-alist nil)
 
-(load-directory-files wl-template-directory "^[^.].*el$")
+(load-directory-files wl-template-directory "^.+el$")
 
 (defadvice wl-draft (after wl-draft) activate
   (wl-template-apply "default")
