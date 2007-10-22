@@ -10,7 +10,7 @@
     (if (domestic-network-member-p) "idea" "localhost"))
    (wl-smtp-posting-port
     .
-    (if (domestic-network-member-p) 25 1025))
+    (if (domestic-network-member-p) 25 10025))
    (wl-smtp-authenticate-type . "cram-md5")
    (wl-smtp-posting-user . "takeru")
    (wl-local-domain . "elim.teroknor.org")

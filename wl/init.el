@@ -215,7 +215,7 @@
 
 (load-directory-files wl-template-directory "^.+el$")
 
-(defadvice wl-draft (after wl-draft) activate
+(defadvice wl-draft (after wl-draft activate)
   (wl-template-apply "default")
   (unless
       (wl-message-field-exists-p "To")
@@ -223,7 +223,7 @@
       (wl-draft-config-body-goto-header)
       (goto-char (point-min))
       (wl-draft-config-sub-eval-insert "To:" 'newline)
-      (goto-char (point-min)))))
+      (goto-char (point-max)))))
 
 (defadvice wl-template-select (before before-template-select activate)
   (wl-template-apply "default")) ;; reset variables.
