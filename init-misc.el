@@ -38,7 +38,18 @@
 		(set-buffer-process-coding-system 'undecided-dos 'sjis-unix)))
 
     ;; shell-modeでの補完 (for drive letter)
-    (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-")))
+    (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-"))
+
+
+  (when (string-match "cygwin"
+		      (shell-command-to-string "zsh --version"))
+
+    (defadvice kill-new (after after-kill-new activate)
+      (and (locate-executable "zsh")
+	   (start-process
+	    "normalization fof the contents of the clipboard."
+	    "*Messages*" "zsh"
+	    "-c" "cat =(cat /dev/clipboard) > /dev/clipboard")))))
 
 ;; Deleteキーでカーソル位置の文字が消えるようにする
 (global-set-key [delete] 'delete-char)
