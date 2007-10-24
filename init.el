@@ -73,11 +73,11 @@
 	 (locate-library "traceroute" nil exec-path)
 	 (locate-library "tracert.exe" nil exec-path)))
        (host-name
-	(if (isPlainHostName system-name)
-	  system-name
-	  (progn
-	    (string-match "\\(.+?\\)\\." system-name)
-	    (match-string-no-properties 1 system-name)))))
+	(if (string-match "\\." system-name)
+	    (progn
+	      (string-match "^\\(.+?\\)\\." system-name)
+	      (match-string-no-properties 1 system-name))
+	  system-name)))
 
     (if traceroute
 	(with-temp-buffer
