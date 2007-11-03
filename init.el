@@ -7,9 +7,7 @@
   (setq default-directory (getenv "HOME")))
 
 ;;; checking and/or loading Common Lisp extensions.
-(when (require 'apropos nil t)
-  (when (not (apropos-macrop 'dolist))
-    (require 'cl nil t)))
+(require 'cl nil t)
 
 ;;; path and filenames.
 (setq base-directory "~/.emacs.d")
