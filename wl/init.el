@@ -222,7 +222,7 @@
     (progn
       (wl-draft-config-body-goto-header)
       (goto-char (point-min))
-      (wl-draft-config-sub-eval-insert "To: " 'newline)
+      (wl-draft-config-sub-eval-insert "To" 'newline)
       (backward-char)
       (wl-complete-field-body-or-tab))))
 

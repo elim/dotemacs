@@ -11,6 +11,7 @@
    (wl-smtp-posting-port
     .
     (if (domestic-network-member-p) 25 10025))
+   (wl-draft-send-mail-function . 'wl-draft-send-mail-with-smtp)
    (wl-smtp-authenticate-type . "cram-md5")
    (wl-smtp-posting-user . "takeru")
    (wl-local-domain . "elim.teroknor.org")
