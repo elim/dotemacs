@@ -5,7 +5,9 @@
 
   ;; server setting.
   (setq riece-server-alist
-	'(("default" :host "localhost"))
+	'(("default"
+	   :host "localhost"
+	   :coding utf-8))
 	riece-server "default"
 	riece-ndcc-server-address "localhost"
 	riece-channel-buffer-mode 't
