@@ -5,11 +5,11 @@
 
   ;; server settings
   (setq riece-server-alist
-	'("default"
+	'(("default"
 	  :host "localhost"
 	  :service 6667
 	  :coding utf-8
-	  :function open-ssh-stream-idea)
+	  :function open-ssh-stream-idea))
 	riece-server "default"
 	riece-ndcc-server-address "localhost"
 	riece-channel-buffer-mode 't
