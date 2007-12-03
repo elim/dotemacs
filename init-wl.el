@@ -27,8 +27,17 @@
 	wl-biff-check-interval 30
 	wl-biff-notify-hook '(ding))
 
+  (add-hook 'wl-init-hook
+	    (lambda ()
+	      (add-to-list 'elmo-network-stream-type-alist
+			   '("!idea" localhost nil open-ssh-stream-idea))))
+
+  (setq elmo-imap4-default-stream-type 'idea)
+  (setq elmo-imap4-default-stream-type 'idea)
+
+
   (defadvice wl-summary-line-day-of-week
-    (after after-wl-summary-line-day-of-week)
+    (after after-wl-summary-line-day-of-week activate)
     (when (string-match ad-return-value "?")
       (setq ad-return-value
 	    (let*
@@ -38,11 +47,6 @@
 		 (return-string ""))
 	      (dotimes (r day-of-week-name-width return-string)
 		(setq return-string (concat "?" return-string)))))))
-  (ad-activate 'wl-summary-line-day-of-week)
-
-;;; 振り分け準備 (procmail にバトンタッチ)
-;;  (autoload 'elmo-split "elmo-split"
-;;    "Split messages on the folder." t)
 
 ;;;  emacs の defualt MUA に
   (autoload-if-found 'wl-user-agent-compose "wl-draft" nil t)

@@ -1,6 +1,8 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
-;;;; based upon dot.wl
+
+;; based upon dot.wl and
+;; http://triaez.kaisei.org/%7Ekaoru/ssh/emacs-ssh.html
 
 ;;; [[ Private Setting ]]
 
@@ -114,7 +116,7 @@
 (setq wl-summary-move-order 'unread)
 
 ;; notify mail arrival
-(setq wl-biff-check-folder-list '("%INBOX"))
+(setq wl-biff-check-folder-list (list "%INBOX"))
 (setq wl-biff-notify-hook '(ding))
 
 ;;; [[ Network ]]
@@ -215,29 +217,22 @@
 
 (load-directory-files wl-template-directory "^.+el$")
 
-(defadvice wl-draft (after after-wl-draft activate)
-  (wl-template-apply "default")
-  (unless
-      (wl-message-field-exists-p "To")
-    (progn
-      (wl-draft-config-body-goto-header)
-      (goto-char (point-min))
-      (wl-draft-config-sub-eval-insert "To" 'newline)
-      (backward-char)
-      (wl-complete-field-body-or-tab))))
-
-(defadvice wl-template-select (before before-template-select activate)
-  (wl-template-apply "default")) ;; reset variables.
+(add-hook 'wl-mail-setup-hook
+	  '(lambda ()
+	     (wl-template-apply "default")
+	     (setq wl-template "default")))
 
 ;; signatures
 (setq signature-file-name nil)
 (setq wl-signature-directory
       (expand-file-name "signatures" wl-preference-directory))
 
-(defadvice wl-template-set (after after-template-set activate)
+(defadvice wl-template-apply (after after-template-apply activate)
   (setq signature-file-name
 	(expand-file-name
-	 wl-template wl-signature-directory)))
+	 (if wl-template
+	     wl-template
+	   "default") wl-signature-directory)))
 
 ;; Change headers in draft sending time.
 ;(setq wl-draft-config-alist
@@ -266,7 +261,7 @@
 ;; Change headers in draft preparation time.
 (add-hook 'wl-mail-setup-hook
 	  '(lambda ()
-	     (unless wl-draft-reedit	; don't apply when reedit.
+	     (unless wl-draft-reedit  ; don't apply when reedit.
 	       (wl-draft-config-exec wl-draft-config-alist))))
 
 ;; [[ Reply ]]
