@@ -28,10 +28,3 @@
 			    :buffer buffer
 			    :host host
 			    :service service))
-
-(add-to-list 'riece-server-alist
-      '("idea"
-	:host "localhost"
-	:service 6667
-	:coding utf-8
-	:function open-ssh-stream-idea))

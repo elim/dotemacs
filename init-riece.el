@@ -3,18 +3,20 @@
 
 (when (autoload-if-found 'riece "riece" nil t)
 
-  ;; server setting.
+  ;; server settings
   (setq riece-server-alist
-	'(("default"
-	   :host "localhost"
-	   :coding utf-8))
+	'("default"
+	  :host "localhost"
+	  :service 6667
+	  :coding utf-8
+	  :function open-ssh-stream-idea)
 	riece-server "default"
 	riece-ndcc-server-address "localhost"
 	riece-channel-buffer-mode 't
 	riece-user-list-buffer-mode 't
 	riece-layout '"middle-left")
 
-  ;; fils and directories.
+  ;; fils and directories
   (setq riece-preference-directory
 	(expand-file-name "riece" base-directory))
   (setq riece-addon-directory
