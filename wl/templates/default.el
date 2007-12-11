@@ -5,12 +5,9 @@
  'wl-template-alist
  `(,(file-name-sans-extension
     (file-name-nondirectory load-file-name))
-   (wl-smtp-posting-server
-    .
-    (if (domestic-network-member-p) "idea" "localhost"))
-   (wl-smtp-posting-port
-    .
-    (if (domestic-network-member-p) 25 10025))
+   (smtp-open-connection-function . #'open-ssh-stream-idea)
+   (wl-smtp-posting-server . "localhost")
+   (wl-smtp-posting-port . 25)
    (wl-draft-send-mail-function . 'wl-draft-send-mail-with-smtp)
    (wl-smtp-authenticate-type . "cram-md5")
    (wl-smtp-posting-user . "takeru")

@@ -4,11 +4,7 @@
 ;; based upon dot.wl and
 ;; http://triaez.kaisei.org/%7Ekaoru/ssh/emacs-ssh.html
 
-;;; [[ Private Setting ]]
-
-;; Header From:
-;; this overwrites in a default template later.
-(setq wl-from "nobody@example.net")
+;;; [[ Private Settings ]]
 
 ;; User's mail addresses.
 (setq wl-user-mail-address-list nil)
@@ -16,42 +12,56 @@
 ;; Subscribed mailing list.
 (setq wl-subscribed-mailing-list nil)
 
-;; If (system-name) does not return FQDN,
-;; set following as a local domain name without hostname.
-;; this overwrites in a default template later.
-(setq wl-local-domain nil)
-
-;; Use `wl-from' for domain part of Message-ID.
-(setq wl-message-id-use-wl-from t)
-
-;; Insert Message-ID: field.
-(setq wl-insert-message-id t)
-
-;; Folder Carbon Copy
-(setq wl-fcc "%Sent")
-
-;; draft folder
-(setq wl-draft-folder "%Drafts")
-
 ;;; [[ Server Setting ]]
 ;; IMAP server
-(setq elmo-imap4-default-server
-      (if (domestic-network-member-p) "idea" "localhost"))
-(setq elmo-imap4-default-port
-      (if (domestic-network-member-p)  143 10143))
+(add-to-list 'elmo-network-stream-type-alist
+	     '("!idea" idea nil open-ssh-stream-idea))
+(setq elmo-imap4-default-stream-type 'idea) ;;see ssh-relay.el
+;; (setq elmo-imap4-default-server "localhost")
+;; (setq elmo-imap4-default-port 143)
 (setq elmo-imap4-default-authenticate-type 'cram-md5)
 
-;; SMTP server
-;; this overwrites in a default template later.
-(setq wl-smtp-posting-server "example.net")
+(defun wl-restore-server-settings ()
+  "reset variables.
 
-;; POP server
-;; this overwrites in a default template later.
-(setq elmo-pop3-default-server nil)
+NOTE: Many variables will overwrite in a template later."
 
-;; NNTP server
-(setq elmo-nntp-default-server nil)
-(setq wl-nntp-posting-server elmo-nntp-default-server)
+  (setq
+   ;; Header From:
+   wl-from "nobody@example.net"
+
+   ;; If (system-name) does not return FQDN,
+   ;; set following as a local domain name without hostname.
+   wl-local-domain nil
+
+   ;; Use `wl-from' for domain part of Message-ID.
+   wl-message-id-use-wl-from t
+
+  ;; Insert Message-ID: field.
+  wl-insert-message-id t
+
+  ;; Folder Carbon Copy
+  wl-fcc "%Sent"
+
+  ;; draft folder
+  wl-draft-folder "%Drafts"
+
+  ;;; [[ Server Setting ]]
+
+  ;; SMTP server
+  ;; this overwrites in a default template later.
+  wl-smtp-posting-server "example.net"
+  smtp-open-connection-function #'open-network-stream
+
+  ;; POP server
+  ;; Only a primary schoolchild can use the POP3.
+  ;; elmo-pop3-default-server nil
+
+  ;; NNTP server
+  elmo-nntp-default-server nil
+  wl-nntp-posting-server elmo-nntp-default-server))
+
+(wl-restore-server-settings)
 
 ;;; [[ Basic Setting ]]
 ;; Default folder for `wl-summary-goto-folder'.
@@ -226,6 +236,9 @@
 (setq signature-file-name nil)
 (setq wl-signature-directory
       (expand-file-name "signatures" wl-preference-directory))
+
+(defadvice wl-template-apply (before before-template-apply activate)
+  (wl-restore-server-settings))
 
 (defadvice wl-template-apply (after after-template-apply activate)
   (setq signature-file-name

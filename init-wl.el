@@ -22,19 +22,9 @@
 	wl-demo-background-color "#ccccff"
 	wl-auto-save-drafts-interval 30
 	wl-draft-use-frame nil
-
 	wl-biff-check-folder-list '("%INBOX")
 	wl-biff-check-interval 30
 	wl-biff-notify-hook '(ding))
-
-  (add-hook 'wl-init-hook
-	    (lambda ()
-	      (add-to-list 'elmo-network-stream-type-alist
-			   '("!idea" localhost nil open-ssh-stream-idea))))
-
-  (setq elmo-imap4-default-stream-type 'idea)
-  (setq elmo-imap4-default-stream-type 'idea)
-
 
   (defadvice wl-summary-line-day-of-week
     (after after-wl-summary-line-day-of-week activate)
