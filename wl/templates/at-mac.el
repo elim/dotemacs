@@ -9,6 +9,7 @@
    (wl-smtp-posting-port . 25)
    (wl-smtp-authenticate-type . nil)
    (wl-smtp-connection-type . nil)
+   (wl-local-domain . "at-mac.com")
    (wl-draft-send-mail-function . 'wl-draft-send-mail-with-pop-before-smtp)
    (wl-pop-before-smtp-user . "takeru")
    (wl-pop-before-smtp-server . "mail.at-mac.com")
