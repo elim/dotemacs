@@ -21,47 +21,35 @@
 ;; (setq elmo-imap4-default-port 143)
 (setq elmo-imap4-default-authenticate-type 'cram-md5)
 
-(defun wl-restore-server-settings ()
+(defun wl-restore-default-settings ()
   "reset variables.
 
 NOTE: Many variables will overwrite in a template later."
 
-  (setq
-   ;; Header From:
+  (setq ;; default settings
    wl-from "nobody@example.net"
-
-   ;; If (system-name) does not return FQDN,
-   ;; set following as a local domain name without hostname.
    wl-local-domain nil
-
-   ;; Use `wl-from' for domain part of Message-ID.
    wl-message-id-use-wl-from t
+   wl-insert-message-id t
 
-  ;; Insert Message-ID: field.
-  wl-insert-message-id t
+   wl-fcc "%Sent"
+   wl-draft-folder "%Drafts"
 
-  ;; Folder Carbon Copy
-  wl-fcc "%Sent"
+   ;;; [[ Server Setting ]]
 
-  ;; draft folder
-  wl-draft-folder "%Drafts"
+   ;; SMTP server
+   wl-smtp-posting-server "example.net"
+   smtp-open-connection-function #'open-network-stream
 
-  ;;; [[ Server Setting ]]
+   ;; POP server
+   ;; Only a primary schoolchild can use the POP3.
+   ;; elmo-pop3-default-server nil
 
-  ;; SMTP server
-  ;; this overwrites in a default template later.
-  wl-smtp-posting-server "example.net"
-  smtp-open-connection-function #'open-network-stream
+   ;; NNTP server
+   elmo-nntp-default-server nil
+   wl-nntp-posting-server elmo-nntp-default-server))
 
-  ;; POP server
-  ;; Only a primary schoolchild can use the POP3.
-  ;; elmo-pop3-default-server nil
-
-  ;; NNTP server
-  elmo-nntp-default-server nil
-  wl-nntp-posting-server elmo-nntp-default-server))
-
-(wl-restore-server-settings)
+(wl-restore-default-settings)
 
 ;;; [[ Basic Setting ]]
 ;; Default folder for `wl-summary-goto-folder'.
@@ -219,7 +207,6 @@ NOTE: Many variables will overwrite in a template later."
 	      '((?@ (wl-summary-line-attached)))))
 
 ;;; [[ Template ]]
-
 ;; templates
 (setq wl-template-directory
       (expand-file-name "templates" wl-preference-directory))
@@ -232,10 +219,13 @@ NOTE: Many variables will overwrite in a template later."
 	     (wl-template-apply "default")
 	     (setq wl-template "default")))
 
-;; signatures
-(setq signature-file-name nil)
-(setq wl-signature-directory
-      (expand-file-name "signatures" wl-preference-directory))
+(add-hook 'wl-mail-send-pre-hook
+	  (lambda ()
+	    (setq-default
+	     ;; to global variable.
+	     smtp-open-connection-function
+	     ;; from buffer-local vaiable.
+	     smtp-open-connection-function)))
 
 (defadvice wl-template-apply (before before-template-apply activate)
   (wl-restore-server-settings))
@@ -246,6 +236,11 @@ NOTE: Many variables will overwrite in a template later."
 	 (if wl-template
 	     wl-template
 	   "default") wl-signature-directory)))
+
+;; signatures
+(setq signature-file-name nil)
+(setq wl-signature-directory
+      (expand-file-name "signatures" wl-preference-directory))
 
 ;; Change headers in draft sending time.
 ;(setq wl-draft-config-alist
