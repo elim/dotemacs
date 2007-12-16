@@ -5,16 +5,9 @@
 (when (and (eq window-system 'x) (x-list-fonts "*shinonome-gothic*"))
   (progn
     (create-fontset-from-fontset-spec
-     "-shinonome-gothic-medium-r-*--12-*-*-*-*-*-fontset-shinonome12,
-       ascii:-shinonome-gothic-medium-r-normal--12-110-75-75-c-60-iso8859-1,
-       japanese-jisx0208:-shinonome-gothic-medium-r-normal--12-130-75-75-c-120-jisx0208.1983-0,
-       katakana-jisx0201:-shinonome-gothic-medium-r-*--12-0-0-0-c-60-jisx0208.1976-0")
-
+     "-shinonome-gothic-medium-r-*--12-*-*-*-*-*-fontset-shinonome12" nil t)
     (create-fontset-from-fontset-spec
-     "-shinonome-gothic-medium-r-*--14-*-*-*-*-*-fontset-shinonome14,
-       ascii:-shinonome-gothic-medium-r-normal--14-130-75-75-c-70-iso8859-1,
-       japanese-jisx0208:-shinonome-gothic-medium-r-normal--14-130-75-75-c-140-jisx0208.1983-0,
-       katakana-jisx0201:-shinonome-gothic-medium-r-*--14-0-0-0-c-70-jisx0208.1976-0")
+     "-shinonome-gothic-medium-r-*--14-*-*-*-*-*-fontset-shinonome14" nil t)
 
     (set-default-font "fontset-shinonome14"))
 
