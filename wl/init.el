@@ -227,8 +227,19 @@ NOTE: Many variables will overwrite in a template later."
 	     ;; from buffer-local vaiable.
 	     smtp-open-connection-function)))
 
+;; based upon
+;; http://nijino.homelinux.net/diary/200305.shtml#200305121
+(add-hook 'wl-draft-send-hook
+	  (lambda ()
+	    (set (make-local-variable 'wl-from)
+		 (std11-fetch-field "From"))
+	    (set (make-local-variable 'wl-fcc)
+		 (std11-fetch-field "Fcc"))
+	    (set (make-local-variable 'wl-organization)
+		 (std11-fetch-field "Organization"))))
+
 (defadvice wl-template-apply (before before-template-apply activate)
-  (wl-restore-server-settings))
+  (wl-restore-default-settings))
 
 (defadvice wl-template-apply (after after-template-apply activate)
   (setq signature-file-name
