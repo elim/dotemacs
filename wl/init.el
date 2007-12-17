@@ -207,6 +207,11 @@ NOTE: Many variables will overwrite in a template later."
 	      '((?@ (wl-summary-line-attached)))))
 
 ;;; [[ Template ]]
+;; signatures
+(setq signature-file-name nil)
+(setq wl-signature-directory
+      (expand-file-name "signatures" wl-preference-directory))
+
 ;; templates
 (setq wl-template-directory
       (expand-file-name "templates" wl-preference-directory))
@@ -247,11 +252,6 @@ NOTE: Many variables will overwrite in a template later."
 	 (if wl-template
 	     wl-template
 	   "default") wl-signature-directory)))
-
-;; signatures
-(setq signature-file-name nil)
-(setq wl-signature-directory
-      (expand-file-name "signatures" wl-preference-directory))
 
 ;; Change headers in draft sending time.
 ;(setq wl-draft-config-alist
