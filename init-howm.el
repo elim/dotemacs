@@ -142,4 +142,11 @@ Offset is demanded when calling with C-u M-x."
 	   (setq day (calendar-date-string
 		      (calendar-cursor-to-date t)))
 	   (exit-calendar)
-	   (insert day))))))
+	   (insert day)))))
+
+  (add-hook 'emacs-startup-hook
+	    (lambda ()
+	      (howm-menu))))
+
+
+

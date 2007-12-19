@@ -103,5 +103,3 @@
 
 ;; load preferences.
 (load-directory-files preferences-directory "^init-.+el$")
-
-(when (functionp 'howm-menu) (howm-menu))
