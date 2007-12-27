@@ -129,10 +129,10 @@ NOTE: Many variables will overwrite in a template later."
 (setq elmo-enable-disconnected-operation t)
 
 ;; Reconnect before summary checking.
-(defadvice wl-folder-check-current-entity
-  (before before-wl-folder-check-current-entity activate)
-  (wl-toggle-plugged 'off)
-  (wl-toggle-plugged 'on))
+(add-hook 'wl-folder-check-entity-pre-hook
+	  (lambda ()
+	    (wl-toggle-plugged 'off)
+	    (wl-toggle-plugged 'on)))
 
 ;; Store draft message in queue folder if message is sent in unplugged status.
 (setq wl-draft-enable-queuing t)
@@ -220,9 +220,9 @@ NOTE: Many variables will overwrite in a template later."
 (load-directory-files wl-template-directory "^.+el$")
 
 (add-hook 'wl-mail-setup-hook
-	  '(lambda ()
-	     (wl-template-apply "default")
-	     (setq wl-template "default")))
+	  (lambda ()
+	    (wl-template-apply "default")
+	    (setq wl-template "default")))
 
 (add-hook 'wl-mail-send-pre-hook
 	  (lambda ()
