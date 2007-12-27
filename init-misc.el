@@ -6,97 +6,47 @@
 (setq system-time-locale "C")
 
 ;; font lock
-(when (require 'font-lock nil t)
-  (when (not (featurep 'xemacs))
-    (global-font-lock-mode t)))
+(when (and (require 'font-lock nil t)
+	   (not (featurep 'xemacs)))
+  (global-font-lock-mode t))
 
 ;; carbon emacs
-(setq mac-pass-control-to-system nil)
-(setq mac-pass-command-to-system nil)
-(setq mac-option-modifier 'meta)
+(setq mac-pass-control-to-system nil
+      mac-pass-command-to-system nil
+      mac-option-modifier 'meta)
 
-;; meadow and cygwin
-;; based upon meadow-users-jp:3050 and
-;; http://mechanics.civil.tohoku.ac.jp/soft/node45.html and
-;; http://meadow.sourceforge.jp/cgi-bin/hiki.cgi?%B0%EC%C8%CC%C5%AA%A4%CA%BE%F0%CA%F3
-
-(when (featurep 'meadow)
-  (let
-      ((my-shell-file-name nil))
-
-    (dolist (e (list nil "zsh" "sh"))
-      (unless my-shell-file-name
-	(setq my-shell-file-name (locate-executable e))))
-
-    (when my-shell-file-name
-      (setq explicit-shell-file-name my-shell-file-name)
-      (setq shell-file-name my-shell-file-name)
-      (setq shell-command-switch "-c"))
-
-    (add-hook 'shell-mode-hook
-	      (lambda ()
-		(set-buffer-process-coding-system 'undecided-dos 'sjis-unix)))
-
-    ;; shell-modeでの補完 (for drive letter)
-    (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-"))
-
-
-  (when (string-match "cygwin"
-		      (shell-command-to-string "zsh --version"))
-
-    (defadvice kill-new (after after-kill-new activate)
-      (and (locate-executable "zsh")
-	   (start-process
-	    "normalization fof the contents of the clipboard."
-	    "*Messages*" "zsh"
-	    "-c" "cat =(cat /dev/clipboard) > /dev/clipboard")))))
-
-;; Deleteキーでカーソル位置の文字が消えるようにする
 (global-set-key [delete] 'delete-char)
 
-;; C-h キーでカーソルの左の文字が消えるようにする
-;; (global-set-key "\C-h" 'backward-delete-char)
-
-;; C-h を C-? (Backspace) にする
 (when (functionp 'keyboard-translate)
   (keyboard-translate ?\C-h ?\C-?))
 
-;;補完時に大文字と小文字を区別させない
 (setq completion-ignore-case t)
 
 ;; ヘルプ等の window を可変にする
 (when (functionp 'temp-buffer-resize-mode)
   (temp-buffer-resize-mode t))
 
-;; visible-bell
 (setq visible-bell t)
 
-;; 行番号を表示する
 (when (functionp 'line-number-mode)
   (line-number-mode t))
 
-;; 桁番号を表示する
 (when (functionp 'column-number-mode)
   (column-number-mode t))
 
-;;; 時刻を24時間制でモードラインに表示する
 (when (functionp 'display-time)
   (setq display-time-24hr-format t)
   (display-time))
 
-;; メニューを消す
 (when (functionp 'menu-bar-mode)
   (menu-bar-mode -1))
 
-;; ツールバーを消す
 (when (functionp 'tool-bar-mode)
   (tool-bar-mode -1))
 
-;;スクロールバーを右に
 (when (functionp 'set-scroll-bar-mode)
   (set-scroll-bar-mode 'right))
 
-;; スクロールバーを消す
 (when (functionp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
@@ -141,3 +91,6 @@
 
 ;; yank した文字列を X11 の cut buffer に送る
 (setq x-select-enable-clipboard t)
+
+(when (load "saveplace" 'noerror)
+  (setq-default save-place t))
