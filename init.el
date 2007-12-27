@@ -18,14 +18,13 @@
 (setq custom-file
       (expand-file-name "customize.el" base-directory))
 
-(defun coordinate-path (target-list path-list)
-  (condition-case err
-      (eval target-list)
-    (error (set target-list (list))))
-  (dolist (p (reverse path-list))
+(defun coordinate-path (target path)
+  (unless (boundp target)
+    (set target (list)))
+  (dolist (p (reverse path))
     (when (file-accessible-directory-p p)
-      (add-to-list target-list
-		   (expand-file-name p)))))
+      (add-to-list target
+	      (expand-file-name p)))))
 
 (coordinate-path 'load-path
 		 (list base-directory
@@ -95,7 +94,7 @@
 
 (defun load-directory-files (directory file-regex)
   (when (file-accessible-directory-p directory)
-    (dolist (f (directory-files directory t file-regex))
+    (dolist (f (directory-files directory 'full file-regex))
       (load f nil t))))
 
 ;; load essential libraries.
