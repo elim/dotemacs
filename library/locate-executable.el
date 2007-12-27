@@ -3,18 +3,18 @@
 
 ;; based upon
 ;; http://d.hatena.ne.jp/elim/20071014/1192380471
-(require 'cl nil t)
 
-(defun locate-executable (basename)
-  (let
-      ((suffix (list nil ".exe" ".com" ".cmd" ".bat"))
-       (return-value nil))
-
-    (dolist (s suffix return-value)
-      (setq return-value
-	    (or return-value
-		(locate-library (concat basename s) nil exec-path)))
-      (when return-value
-	(if (file-executable-p return-value)
-	    (return return-value)
-	  (setq return-value nil))))))
+(defun locate-executable (name)
+  (if (boundp 'exec-suffixes) ;; emacs22 feature
+      (locate-file name exec-path exec-suffixes 'file-executable-p)
+    (let
+	((exec-suffixes (list nil ".exe" ".com" ".cmd" ".bat"))
+	 (found nil))
+      (require 'cl nil t)
+      (dolist (s exec-suffixes found)
+	(unless found
+	  (setq found
+		(locate-library (concat name s) nil exec-path))
+	  (unless (and found (file-executable-p found))
+	    (setq found nil))))
+      found)))
