@@ -1,6 +1,6 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
-;; http://www.bookshelf.jp/soft/meadow_29.html#SEC388
+;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=save%20scratch
 
 (defun save-scratch-data ()
   (let ((str (progn
