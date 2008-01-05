@@ -10,7 +10,7 @@
   (let
       ((my-shell-file-name nil))
 
-    (dolist (e (list nil "zsh" "sh"))
+    (dolist (e (list "zsh" "bash" "sh"))
       (unless my-shell-file-name
 	(setq my-shell-file-name (locate-executable e))))
 
