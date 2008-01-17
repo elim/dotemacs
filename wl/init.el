@@ -24,7 +24,7 @@
 NOTE: Many variables will overwrite in a template later."
 
   (setq ;; default settings
-   wl-from "takeru@localhost"
+   wl-from "nobody@example.net"
    wl-local-domain nil
    wl-message-id-use-wl-from t
    wl-insert-message-id t
