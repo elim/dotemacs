@@ -33,20 +33,17 @@
 	  (lambda ()
 	    (read-scratch-data)))
 
-(defadvice elscreen-kill-screen-and-buffer
-  (before
-   before-elscreen-kill-screen-and-buffers
-   activate)
+(defadvice elscreen-kill (before call-save-scratch-data
+				 activate)
   (when (equal "*scratch*" (buffer-name))
-      (save-scratch-data)))
+    (save-scratch-data)))
 
-(defadvice elscreen-default-window-configuration
-  (around
-   around-elscreen-default-window-configuration
-   activate)
-    (if (and (equal "*scratch*" elscreen-default-buffer-name)
-	       (not (get-buffer elscreen-default-buffer-name)))
-	(progn
-	  ad-do-it
-	  (read-scratch-data))
-      ad-do-it))
+(defadvice elscreen-default-window-configuration (around
+						  call-read-scratch-data
+						  activate)
+  (if (and (equal "*scratch*" elscreen-default-buffer-name)
+	   (not (get-buffer elscreen-default-buffer-name)))
+      (progn
+	ad-do-it
+	(read-scratch-data))
+    ad-do-it))
