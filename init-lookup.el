@@ -21,12 +21,8 @@
     (setq ndspell-ispell-program "aspell"))
 
   (setq ndtp-server-definition
-	(list 'ndtp
-	      (if (domestic-network-member-p)
-		  "idea" "localhost")
-	      :port 2010))
+	(list 'ndtp "localhost" :port 2010))
 
   (setq lookup-search-agents
-	(list
-	 ndtp-server-definition
-	 '(ndspell))))
+	(list ndtp-server-definition
+	      '(ndspell))))

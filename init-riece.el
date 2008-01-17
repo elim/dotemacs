@@ -8,8 +8,7 @@
 	'(("default"
 	  :host "localhost"
 	  :service 6667
-	  :coding utf-8
-	  :function open-ssh-stream-idea))
+	  :coding utf-8))
 	riece-server "default"
 	riece-ndcc-server-address "localhost"
 	riece-channel-buffer-mode 't

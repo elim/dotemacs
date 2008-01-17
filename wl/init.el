@@ -14,12 +14,9 @@
 
 ;;; [[ Server Setting ]]
 ;; IMAP server
-(add-to-list 'elmo-network-stream-type-alist
-	     '("!idea" idea nil open-ssh-stream-idea))
-(setq elmo-imap4-default-stream-type 'idea) ;;see ssh-relay.el
-;; (setq elmo-imap4-default-server "localhost")
-;; (setq elmo-imap4-default-port 143)
-(setq elmo-imap4-default-authenticate-type 'cram-md5)
+(setq elmo-imap4-default-server "localhost"
+      elmo-imap4-default-port 143
+      elmo-imap4-default-authenticate-type 'cram-md5)
 
 (defun wl-restore-default-settings ()
   "reset variables.
@@ -27,7 +24,7 @@
 NOTE: Many variables will overwrite in a template later."
 
   (setq ;; default settings
-   wl-from "nobody@example.net"
+   wl-from "takeru@localhost"
    wl-local-domain nil
    wl-message-id-use-wl-from t
    wl-insert-message-id t
@@ -38,8 +35,7 @@ NOTE: Many variables will overwrite in a template later."
    ;;; [[ Server Setting ]]
 
    ;; SMTP server
-   wl-smtp-posting-server "example.net"
-   smtp-open-connection-function #'open-network-stream
+   wl-smtp-posting-server "localhost"
 
    ;; POP server
    ;; Only a primary schoolchild can use the POP3.

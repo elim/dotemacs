@@ -6,7 +6,7 @@
     (not (file-directory-p default-directory))
   (setq default-directory (getenv "HOME")))
 
-;;; checking and/or loading Common Lisp extensions.
+;;; loading Common Lisp extensions.
 (require 'cl nil t)
 
 ;;; path and filenames.
