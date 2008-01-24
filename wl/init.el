@@ -121,6 +121,11 @@ NOTE: Many variables will overwrite in a template later."
 ;(setq elmo-imap4-use-cache t)
 ;(setq elmo-pop3-use-cache t)
 
+(setq wl-auto-prefetch-first t)
+(setq wl-message-buffer-prefetch-folder-list "%[^\\(Trash\\|Junk\\)].+")
+(setq wl-message-buffer-prefetch-depth 1000)
+(setq wl-message-buffer-cache-size 1500)
+
 ;; Enable disconnected operation in IMAP folder.
 (setq elmo-enable-disconnected-operation t)
 
@@ -213,7 +218,8 @@ NOTE: Many variables will overwrite in a template later."
       (expand-file-name "templates" wl-preference-directory))
 (setq wl-template-alist nil)
 
-(load-directory-files wl-template-directory "^.+el$")
+(load-directory-files :directory wl-template-directory
+		      :regex "^.+el$")
 
 (add-hook 'wl-mail-setup-hook
 	  (lambda ()

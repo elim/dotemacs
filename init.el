@@ -5,9 +5,9 @@
 (when
     (not (file-directory-p default-directory))
   (setq default-directory (getenv "HOME")))
-
+  
 ;;; loading Common Lisp extensions.
-(require 'cl nil t)
+;; (require 'cl nil t)
 
 ;;; path and filenames.
 (setq base-directory "~/.emacs.d")
@@ -18,48 +18,84 @@
 (setq custom-file
       (expand-file-name "customize.el" base-directory))
 
-(defun coordinate-path (target path)
-  (unless (boundp target)
-    (set target (list)))
-  (dolist (p (reverse path))
-    (when (file-accessible-directory-p p)
-      (add-to-list target
-	      (expand-file-name p)))))
+(defmacro forced-list-transform (arg)
+  (list 'condition-case 'err
+	(list 'if (list 'and (list 'boundp arg)(list 'listp arg))
+	      arg
+	      (list 'list arg))
+	(list 'error
+	      (list 'cond
+		    (list (list 'equal (list 'car 'err) ''void-variable)
+			  (list 'list))
+		    (list (list 'and
+				(list 'equal (list 'car 'err)
+				      ''wrong-type-argument)
+				(list 'atom arg))
+			  (list 'list arg))
+		    (list (list 'and
+				(list 'equal (list 'car 'err)
+				      ''wrong-type-argument)
+				(list 'listp arg))
+			  arg)
+		    (list t (list 'message "%s" 'err))))))
 
-(coordinate-path 'load-path
-		 (list base-directory
-		       preferences-directory
-		       libraries-directory
-		       "/usr/local/share/emacs/site-lisp/"))
+(defmacro marge-lists-without-duplicate (base additional)
+  (list 'let
+	(list (list 'base (list 'forced-list-transform base))
+	      (list 'additional (list 'forced-list-transform additional)))
 
-(coordinate-path 'exec-path
-		 (list "~/bin"
-		       "/bin/"
-		       "/sbin/"
-		       "/usr/bin/"
-		       "/usr/sbin/"
-		       "/usr/local/bin"
-		       "/usr/local/sbin"
-		       "/opt/local/bin"
-		       "/opt/local/sbin"
-		       "/sw/bin"
-		       "/sw/sbin/"
-		       "/Developer/Tools"
-		       "c:/cygwin/usr/bin"
-		       "c:/cygwin/usr/sbin"
-		       "c:/cygwin/usr/local/bin"
-		       "c:/cygwin/usr/local/sbin"
-		       "/usr/games"
-		       "/usr/X11R6/bin"
-		       "c:/program files/mozilla firefox"))
+	(list 'marge-lists-without-duplicate-internal 'base 'additional)))
 
-(coordinate-path 'Info-additional-directory-list
-		 (list "/Applications/Emacs.app/Contents/Resources/info/"
-		       "/opt/local/share/info"
-		       "/sw/info"
-		       "/sw/share/info"
-		       "c:/cygwin/usr/share/info"
-		       "c:/cygwin/usr/local/share/info"))
+(defun marge-lists-without-duplicate-internal (base additional)
+  (when (car additional)
+    (setq base
+	 (cons
+	  (car additional)
+	  (delete (car additional) base))))
+
+  (if (cdr additional)
+      (marge-lists-without-duplicate-internal base (cdr additional))
+    base))
+
+(setq load-path
+      (marge-lists-without-duplicate
+       load-path
+       (list base-directory
+	     preferences-directory
+	     libraries-directory
+	     "/usr/local/share/emacs/site-lisp/")))
+(setq exec-path
+      (marge-lists-without-duplicate
+       exec-path
+       (list "~/bin"
+	     "/bin/"
+	     "/sbin/"
+	     "/usr/bin/"
+	     "/usr/sbin/"
+	     "/usr/local/bin"
+	     "/usr/local/sbin"
+	     "/opt/local/bin"
+	     "/opt/local/sbin"
+	     "/sw/bin"
+	     "/sw/sbin/"
+	     "/Developer/Tools"
+	     "c:/cygwin/usr/bin"
+	     "c:/cygwin/usr/sbin"
+	     "c:/cygwin/usr/local/bin"
+	     "c:/cygwin/usr/local/sbin"
+	     "/usr/games"
+	     "/usr/X11R6/bin"
+	     "c:/program files/mozilla firefox")))
+
+(setq Info-additional-directory-list
+      (marge-lists-without-duplicate
+       Info-additional-directory-list
+       (list "/Applications/Emacs.app/Contents/Resources/info/"
+	     "/opt/local/share/info"
+	     "/sw/info"
+	     "/sw/share/info"
+	     "c:/cygwin/usr/share/info"
+	     "c:/cygwin/usr/local/share/info")))
 
 ;;; networking.
 (defun get-ip-address ()
@@ -92,13 +128,53 @@
      (string-match domestic-address (get-ip-address))
      (string-match domestic-domain-name system-name))))
 
-(defun load-directory-files (directory file-regex)
-  (when (file-accessible-directory-p directory)
-    (dolist (f (directory-files directory 'full file-regex))
-      (load f nil t))))
+(defun load-directory-files (&rest plist)
+  "property list details.
+
+:directory => target directory (required).
+:regex     => filename regex (defalt:`.+')
+
+he-he-he. Setting this instead of the message you expected?"
+
+  (let*
+      ((directory (plist-get plist :directory))
+       (regex (or (plist-get plist :regex) ".+"))
+       (files (and
+	       directory
+	       (file-accessible-directory-p directory)
+	       (or (plist-get plist :files)
+		   (directory-files directory 'full regex)))))
+
+    (mapcar '(lambda (file)
+	       (when (load file nil t)
+		 (message "`%s' loaded." file))) files)))
 
 ;; load essential libraries.
-(load-directory-files libraries-directory "^.+el$")
+(load-directory-files :directory libraries-directory
+		      :regex "^.+el$")
 
 ;; load preferences.
-(load-directory-files preferences-directory "^init-.+el$")
+(load-directory-files :directory preferences-directory
+		      :regex "^init-.+el$")
+
+(delete nil (mapcar '(lambda (dir)
+			  (when (file-accessible-directory-p dir)
+			    dir)) (list "~/bin"
+	     "/bin/"
+	     "/sbin/"
+	     "/usr/bin/"
+	     "/usr/sbin/"
+	     "/usr/local/bin"
+	     "/usr/local/sbin"
+	     "/opt/local/bin"
+	     "/opt/local/sbin"
+	     "/sw/bin"
+	     "/sw/sbin/"
+	     "/Developer/Tools"
+	     "c:/cygwin/usr/bin"
+	     "c:/cygwin/usr/sbin"
+	     "c:/cygwin/usr/local/bin"
+	     "c:/cygwin/usr/local/sbin"
+	     "/usr/games"
+	     "/usr/X11R6/bin"
+	     "c:/program files/mozilla firefox")))

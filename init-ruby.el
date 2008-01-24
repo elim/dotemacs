@@ -1,23 +1,18 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
-(when (autoload-if-found 'ruby-mode "ruby-mode"
-			 "Mode for editing ruby source files" t)
+(when (require 'ruby-mode nil t)
+  (require 'inf-ruby nil t)
+  (require 'ruby-electric nil t)
 
-  (setq ruby-indent-level 2)
-  (setq ruby-indent-tabs-mode nil)
+  (setq ruby-indent-level 2
+	ruby-indent-tabs-mode nil
 
-  (setq auto-mode-alist
-	(append '(("\\.rb$" . ruby-mode)) auto-mode-alist))
+	auto-mode-alist
+	(append '(("\\.rb$" . ruby-mode)) auto-mode-alist)
 
-  (setq interpreter-mode-alist
+	interpreter-mode-alist
 	(append '(("ruby" . ruby-mode)) interpreter-mode-alist))
-
-  (autoload-if-found 'run-ruby "inf-ruby"
-		     "Run an inferior Ruby process")
-
-  (autoload-if-found 'inf-ruby-keys "inf-ruby"
-		     "Set local key defs for inf-ruby in ruby-mode")
 
   (add-hook 'ruby-mode-hook
 	    '(lambda ()

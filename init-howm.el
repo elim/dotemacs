@@ -51,8 +51,8 @@
 Diary buffer after the numelic day is generated with C-u numelic M-x.
 Offset is demanded when calling with C-u M-x."
     (interactive "P")
-    (when (equal my-diary-date-offset '(4)) ;; C-u M-x で呼ばれたなら
-      (while (not (number-or-marker-p       ;; 数値を要求する
+    (when (equal my-diary-date-offset '(4))
+      (while (not (number-or-marker-p
 		   (setq my-diary-date-offset
 			 (read-from-minibuffer
 			  "Date offset is: " nil nil t nil "0"))))))

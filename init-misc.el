@@ -5,6 +5,8 @@
 
 (setq system-time-locale "C")
 
+(setq kill-ring-max 300)
+
 ;; font lock
 (when (and (require 'font-lock nil t)
 	   (not (featurep 'xemacs)))
