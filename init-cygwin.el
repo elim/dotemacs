@@ -8,10 +8,9 @@
 
 (when (featurep 'meadow)
   (let
-      ((my-shell-file-name))
-    (car (remove nil
-		 (mapcar 'locate-executable '("zsh" "bash" "sh"))))
-
+      ((my-shell-file-name
+	(car (remove nil
+		     (mapcar 'locate-executable '("zsh" "bash" "sh"))))))
     (when my-shell-file-name
       (setq explicit-shell-file-name my-shell-file-name)
       (setq shell-file-name my-shell-file-name)
@@ -24,15 +23,15 @@
 
 	(defadvice kill-new (after after-kill-new activate)
 	  (my-shell-file-name
-	       (start-process
-		"normalization fof the contents of the clipboard."
-		"*Messages*" "zsh"
-		"-c" "cat =(cat /dev/clipboard) > /dev/clipboard"))))
+	   (start-process
+	    "normalization fof the contents of the clipboard."
+	    "*Messages*" "zsh"
+	    "-c" "cat =(cat /dev/clipboard) > /dev/clipboard"))))
 
       (add-hook 'shell-mode-hook
 		(lambda ()
 		  (set-buffer-process-coding-system
 		   'undecided-dos 'sjis-unix)))
 
-    ;; shell-modeでの補完 (for drive letter)
-    (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-"))))
+      ;; shell-modeでの補完 (for drive letter)
+      (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-"))))
