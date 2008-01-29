@@ -142,7 +142,7 @@ he-he-he. Setting this instead of the message you expected?"
 	       (or (plist-get plist :files)
 		   (directory-files directory 'full regex)))))
 
-    (mapcar '(lambda (file)
+    (mapc '(lambda (file)
 	       (when (load file nil t)
 		 (message "`%s' loaded." file))) files)))
 
@@ -154,7 +154,7 @@ he-he-he. Setting this instead of the message you expected?"
 (load-directory-files :directory preferences-directory
 		      :regex "^init-.+el$")
 
-(delete nil (mapcar '(lambda (dir)
+(delete nil (mapc '(lambda (dir)
 			  (when (file-accessible-directory-p dir)
 			    dir)) (list "~/bin"
 	     "/bin/"
@@ -175,7 +175,3 @@ he-he-he. Setting this instead of the message you expected?"
 	     "/usr/games"
 	     "/usr/X11R6/bin"
 	     "c:/program files/mozilla firefox")))
-
-(mapcar #'(lambda (arg)
-	    (let ((foo '(a b c)))
-	      (cons arg (remove arg foo))))'(b d a))
