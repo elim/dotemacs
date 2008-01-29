@@ -52,8 +52,8 @@
 (when (functionp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
-;; window system では行間を空ける
-(setq-default line-spacing 2)
+(unless (featurep 'mac-carbon)
+  (setq-default line-spacing 2))
 
 ;; バッファの最後で newline で新規行を追加するのを禁止する
 (setq next-line-add-newlines nil)
@@ -82,14 +82,17 @@
 (defadvice kill-new (before ys:no-kill-new-duplicates activate)
   (setq kill-ring (delete (ad-get-arg 0) kill-ring)))
 
-;; history から重複したのを消す
-(defun minibuffer-delete-duplicate ()
-  (let (list)
-    (dolist (elt (symbol-value minibuffer-history-variable))
-      (unless (member elt list)
-	(push elt list)))
-      (set minibuffer-history-variable (nreverse list))))
-(add-hook 'minibuffer-setup-hook 'minibuffer-delete-duplicate)
+;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=delete%20history
+(add-hook
+ 'minibuffer-setup-hook
+ #'(lambda ()
+     (mapc
+      #'(lambda (arg)
+	  (set minibuffer-history-variable
+	       (cons arg
+		     (remove arg
+			     (symbol-value minibuffer-history-variable)))))
+      (reverse (symbol-value minibuffer-history-variable)))))
 
 ;; yank した文字列を X11 の cut buffer に送る
 (setq x-select-enable-clipboard t)
