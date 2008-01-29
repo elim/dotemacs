@@ -1,6 +1,5 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
-
 (when (locate-library "howm")
   (setq howm-menu-lang 'en)
   (global-set-key "\C-c,," 'howm-menu)
@@ -105,28 +104,19 @@ Offset is demanded when calling with C-u M-x."
 	"\C-c,d" 'my-howm-diary-edit)))
 
   ;; utf-8-unix を選択できるのなら強制する
-  (let (result)
-    (dolist (c coding-system-alist result)
-      (setq result (or
-		    (string-equal (car c) "utf-8-unix")
-		    result)))
-    (when result
-      (add-hook 'howm-view-open-hook
-		(lambda ()
-		  (setq buffer-file-coding-system 'utf-8-unix)))
+  (when (member '("utf-8-unix") coding-system-alist)
+    (mapc #'(lambda (arg)
+	      (add-hook arg
+			(lambda ()
+			  (setq buffer-file-coding-system 'utf-8-unix))))
+	  (list 'howm-view-open-hook 'howm-create-file-hook)))
 
-      (add-hook 'howm-create-file-hook
-		(lambda ()
-		  (setq buffer-file-coding-system 'utf-8-unix)))))
-
-  ;; menu を 5 分毎に自動更新
-  (defvar howm-auto-menu-refresh-interval (* 5 60))
-  (defun  howm-auto-menu-refresh()
-    (when (string-match "howm.*menu" (buffer-name))
-      (howm-menu-refresh)))
-  (run-with-idle-timer howm-auto-menu-refresh-interval
-		       t
-		       'howm-auto-menu-refresh)
+  ;; auto refresh menu.
+  (defvar howm-auto-menu-refresh-interval 30)
+  (eval-after-load "howm-menu"
+    '(run-with-idle-timer howm-auto-menu-refresh-interval
+			  'repeat
+			  (howm-menu-refresh-background)))
 
   ;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
   (eval-after-load "calendar"
@@ -147,6 +137,3 @@ Offset is demanded when calling with C-u M-x."
   (add-hook 'emacs-startup-hook
 	    (lambda ()
 	      (howm-menu))))
-
-
-
