@@ -5,9 +5,6 @@
 (when
     (not (file-directory-p default-directory))
   (setq default-directory (getenv "HOME")))
-  
-;;; loading Common Lisp extensions.
-;; (require 'cl nil t)
 
 ;;; path and filenames.
 (setq base-directory "~/.emacs.d")
@@ -178,3 +175,7 @@ he-he-he. Setting this instead of the message you expected?"
 	     "/usr/games"
 	     "/usr/X11R6/bin"
 	     "c:/program files/mozilla firefox")))
+
+(mapcar #'(lambda (arg)
+	    (let ((foo '(a b c)))
+	      (cons arg (remove arg foo))))'(b d a))

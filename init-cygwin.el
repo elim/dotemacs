@@ -19,7 +19,7 @@
       (when (string-match
 	     "cygwin"
 	     (shell-command-to-string
-	      (concat mshell-file-name "--version")))
+	      (concat shell-file-name "--version")))
 
 	(defadvice kill-new (after normalized-clipboard activate)
 	  (let
@@ -27,7 +27,7 @@
 	    (start-process
 	     "normalization of the contents of the clipboard."
 	     "*Messages*" shell-file-name shell-command-switch
-	     "cat /dev/clipboard |tee /dev/clipboard > /dev/nul")))
+	     "cat /dev/clipboard |tee /dev/clipboard > /dev/nul"))))
 
       (add-hook 'shell-mode-hook
 		(lambda ()
@@ -35,5 +35,4 @@
 		   'undecided-dos 'sjis-unix)))
 
       ;; shell-modeでの補完 (for drive letter)
-      (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-")))
-
+      (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-"))))

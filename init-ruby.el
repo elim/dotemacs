@@ -2,7 +2,8 @@
 ;; $Id$
 
 (when (require 'ruby-mode nil t)
-  (require 'inf-ruby nil t)
+  (when (require 'inf-ruby nil t)
+    (setq ruby-program-name  "ruby /usr/bin/irb --inf-ruby-mode"))
   (require 'ruby-electric nil t)
 
   (setq ruby-indent-level 2
