@@ -17,15 +17,17 @@
       (setq shell-command-switch "-c")
 
       (when (string-match
-	     "zsh.+cygwin"
+	     "cygwin"
 	     (shell-command-to-string
-	      (concat my-shell-file-name "--version")))
+	      (concat mshell-file-name "--version")))
 
-	(defadvice kill-new (after after-kill-new activate)
-	  (start-process
-	   "normalization fof the contents of the clipboard."
-	   "*Messages*" "zsh"
-	   "-c" "cat =(cat /dev/clipboard) > /dev/clipboard"))))
+	(defadvice kill-new (after normalized-clipboard activate)
+	  (let
+	      ((temporary-file (abs (random t))))
+	    (start-process
+	     "normalization of the contents of the clipboard."
+	     "*Messages*" shell-file-name shell-command-switch
+	     "cat /dev/clipboard |tee /dev/clipboard > /dev/nul")))
 
       (add-hook 'shell-mode-hook
 		(lambda ()
@@ -34,3 +36,4 @@
 
       ;; shell-modeでの補完 (for drive letter)
       (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-")))
+
