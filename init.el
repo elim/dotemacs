@@ -36,23 +36,14 @@
 			  arg)
 		    (list t (list 'message "%s" 'err))))))
 
-(defmacro marge-lists-without-duplicate (base additional)
-  (list 'let
-	(list (list 'base (list 'forced-list-transform base))
-	      (list 'additional (list 'forced-list-transform additional)))
-
-	(list 'marge-lists-without-duplicate-internal 'base 'additional)))
-
-(defun marge-lists-without-duplicate-internal (base additional)
-  (when (car additional)
-    (setq base
-	 (cons
-	  (car additional)
-	  (delete (car additional) base))))
-
-  (if (cdr additional)
-      (marge-lists-without-duplicate-internal base (cdr additional))
-    base))
+(defun marge-lists-without-duplicate (base additional)
+  (let (result)
+    (if additional
+	(mapc '(lambda (arg)
+		 (setq result (cons arg
+				    (remove arg base)))) additional)
+      (setq result base))
+    result))
 
 (setq load-path
       (marge-lists-without-duplicate
@@ -61,6 +52,7 @@
 	     preferences-directory
 	     libraries-directory
 	     "/usr/local/share/emacs/site-lisp/")))
+
 (setq exec-path
       (marge-lists-without-duplicate
        exec-path
@@ -86,7 +78,7 @@
 
 (setq Info-additional-directory-list
       (marge-lists-without-duplicate
-       Info-additional-directory-list
+       (forced-list-transform Info-additional-directory-list)
        (list "/Applications/Emacs.app/Contents/Resources/info/"
 	     "/opt/local/share/info"
 	     "/sw/info"
@@ -153,25 +145,3 @@ he-he-he. Setting this instead of the message you expected?"
 ;; load preferences.
 (load-directory-files :directory preferences-directory
 		      :regex "^init-.+el$")
-
-(delete nil (mapc '(lambda (dir)
-			  (when (file-accessible-directory-p dir)
-			    dir)) (list "~/bin"
-	     "/bin/"
-	     "/sbin/"
-	     "/usr/bin/"
-	     "/usr/sbin/"
-	     "/usr/local/bin"
-	     "/usr/local/sbin"
-	     "/opt/local/bin"
-	     "/opt/local/sbin"
-	     "/sw/bin"
-	     "/sw/sbin/"
-	     "/Developer/Tools"
-	     "c:/cygwin/usr/bin"
-	     "c:/cygwin/usr/sbin"
-	     "c:/cygwin/usr/local/bin"
-	     "c:/cygwin/usr/local/sbin"
-	     "/usr/games"
-	     "/usr/X11R6/bin"
-	     "c:/program files/mozilla firefox")))
