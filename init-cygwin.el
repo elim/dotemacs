@@ -22,12 +22,10 @@
 	      (concat shell-file-name "--version")))
 
 	(defadvice kill-new (after normalized-clipboard activate)
-	  (let
-	      ((temporary-file (abs (random t))))
-	    (start-process
-	     "normalization of the contents of the clipboard."
-	     "*Messages*" shell-file-name shell-command-switch
-	     "cat /dev/clipboard |tee /dev/clipboard > /dev/nul"))))
+	  (start-process
+	   "normalization of the contents of the clipboard."
+	   "*Messages*" shell-file-name shell-command-switch
+	   "cat /dev/clipboard |tee /dev/clipboard > /dev/nul"))
 
       (add-hook 'shell-mode-hook
 		(lambda ()
