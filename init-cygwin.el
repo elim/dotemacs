@@ -1,5 +1,5 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
-;; $Id: init-misc.el 234 2007-10-23 13:09:20Z takeru $
+;; $Id$
 
 ;; meadow and cygwin
 ;; based upon meadow-users-jp:3050 and
