@@ -1,6 +1,11 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
+;; carbon emacs
+(setq mac-pass-control-to-system nil
+      mac-pass-command-to-system nil
+      mac-option-modifier 'meta)
+
 (when (let
 	  ((exec "sysctl")
 	   (arg "keyremap4macbook.version"))
@@ -13,7 +18,6 @@
 		      (if (re-search-forward "\\(\\w+\\)" nil t)
 			  (match-string 0))))))
 
-(locate-executable "sysctl")
   (and
    (global-set-key [(control x) (right)] #'find-file)
 
@@ -25,5 +29,5 @@
 
    (eval-after-load "riece"
      #'(and
-	(define-key riece-dialogue-mode-map [(up)] #'riece-command-part)
+	(define-key riece-dialogue-mode-map [(up)]   #'riece-cobmmand-part)
 	(define-key riece-dialogue-mode-map [(down)] #'riece-command-names)))))

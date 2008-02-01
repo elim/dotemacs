@@ -33,4 +33,4 @@
 		   'undecided-dos 'sjis-unix)))
 
       ;; shell-modeでの補完 (for drive letter)
-      (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-"))))
+      (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-")))))
