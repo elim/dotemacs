@@ -8,26 +8,38 @@
 
 (when (let
 	  ((exec "sysctl")
-	   (arg "keyremap4macbook.version"))
+	   (arg "keyremap4macbook.option.emacsmode_controlPNBF"))
 
 	(and (locate-executable exec)
-	     (equal "keyremap4macbook"
+	     (string-equal "1"
 		    (with-temp-buffer
 		      (call-process exec nil t nil arg)
 		      (goto-char (point-min))
-		      (if (re-search-forward "\\(\\w+\\)" nil t)
+		      (if (re-search-forward "\\(.\\)$" nil t)
 			  (match-string 0))))))
-
   (and
    (global-set-key [(control x) (right)] #'find-file)
 
-   (eval-after-load "elscreen"
-     #'(and
-	(define-key elscreen-map [(right)]  #'elscreen-find-file)
-	(define-key elscreen-map [(up)]     #'elscreen-previous)
-	(define-key elscreen-map [(down)]   #'elscreen-next)))
+   (defadvice define-key (around keyreremap (keymap key def)
+				 activate)
+     (setq key
+	   (cond
+	    ((vectorp key) (apply 'vector
+				  (mapcar
+				   #'(lambda (k)
+				       (cond
+					((equal "\C-p" k) '(up))
+					((equal "\C-n" k) '(down))
+					((equal "\C-b" k) '(left))
+					((equal "\C-f" k) '(right))
+					(t k)))
+				   key)))
+	    ((stringp key) (cond
+			    ((equal "\C-p" key) [(up)])
+			    ((equal "\C-n" key) [(down)])
+			    ((equal "\C-b" key) [(left)])
+			    ((equal "\C-f" key) [(right)])
+			    (t key)))
+	    (t key)))
 
-   (eval-after-load "riece"
-     #'(and
-	(define-key riece-dialogue-mode-map [(up)]   #'riece-cobmmand-part)
-	(define-key riece-dialogue-mode-map [(down)] #'riece-command-names)))))
+     ad-do-it)))
