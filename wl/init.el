@@ -218,21 +218,12 @@ NOTE: Many variables will overwrite in a template later."
       (expand-file-name "templates" wl-preference-directory))
 (setq wl-template-alist nil)
 
-(load-directory-files :directory wl-template-directory
-		      :regex "^.+el$")
+(load-directory-files wl-template-directory "^.+el$")
 
 (add-hook 'wl-mail-setup-hook
 	  (lambda ()
 	    (wl-template-apply "default")
 	    (setq wl-template "default")))
-
-(add-hook 'wl-mail-send-pre-hook
-	  (lambda ()
-	    (setq-default
-	     ;; to global variable.
-	     smtp-open-connection-function
-	     ;; from buffer-local vaiable.
-	     smtp-open-connection-function)))
 
 ;; based upon
 ;; http://nijino.homelinux.net/diary/200305.shtml#200305121

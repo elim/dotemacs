@@ -117,31 +117,21 @@
      (string-match domestic-address (get-ip-address))
      (string-match domestic-domain-name system-name))))
 
-(defun load-directory-files (&rest plist)
-  "property list details.
 
-:directory => target directory (required).
-:regex     => filename regex (defalt:`.+')
-
-he-he-he. Setting this instead of the message you expected?"
-
+(defun load-directory-files (dir &optional regex)
   (let*
-      ((directory (plist-get plist :directory))
-       (regex (or (plist-get plist :regex) ".+"))
+      ((regex (or regex ".+"))
        (files (and
-	       directory
-	       (file-accessible-directory-p directory)
-	       (or (plist-get plist :files)
-		   (directory-files directory 'full regex)))))
+	       dir
+	       (file-accessible-directory-p dir)
+	       (directory-files dir 'full regex))))
 
-    (mapc '(lambda (file)
+    (mapc #'(lambda (file)
 	       (when (load file nil t)
 		 (message "`%s' loaded." file))) files)))
 
 ;; load essential libraries.
-(load-directory-files :directory libraries-directory
-		      :regex "^.+el$")
+(load-directory-files libraries-directory "^.+el$")
 
 ;; load preferences.
-(load-directory-files :directory preferences-directory
-		      :regex "^init-.+el$")
+(load-directory-files preferences-directory "^init-.+el$")
