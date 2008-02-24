@@ -30,13 +30,13 @@
     (after after-wl-summary-line-day-of-week activate)
     (when (string-match ad-return-value "?")
       (setq ad-return-value
-	    (let*
+	    (let
 		((elmo-lang wl-summary-weekday-name-lang)
 		 (day-of-week-name-width
-		  (string-width (elmo-date-get-week 1970 1 1)))
-		 (return-string ""))
-	      (dotimes (r day-of-week-name-width return-string)
-		(setq return-string (concat "?" return-string)))))))
+		  (string-width (elmo-date-get-week 1970 1 1))))
+	      (setq ad-return-value
+		    (make-string day-of-week-name-width ??))))))
+
 
 ;;;  emacs の defualt MUA に
   (autoload-if-found 'wl-user-agent-compose "wl-draft" nil t)
