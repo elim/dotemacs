@@ -88,11 +88,9 @@ Offset is demanded when calling with C-u M-x."
       (howm-mode t)
 
       (when (not (number-or-marker-p my-diary-date-offset))
-	(when (eq (current-column) 1)
-	  (insert "\n"))
-	(dotimes (r 2) (insert "-"))
-	(insert
-	 (concat " \n" (format-time-string "%H:%M" my-diary-time) "\n")))))
+	(insert (if (eq (current-column) 1) "\n" "")
+		(make-string 2 ?-) " \n"
+		(format-time-string "%H:%M" my-diary-time) "\n"))))
 
   (eval-after-load "howm-mode"
     '(progn
@@ -135,5 +133,4 @@ Offset is demanded when calling with C-u M-x."
 	   (insert day)))))
 
   (add-hook 'emacs-startup-hook
-	    (lambda ()
-	      (howm-menu))))
+	    '(lambda () (howm-menu)))
