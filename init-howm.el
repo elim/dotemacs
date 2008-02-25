@@ -133,4 +133,4 @@ Offset is demanded when calling with C-u M-x."
 	   (insert day)))))
 
   (add-hook 'emacs-startup-hook
-	    '(lambda () (howm-menu)))
+	    '(lambda () (howm-menu))))
