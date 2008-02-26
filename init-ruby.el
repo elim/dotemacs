@@ -2,15 +2,20 @@
 ;; $Id$
 
 (when (require 'ruby-mode nil t)
-  (when (require 'inf-ruby nil t)
-    (let
-	((path (locate-library "irb" nil exec-path)))
-      (unless (file-executable-p path)
-	(setq ruby-program-name
-	      (mapconcat #'identity
-			 (list "ruby" path "--inf-ruby-mode") " ")))))
-
   (require 'ruby-electric nil t)
+  (let
+      ((ruby (locate-executable "ruby"))
+       (irb (locate-library "irb" nil exec-path))
+       (arg "--inf-ruby-mode -Ku"))
+    (when (and irb (not (file-executable-p irb)))
+      (and
+       (setq ruby-program-name
+	     (mapconcat #'identity
+			(list ruby irb arg) " "))
+       (when (require 'inf-ruby nil t)
+	 (define-key inferior-ruby-mode-map
+	   "\C-\M-p"  #'comint-previous-input)))))
+
 
   (setq ruby-indent-level 2
 	ruby-indent-tabs-mode nil
