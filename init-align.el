@@ -22,4 +22,4 @@
 
 	 '(ruby-xmpfilter-mark ;;TODO: add to rcodetools.el
 	   (regexp . "\\(\\s-*\\)# => [^#\t\n]")
-	   (repeat . nil))))
+	   (repeat . nil)))))
