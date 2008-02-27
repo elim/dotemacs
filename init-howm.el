@@ -132,5 +132,8 @@ Offset is demanded when calling with C-u M-x."
 	   (exit-calendar)
 	   (insert day)))))
 
-  (add-hook 'emacs-startup-hook
-	    '(lambda () (howm-menu))))
+  (and
+   (setq inhibit-splash-screen t)
+   (add-hook 'after-init-hook
+	     '(lambda () (howm-menu))
+	     'append)))
