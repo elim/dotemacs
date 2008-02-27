@@ -2,30 +2,25 @@
 ;; $Id$
 
 (when (require 'w3m-load nil t)
-  (autoload-if-found
-   'w3m "w3m" "*Interface for w3m on Emacs." t)
-  (autoload-if-found
-   'w3m-find-file "w3m" "*w3m interface function for local file." t)
-  (autoload-if-found
-   'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
-  (autoload-if-found
-   'w3m-search "w3m-search" "*Search QUERY using SEARCH-ENGINE." t)
-  (autoload-if-found
-   'w3m-weather "w3m-weather" "*Display weather report." t)
-  (autoload-if-found
-   'w3m-antenna "w3m-antenna" "*Report chenge of WEB sites." t)
+  (setq w3m-preference-directory
+	(expand-file-name "w3m" base-directory)
+	w3m-init-file
+	(expand-file-name "init.el" w3m-preference-directory))
 
-  (require 'w3m-wget nil t)
-
-  (setq w3m-pop-up-frames nil)
-  (setq w3m-tab-width 4)
-  (setq w3m-use-cookies t)
-  (setq w3m-use-tab t)
-  (setq w3m-use-toolbar t)
-  (setq w3m-home-page "about:blank")
-  (setq w3m-weather-default-area "道央・石狩")
+  (mapc '(lambda (lib)
+	   (apply #'autoload-if-found lib))
+	(list
+	 '(w3m "w3m" "*Interface for w3m on Emacs." t)
+	 '(w3m-filter "w3m-filter" "*w3m filter advertisements." t)
+	 '(w3m-find-file "w3m" "*w3m interface function for local file." t)
+	 '(w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+	 '(w3m-search "w3m-search" "*Search QUERY using SEARCH-ENGINE." t)
+	 '(w3m-weather "w3m-weather" "*Display weather report." t)
+	 '(w3m-antenna "w3m-antenna" "*Report chenge of WEB sites." t)))
 
   (global-set-key "\C-cs" 'w3m-search)
+
+  (require 'w3m-wget nil t)
 
   (when (and
 	 (require 'mime-view nil t)
