@@ -61,12 +61,12 @@
    '(font . "shinonome 14")))
 
 ;; Carbon Emacs
-(when (and (eq window-system 'mac) (locate-library "carbon-font"))
-  (when (require 'carbon-font nil t)
-    (setq mac-allow-anti-aliasing nil)
-    (add-to-list
-     'default-frame-alist
-     '(font . "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-osaka")))
+(when (and (eq window-system 'mac)
+	   (require 'carbon-font nil t))
+  (setq mac-allow-anti-aliasing nil)
+  (add-to-list
+   'default-frame-alist
+   '(font . "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-osaka"))
 
   (when (x-list-fonts "*vl gothic*")
     (setq carbon-font-encode-family-list-vl
