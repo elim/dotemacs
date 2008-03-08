@@ -48,7 +48,8 @@
 (when (and (not window-system)
 	   (string-equal "screen" (getenv "TERM")))
   (and
-   (call-process "screen" nil nil nil "-X" "encoding" "euc")
+   (call-process "screen" nil nil nil "-X" "eval" "encoding euc"
+		 "cjkwidth off")
    (mapc #'(lambda (func)
 	     (funcall func 'euc-jp))
 	 (list #'set-terminal-coding-system
