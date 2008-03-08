@@ -17,7 +17,10 @@
 	       (apply #'define-key inferior-ruby-mode-map lst))
 	    (list
 	     '("\C-p"  comint-previous-input)
-	     '("\C-n"  comint-next-input)))))
+	     '("\C-n"  comint-next-input)))
+      (add-hook 'ruby-mode-hook
+	    '(lambda ()
+	       (ruby-electric-mode)))))
 
   (setq ruby-indent-level 2
 	ruby-indent-tabs-mode nil
