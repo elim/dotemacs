@@ -23,12 +23,12 @@
     (let
 	((ruby (locate-executable "ruby"))
 	 (irb (locate-library "irb" nil exec-path))
-	 (arg "--inf-ruby-mode -Ku"))
+	 (args (list "--inf-ruby-mode" "-Ku")))
 
       (and irb
 	   (setq ruby-program-name
 		 (mapconcat #'identity
-			    (list ruby irb arg) " "))
+			    `(,ruby ,irb ,@args) " "))
 
 	   (add-hook 'ruby-mode-hook
 		     '(lambda ()
@@ -40,4 +40,4 @@
 				 (apply #'define-key (current-local-map) lst))
 			      (list
 			       '("\C-p"  comint-previous-input)
-			       '("\C-n"  comint-next-input))))))))
+			       '("\C-n"  comint-next-input)))))))))
