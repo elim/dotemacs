@@ -10,27 +10,25 @@
   (let
       ((my-shell-file-name
 	(car (remove nil
-		     (mapcar #'locate-executable '("zsh" "bash" "sh"))))))
+		     (mapcar #'locate-executable (list "zsh" "bash" "sh"))))))
     (when my-shell-file-name
       (setq explicit-shell-file-name my-shell-file-name)
       (setq shell-file-name my-shell-file-name)
       (setq shell-command-switch "-c")
 
-      (when (string-match
-	     "cygwin"
-	     (shell-command-to-string
-	      (concat shell-file-name "--version")))
+      (add-hook 'shell-mode-hook
+		'(lambda ()
+		   (set-buffer-process-coding-system
+		    'undecided-dos 'sjis-unix)))
 
-	(defadvice kill-new (after normalized-clipboard activate)
-	  (start-process
-	   "normalization of the contents of the clipboard."
-	   "*Messages*" shell-file-name shell-command-switch
-	   "cat /dev/clipboard |tee /dev/clipboard > /dev/nul"))
+      ;; shell-modeでの補完 (for drive letter)
+      (setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-"))
 
-	(add-hook 'shell-mode-hook
-		  '(lambda ()
-		     (set-buffer-process-coding-system
-		      'undecided-dos 'sjis-unix)))
+    (when (and (mapcar #'locate-executable
+		       (list "getclip" "putclip")))
 
-	;; shell-modeでの補完 (for drive letter)
-	(setq shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-")))))
+      (defadvice kill-new (after normalized-clipboard activate)
+	(start-process
+	 "normalization of the contents of the clipboard."
+	 "*Messages*" shell-file-name shell-command-switch
+	 "getclip | setclip")))))
