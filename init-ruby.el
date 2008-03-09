@@ -2,35 +2,42 @@
 ;; $Id$
 
 (when (require 'ruby-mode nil t)
-  (require 'ruby-electric nil t)
+  (setq ruby-indent-level 2
+	ruby-indent-tabs-mode nil
+	ruby-indnt-paren-style nil)
+
+  (mapc '(lambda (lst)
+	   (add-to-list 'auto-mode-alist lst))
+	(list '("\\.rb$" . ruby-mode)
+	      '("Rakefile" . ruby-mode)))
+
+  (when (require 'ruby-electric nil t)
+    (setq ruby-electric-expand-delimiters-list '(?\{))
+    (add-hook 'ruby-mode-hook
+	      '(lambda ()
+		 (ruby-electric-mode 1))))
+
   (when (require 'inf-ruby nil t)
+    (setq interpreter-mode-alist
+	  (cons '("ruby" . ruby-mode) interpreter-mode-alist))
     (let
 	((ruby (locate-executable "ruby"))
 	 (irb (locate-library "irb" nil exec-path))
 	 (arg "--inf-ruby-mode -Ku"))
-      (when (and irb (not (file-executable-p irb)))
-	(and
-	 (setq ruby-program-name
-	       (mapconcat #'identity
-			  (list ruby irb arg) " "))))
-      (mapc '(lambda (lst)
-	       (apply #'define-key inferior-ruby-mode-map lst))
-	    (list
-	     '("\C-p"  comint-previous-input)
-	     '("\C-n"  comint-next-input)))
-      (add-hook 'ruby-mode-hook
-	    '(lambda ()
-	       (ruby-electric-mode)))))
 
-  (setq ruby-indent-level 2
-	ruby-indent-tabs-mode nil
+      (and irb
+	   (setq ruby-program-name
+		 (mapconcat #'identity
+			    (list ruby irb arg) " "))
 
-	auto-mode-alist
-	(cons '("\\.rb$" . ruby-mode) auto-mode-alist)
+	   (add-hook 'ruby-mode-hook
+		     '(lambda ()
+			(inf-ruby-keys)))
 
-	interpreter-mode-alist
-	(cons '("ruby" . ruby-mode) interpreter-mode-alist))
-
-  (add-hook 'ruby-mode-hook
-	    '(lambda ()
-	       (inf-ruby-keys))))
+	   (add-hook 'inferior-ruby-mode-hook
+		     '(lambda ()
+			(mapc '(lambda (lst)
+				 (apply #'define-key (current-local-map) lst))
+			      (list
+			       '("\C-p"  comint-previous-input)
+			       '("\C-n"  comint-next-input))))))))
