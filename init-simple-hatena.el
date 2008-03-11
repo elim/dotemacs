@@ -18,7 +18,7 @@
 
   (when (member '("utf-8-unix") coding-system-alist)
     (mapc #'(lambda (arg)
-	      (add-hook aUrg
+	      (add-hook arg
 			(lambda ()
 			  (setq buffer-file-coding-system 'utf-8-unix))))
-	  (list 'howm-view-open-hook 'howm-create-file-hook)))
+	  (list 'howm-view-open-hook 'howm-create-file-hook))))
