@@ -17,12 +17,15 @@
 
   ;; fils and directories
   (setq riece-preference-directory
-	(expand-file-name "riece" base-directory))
-  (setq riece-addon-directory
-	(expand-file-name "addons" riece-preference-directory))
-  (setq riece-saved-variables-file
-	(expand-file-name "save" riece-preference-directory))
-  (setq riece-variables-file
+	(expand-file-name "riece" base-directory)
+
+	riece-addon-directory
+	(expand-file-name "addons" riece-preference-directory)
+
+	riece-saved-variables-file
+	(expand-file-name "save" riece-preference-directory)
+
+	riece-variables-file
 	(expand-file-name "init" riece-preference-directory))
 
   (setq riece-variables-files
@@ -44,8 +47,10 @@
 	  riece-menu riece-skk-kakutei riece-unread
 	  riece-url))
 
-  (setq riece-keywords '("Elim" "elim" "えりむ" "エリム"
-			 "えろり" "えろむ" "女の敵"))
+  (setq riece-keywords '("Elim" "elim"
+			 "えりむ" "エリム"
+			 "えろり" "えろむ"
+			 "lisp" "emacs"))
 
   (let
       ((notify-sound-file (expand-file-name "~/sounds/notify.wav"))
