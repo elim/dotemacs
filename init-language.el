@@ -49,7 +49,7 @@
 	   (string-equal "screen" (getenv "TERM")))
   (and
    (call-process "screen" nil nil nil "-X" "eval" "encoding euc"
-		 "cjkwidth off")
+		 "cjkwidth on")
    (mapc #'(lambda (func)
 	     (funcall func 'euc-jp))
 	 (list #'set-terminal-coding-system
