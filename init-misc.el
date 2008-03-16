@@ -1,65 +1,37 @@
 ;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
 ;; $Id$
 
-(setq gc-cons-threshold (* 32 1024 1024))
-
-(setq system-time-locale "C")
-
-(setq kill-ring-max 300)
-
-;; font lock
-(when (and (require 'font-lock nil t)
-	   (not (featurep 'xemacs)))
-  (global-font-lock-mode t))
-
 (global-set-key [delete] #'delete-char)
 
-(when (functionp #'keyboard-translate)
-  (keyboard-translate ?\C-h ?\C-?))
-
 (setq completion-ignore-case t)
-
-;; ヘルプ等の window を可変にする
-(when (functionp #'temp-buffer-resize-mode)
-  (temp-buffer-resize-mode t))
-
+(setq gc-cons-threshold (* 32 1024 1024))
+(setq kill-ring-max 300)
+(setq system-time-locale "C")
 (setq visible-bell t)
-
-(when (functionp #'line-number-mode)
-  (line-number-mode t))
-
-(when (functionp #'column-number-mode)
-  (column-number-mode t))
-
-(when (functionp #'display-time)
-  (setq display-time-24hr-format t)
-  (display-time))
-
-(when (functionp #'menu-bar-mode)
-  (menu-bar-mode -1))
-
-(when (functionp #'tool-bar-mode)
-  (tool-bar-mode -1))
-
-(when (functionp #'set-scroll-bar-mode)
-  (set-scroll-bar-mode 'right))
-
-(when (functionp #'scroll-bar-mode)
-  (scroll-bar-mode -1))
+(setq display-time-24hr-format t)
+(setq next-line-add-newlines nil)
+(setq x-select-enable-clipboard t)
+(setq frame-title-format
+      `(" %b " (buffer-file-name "( %f )")))
 
 (unless (featurep 'mac-carbon)
   (setq-default line-spacing 2))
 
-;; バッファの最後で newline で新規行を追加するのを禁止する
-(setq next-line-add-newlines nil)
-
-;;対応する括弧を表示するか
-(when (functionp #'show-paren-mode)
-  (show-paren-mode -1))
-
-;; フレームタイトルを 「バッファ名 (フルパスのファイル名)」とする
-(setq frame-title-format
-      `(" %b " (buffer-file-name "( %f )")))
+(mapc '(lambda (f)
+	 (let ((func (car f)) (args (cdr f)))
+	   (when (functionp func)
+	     (apply func args))))
+      '((line-number-mode t)
+	(global-font-lock-mode t)
+	(temp-buffer-resize-mode t)
+	(keyboard-translate ?\C-h ?\C-?)
+	(column-number-mode t)
+	(display-time)
+	(menu-bar-mode -1)
+	(tool-bar-mode -1)
+	(set-scroll-bar-mode 'right)
+	(scroll-bar-mode -1)
+	(show-paren-mode -1)))
 
 ;; 同一ファイル名のバッファ名を分かりやすく
 (when (require 'uniquify nil t)
@@ -88,9 +60,3 @@
 		     (remove arg
 			     (symbol-value minibuffer-history-variable)))))
       (reverse (symbol-value minibuffer-history-variable)))))
-
-;; yank した文字列を X11 の cut buffer に送る
-(setq x-select-enable-clipboard t)
-
-(when (load "saveplace" 'noerror)
-  (setq-default save-place t))
