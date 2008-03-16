@@ -6,5 +6,5 @@
   (mapc '(lambda (key)
 	   (global-set-key key 'anything))
 	(list [(control x)(b)]
-	      [(control x)(C-f)]
+	      [(control x)(control f)]
 	      [(control x)(right)])))
