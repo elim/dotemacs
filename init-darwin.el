@@ -22,6 +22,8 @@
 
    (defadvice define-key (around keyreremap (keymap key def)
 				 activate)
+     ad-do-it
+
      (setq key
 	   (cond
 	    ((vectorp key) (apply 'vector
