@@ -5,11 +5,11 @@
   (elscreen-set-prefix-key "\C-l")
   (setq elscreen-display-tab t)
 
-  (mapcar #'(lambda (arg)
-	     (require arg nil t))
-	  (list 'elscreen-dired 'elscreen-howm
-		'elscreen-w3m 'elscreen-wl
-		'elscreen-server))
+  (mapc #'(lambda (arg)
+	    (require arg nil t))
+	(list 'elscreen-dired 'elscreen-howm
+	      'elscreen-w3m 'elscreen-wl
+	      'elscreen-server))
 
   (add-hook
    'wl-draft-mode-hook
