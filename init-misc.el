@@ -3,16 +3,16 @@
 
 (global-set-key [delete] #'delete-char)
 
-(setq completion-ignore-case t)
-(setq gc-cons-threshold (* 32 1024 1024))
-(setq kill-ring-max 300)
-(setq system-time-locale "C")
-(setq visible-bell t)
-(setq display-time-24hr-format t)
-(setq next-line-add-newlines nil)
-(setq x-select-enable-clipboard t)
-(setq frame-title-format
-      `(" %b " (buffer-file-name "( %f )")))
+(setq completion-ignore-case t
+      display-time-24hr-format t
+      enable-recursive-minibuffers nil
+      frame-title-format `(" %b " (buffer-file-name "( %f )"))
+      gc-cons-threshold (* 32 1024 1024)
+      kill-ring-max 300
+      next-line-add-newlines nil
+      system-time-locale "C"
+      visible-bell t
+      x-select-enable-clipboard t)
 
 (unless (featurep 'mac-carbon)
   (setq-default line-spacing 2))
@@ -31,6 +31,7 @@
 	(tool-bar-mode -1)
 	(set-scroll-bar-mode 'right)
 	(scroll-bar-mode -1)
+
 	(show-paren-mode -1)))
 
 ;; 同一ファイル名のバッファ名を分かりやすく
