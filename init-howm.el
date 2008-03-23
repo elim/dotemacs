@@ -70,10 +70,10 @@ Offset is demanded when calling with C-u M-x."
 
       (howm-mode t)
 
-      (when (not (file-exists-p diary-file))
+      (if (file-exists-p diary-file)
+	  (goto-char (point-max))
 	(insert "= diary\n"))
-      (goto-char (point-max))
-
+      
       (insert (if (eq (current-column) 0) "" "\n")
 	      (make-string 2 ?-) " \n"
 	      (if (= offset 0)
@@ -104,14 +104,6 @@ Offset is demanded when calling with C-u M-x."
 	   (insert day)))))
 
   (and
-   (defvar howm-auto-menu-refresh-interval 30)
    (setq inhibit-splash-screen t)
    (add-hook 'after-init-hook
-	     '(lambda ()
-		(howm-menu)
-		(run-with-idle-timer howm-auto-menu-refresh-interval
-				     'repeat
-				     '(lambda ()
-					(save-window-excursion
-					  (howm-menu-refresh-background))))))
-	     'append))
+	     'howm-menu 'append)))
