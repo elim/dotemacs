@@ -21,12 +21,11 @@
 	       howm-list-grep howm-create
 	       howm-keyword-to-kill-ring))
 
-  (add-hook 'howm-menu-hook
-	    '(lambda ()
-	       (when (functionp #'elscreen-display-version)
-		 (if (memq 0 (elscreen-get-screen-list))
-		     (elscreen-goto 0)
-		   (elscreen-create)))))
+  (when (functionp #'elscreen-display-version)
+    (defadvice howm-menu (before forced-elscreen-zero activate)
+      (if (memq 0 (elscreen-get-screen-list))
+	  (elscreen-goto 0)
+	(elscreen-create))))
 
   (defun howm-diary-write (&optional offset)
     "The diary is written by using howm.
@@ -73,7 +72,7 @@ Offset is demanded when calling with C-u M-x."
       (if (file-exists-p diary-file)
 	  (goto-char (point-max))
 	(insert "= diary\n"))
-      
+
       (insert (if (eq (current-column) 0) "" "\n")
 	      (make-string 2 ?-) " \n"
 	      (if (= offset 0)
@@ -101,9 +100,4 @@ Offset is demanded when calling with C-u M-x."
 	   (setq day (calendar-date-string
 		      (calendar-cursor-to-date t)))
 	   (exit-calendar)
-	   (insert day)))))
-
-  (and
-   (setq inhibit-splash-screen t)
-   (add-hook 'after-init-hook
-	     'howm-menu 'append)))
+	   (insert day))))))
