@@ -5,8 +5,9 @@
 	   (require 'anything-config nil t))
   (mapc '(lambda (key)
 	   (global-set-key key 'anything))
-	(list [(control x)(b)]
-	      [(control x)(:)]
-	      [(control x)(\;)]
-	      [(control x)(control :)]
-	      [(control x)(control \;)])))
+	(list
+	 [(control ?:)]
+	 [(control \;)]
+	 [(control x)(b)]
+	 [(control x)(control :)]
+	 [(control x)(control \;)])))

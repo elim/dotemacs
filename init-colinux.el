@@ -11,23 +11,22 @@
   (defvar clipboard-file-name "~/media/home/tmp/clipboard")
 
   (defadvice kill-new (after throw-clipboard activate)
-      (let
-	  ((str (car kill-ring))
-	   (file (expand-file-name clipboard-file-name)))
+    (let
+	((str (car kill-ring))
+	 (file (expand-file-name clipboard-file-name)))
 
-	(when (file-writable-p file)
-	   (with-temp-buffer
-	     (insert str)
-	     (set-buffer-file-coding-system 'sjis-dos)
-	     (write-region (point-min) (point-max)
-			   file nil 'no-message)))))
+      (when (file-writable-p file)
+	(with-temp-buffer
+	  (insert str)
+	  (set-buffer-file-coding-system 'sjis-dos)
+	  (write-region (point-min) (point-max)
+			file nil 'no-message)))))
 
   (defvar clipboard-synchronize-interval 0.5)
-  (defvar clipboard-mtime '(0 . 0))
-  (run-with-idle-timer
-   clipboard-synchronize-interval
-   'repeat
-   '(lambda ()
+  (defvar clipboard-mtime (cons (car (current-time))
+				(cadr (current-time))))
+
+   (defun clipboard-synchronize ()
       (let*
 	  ((file (expand-file-name clipboard-file-name))
 	   (current-mtime (nth 5 (file-attributes file))))
@@ -36,5 +35,14 @@
 	  (and
 	   (setq clipboard-mtime current-mtime)
 	   (with-temp-buffer
+	     (set-buffer-file-coding-system 'sjis-dos)
+	     (erase-buffer)
 	     (insert-file-contents file)
-	     (kill-ring-save (point-min) (point-max)))))))))
+	     (replace-regexp "\\\r" "")	     
+	     (kill-ring-save (point-min) (point-max)))))))
+
+   (run-with-idle-timer clipboard-synchronize-interval
+			'repeat
+			'clipboard-synchronize))
+   
+;;(cancel-function-timers 'clipboard-synchronize)
