@@ -1,5 +1,5 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: t -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: t -*-
+;;; $Id$
 
 (when (autoload-if-found 'riece "riece" nil t)
   (setq riece-server-alist

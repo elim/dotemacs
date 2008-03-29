@@ -1,5 +1,5 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
+;;; $Id$
 
 ;;; provisional measures for cygwin $PWD environment variable.
 (when

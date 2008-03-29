@@ -1,5 +1,5 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: t -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: t -*-
+;;; $Id$
 
 (when (and (locate-executable "dmesg")
 	   (with-temp-buffer
@@ -22,27 +22,26 @@
 	  (write-region (point-min) (point-max)
 			file nil 'no-message)))))
 
-  (defvar clipboard-synchronize-interval 0.5)
-  (defvar clipboard-mtime (cons (car (current-time))
-				(cadr (current-time))))
+  (defvar clipboard-synchronize-interval 0.1)
+  (defvar clipboard-mtime (let
+			      ((current (current-time)))
+			    (cons (car current)
+				  (cadr current))))
 
-   (defun clipboard-synchronize ()
-      (let*
-	  ((file (expand-file-name clipboard-file-name))
-	   (current-mtime (nth 5 (file-attributes file))))
+  (defun clipboard-synchronize ()
+    (let*
+	((file (expand-file-name clipboard-file-name))
+	 (current-mtime (nth 5 (file-attributes file))))
 
-	(unless (equal clipboard-mtime current-mtime)
-	  (and
-	   (setq clipboard-mtime current-mtime)
-	   (with-temp-buffer
-	     (set-buffer-file-coding-system 'sjis-dos)
-	     (erase-buffer)
-	     (insert-file-contents file)
-	     (replace-regexp "\\\r" "")	     
-	     (kill-ring-save (point-min) (point-max)))))))
+      (unless (equal clipboard-mtime current-mtime)
+	(and
+	 (setq clipboard-mtime current-mtime)
+	 (with-temp-buffer
+	   (set-buffer-file-coding-system 'sjis-dos)
+	   (erase-buffer)
+	   (insert-file-contents file)
+	   (kill-ring-save (point-min) (point-max)))))))
 
-   (run-with-idle-timer clipboard-synchronize-interval
-			'repeat
-			'clipboard-synchronize))
-   
-;;(cancel-function-timers 'clipboard-synchronize)
+  (run-with-idle-timer clipboard-synchronize-interval
+		       'repeat
+		       'clipboard-synchronize))
