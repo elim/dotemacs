@@ -1,4 +1,4 @@
-;;; -*- coding: utf-8; mode: emacs-lisp; indent-tabs-mode: nil -*-
+;;; -*- coding: utf-8; mode: emacs-lisp; indent-tabs-mode: t -*-
 ;;; $Id$
 
 (defun get-ip-address ()
