@@ -8,6 +8,7 @@
       enable-recursive-minibuffers nil
       frame-title-format `(" %b " (buffer-file-name "( %f )"))
       gc-cons-threshold (* 32 1024 1024)
+      inhibit-splash-screen t
       kill-ring-max 300
       next-line-add-newlines nil
       system-time-locale "C"
@@ -31,7 +32,6 @@
 	(tool-bar-mode -1)
 	(set-scroll-bar-mode 'right)
 	(scroll-bar-mode -1)
-
 	(show-paren-mode -1)))
 
 ;; 同一ファイル名のバッファ名を分かりやすく
@@ -49,15 +49,16 @@
 ;;kill-ring に同じ内容の文字列を複数入れない
 (defadvice kill-new (before ys:no-kill-new-duplicates activate)
   (setq kill-ring (delete (ad-get-arg 0) kill-ring)))
+(setq-default minibuffer-setup-hook)
 
 ;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=delete%20history
 (add-hook
  'minibuffer-setup-hook
- #'(lambda ()
-     (mapc
-      #'(lambda (arg)
-	  (set minibuffer-history-variable
-	       (cons arg
-		     (remove arg
-			     (symbol-value minibuffer-history-variable)))))
-      (reverse (symbol-value minibuffer-history-variable)))))
+ '(lambda ()
+    (mapc
+     '(lambda (arg)
+	(set minibuffer-history-variable
+	     (cons arg
+		   (remove arg
+			   (symbol-value minibuffer-history-variable)))))
+     (reverse (symbol-value minibuffer-history-variable)))))
