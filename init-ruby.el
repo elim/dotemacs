@@ -36,8 +36,8 @@
 
 	   (add-hook 'inferior-ruby-mode-hook
 		     '(lambda ()
-			(mapc '(lambda (lst)
-				 (apply #'define-key (current-local-map) lst))
+			(mapc '(lambda (pair)
+				 (apply #'define-key (current-local-map) pair))
 			      (list
-			       '("\C-p"  comint-previous-input)
-			       '("\C-n"  comint-next-input)))))))))
+			       '([control p] comint-previous-input)
+			       '([control n] comint-next-input)))))))))
