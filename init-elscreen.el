@@ -6,11 +6,11 @@
      (setq elscreen-display-tab t)
 
      (mapc '(lambda (arg)
-	       (and (fboundp arg)
+	       (and (locate-library arg)
 		    (require (intern (format "elscreen-%s" arg)) nil t)))
 	   (list
-	    'dired 'howm
-	    'server 'w3m 'wl)))
+	    "dired" "howm"
+	    "server" "w3m" "wl")))
 
 (add-hook 'wl-draft-mode-hook
 	  '(lambda ()
