@@ -65,7 +65,7 @@
 	     "c:/program files/mozilla firefox")))
 
 (setq Info-additional-directory-list
-      (merge-lists-without-duplicate
+      (merge-path-without-duplicate
        (list "/Applications/Emacs.app/Contents/Resources/info/"
 	     "/opt/local/share/info"
 	     "/sw/info"
