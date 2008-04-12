@@ -26,6 +26,16 @@
 	wl-biff-check-interval 30
 	wl-biff-notify-hook '(ding))
 
+  (add-hook
+   'wl-draft-mode-hook
+   '(lambda ()
+      (mapc (lambda (pair)
+	      (apply #'define-key wl-draft-mode-map pair))
+	    (list
+	     '([(control l)] nil)
+	     '([(control c) (l)] wl-draft-highlight-and-recenter)
+	     '([(control c) (control l)] wl-draft-highlight-and-recenter)))))
+
   (defadvice wl-summary-line-day-of-week
     (after after-wl-summary-line-day-of-week activate)
     (when (string-match ad-return-value "?")
@@ -36,7 +46,6 @@
 		  (string-width (elmo-date-get-week 1970 1 1))))
 	      (setq ad-return-value
 		    (make-string day-of-week-name-width ??))))))
-
 
 ;;;  emacs の defualt MUA に
   (autoload-if-found 'wl-user-agent-compose "wl-draft" nil t)
