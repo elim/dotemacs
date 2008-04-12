@@ -58,7 +58,7 @@ print(which_library(%%[%s]))'"
   (and (locate-executable "fastri-server")
        (locate-executable "fri")
        (setq ri-ruby-script (locate-executable "ri-emacs"))
-       (load "ri-ruby")
+       (load "ri-ruby" 'noerror)
 
        (defun force-start-fastri-server ()
 	 (let*
