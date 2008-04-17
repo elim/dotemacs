@@ -1,5 +1,5 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: t -*-
+;;; $Id$
 
 (global-set-key [delete] #'delete-char)
 
@@ -15,8 +15,8 @@
       visible-bell t
       x-select-enable-clipboard t)
 
-(unless (featurep 'mac-carbon)
-  (setq-default line-spacing 2))
+(setq-default line-spacing
+	      (if (featurep 'mac-carbon) nil 2))
 
 (mapc '(lambda (f)
 	 (let ((func (car f)) (args (cdr f)))
@@ -42,6 +42,14 @@
 
 ;; minibuf-isearch
 (require 'minibuf-isearch nil t)
+
+;; http://www.emacsblog.org/2007/02/27/quick-tip-add-occur-to-isearch/
+(define-key isearch-mode-map (kbd "C-o")
+  (lambda ()
+    (interactive)
+    (let ((case-fold-search isearch-case-fold-search))
+      (occur (if isearch-regexp isearch-string
+	       (regexp-quote isearch-string))))))
 
 ;; grep-edit
 (require 'grep-edit nil t)
