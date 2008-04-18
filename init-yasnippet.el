@@ -7,7 +7,7 @@
 
 (and (require 'yasnippet nil t)
      (setq yas/root-directory
-	   (expand-file-name "~/src/elisps/yasnippet/snippets/")
+	   (expand-file-name "~/src/lang/elisps/yasnippet/snippets/")
 	   yas/use-menu nil
 	   yas/trigger-key (kbd "SPC")
 	   yas/next-field-key (kbd "TAB")
