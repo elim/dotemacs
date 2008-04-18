@@ -11,6 +11,7 @@
 	(let ((name (buffer-file-name)))
 	  (or (equal ?. (string-to-char (file-name-nondirectory name)))
 	      (let ((mode (file-modes name)))
-		(set-file-modes name (logior mode (logand (/ mode 4) 73)))
-		(message (concat "Wrote " name " (+x)"))))))))
+		(set-file-modes
+		 name (logior mode (logand (/ mode 4) 73)))))))))
+
 (add-hook 'after-save-hook 'make-file-executable)
