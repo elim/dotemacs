@@ -28,6 +28,7 @@
 			    (cons (car current)
 				  (cadr current))))
 
+  (defun clipboard-synchronize ())
   (defun clipboard-synchronize ()
     (let*
 	((file (expand-file-name clipboard-file-name))
@@ -40,6 +41,7 @@
 	   (set-buffer-file-coding-system 'sjis-dos)
 	   (erase-buffer)
 	   (insert-file-contents file)
+	   (set-next-selection-coding-system 'sjis-dos)
 	   (kill-ring-save (point-min) (point-max)))))))
 
   (run-with-idle-timer clipboard-synchronize-interval
