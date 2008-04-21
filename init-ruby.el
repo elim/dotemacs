@@ -4,7 +4,7 @@
 (when (require 'ruby-mode nil t)
   (setq ruby-indent-level 2
 	ruby-indent-tabs-mode nil
-	ruby-indnt-paren-style nil)
+	ruby-deep-indent-paren-style nil)
 
   (mapc '(lambda (arg)
 	   (cons arg auto-mode-alist))
@@ -12,7 +12,7 @@
 	      '("Rakefile" . ruby-mode)))
 
   (and (require 'ruby-electric nil t)
-       (setq ruby-electric-expand-delimiters-list '(?\{))
+       (setq ruby-electric-expand-delimiters-list nil)
        (add-hook 'ruby-mode-hook
 		 '(lambda ()
 		    (ruby-electric-mode 1))))
