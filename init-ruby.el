@@ -69,19 +69,49 @@ print(which_library(%%[%s]))'"
 	 (let*
 	     ((progname "fastri-server")
 	      (buffname (format "*%s*" progname)))
-	 (with-temp-buffer
-	   (call-process-shell-command
-	    (format "ps ux |sed -e '/%s/!d' -e '/sed/d'" progname) nil t)
-	   (goto-char (point-min))
-	   (unless (re-search-forward progname nil t)
+	   (with-temp-buffer
+	     (call-process-shell-command
+	      (format "ps uxww |sed -e '/%s/!d' -e '/sed/d'" progname) nil t)
+	     (goto-char (point-min))
+	     (unless (re-search-forward progname nil t)
 	       (with-current-buffer (get-buffer-create buffname)
 		 (erase-buffer)
 		 (start-process progname buffname progname)
 		 (while (not
 			 (progn
-			   (goto-char (point-min))
-			   (re-search-forward progname nil t)))
-		   (sit-for 0.1)))))))
+			   (sit-for 0.5)
+			   (with-temp-buffer
+			     (call-process-shell-command
+			      (format "fri 'Kernel#lambda'" progname) nil t)
+			     (goto-char (point-min))
+			     (re-search-forward "lambda" nil t))))))))))
 
-       (defadvice ri (before ri/force-start-fastri-server activate)
-	 (force-start-fastri-server))))
+       (defadvice ri-ruby-get-process (before ri/force-start-fastri-server
+					      activate)
+	 (force-start-fastri-server)))
+
+  ;; Software Design 2008-02 P154
+  ;; xmpfilter (rcodetools)
+  (when (require 'rcodetools nil t)
+    (setq rct-find-tag-if-available nil)
+
+    (defun make-ruby-scratch-buffer ()
+      (with-current-buffer (get-buffer-create "*ruby scratch*")
+	(ruby-mode)
+	(current-buffer)))
+
+    (defun ruby-scratch ()
+      (interactive)
+      (pop-to-buffer (make-ruby-scratch-buffer)))
+
+    (add-hook
+     'ruby-mode-hook
+     '(lambda ()
+	(mapc (lambda (pair)
+		(apply #'define-key ruby-mode-map pair))
+	      (list
+	       '([(meta i)]		   rct-complete-symbol)
+	       '([(meta control i)]	   rct-complete-symbol)
+	       '([(control c) (control t)] ruby-toggle-buffer)
+	       '([(control c) (control d)] xmp)
+	       '([(control c) (control f)] rct-ri)))))))
