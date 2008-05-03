@@ -1,5 +1,5 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: t -*-
+;;; $Id$
 
 (when window-system
   (setq initial-frame-alist
@@ -10,13 +10,10 @@
 	   (alpha  . (90 100)))
 	 default-frame-alist))
 
-  ;; http://lists.sourceforge.jp/mailman/archives/macemacsjp-english/2006-April/000569.html
   (when (eq window-system 'mac)
-    (when (functionp 'set-active-alpha)
-      (set-active-alpha 0.9))
-    (when (functionp 'set-iactive-alpha)
-      (set-inactive-alpha 0.8))
+    (set-frame-parameter nil 'alpha '(90 95))
 
+    ;; http://lists.sourceforge.jp/mailman/archives/macemacsjp-english/2006-April/000569.html
     (defun hide-others ()
       (interactive)
       (do-applescript
@@ -33,8 +30,8 @@
         end tell")))
 
   ;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=save%20framesize
-  (setq frame-size-configuration-file
-	(expand-file-name "framesize.el" base-directory))
+  (defvar frame-size-configuration-file
+    (expand-file-name "framesize.el" base-directory))
 
   (defun window-size-save ()
     (let* ((rlist (frame-parameters (selected-frame)))
@@ -74,9 +71,15 @@
       (if (file-exists-p file)
 	  (load file))))
 
-  (window-size-load)
-
   ;; Call the function above at C-x C-c.
-  (defadvice save-buffers-kill-emacs
-    (before save-frame-size activate)
-    (window-size-save)))
+  (add-hook 'kill-emacs-hook
+	    (lambda ()
+	      (window-size-save)))
+
+  (add-hook 'window-setup-hook
+	    (lambda ()
+	      (if (and (eq window-system 'mac)
+		       (functionp #'mac-toggle-max-window))
+		  (progn (mac-toggle-max-window)
+			 (display-battery-mode t))
+		(window-size-load)))))
