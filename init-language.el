@@ -15,6 +15,10 @@
      (require 'jisx0213 nil t)) ; JIS X 0213
 
 (and (member '("utf-8-unix") coding-system-alist)
+     (setenv "LANG"
+	     (or (getenv "LANG") "en_US.UTF-8"))
+     (setenv "LC_CTYPE"
+	     (or (getenv "LC_CTYPE") "ja_JP.UTF-8"))
      (set-language-environment 'utf-8)
 
      ;; modified coding detection priority. (low => high)
