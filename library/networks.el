@@ -1,6 +1,25 @@
 ;;; -*- coding: utf-8; mode: emacs-lisp; indent-tabs-mode: t -*-
 ;;; $Id$
 
+(unless (getenv "SSH_AUTH_SOCK")
+  (let
+      ((keychain-output
+	(expand-file-name
+	 (format "~/.keychain/%s-sh"
+		 (car (split-string (system-name) "\\."))))))
+
+    (when (file-readable-p keychain-output)
+      (with-temp-buffer
+	(insert-file-contents keychain-output)
+	(setenv "SSH_AUTH_SOCK"
+		(when (re-search-forward
+		       "SSH_AUTH_SOCK=\\(.+[0-9]+\\);" nil t)
+		  (match-string 1)))
+	(setenv "SSH_AGENT_PID"
+		(when (re-search-forward
+		       "SSH_AGENT_PID=\\([0-9]+\\);" nil t)
+		  (match-string 1)))))))
+
 (defun get-ip-address ()
   (interactive)
   (let
@@ -60,10 +79,12 @@
 				       activate)
   "Open network stream with relaying."
   (let
-      ((hosts (list "localhost" "idea" "elim.teroknor.org"))
+      ((short-system-name (car (split-string (system-name) "\\.")))
+       (hosts (list "localhost" "idea" "elim.teroknor.org"))
        (services (list 25 143 2010 6667)))
 
-    (if (and (member host hosts)
+    (if (and (not (member short-system-name hosts))
+	     (member host hosts)
 	     (member service services))
 	(setq ad-return-value
 	      (open-ssh-stream name buffer host service))
