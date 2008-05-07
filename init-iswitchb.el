@@ -1,10 +1,9 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: t -*-
+;;; $Id$
 
 (when (require 'iswitchb nil t)
-  (iswitchb-mode 1)
-  (setq iswitchb-regexp t)
-  (setq iswitchb-buffer-ignore
+  (setq iswitchb-regexp t
+	iswitchb-buffer-ignore
 	(append
 	 '("\\`[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\.howm\\'"
 	   "\\.howm-keys"
@@ -20,5 +19,8 @@
      (define-key iswitchb-mode-map "\C-n" 'iswitchb-next-match)
      (define-key iswitchb-mode-map "\C-p" 'iswitchb-prev-match)
      (define-key iswitchb-mode-map "\C-f" 'iswitchb-next-match)
-     (define-key iswitchb-mode-map "\C-b" 'iswitchb-prev-match))))
+     (define-key iswitchb-mode-map "\C-b" 'iswitchb-prev-match)))
 
+  (add-hook 'emacs-startup-hook
+	    (lambda ()
+	      (iswitchb-mode 1))))
