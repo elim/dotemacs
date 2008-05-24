@@ -5,7 +5,7 @@
 
 (setq completion-ignore-case t
       display-time-24hr-format t
-      enable-recursive-minibuffers nil
+      enable-recursive-minibuffers t
       frame-title-format `(" %b " (buffer-file-name "( %f )"))
       gc-cons-threshold (* 32 1024 1024)
       inhibit-splash-screen t
@@ -14,9 +14,6 @@
       system-time-locale "C"
       visible-bell t
       x-select-enable-clipboard t)
-
-(setq-default line-spacing
-	      (if (featurep 'mac-carbon) nil 2))
 
 (mapc '(lambda (f)
 	 (let ((func (car f)) (args (cdr f)))

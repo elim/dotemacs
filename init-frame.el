@@ -2,6 +2,8 @@
 ;;; $Id$
 
 (when window-system
+  (setq-default line-spacing
+		(if (featurep 'mac-carbon) nil 2))
   (setq initial-frame-alist
 	(append
 	 '((foreground-color . "gray")
@@ -80,6 +82,9 @@
 	    (lambda ()
 	      (if (and (eq window-system 'mac)
 		       (functionp #'mac-toggle-max-window))
-		  (progn (mac-toggle-max-window)
-			 (display-battery-mode t))
+		  (condition-case ERR
+		      (catch 'retry-max-window
+			(progn (mac-toggle-max-window)
+			       (display-battery-mode t))
+			(error (throw 'retry-max-window t))))
 		(window-size-load)))))
