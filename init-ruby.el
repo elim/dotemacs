@@ -38,7 +38,7 @@
   ;; devel/which and ffap
   (with-temp-buffer
     (call-process-shell-command
-     "ruby -e 'require %[devel/whih]'" nil t)
+     "ruby -e 'require %[devel/which]'" nil t)
     (goto-char (point-min))
     (unless (re-search-forward "LoadError" nil t)
       (defun ffap-ruby-mode (name)
@@ -49,14 +49,14 @@ require %%[rubygems]
 require %%[devel/which]
 require %%[%s]
 print(which_library(%%[%s]))'"
-		 name name)))
+		 name name))
 
       (defun find-rubylib (name)
 	(interactive "sRuby library name: ")
 	(find-file (ffap-ruby-mode name)))
 
       (and (require 'ffap nil t)
-	   (add-to-list 'ffap-alist '(ruby-mode . ffap-ruby-mode)))))
+	   (add-to-list 'ffap-alist '(ruby-mode . ffap-ruby-mode))))))
 
   ;; Software Design 2008-02 P153
   ;; ri
