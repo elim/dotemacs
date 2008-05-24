@@ -1,16 +1,21 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: t -*-
+;;; $Id$
 
 ;; vars
-(setq dired-bind-jump nil)
-(setq dired-recursive-copies 'always)
-(setq dired-recursive-deletes 'always)
-(setq dired-guess-shell-alist-user
+(setq dired-bind-jump nil
+      dired-recursive-copies 'always
+      dired-recursive-deletes 'always
+      dired-guess-shell-alist-user
       '(("\\.tar\\.gz\\'"  "tar tzvf")
 	("\\.taz\\'" "tar ztvf")
 	("\\.tar\\.bz2\\'" "tar tjvf")
 	("\\.zip\\'" "unzip -l")
 	("\\.\\(g\\|\\) z\\'" "zcat")))
+
+;; sorter
+(add-hook 'dired-load-hook
+	  (lambda ()
+	    (require 'sorter nil t)))
 
 ;; dired-x
 (when (locate-library "dired-x")
@@ -19,13 +24,17 @@
 	      (load "dired-x"))))
 
 ;; wdired
-;; dired バッファを編集して，その変更を適用することができます．
-(when (locate-library "wdired")
-  (require 'wdired)
+(when (require 'wdired nil t)
   (add-hook 'dired-mode-hook
 	    (lambda ()
 	      (define-key (current-local-map) "r"
 		'wdired-change-to-wdired-mode))))
+
+;; sorter
+(when (locate-library "sorter")
+  (add-hook 'dired-load-hook
+	    (lambda ()
+	      (require 'sorter))))
 
 ;; スペースでマークする (FD like)
 (defun dired-toggle-mark (arg)
@@ -47,7 +56,7 @@
 ;;; dired を使って、一気にファイルの coding system (漢字) を変換する
 ;; dired で m でマークを付け，T とします．これで，マークを付けたファイルの
 ;; 文字コードを変換できます．
-(when (require 'dired-aux)
+(when (require 'dired-aux nil t)
   (add-hook 'dired-mode-hook
 	    (lambda ()
 	      (define-key (current-local-map) "T"
