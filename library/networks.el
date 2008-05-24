@@ -1,7 +1,7 @@
 ;;; -*- coding: utf-8; mode: emacs-lisp; indent-tabs-mode: t -*-
 ;;; $Id$
 
-(unless (getenv "SSH_AUTH_SOCK")
+(unless (getenv "SSH_AGENT_PID")
   (let
       ((keychain-output
 	(expand-file-name
