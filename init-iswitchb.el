@@ -3,15 +3,15 @@
 
 (when (require 'iswitchb nil t)
   (setq iswitchb-regexp t
-	iswitchb-buffer-ignore
-	(append
-	 '("\\`[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\.howm\\'"
-	   "\\.howm-keys"
-	   "\\*WL.*"
-	   "\\*Channel.*"
-	   ".*skk.*"
-	   "\\*\\(IMAP|NNTP|SMTP\\).*"
-	   iswitchb-buffer-ignore)))
+        iswitchb-buffer-ignore
+        (append
+         '("\\`[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\.howm\\'"
+           "\\.howm-keys"
+           "\\*WL.*"
+           "\\*Channel.*"
+           ".*skk.*"
+           "\\*\\(IMAP|NNTP|SMTP\\).*"
+           iswitchb-buffer-ignore)))
 
   (add-hook
    'iswitchb-define-mode-map-hook
@@ -22,5 +22,5 @@
      (define-key iswitchb-mode-map "\C-b" 'iswitchb-prev-match)))
 
   (add-hook 'emacs-startup-hook
-	    (lambda ()
-	      (iswitchb-mode 1))))
+            (lambda ()
+              (iswitchb-mode 1))))

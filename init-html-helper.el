@@ -9,4 +9,4 @@
   (setq html-helper-item-continue-indent 2)
   (setq html-helper-address-string "elim@teroknor.org")
   (setq auto-mode-alist
-	(cons '("\\.html$" . html-helper-mode) auto-mode-alist)))
+        (cons '("\\.html$" . html-helper-mode) auto-mode-alist)))

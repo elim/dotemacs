@@ -9,7 +9,7 @@
       ;; http://yoichi.geiin.org/d/?date=20030328#p01
       auto-save-file-name-transforms
       `(("\\`/[^/]*:\\(.+/\\)*\\(.*\\)"
-	 ,(expand-file-name "\\2" temporary-file-directory))))
+         ,(expand-file-name "\\2" temporary-file-directory))))
      (boundp 'tramp-multi-connection-function-alist)
      (add-to-list
       'tramp-multi-connection-function-alist

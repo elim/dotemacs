@@ -2,12 +2,12 @@
 ;;; $Id$
 
 (when (and (require 'anything nil t)
-	   (require 'anything-config nil t))
+           (require 'anything-config nil t))
   (mapc '(lambda (key)
-	   (global-set-key key 'anything))
-	(list
-	 [(control ?:)]
-	 [(control \;)]
-	 [(control x)(b)]
-	 [(control x)(control :)]
-	 [(control x)(control \;)])))
+           (global-set-key key 'anything))
+        (list
+         [(control ?:)]
+         [(control \;)]
+         [(control x)(b)]
+         [(control x)(control :)]
+         [(control x)(control \;)])))

@@ -6,8 +6,8 @@
      (setq elscreen-display-tab t)
 
      (mapc '(lambda (arg)
-	       (and (locate-library arg)
-		    (require (intern (format "elscreen-%s" arg)) nil t)))
-	   (list
-	    "dired" "howm"
-	    "server" "w3m" "wl")))
+               (and (locate-library arg)
+                    (require (intern (format "elscreen-%s" arg)) nil t)))
+           (list
+            "dired" "howm"
+            "server" "w3m" "wl")))

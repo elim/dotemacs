@@ -11,7 +11,7 @@
   (setq rails-always-use-text-menus t)
 
   (mapc (lambda (pair)
-	  (apply #'define-key rails-minor-mode-map pair))
-	'(([(control c)(t)] rails-controller-layout:toggle-action-view)
-	  ([(control c)(control p)] rails-lib:run-primary-switch)
-	  ([(control c)(control n)] rails-lib:run-secondary-switch))))
+          (apply #'define-key rails-minor-mode-map pair))
+        '(([(control c)(t)] rails-controller-layout:toggle-action-view)
+          ([(control c)(control p)] rails-lib:run-primary-switch)
+          ([(control c)(control n)] rails-lib:run-secondary-switch))))

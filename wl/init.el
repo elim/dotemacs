@@ -92,10 +92,10 @@ NOTE: Many variables will overwrite in a template later."
 ;; Change format of thread view
 ;(setq wl-thread-indent-level 2)
 ;(setq wl-thread-have-younger-brother-str "+"
-;      wl-thread-youngest-child-str	 "+"
-;      wl-thread-vertical-str		 "|"
-;      wl-thread-horizontal-str		 "-"
-;      wl-thread-space-str		 " ")
+;      wl-thread-youngest-child-str         "+"
+;      wl-thread-vertical-str                 "|"
+;      wl-thread-horizontal-str                 "-"
+;      wl-thread-space-str                 " ")
 
 ;; display first message automatically.
 ;(setq wl-auto-select-first t)
@@ -131,9 +131,9 @@ NOTE: Many variables will overwrite in a template later."
 
 ;; Reconnect before summary checking.
 (add-hook 'wl-folder-check-entity-pre-hook
-	  (lambda ()
-	    (wl-toggle-plugged 'off)
-	    (wl-toggle-plugged 'on)))
+          (lambda ()
+            (wl-toggle-plugged 'off)
+            (wl-toggle-plugged 'on)))
 
 ;; Store draft message in queue folder if message is sent in unplugged status.
 (setq wl-draft-enable-queuing t)
@@ -145,30 +145,30 @@ NOTE: Many variables will overwrite in a template later."
 ;(setq wl-plugged nil)
 ;; change plug status by server or port at startup.
 ;(add-hook 'wl-make-plugged-hook
-;	  '(lambda ()
-;	     ;; Add or Change plug status for SERVER and PORT.
-;	     (elmo-set-plugged plugged(t/nil) server port)
-;	     ;; When omit port, SEVERS all port was changes.
-;	     ;; (Can't add plug status without PORT)
-;	     (elmo-set-plugged plugged(t/nil) server)
-;	     ))
+;          '(lambda ()
+;             ;; Add or Change plug status for SERVER and PORT.
+;             (elmo-set-plugged plugged(t/nil) server port)
+;             ;; When omit port, SEVERS all port was changes.
+;             ;; (Can't add plug status without PORT)
+;             (elmo-set-plugged plugged(t/nil) server)
+;             ))
 
 ;;; [[ Special Setting ]]
 
 ;; open unread group folder after checking.
 ;(add-hook 'wl-folder-check-entity-hook
-;	  '(lambda ()
-;	     (wl-folder-open-unread-folder entity)
-;	     ))
+;          '(lambda ()
+;             (wl-folder-open-unread-folder entity)
+;             ))
 
 ;; Jump to unfiltered folder by `wl-summary-exit'. It is useful for people who
 ;; use filtered folder as a temporary folder created by `wl-summary-virtual'.
 ;(add-hook 'wl-summary-prepared-hook
-;	  '(lambda ()
-;	     (setq wl-summary-buffer-exit-function
-;		   (when (eq 'filter
-;			     (elmo-folder-type-internal wl-summary-buffer-elmo-folder))
-;		     'wl-summary-unvirtual))))
+;          '(lambda ()
+;             (setq wl-summary-buffer-exit-function
+;                   (when (eq 'filter
+;                             (elmo-folder-type-internal wl-summary-buffer-elmo-folder))
+;                     'wl-summary-unvirtual))))
 
 ;; Change summary display function.
 
@@ -182,9 +182,9 @@ NOTE: Many variables will overwrite in a template later."
 ;; Set summary line format according to folder name.
 ;(setq wl-folder-summary-line-format-alist
 ;      '(("^%inbox\\.emacs\\.wl$" .
-;	 "%-5l%T%P%M/%D %h:%m %-4S %[ %17f %] %t%C%s")
-;	("^%" . "%T%P%M/%D %h:%m %-4S %[ %17f %] %t%C%s")
-;	("^+" . "%n%T%P%M/%D %h:%m %-4S %[ %17f %] %t%C%s")))
+;         "%-5l%T%P%M/%D %h:%m %-4S %[ %17f %] %t%C%s")
+;        ("^%" . "%T%P%M/%D %h:%m %-4S %[ %17f %] %t%C%s")
+;        ("^+" . "%n%T%P%M/%D %h:%m %-4S %[ %17f %] %t%C%s")))
 
 ;; imput asynchronously.
 ;; (utils/im-wl.el is needed to be installed.
@@ -205,7 +205,7 @@ NOTE: Many variables will overwrite in a template later."
 (setq wl-summary-line-format "%n%T%P%1@%M/%D(%W)%h:%m %t%[%17(%c %f%) %] %#%~%s")
 (setq wl-summary-line-format-spec-alist
       (append wl-summary-line-format-spec-alist
-	      '((?@ (wl-summary-line-attached)))))
+              '((?@ (wl-summary-line-attached)))))
 
 ;;; [[ Template ]]
 ;; signatures
@@ -221,48 +221,48 @@ NOTE: Many variables will overwrite in a template later."
 (load-directory-files wl-template-directory "^.+el$")
 
 (add-hook 'wl-mail-setup-hook
-	  (lambda ()
-	    (wl-template-apply "default")
-	    (setq wl-template "default")))
+          (lambda ()
+            (wl-template-apply "default")
+            (setq wl-template "default")))
 
 ;; based upon
 ;; http://nijino.homelinux.net/diary/200305.shtml#200305121
 (add-hook 'wl-draft-send-hook
-	  (lambda ()
-	    (set (make-local-variable 'wl-from)
-		 (std11-fetch-field "From"))
-	    (set (make-local-variable 'wl-fcc)
-		 (std11-fetch-field "Fcc"))
-	    (set (make-local-variable 'wl-organization)
-		 (std11-fetch-field "Organization"))))
+          (lambda ()
+            (set (make-local-variable 'wl-from)
+                 (std11-fetch-field "From"))
+            (set (make-local-variable 'wl-fcc)
+                 (std11-fetch-field "Fcc"))
+            (set (make-local-variable 'wl-organization)
+                 (std11-fetch-field "Organization"))))
 
 (defadvice wl-template-apply (before before-template-apply activate)
   (wl-restore-default-settings))
 
 (defadvice wl-template-apply (after after-template-apply activate)
   (setq signature-file-name
-	(expand-file-name
-	 (if wl-template
-	     wl-template
-	   "default") wl-signature-directory)))
+        (expand-file-name
+         (if wl-template
+             wl-template
+           "default") wl-signature-directory)))
 
 ;; Change headers in draft sending time.
 ;(setq wl-draft-config-alist
-;      '((reply				; see reply buffer
-;	 "^To: .*test-notsend-wl@lists\\.airs\\.net"
-;	 (template . "default"))	; template
-;	("^To: .*test-notsend-wl@lists\\.airs\\.net"
-;	 ding				; function
-;	 ("From" . wl-from)		; variable
-;	 ("Organization" . "organization")) ; string
-;	("^Newsgroups: test.*"
-;	 ("Organization" . "organization for nntp."))
-;	))
+;      '((reply                                ; see reply buffer
+;         "^To: .*test-notsend-wl@lists\\.airs\\.net"
+;         (template . "default"))        ; template
+;        ("^To: .*test-notsend-wl@lists\\.airs\\.net"
+;         ding                                ; function
+;         ("From" . wl-from)                ; variable
+;         ("Organization" . "organization")) ; string
+;        ("^Newsgroups: test.*"
+;         ("Organization" . "organization for nntp."))
+;        ))
 
 ;; Insert Daredevil SKK's version to header.
 (when (locate-library "skk-version")
   (add-to-list 'wl-draft-config-alist
-	       `(t ("X-Input-Method" . ,(skk-version)))))
+               `(t ("X-Input-Method" . ,(skk-version)))))
 
 ;; Turn on Daredevil SKK to draft writing.
 ;(when (locate-library "skk")
@@ -272,9 +272,9 @@ NOTE: Many variables will overwrite in a template later."
 
 ;; Change headers in draft preparation time.
 (add-hook 'wl-mail-setup-hook
-	  '(lambda ()
-	     (unless wl-draft-reedit  ; don't apply when reedit.
-	       (wl-draft-config-exec wl-draft-config-alist))))
+          '(lambda ()
+             (unless wl-draft-reedit  ; don't apply when reedit.
+               (wl-draft-config-exec wl-draft-config-alist))))
 
 ;; [[ Reply ]]
 ;; header value setting for mail reply.
@@ -289,47 +289,47 @@ NOTE: Many variables will overwrite in a template later."
 ;; if 'X-ML-Name' and 'Reply-To' exists, reply to 'Reply-To'.
 ;(setq wl-draft-reply-without-argument-list
 ;      '((("X-ML-Name" "Reply-To") . (("Reply-To") nil nil))
-;	("X-ML-Name" . (("To" "Cc") nil nil))
-;	("Followup-To" . (nil nil ("Followup-To")))
-;	("Newsgroups" . (nil nil ("Newsgroups")))
-;	("Reply-To" . (("Reply-To") nil nil))
-;	("Mail-Reply-To" . (("Mail-Reply-To") nil nil))
-;	(wl-draft-self-reply-p . (("To") ("Cc") nil))
-;	("From" . (("From") nil nil))))
+;        ("X-ML-Name" . (("To" "Cc") nil nil))
+;        ("Followup-To" . (nil nil ("Followup-To")))
+;        ("Newsgroups" . (nil nil ("Newsgroups")))
+;        ("Reply-To" . (("Reply-To") nil nil))
+;        ("Mail-Reply-To" . (("Mail-Reply-To") nil nil))
+;        (wl-draft-self-reply-p . (("To") ("Cc") nil))
+;        ("From" . (("From") nil nil))))
 
 ;; old defaults < 2.11.0
 ;(setq wl-draft-reply-without-argument-list
 ;      '(((wl-draft-self-reply-p
-;	  "Followup-To") . (("To") ("Cc") ("Followup-To")))
-;	((wl-draft-self-reply-p
-;	  "Newsgroups") . (("To") ("Cc") ("Newsgroups")))
-;	((wl-draft-self-reply-p
-;	  "From") . (("To") ("Cc") nil))
-;	("Followup-To" . (nil nil ("Followup-To")))
-;	("Mail-Followup-To" . (("Mail-Followup-To") nil ("Newsgroups")))
-;	("Reply-To" . (("Reply-To") ("To" "Cc" "From") ("Newsgroups")))
-;	("From" . (("From") ("To" "Cc") ("Newsgroups")))))
+;          "Followup-To") . (("To") ("Cc") ("Followup-To")))
+;        ((wl-draft-self-reply-p
+;          "Newsgroups") . (("To") ("Cc") ("Newsgroups")))
+;        ((wl-draft-self-reply-p
+;          "From") . (("To") ("Cc") nil))
+;        ("Followup-To" . (nil nil ("Followup-To")))
+;        ("Mail-Followup-To" . (("Mail-Followup-To") nil ("Newsgroups")))
+;        ("Reply-To" . (("Reply-To") ("To" "Cc" "From") ("Newsgroups")))
+;        ("From" . (("From") ("To" "Cc") ("Newsgroups")))))
 
 ;(setq wl-draft-reply-with-argument-list
 ;      '(((wl-draft-self-reply-p
-;	  "Followup-To") . (("To") ("Cc") ("Followup-To")))
-;	((wl-draft-self-reply-p
-;	  "Newsgroups") . (("To") ("Cc") ("Newsgroups")))
-;	((wl-draft-self-reply-p
-;	  "From") . (("To") ("Cc") nil))
-;	("Reply-To" . (("Reply-To") nil nil))
-;	("Mail-Reply-To" . (("Mail-Reply-To") nil nil))
-;	("From" . (("From") nil nil))))
+;          "Followup-To") . (("To") ("Cc") ("Followup-To")))
+;        ((wl-draft-self-reply-p
+;          "Newsgroups") . (("To") ("Cc") ("Newsgroups")))
+;        ((wl-draft-self-reply-p
+;          "From") . (("To") ("Cc") nil))
+;        ("Reply-To" . (("Reply-To") nil nil))
+;        ("Mail-Reply-To" . (("Mail-Reply-To") nil nil))
+;        ("From" . (("From") nil nil))))
 
 ;;; [[ Message Display Settings ]]
 
 ;; Hidden header field in message buffer.
 (setq wl-message-ignored-field-list
       '(".*Received:" ".*Path:" ".*Id:" "^References:"
-	"^Replied:" "^Errors-To:"
-	"^Lines:" "^Sender:" ".*Host:" "^Xref:"
-	"^Content-Type:" "^Precedence:"
-	"^Status:" "^X-VM-.*:"))
+        "^Replied:" "^Errors-To:"
+        "^Lines:" "^Sender:" ".*Host:" "^Xref:"
+        "^Content-Type:" "^Precedence:"
+        "^Status:" "^X-VM-.*:"))
 
 ;; Displayed header field in message buffer.
 ;; This value precedes `wl-message-ignored-field-list'
@@ -337,41 +337,41 @@ NOTE: Many variables will overwrite in a template later."
 
 ;; X-Face
 (when window-system
-  (cond ((and (featurep 'xemacs)	; for XEmacs
-	      (module-installed-p 'x-face))
-	 (autoload 'x-face-xmas-wl-display-x-face "x-face")
-	 (setq wl-highlight-x-face-function 'x-face-xmas-wl-display-x-face))
+  (cond ((and (featurep 'xemacs)        ; for XEmacs
+              (module-installed-p 'x-face))
+         (autoload 'x-face-xmas-wl-display-x-face "x-face")
+         (setq wl-highlight-x-face-function 'x-face-xmas-wl-display-x-face))
 
-	;; for Emacs21
-	((and (not (featurep 'xemacs))
-	      (= emacs-major-version 21)
-	      (module-installed-p 'x-face-e21))
-	 (autoload 'x-face-decode-message-header "x-face-e21")
-	 (setq wl-highlight-x-face-function 'x-face-decode-message-header))
+        ;; for Emacs21
+        ((and (not (featurep 'xemacs))
+              (= emacs-major-version 21)
+              (module-installed-p 'x-face-e21))
+         (autoload 'x-face-decode-message-header "x-face-e21")
+         (setq wl-highlight-x-face-function 'x-face-decode-message-header))
 
-	;; for Emacs 19.34, Emacs 20.x
-	((module-installed-p 'x-face-mule)
-	 ;; x-face-mule distributed with bitmap-mule 8.0 or later
-	 (autoload 'x-face-decode-message-header "x-face-mule")
-	 (setq wl-highlight-x-face-function 'x-face-decode-message-header))))
+        ;; for Emacs 19.34, Emacs 20.x
+        ((module-installed-p 'x-face-mule)
+         ;; x-face-mule distributed with bitmap-mule 8.0 or later
+         (autoload 'x-face-decode-message-header "x-face-mule")
+         (setq wl-highlight-x-face-function 'x-face-decode-message-header))))
 
 ;; Scoring.
 ;; "all.SCORE" file is used regardless of wl-score-folder-alist.
 ;(setq wl-score-folder-alist
 ;      '(("^-comp\\."
-;	 "news.comp.SCORE"
-;	 "news.SCORE")
-;	("^-"
-;	 "news.SCORE")))
+;         "news.comp.SCORE"
+;         "news.SCORE")
+;        ("^-"
+;         "news.SCORE")))
 
 ;; rule for auto refile.
 ;(setq wl-refile-rule-alist
 ;      '(
-;	("x-ml-name"
-;	 ("^Wanderlust" . "+wl")
-;	 ("^Elisp" . "+elisp"))
-;	("From"
-;	 ("foo@example\\.com" . "+foo"))))
+;        ("x-ml-name"
+;         ("^Wanderlust" . "+wl")
+;         ("^Elisp" . "+elisp"))
+;        ("From"
+;         ("foo@example\\.com" . "+foo"))))
 
 ;; Marks to skip auto-refile (default is "N" "U" "!").
 ;; nil means all message is auto-refiled.
@@ -391,21 +391,21 @@ NOTE: Many variables will overwrite in a template later."
 ;; when `o' (wl-summary-refile) is performed in a summary buffer.
 ;(unless (memq 'wl-refile-guess-by-spam wl-refile-guess-functions)
 ;  (setq wl-refile-guess-functions
-;	(cons #'wl-refile-guess-by-spam
-;	      wl-refile-guess-functions)))
+;        (cons #'wl-refile-guess-by-spam
+;              wl-refile-guess-functions)))
 
 ;; Judge *first* whether a message is a spam
 ;; when `C-o' (wl-summary-auto-refile) is performed in a summary buffer.
 ;(unless (memq 'wl-refile-guess-by-spam wl-auto-refile-guess-functions)
 ;  (setq wl-auto-refile-guess-functions
-;	(cons #'wl-refile-guess-by-spam
-;	      wl-auto-refile-guess-functions)))
+;        (cons #'wl-refile-guess-by-spam
+;              wl-auto-refile-guess-functions)))
 
 ;; When you want to give priority to refile-rule (same as spamfilter-wl.el
 ;; or bogofilter-wl.el), please confirm the setup here.
 ;(unless (memq 'wl-refile-guess-by-spam wl-auto-refile-guess-functions)
 ;  (setq wl-auto-refile-guess-functions
-;	(append wl-auto-refile-guess-functions
-;		'(wl-refile-guess-by-spam))))
+;        (append wl-auto-refile-guess-functions
+;                '(wl-refile-guess-by-spam))))
 
 ;;; dot.wl ends here

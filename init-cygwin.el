@@ -10,24 +10,24 @@
 
 (when (featurep 'meadow)
   (setq explicit-shell-file-name (car
-				  (remove nil
-					  (mapcar #'locate-executable
-						  (list "zsh" "bash" "sh"))))
-	shell-file-name explicit-shell-file-name
-	shell-command-switch "-c"
-	;; drive letter completion on shell-mode.
-	shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-")
+                                  (remove nil
+                                          (mapcar #'locate-executable
+                                                  (list "zsh" "bash" "sh"))))
+        shell-file-name explicit-shell-file-name
+        shell-command-switch "-c"
+        ;; drive letter completion on shell-mode.
+        shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-")
 
   (add-hook 'shell-mode-hook
-	    '(lambda ()
-	       (set-buffer-process-coding-system
-		'undecided-dos 'sjis-unix)))
+            '(lambda ()
+               (set-buffer-process-coding-system
+                'undecided-dos 'sjis-unix)))
 
   (and (mapcar #'locate-executable
-	       (list "getclip" "putclip"))
+               (list "getclip" "putclip"))
 
        (defadvice kill-new (after normalized-clipboard activate)
-	 (start-process
-	  "normalization of the contents of the clipboard."
-	  "*Messages*" shell-file-name shell-command-switch
-	  "getclip | setclip"))))
+         (start-process
+          "normalization of the contents of the clipboard."
+          "*Messages*" shell-file-name shell-command-switch
+          "getclip | setclip"))))

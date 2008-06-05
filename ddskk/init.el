@@ -30,10 +30,10 @@
 ;; (when skk-use-color-cursor
 ;;   ;; カーソル色を変えてみる
 ;;   (setq skk-cursor-hiragana-color "blue"
-;;	   skk-cursor-katakana-color "green"
-;;	   skk-cursor-abbrev-color "red"
-;;	   skk-cursor-jisx0208-latin-color "red"
-;;	   skk-cursor-jisx0201-color "purple"))
+;;           skk-cursor-katakana-color "green"
+;;           skk-cursor-abbrev-color "red"
+;;           skk-cursor-jisx0208-latin-color "red"
+;;           skk-cursor-jisx0201-color "purple"))
 
 ;; インジケータに色を付けない
 ;; (setq skk-indicator-use-cursor-color nil)
@@ -109,18 +109,18 @@
 ;;   ;; `skk-abbrev-mode' で skk-look を使った検索をしたときに確定情報を
 ;;   ;; 個人辞書に記録しないようにする
 ;;   (setq skk-search-excluding-word-pattern-function
-;;	   ;; KAKUTEI-WORD を引数にしてコールされるので、不要でも引数を取る
-;;	   ;; 必要あり
-;;	   (lambda (kakutei-word)
-;;	     (and skk-abbrev-mode
-;;		  (save-match-data
-;;		    ;; `skk-henkan-key' が "*" で終わるとき
-;;		    (string-match "\\*$" skk-henkan-key))))))
+;;           ;; KAKUTEI-WORD を引数にしてコールされるので、不要でも引数を取る
+;;           ;; 必要あり
+;;           (lambda (kakutei-word)
+;;             (and skk-abbrev-mode
+;;                  (save-match-data
+;;                    ;; `skk-henkan-key' が "*" で終わるとき
+;;                    (string-match "\\*$" skk-henkan-key))))))
 
 ;; lookup を利用した変換を行う
 ;; (setq skk-search-prog-list
 ;;       (skk-nunion skk-search-prog-list
-;;		     '((skk-lookup-search))))
+;;                     '((skk-lookup-search))))
 
 ;; 送りあり変換を送りなし変換と同じ操作でできるようにする
 ;; (setq skk-auto-okuri-process t)
@@ -128,12 +128,12 @@
 ;; カタカナ語を変換候補に加える
 ;;(setq skk-search-prog-list
 ;;      (skk-nunion skk-search-prog-list
-;;		  '((skk-search-katakana))))
+;;                  '((skk-search-katakana))))
 
 ;; サ行変格活用の動詞も送りあり変換出来るようにする
 (setq skk-search-prog-list
       (skk-nunion skk-search-prog-list
-		   '((skk-search-sagyo-henkaku))))
+                   '((skk-search-sagyo-henkaku))))
 
 ;; @@ かな入力関連の設定
 

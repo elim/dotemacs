@@ -39,32 +39,32 @@
 
   ;; ~/.skk* なファイルがたくさんあるので整理したい
   (setq ddskk-preference-directory
-	(expand-file-name "ddskk" base-directory))
+        (expand-file-name "ddskk" base-directory))
   (setq skk-init-file
-	(expand-file-name "init.el" ddskk-preference-directory)
-	skk-custom-file
-	(expand-file-name "custom.el" ddskk-preference-directory)
-	skk-emacs-id-file
-	(expand-file-name "emacs-id" ddskk-preference-directory)
-	skk-record-file
-	(expand-file-name "record" ddskk-preference-directory))
-  ;	skk-jisyo "~/.ddskk/jisyo"
+        (expand-file-name "init.el" ddskk-preference-directory)
+        skk-custom-file
+        (expand-file-name "custom.el" ddskk-preference-directory)
+        skk-emacs-id-file
+        (expand-file-name "emacs-id" ddskk-preference-directory)
+        skk-record-file
+        (expand-file-name "record" ddskk-preference-directory))
+  ;        skk-jisyo "~/.ddskk/jisyo"
   ;      skk-backup-jisyo "~/.ddskk/jisyo.bak")
 
 
   ;; super-smart-find のための設定 (意味あるかな？)
   (setq super-smart-find-self-insert-command-list
-	'(canna-self-insert-command
-	  egg-self-insert-command
-	  self-insert-command
-	  tcode-self-insert-command-maybe
-	  skk-insert))
+        '(canna-self-insert-command
+          egg-self-insert-command
+          self-insert-command
+          tcode-self-insert-command-maybe
+          skk-insert))
 
   ;; YaTeX のときだけ句読点を変更したい
   (add-hook 'yatex-mode-hook
-	    (lambda ()
-	      (require 'skk)
-	      (setq skk-kutouten-type 'en)))
+            (lambda ()
+              (require 'skk)
+              (setq skk-kutouten-type 'en)))
 
   ;; 辞書を 10 分毎に自動保存
   (defvar skk-auto-save-jisyo-interval 600)
@@ -73,6 +73,6 @@
     (skk-bayesian-save-history)
     (skk-bayesian-corpus-save))
   (run-with-idle-timer skk-auto-save-jisyo-interval
-		       t
-		       'skk-auto-save-jisyo))
+                       t
+                       'skk-auto-save-jisyo))
  ;;(cancel-function-timers 'skk-auto-save-jisyo)

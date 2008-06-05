@@ -31,12 +31,12 @@
   '(require 'color-moccur))
 (setq *moccur-buffer-name-exclusion-list*
       '(".+TAGS.+" "*Completions*" "*Messages*"
-	"newsrc.eld"
-	" *migemo*" ".bbdb"))
+        "newsrc.eld"
+        " *migemo*" ".bbdb"))
 
 (add-hook 'dired-mode-hook
-	  '(lambda ()
-	     (local-set-key "O" 'dired-do-moccur)))
+          '(lambda ()
+             (local-set-key "O" 'dired-do-moccur)))
 
 (define-key Buffer-menu-mode-map "O" 'Buffer-menu-moccur)
 ;;(global-set-key "\M-f" 'grep-buffers)
