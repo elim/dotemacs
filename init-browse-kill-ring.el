@@ -1,5 +1,5 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
+;;; $Id$
 
 (when (require 'browse-kill-ring nil t)
   (define-key ctl-x-map "\C-y" 'browse-kill-ring)

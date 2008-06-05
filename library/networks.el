@@ -1,4 +1,4 @@
-;;; -*- coding: utf-8; mode: emacs-lisp; indent-tabs-mode: t -*-
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 ;;; $Id$
 
 (unless (getenv "SSH_AGENT_PID")

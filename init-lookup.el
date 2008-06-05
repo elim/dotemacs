@@ -1,5 +1,5 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
+;;; $Id$
 
 (when (autoload-if-found 'lookup "lookup" nil t)
   (autoload-if-found 'lookup-word "lookup" nil t)

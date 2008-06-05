@@ -1,5 +1,5 @@
-;; -*- emacs-lisp -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
+;;; $Id$
 
 ;; http://d.hatena.ne.jp/higepon/20061230/1167447339
 (when (require 'session nil t)

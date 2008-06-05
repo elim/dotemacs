@@ -1,5 +1,5 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
+;;; $Id$
 ;; http://www.sodan.org/%7Eknagano/emacs/dotemacs.html
 
 (defmacro eval-safe (&rest body)

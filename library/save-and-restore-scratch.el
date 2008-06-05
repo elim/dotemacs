@@ -1,5 +1,5 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
+;;; $Id$
 ;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=save%20scratch
 
 (defvar scratch-file-name "~/.scratch")

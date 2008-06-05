@@ -1,5 +1,5 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
+;;; $Id$
 
 ;; based upon dot.wl and
 ;; http://triaez.kaisei.org/%7Ekaoru/ssh/emacs-ssh.html

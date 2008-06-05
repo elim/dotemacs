@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: t -*-
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 ;;; $Id$
 ;; based upon
 ;;   http://www.namazu.org/%7Etsuchiya/elisp/#chmod

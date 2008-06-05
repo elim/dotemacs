@@ -1,5 +1,5 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: t -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
+;;; $Id$
 
 ;; based upon
 ;; http://coderepos.org/share/wiki/SimpleHatenaMode

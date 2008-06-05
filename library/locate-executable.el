@@ -1,5 +1,5 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
+;;; $Id$
 
 (defun locate-executable (name)
   (if (and (boundp 'exec-suffixes) (fboundp 'locate-file)) ;; emacs22 feature

@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 ;; http://homepage1.nifty.com/blankspace/emacs/tips.html
 (defadvice display-completion-list (after display-completion-list-highlight activate)
   (let* ((str-list (mapcar (lambda(x) (cond ((stringp x) x)

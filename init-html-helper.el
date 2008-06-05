@@ -1,5 +1,5 @@
-;; -*- mode: emacs-lisp; coding: utf-8-unix -*-
-;; $Id$
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
+;;; $Id$
 
 (when (autoload-if-found 'html-helper-mode "html-helper-mode" "Yay HTML" t)
   (setq html-helper-new-buffer-template nil)
