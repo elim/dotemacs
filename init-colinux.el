@@ -1,5 +1,4 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
 (when (and (locate-executable "dmesg")
            (with-temp-buffer
@@ -28,8 +27,7 @@
                             (cons (car current)
                                   (cadr current))))
 
-  (defun clipboard-synchronize ())
-  (defun clipboard-synchronize ()
+  (defun clipboard-synchronize () ;; broken
     (let*
         ((file (expand-file-name clipboard-file-name))
          (current-mtime (nth 5 (file-attributes file))))
@@ -43,6 +41,8 @@
            (insert-file-contents file)
            (set-next-selection-coding-system 'sjis-dos)
            (kill-ring-save (point-min) (point-max)))))))
+
+  (defun clipboard-synchronize ()) ;; avoid
 
   (run-with-idle-timer clipboard-synchronize-interval
                        'repeat
