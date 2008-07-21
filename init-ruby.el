@@ -51,12 +51,12 @@ require %%[%s]
 print(which_library(%%[%s]))'"
                  name name))
 
-      (defun find-rubylib (name)
-        (interactive "sRuby library name: ")
-        (find-file (ffap-ruby-mode name)))
+        (defun find-rubylib (name)
+          (interactive "sRuby library name: ")
+          (find-file (ffap-ruby-mode name)))
 
-      (and (require 'ffap nil t)
-           (add-to-list 'ffap-alist '(ruby-mode . ffap-ruby-mode))))))
+        (and (require 'ffap nil t)
+             (add-to-list 'ffap-alist '(ruby-mode . ffap-ruby-mode))))))
 
   ;; Software Design 2008-02 P153
   ;; ri
@@ -96,9 +96,24 @@ print(which_library(%%[%s]))'"
     (setq rct-find-tag-if-available nil)
 
     (defun make-ruby-scratch-buffer ()
-      (with-current-buffer (get-buffer-create "*ruby scratch*")
-        (ruby-mode)
-        (current-buffer)))
+      (let*
+          ((buffer-name-base "ruby scratch")
+           (exist-buffer-count
+            (length
+             (remove nil
+                     (mapcar
+                      '(lambda (arg)
+                         (string-match buffer-name-base
+                                       (buffer-name arg)))
+                      (buffer-list))))))
+
+        (with-current-buffer (get-buffer-create
+                              (concat
+                               "*" buffer-name-base "<"
+                               (int-to-string exist-buffer-count)
+                               ">*"))
+          (ruby-mode)
+          (current-buffer))))
 
     (defun ruby-scratch ()
       (interactive)
@@ -110,8 +125,8 @@ print(which_library(%%[%s]))'"
         (mapc (lambda (pair)
                 (apply #'define-key ruby-mode-map pair))
               (list
-               '([(meta i)]                   rct-complete-symbol)
-               '([(meta control i)]           rct-complete-symbol)
+               '([(meta i)]                rct-complete-symbol)
+               '([(meta control i)]        rct-complete-symbol)
                '([(control c) (control t)] ruby-toggle-buffer)
                '([(control c) (control d)] xmp)
                '([(control c) (control f)] rct-ri)))))))
