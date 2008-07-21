@@ -15,7 +15,7 @@
 
   (mapc
    (lambda (f)
-     (autoload f
+     (autoload-if-found f
        "howm" "Hitori Otegaru Wiki Modoki" t))
    '(howm-menu howm-list-all howm-list-recent
                howm-list-grep howm-create
@@ -85,6 +85,11 @@ Offset is demanded when calling with C-u M-x."
                         '(lambda ()
                            (setq buffer-file-coding-system 'utf-8-unix))))
           (list 'howm-view-open-hook 'howm-create-file-hook)))
+
+  (when (fboundp 'git-sync)
+    (defadvice howm-save-and-kill-buffer/screen ;; <= elscreen-howm
+      (after howm-git-sync activate)
+      (git-sync howm-directory)))
 
   ;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
   (eval-after-load "calendar"
