@@ -4,9 +4,9 @@
 ;; based upon
 ;;   http://d.hatena.ne.jp/antipop/20080321/1206090430
 
-(when (require 'yasnippet nil t)
+(when nil ;(require 'yasnippet nil t)   ; pending.
   (setq yas/root-directory
-        (expand-file-name "~/src/lang/elisps/yasnippet/snippets/")
+        (list (expand-file-name "~/src/lang/elisps/yasnippet/snippets/"))
         yas/use-menu nil
         yas/trigger-key (kbd "SPC")     ; default => "TAB"
         yas/next-field-key (kbd "TAB")  ; default => "TAB"
