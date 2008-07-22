@@ -16,6 +16,11 @@
   (defmacro git (&rest arg)
     `(call-process "git" nil t nil ,@arg))
 
+  (defun git-pull (directory)
+    (with-temp-buffer  ;; preserve pwd
+      (cd directory)
+      (git "pull")))
+
   (defun git-sync (directory)
     (with-temp-buffer ;; preserve pwd
       (cd directory)
