@@ -1,5 +1,4 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
 ;; vars
 ; default-buffer-file-coding-system
@@ -50,12 +49,19 @@
              (#xff00 . #xffef)))))
 
 (and (not window-system)
-     (mapc #'(lambda (func)
-               (funcall func 'euc-jp-unix))
-           (list #'set-terminal-coding-system
-                 #'set-keyboard-coding-system))
-     (string-equal "screen" (getenv "TERM"))
-     (call-process "screen" nil nil nil
-                   "-X" "eval"
-                   "encoding euc utf8"
-                   "cjkwidth on"))
+     (let
+	 ((enc
+	   (cond
+	    ((string-match "cygwin" (version)) (list 'sjis-dos "SJIS"))
+	    (t (list 'euc-jp-unix "eucJP")))))
+
+       (mapc #'(lambda (func)
+		 (funcall func (car enc)))
+             (list #'set-terminal-coding-system
+                   #'set-keyboard-coding-system))
+
+       (string-equal "screen" (getenv "TERM"))
+       (call-process "screen" nil nil nil
+                     "-X" "eval"
+                     (format "encoding %s" (cdr enc))
+                     "cjkwidth on")))
