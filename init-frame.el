@@ -9,12 +9,10 @@
          '((foreground-color . "gray")
            (background-color . "black")
            (cursor-color  . "blue")
-           (alpha  . (90 100)))
+           (alpha . (90 95)))
          default-frame-alist))
 
   (when (eq window-system 'mac)
-    (set-frame-parameter nil 'alpha '(90 95))
-
     ;; http://lists.sourceforge.jp/mailman/archives/macemacsjp-english/2006-April/000569.html
     (defun hide-others ()
       (interactive)
@@ -73,6 +71,16 @@
       (if (file-exists-p file)
           (load file))))
 
+  (defun toggle-fullscreen ()
+    (interactive)
+    (set-frame-parameter nil
+                         'fullscreen
+                         (if (frame-parameter nil
+                                              'fullscreen)
+                             nil 'fullboth)))
+
+  (global-set-key [(meta return)] 'toggle-fullscreen)
+
   ;; Call the function above at C-x C-c.
   (add-hook 'kill-emacs-hook
             (lambda ()
@@ -80,11 +88,6 @@
 
   (add-hook 'window-setup-hook
             (lambda ()
-              (if (and (eq window-system 'mac)
-                       (functionp #'mac-toggle-max-window))
-                  (condition-case ERR
-                      (catch 'retry-max-window
-                        (progn (mac-toggle-max-window)
-                               (display-battery-mode t))
-                        (error (throw 'retry-max-window t))))
-                (window-size-load)))))
+              (progn
+                (window-size-load)
+                (toggle-fullscreen)))))
