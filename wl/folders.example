@@ -1,14 +1,20 @@
+### Folder definition file
 #
-# Folder definition file
-# This file is generated automatically by Wanderlust/2.15.6 (Almost Unreal).
+## IMAP
+# %/ 
 #
-# If you edit this file by hand, be sure that comment lines
-# will be washed out by wl-fldmgr.
+## ~/Mail
+# +/
+#
+## ~/Maidir
+# ./
+#
+## Gmail IMAP
+# %:takeru.naito/clear@imap.gmail.com:993!/
 #
 
 %/
-%:user/auth_method@server:port!direct/
-+inbox
++/
 
 # petname definition (access group, folder in access group)
 
