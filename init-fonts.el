@@ -74,8 +74,8 @@
 
 ;; Carbon Emacs
 (and (eq window-system 'mac)
-     (setq mac-allow-anti-aliasing nil)
      (require 'carbon-font nil t)
      (add-to-list
       'default-frame-alist
-      '(font . "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-osaka")))
+      '(font . "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-osaka"))
+     (setq mac-allow-anti-aliasing nil))
