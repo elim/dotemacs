@@ -11,10 +11,13 @@
         ("\\.zip\\'" "unzip -l")
         ("\\.\\(g\\|\\) z\\'" "zcat")))
 
-(and (featurep 'mac-carbon)
-     (load "utf-8m" t)
-     (member '("utf-8m") coding-system-alist)
-     (set-file-name-coding-system 'utf-8m))
+(cond
+ ((featurep 'mac-carbon)
+  (and
+   (load "utf-8m" t)
+   (set-file-name-coding-system 'utf-8m)))
+ ((string-match "cygwin" (version))
+  (set-file-name-coding-system 'sjis-dos)))
 
 ;; sorter
 (add-hook 'dired-load-hook
