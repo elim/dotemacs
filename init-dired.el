@@ -1,5 +1,4 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
 ;; vars
 (setq dired-bind-jump nil
@@ -11,6 +10,11 @@
         ("\\.tar\\.bz2\\'" "tar tjvf")
         ("\\.zip\\'" "unzip -l")
         ("\\.\\(g\\|\\) z\\'" "zcat")))
+
+(and (featurep 'mac-carbon)
+     (load "utf-8m" t)
+     (member '("utf-8m") coding-system-alist)
+     (set-file-name-coding-system 'utf-8m))
 
 ;; sorter
 (add-hook 'dired-load-hook
