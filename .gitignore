@@ -1,5 +1,6 @@
 anything-c-adaptive-history
 auto-save-list
 customize.el
-session-save.el
+framesize.el
+session*
 *~
