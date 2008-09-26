@@ -1,5 +1,4 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
 (when (locate-library "howm")
   (setq howm-menu-lang 'en
@@ -85,14 +84,6 @@ Offset is demanded when calling with C-u M-x."
                         '(lambda ()
                            (setq buffer-file-coding-system 'utf-8-unix))))
           (list 'howm-view-open-hook 'howm-create-file-hook)))
-
-  (when (fboundp 'git)
-    (defadvice howm-menu
-      (before howm-git-pull activate)
-      (git-pull howm-directory))
-    (defadvice howm-save-and-kill-buffer/screen ;; <= elscreen-howm
-      (after howm-git-sync activate)
-      (git-sync howm-directory)))
 
   ;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
   (eval-after-load "calendar"
