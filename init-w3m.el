@@ -3,7 +3,7 @@
 (let
     ((emacs-major-version
       (if (= 23 emacs-major-version)
-          22 emacs-major-version))) ; for Emacs23 !! Very dirty hack !!
+          22 emacs-major-version))) ; for Emacs23 !!Very dirty hack!!
 
   (when (require 'w3m-load nil t)
     (setq w3m-preference-directory
@@ -23,6 +23,14 @@
            '(w3m-antenna "w3m-antenna" "*Report chenge of WEB sites." t)))
 
     (global-set-key "\C-cs" 'w3m-search)
+
+    (eval-after-load 'w3m-search
+      '(add-to-list
+        'w3m-search-engine-alist
+        `("google"
+          ,(concat
+            "http://www.google.com/search?"
+            "hl=en&lr=lang_ja&q=%s&oe=utf-8&ie=utf-8") utf-8)))
 
     (require 'w3m-wget nil t)
 
