@@ -1,5 +1,4 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
 (when (require 'ruby-mode nil t)
   (setq ruby-indent-level 2
@@ -95,6 +94,10 @@ print(which_library(%%[%s]))'"
   ;; Software Design 2008-02 P154
   ;; xmpfilter (rcodetools)
   (when (require 'rcodetools nil t)
+    (when (require 'anything-rcodetools nil t)
+      (setq rct-get-all-methods-command "PAGER=cat fri -l")
+      (define-key anything-map "\C-z" 'anything-execute-persistent-action))
+
     (setq rct-find-tag-if-available nil)
 
     (defun make-ruby-scratch-buffer ()
