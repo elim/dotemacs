@@ -29,6 +29,7 @@
 
 (eval-after-load "ibuffer"
   '(require 'color-moccur))
+
 (setq *moccur-buffer-name-exclusion-list*
       '(".+TAGS.+" "*Completions*" "*Messages*"
         "newsrc.eld"

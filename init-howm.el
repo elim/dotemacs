@@ -9,9 +9,6 @@
         howm-directory (expand-file-name "~/.howm/")
         howm-view-use-grep (not (not (locate-executable "grep"))))
 
-  (global-set-key [(control c)(,)(,)] 'howm-menu)
-  (global-set-key [(control c)(,)(d)] 'howm-diary-write)
-
   (mapc
    (lambda (f)
      (autoload-if-found f
@@ -19,6 +16,13 @@
    '(howm-menu howm-list-all howm-list-recent
                howm-list-grep howm-create
                howm-keyword-to-kill-ring))
+
+  (add-hook 'term-setup-hook
+            (lambda ()
+              (progn
+                (howm-menu)
+                (global-set-key [(control c)(,)(,)] 'howm-menu)
+                (global-set-key [(control c)(,)(d)] 'howm-diary-write))))
 
   (when (functionp #'elscreen-display-version)
     (defadvice howm-menu (before forced-elscreen-zero activate)
