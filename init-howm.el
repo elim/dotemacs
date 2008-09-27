@@ -15,7 +15,7 @@
   (mapc
    (lambda (f)
      (autoload-if-found f
-       "howm" "Hitori Otegaru Wiki Modoki" t))
+                        "howm" "Hitori Otegaru Wiki Modoki" t))
    '(howm-menu howm-list-all howm-list-recent
                howm-list-grep howm-create
                howm-keyword-to-kill-ring))
