@@ -180,21 +180,24 @@
           (zope-mode . "zope")))
 
   ;; depends 50background.el
-  (defun google-code-search (query &optional lang)
-    (interactive
-     (let ((lang (gcs-read-language)))
-       (list (read-string
-              (format "Google code search (lang:%s): " lang)) lang)))
-    (let ((w3m-pop-up-windows t))
-      (if (one-window-p) (split-window))
-      (other-window 1)
-      (w3m
-       (format "http://www.google.com/codesearch?q=%s+lang:%s&hl=ja&num=20"
-               query lang)
-       t)))
-  (defun gcs-read-language ()
-    (let ((cell (assq major-mode google-code-search-languages)))
-      (if cell (cdr cell)
-        (read-string "Language: "))))
+  (eval-after-load "w3m"
+    '(progn
+       (defun google-code-search (query &optional lang)
+         (interactive
+          (let ((lang (gcs-read-language)))
+            (list (read-string
+                   (format "Google code search (lang:%s): " lang)) lang)))
+         (let ((w3m-pop-up-windows t))
+           (if (one-window-p) (split-window))
+           (other-window 1)
+           (w3m
+            (format
+             "http://www.google.com/codesearch?q=%s+lang:%s&hl=ja&num=20"
+             query lang)
+            t)))
+       (defun gcs-read-language ()
+         (let ((cell (assq major-mode google-code-search-languages)))
+           (if cell (cdr cell)
+             (read-string "Language: "))))
 
-  (defalias 'gcode 'google-code-search))
+       (defalias 'gcode 'google-code-search))))
