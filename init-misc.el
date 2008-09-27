@@ -1,5 +1,4 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
 (global-set-key [delete] #'delete-char)
 
@@ -67,3 +66,15 @@
                    (remove arg
                            (symbol-value minibuffer-history-variable)))))
      (reverse (symbol-value minibuffer-history-variable)))))
+
+;; 使い捨てコード用のファイルを開く
+;; http://d.hatena.ne.jp/rubikitch/20080923/1222104034
+(defun open-junk-file ()
+  (interactive)
+  (let* ((file (expand-file-name
+                (format-time-string
+                 "%Y/%m/%Y-%m-%d-%H%M%S." (current-time))
+                "~/sketch"))
+         (dir (file-name-directory file)))
+    (make-directory dir t)
+    (find-file-other-window (read-string "Junk Code: " file))))
