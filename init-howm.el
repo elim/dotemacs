@@ -17,12 +17,19 @@
                howm-list-grep howm-create
                howm-keyword-to-kill-ring))
 
+  (global-set-key [(control c)(,)(,)] 'howm-menu)
+
   (add-hook 'term-setup-hook
-            (lambda ()
-              (progn
-                (howm-menu)
-                (global-set-key [(control c)(,)(,)] 'howm-menu)
-                (global-set-key [(control c)(,)(d)] 'howm-diary-write))))
+            (lambda () (howm-menu)))
+
+  (eval-after-load "howm-menu"
+    '(progn
+       (setq-default howm-default-key-table
+                     (mapcar (lambda (arg)
+                               (if (string-equal (car arg) "d")
+                                   '("d" howm-diary-write nil t)  arg))
+                             howm-default-key-table))
+       (howm-set-keymap)))
 
   (when (functionp #'elscreen-display-version)
     (defadvice howm-menu (before forced-elscreen-zero activate)
