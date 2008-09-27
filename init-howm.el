@@ -4,7 +4,7 @@
   (setq howm-menu-lang 'en
         howm-list-all-title t
         howm-list-recent-title t
-        howm-list-normalizer #'howm-view-sort-by-reverse-date
+        howm-normalizer #'howm-view-sort-by-reverse-date
         howm-todo-menu-types "[-+~!]"
         howm-directory (expand-file-name "~/.howm/")
         howm-view-use-grep (not (not (locate-executable "grep"))))
