@@ -1,11 +1,10 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
 (global-set-key [delete] #'delete-char)
 
 (setq completion-ignore-case t
       display-time-24hr-format t
-      enable-recursive-minibuffers t
+      enable-recursive-minibuffers nil
       frame-title-format `(" %b " (buffer-file-name "( %f )"))
       gc-cons-threshold (* 32 1024 1024)
       inhibit-splash-screen t
@@ -37,8 +36,6 @@
         uniquify-ignore-buffers-re "*[^*]+*"
         uniquify-min-dir-content 1))
 
-;; minibuf-isearch
-(require 'minibuf-isearch nil t)
 
 ;; http://www.emacsblog.org/2007/02/27/quick-tip-add-occur-to-isearch/
 (define-key isearch-mode-map (kbd "C-o")
