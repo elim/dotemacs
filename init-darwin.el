@@ -4,4 +4,4 @@
 (when (eq window-system 'mac)
   (setq mac-pass-control-to-system nil
         mac-pass-command-to-system nil
-        mac-option-modifier 'meta)
+        mac-option-modifier 'meta))
