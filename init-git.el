@@ -11,22 +11,3 @@
             '(lambda ()
                (define-key dired-mode-map "V" 'git-status)
                (turn-on-font-lock))))
-
-(when (locate-executable "git")
-  (defmacro git (&rest arg)
-    `(call-process "git" nil t nil ,@arg))
-
-  (defun git-pull (directory)
-    (with-temp-buffer  ;; preserve pwd
-      (cd directory)
-      (git "pull")))
-
-  (defun git-sync (directory)
-    (with-temp-buffer ;; preserve pwd
-      (cd directory)
-      (git "add" ".")
-      (git "pull")
-      (git "commit" "-m" (format-time-string
-                          "Snapshot %b.%d,%Y(%a) %H:%M:%S"))
-      (git "push"))))
-

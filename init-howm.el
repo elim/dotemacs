@@ -1,25 +1,35 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
 (when (locate-library "howm")
   (setq howm-menu-lang 'en
         howm-list-all-title t
         howm-list-recent-title t
-        howm-list-normalizer #'howm-view-sort-by-reverse-date
+        howm-normalizer #'howm-view-sort-by-reverse-date
         howm-todo-menu-types "[-+~!]"
         howm-directory (expand-file-name "~/.howm/")
         howm-view-use-grep (not (not (locate-executable "grep"))))
 
-  (global-set-key [(control c)(,)(,)] 'howm-menu)
-  (global-set-key [(control c)(,)(d)] 'howm-diary-write)
-
   (mapc
    (lambda (f)
      (autoload-if-found f
-       "howm" "Hitori Otegaru Wiki Modoki" t))
+                        "howm" "Hitori Otegaru Wiki Modoki" t))
    '(howm-menu howm-list-all howm-list-recent
                howm-list-grep howm-create
                howm-keyword-to-kill-ring))
+
+  (global-set-key [(control c)(,)(,)] 'howm-menu)
+
+  (add-hook 'term-setup-hook
+            (lambda () (howm-menu)))
+
+  (eval-after-load "howm-menu"
+    '(progn
+       (setq-default howm-default-key-table
+                     (mapcar (lambda (arg)
+                               (if (string-equal (car arg) "d")
+                                   '("d" howm-diary-write nil t)  arg))
+                             howm-default-key-table))
+       (howm-set-keymap)))
 
   (when (functionp #'elscreen-display-version)
     (defadvice howm-menu (before forced-elscreen-zero activate)
@@ -85,14 +95,6 @@ Offset is demanded when calling with C-u M-x."
                         '(lambda ()
                            (setq buffer-file-coding-system 'utf-8-unix))))
           (list 'howm-view-open-hook 'howm-create-file-hook)))
-
-  (when (fboundp 'git)
-    (defadvice howm-menu
-      (before howm-git-pull activate)
-      (git-pull howm-directory))
-    (defadvice howm-save-and-kill-buffer/screen ;; <= elscreen-howm
-      (after howm-git-sync activate)
-      (git-sync howm-directory)))
 
   ;; M-x calendar 上で選んだ日付けを [yyyy-mm-dd] で出力
   (eval-after-load "calendar"
