@@ -61,35 +61,46 @@ print(which_library(%%[%s]))'"
 
   ;; Software Design 2008-02 P153
   ;; ri
-  (and (locate-executable "fastri-server")
-       (locate-executable "fri")
-       (setq ri-ruby-script (locate-executable "ri-emacs"))
-       (load "ri-ruby" 'noerror)
+  (when (and
+         (locate-executable "fastri-server")
+         (locate-executable "fri")
+         (setq ri-ruby-script (locate-executable "ri-emacs"))
+         (load "ri-ruby" 'noerror))
 
-       (defun force-start-fastri-server ()
-         (let*
-             ((progname "fastri-server")
-              (buffname (format "*%s*" progname)))
-           (with-temp-buffer
-             (call-process-shell-command
-              (format "ps uxww |sed -e '/%s/!d' -e '/sed/d'" progname) nil t)
-             (goto-char (point-min))
-             (unless (re-search-forward progname nil t)
-               (with-current-buffer (get-buffer-create buffname)
-                 (erase-buffer)
-                 (start-process progname buffname progname)
-                 (while (not
-                         (progn
-                           (sit-for 0.5)
-                           (with-temp-buffer
-                             (call-process-shell-command
-                              (format "fri 'Kernel#lambda'" progname) nil t)
-                             (goto-char (point-min))
-                             (re-search-forward "lambda" nil t))))))))))
+    (defun fastri-server-alive-p ()
+      (with-temp-buffer
+        (let
+            ((progname "fastri-server"))
 
-       (defadvice ri-ruby-get-process (before ri/force-start-fastri-server
-                                              activate)
-         (force-start-fastri-server)))
+          (cond
+           ((or (eq system-type 'cygwin)
+                (eq system-type 'windows-nt))
+            (call-process
+             "wmic" nil t t "process"))
+           (t
+            (call-process
+             "ps" nil t t "uxww")))
+          (goto-char (point-min))
+          (not (not (re-search-forward progname nil t))))))
+
+    (defun fastri-server-start ()
+      (unless (fastri-server-alive-p)
+        (let*
+            ((progname "fastri-server")
+             (buffname (format "*%s*" progname)))
+
+          (start-process progname buffname progname)
+          (while (not
+                  (with-temp-buffer
+                    (sit-for 0.5)
+                    (call-process
+                     "fri" nil t t "Kernel#lambda")
+                    (goto-char (point-min))
+                    (re-search-forward "lambda" nil t)))))))
+
+    (defadvice ri-ruby-get-process (before ri/force-start-fastri-server
+                                           activate)
+      (fastri-server-start)))
 
   ;; Software Design 2008-02 P154
   ;; xmpfilter (rcodetools)
