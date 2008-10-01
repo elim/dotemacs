@@ -125,10 +125,9 @@ print(which_library(%%[%s]))'"
                       (buffer-list))))))
 
         (with-current-buffer (get-buffer-create
-                              (concat
-                               "*" buffer-name-base "<"
-                               (int-to-string exist-buffer-count)
-                               ">*"))
+                              (format "*%s<%s>*"
+                                      buffer-name-base
+                                      exist-buffer-count))
           (ruby-mode)
           (current-buffer))))
 
