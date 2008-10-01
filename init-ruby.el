@@ -70,21 +70,22 @@ print(which_library(%%[%s]))'"
     (defun fastri-server-alive-p ()
       (with-temp-buffer
         (let
-            ((progname "fastri-server"))
-
+            ((progname "fastri-server")
+             (wmic-tmp-file "TempWmicBatchFile.bat"))
           (cond
            ((or (eq system-type 'cygwin)
                 (eq system-type 'windows-nt))
-            (call-process
-             "wmic" nil t t "process"))
+            (call-process "wmic" nil t t "process")
+            (when (file-exists-p wmic-tmp-file)
+              (delete-file wmic-tmp-file)))
            (t
-            (call-process
-             "ps" nil t t "uxww")))
+            (call-process "ps" nil t t "uxww")))
           (goto-char (point-min))
           (not (not (re-search-forward progname nil t))))))
 
     (defun fastri-server-start ()
       (unless (fastri-server-alive-p)
+        (message "starting fastri-server. please wait...")
         (let*
             ((progname "fastri-server")
              (buffname (format "*%s*" progname)))
