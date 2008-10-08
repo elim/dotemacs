@@ -1,5 +1,4 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
 (when window-system
   (setq-default line-spacing
@@ -71,6 +70,7 @@
       (if (file-exists-p file)
           (load file))))
 
+  ;; http://groups.google.com/group/carbon-emacs/msg/287876a967948923
   (defun toggle-fullscreen ()
     (interactive)
     (set-frame-parameter nil
