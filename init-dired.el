@@ -1,6 +1,5 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
-;; vars
 (setq dired-bind-jump nil
       dired-recursive-copies 'always
       dired-recursive-deletes 'always
@@ -12,11 +11,10 @@
         ("\\.\\(g\\|\\) z\\'" "zcat")))
 
 (cond
- ((featurep 'mac-carbon)
-  (and
-   (load "utf-8m" t)
-   (set-file-name-coding-system 'utf-8m)))
- ((string-match "cygwin" (version))
+ (carbon-p
+  (and (load "utf-8m" t)
+       (set-file-name-coding-system 'utf-8m)))
+ (windows-p
   (set-file-name-coding-system 'sjis-dos)))
 
 ;; sorter
@@ -36,12 +34,6 @@
             (lambda ()
               (define-key (current-local-map) "r"
                 'wdired-change-to-wdired-mode))))
-
-;; sorter
-(when (locate-library "sorter")
-  (add-hook 'dired-load-hook
-            (lambda ()
-              (require 'sorter))))
 
 ;; スペースでマークする (FD like)
 (defun dired-toggle-mark (arg)
