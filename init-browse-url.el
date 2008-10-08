@@ -1,34 +1,29 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
-(when (and (or
-            (featurep 'mac-carbon)
-            (featurep 'meadow)
-            (locate-executable "www-browser")
-            (locate-executable "firefox")
-       (require 'browse-url nil t))
+(when (require 'browse-url nil t)
 
   (global-set-key "\C-xm" 'browse-url-at-point)
 
-  (if window-system
-      (progn
-        (setq browse-url-browser-function
-              'browse-url-generic)
-        (cond
-         ((locate-executable "firefox")
-          (setq browse-url-generic-program "firefox"))
-         ((locate-executable "cmd")
-          (setq browse-url-generic-program "cmd"
-                browse-url-generic-args "\/cstart"))
-         ((locate-executable "open")
-          (setq browse-url-generic-program "open"))))
-    (progn
-      (when (functionp 'w3m-browse-url)
-        (setq browse-url-browser-function
-              'w3m-browse-url)))))
+  (setq browse-url-browser-display t
+        browse-url-new-window-flag nil
+        browse-url-browser-function 'browse-url-generic)
 
-  (setq browse-url-browser-display t)
-  (setq browse-url-new-window-flag nil))
+  (cond
+   (windows-p
+    (setq browse-url-generic-program "cmd"
+          browse-url-generic-args '("/c" "start")))
+
+   (darwin-p
+    (setq browse-url-generic-program "open"))
+
+   (window-system
+    (car (remove nil
+                 (mapcar #'(lambda (arg)
+                             (locate-executable arg))
+                         (list "x-www-browser"
+                               "firefox")))))
+   ((functionp 'w3m-browse-url)
+    (setq browse-url-browser-function 'w3m-browse-url))))
 
 
 ;; http://cgi.netlaputa.ne.jp/~kose/diary/?200209b&to=200209125#200209125
