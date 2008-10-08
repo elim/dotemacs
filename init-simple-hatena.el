@@ -12,4 +12,4 @@
   (when (require 'hatenahelper-mode nil t)
     (add-hook 'simple-hatena-mode-hook
               '(lambda ()
-                 (hatenahelper-mode 1))))))
+                 (hatenahelper-mode 1)))))

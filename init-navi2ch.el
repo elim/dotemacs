@@ -1,5 +1,4 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
 (when (autoload-if-found
        'navi2ch "navi2ch" "Navigator for 2ch for Emacs" t)

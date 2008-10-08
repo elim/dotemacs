@@ -32,7 +32,7 @@
 
 ;; Meadow 2.x or greater
 (and (functionp 'w32-list-font)
-     (not (w32-list-fonts "shinonome 12"))
+     (not (w32-list-fonts "shinonome 14"))
 
      (let
          ((w32-font-path
@@ -73,7 +73,7 @@
           '(font . "shinonome 14")))))
 
 ;; Carbon Emacs
-(and (eq window-system 'mac)
+(and carbon-p
      (require 'carbon-font nil t)
      (add-to-list
       'default-frame-alist

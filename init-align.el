@@ -1,8 +1,6 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
-;; based upon
-;; http://d.hatena.ne.jp/rubikitch/20080227/1204051280
 
+;; http://d.hatena.ne.jp/rubikitch/20080227/1204051280
 (when (require 'align nil t)
   ;; ruby-mode
   (mapc '(lambda (lst)

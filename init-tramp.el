@@ -1,5 +1,4 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
 (and (require 'tramp nil t)
      (setq

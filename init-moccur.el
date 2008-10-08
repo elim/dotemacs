@@ -1,8 +1,6 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
-;; based upon
-;;  http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=exampleelisp+color-moccur
+;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=exampleelisp+color-moccur
 
 (setq moccur-split-word t
       moccur-use-migemo nil

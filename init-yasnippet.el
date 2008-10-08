@@ -1,5 +1,4 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
 ;; based upon
 ;;   http://d.hatena.ne.jp/antipop/20080321/1206090430

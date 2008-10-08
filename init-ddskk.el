@@ -1,22 +1,24 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
 (when (require 'skk-setup nil t)
   (setq skk-indicator-use-cursor-color nil)
   (global-set-key "\C-x\C-j" 'skk-mode)
-  ;; (global-set-key "\C-xj" 'skk-auto-fill-mode)
   (global-set-key "\C-xj" nil)
-  ;; (global-set-key "\C-xt" 'skk-tutorial)
   (global-set-key "\C-xt" nil)
+  ;; (global-set-key "\C-xj" 'skk-auto-fill-mode)
+  ;; (global-set-key "\C-xt" 'skk-tutorial)
 
-  (autoload-if-found 'skk "skk" nil t)
-  (autoload-if-found 'skk-mode "skk" nil t)
-  (autoload-if-found 'skk-auto-fill-mode "skk" nil t)
-  (autoload-if-found 'skk-check-jisyo "skk-tools" nil t)
-  (autoload-if-found 'skk-merge "skk-tools" nil t)
-  (autoload-if-found 'skk-diff "skk-tools" nil t)
-  (autoload-if-found 'skk-isearch-mode-setup "skk-isearch" nil t)
-  (autoload-if-found 'skk-isearch-mode-cleanup "skk-isearch" nil t)
+  (mapc '(lambda (lib)
+           (apply #'autoload-if-found lib))
+        (list
+          '(skk "skk" nil t)
+          '(skk-mode "skk" nil t)
+          '(skk-auto-fill-mode "skk" nil t)
+          '(skk-check-jisyo "skk-tools" nil t)
+          '(skk-merge "skk-tools" nil t)
+          '(skk-diff "skk-tools" nil t)
+          '(skk-isearch-mode-setup "skk-isearch" nil t)
+          '(skk-isearch-mode-cleanup "skk-isearch" nil t)))
 
   ;; @@ 基本の設定
 

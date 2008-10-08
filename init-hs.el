@@ -1,6 +1,4 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
-
 
 (when (require 'hideshow nil t)
   (define-key hs-minor-mode-map
