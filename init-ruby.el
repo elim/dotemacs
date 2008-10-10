@@ -73,8 +73,7 @@ print(which_library(%%[%s]))'"
             ((progname "fastri-server")
              (wmic-tmp-file "TempWmicBatchFile.bat"))
           (cond
-           ((or (eq system-type 'cygwin)
-                (eq system-type 'windows-nt))
+           (windows-p
             (call-process "wmic" nil t t "process")
             (when (file-exists-p wmic-tmp-file)
               (delete-file wmic-tmp-file)))

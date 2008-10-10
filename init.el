@@ -1,21 +1,23 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
+;; system-type predicates
 (defun boolize (elem) (not (not elem)))
 
-(setq darwin-p  (boolize (string-match "darwin" (version)))
+(setq darwin-p  (eq system-type 'darwin)
       carbon-p  (eq window-system 'mac)
-      linux-p   (boolize (string-match "linux" (version)))
+      linux-p   (eq system-type 'gnu/linux)
       colinux-p (and linux-p
                      (boolize
                       (with-temp-buffer
                         (insert-file-contents "/proc/modules")
                         (goto-char (point-min))
                         (re-search-forward "^cofuse\.+" nil t))))
-      cygwin-p  (boolize (string-match "cygwin" (version)))
+      cygwin-p  (eq system-type 'cygwin)
+      nt-p      (eq system-type 'windows-nt)
       meadow-p  (featurep 'meadow)
-      windows-p (or cygwin-p meadow-p))
+      windows-p (or cygwin-p nt-p meadow-p))
 
-;; provisional measures for cygwin $PWD environment variable and Meadow.
+;; provisional measures for cygwin $PWD environment variable on Meadow.
 (when (and meadow-p (not (file-directory-p default-directory)))
   (setq default-directory (getenv "HOME")))
 
