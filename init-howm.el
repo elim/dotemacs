@@ -1,12 +1,12 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
 (when (locate-library "howm")
-  (setq howm-menu-lang 'en
-        howm-list-all-title t
+  (setq howm-list-all-title t
         howm-list-recent-title t
         howm-normalizer #'howm-view-sort-by-reverse-date
         howm-todo-menu-types "[-+~!]"
         howm-directory (expand-file-name "~/.howm/")
+        howm-keyword-file (expand-file-name ".howm-keys" howm-directory)
         howm-view-use-grep (not (not (locate-executable "grep"))))
 
   (mapc
@@ -42,7 +42,6 @@
 Diary buffer after the numelic day is generated with C-u numelic M-x.
 Offset is demanded when calling with C-u M-x."
     (interactive "P")
-
     (let*
         ((offset (cond
                   ((null offset) 0)
