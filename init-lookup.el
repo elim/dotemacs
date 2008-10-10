@@ -18,6 +18,11 @@
         lookup-open-function 'lookup-other-frame
         lookup-frame-alist default-frame-alist
 
+        ndspell-ispell-program
+        (if (require 'ispell nil t)
+          ispell-program-name
+          ndspell-ispell-program)
+
         ndtp-server-definition
         (list 'ndtp "localhost" :port 2010)
 
