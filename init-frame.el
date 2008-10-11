@@ -3,7 +3,7 @@
 (when window-system
   (setq-default line-spacing
                 (if (featurep 'mac-carbon) nil 2))
-  (setq initial-frame-alist
+  (setq default-frame-alist
         (append
          '((foreground-color . "gray")
            (background-color . "black")
@@ -11,8 +11,13 @@
            (alpha . (90 95)))
          default-frame-alist))
 
-  (when (eq window-system 'mac)
-    ;; http://lists.sourceforge.jp/mailman/archives/macemacsjp-english/2006-April/000569.html
+  (setq initial-frame-alist
+        (append
+         '((fullscreen . fullboth))
+         default-frame-alist))
+
+  ;; http://lists.sourceforge.jp/mailman/archives/macemacsjp-english/2006-April/000569.html
+  (when carbon-p
     (defun hide-others ()
       (interactive)
       (do-applescript
@@ -28,48 +33,6 @@
           set visible of theFrontProcess to false
         end tell")))
 
-  ;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=save%20framesize
-  (defvar frame-size-configuration-file
-    (expand-file-name "framesize.el" base-directory))
-
-  (defun window-size-save ()
-    (let* ((rlist (frame-parameters (selected-frame)))
-           (ilist initial-frame-alist)
-           (nCHeight (frame-height))
-           (nCWidth (frame-width))
-           (tMargin (if (integerp (cdr (assoc 'top rlist)))
-                        (cdr (assoc 'top rlist)) 0))
-           (lMargin (if (integerp (cdr (assoc 'left rlist)))
-                        (cdr (assoc 'left rlist)) 0))
-           buf
-           (file frame-size-configuration-file))
-      (if (get-file-buffer (expand-file-name file))
-          (setq buf (get-file-buffer (expand-file-name file)))
-        (setq buf (find-file-noselect file)))
-      (set-buffer buf)
-      (erase-buffer)
-      (insert (concat
-               ;; 初期値をいじるよりも modify-frame-parameters
-               ;; で変えるだけの方がいい?
-               "(delete 'width initial-frame-alist) "
-               "(delete 'height initial-frame-alist) "
-               "(delete 'top initial-frame-alist) "
-               "(delete 'left initial-frame-alist) "
-               "(setq initial-frame-alist "
-               "(append (list "
-               "'(width . " (int-to-string nCWidth) ") "
-               "'(height . " (int-to-string nCHeight) ") "
-               "'(top . " (int-to-string tMargin) ") "
-               "'(left . " (int-to-string lMargin) ")) "
-               "initial-frame-alist)) "
-               "(setq default-frame-alist initial-frame-alist)" ))
-      (save-buffer 0)))
-
-  (defun window-size-load ()
-    (let* ((file frame-size-configuration-file))
-      (if (file-exists-p file)
-          (load file))))
-
   ;; http://groups.google.com/group/carbon-emacs/msg/287876a967948923
   (defun toggle-fullscreen ()
     (interactive)
@@ -79,15 +42,4 @@
                                               'fullscreen)
                              nil 'fullboth)))
 
-  (global-set-key [(meta return)] 'toggle-fullscreen)
-
-  ;; Call the function above at C-x C-c.
-  (add-hook 'kill-emacs-hook
-            (lambda ()
-              (window-size-save)))
-
-  (add-hook 'window-setup-hook
-            (lambda ()
-              (progn
-                (window-size-load)
-                (toggle-fullscreen)))))
+  (global-set-key [(meta return)] 'toggle-fullscreen))
