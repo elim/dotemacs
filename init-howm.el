@@ -65,7 +65,7 @@ Offset is demanded when calling with C-u M-x."
                             howm-directory))
 
          (diary-file
-          (expand-file-name (downcasep
+          (expand-file-name (downcase
                              (format-time-string "%Y-%m-%d-%a.howm" date))
                             diary-directory)))
 
