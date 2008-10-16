@@ -7,7 +7,7 @@
         howm-todo-menu-types "[-+~!]"
         howm-directory (expand-file-name "~/.howm/")
         howm-keyword-file (expand-file-name ".howm-keys" howm-directory)
-        howm-view-use-grep (not (not (locate-executable "grep"))))
+        howm-view-use-grep (boolize (locate-executable "grep")))
 
   (mapc
    (lambda (f)
