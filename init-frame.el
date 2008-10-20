@@ -1,8 +1,7 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
 (when window-system
-  (setq-default line-spacing
-                (if (featurep 'mac-carbon) nil 2))
+  (setq-default line-spacing (if carbon-p nil 2))
   (setq default-frame-alist
         (append
          '((foreground-color . "gray")
