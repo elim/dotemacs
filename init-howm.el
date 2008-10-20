@@ -6,7 +6,8 @@
         howm-normalizer #'howm-view-sort-by-reverse-date
         howm-todo-menu-types "[-+~!]"
         howm-directory (expand-file-name "~/.howm/")
-        howm-keyword-file (expand-file-name ".howm-keys" howm-directory)
+        howm-keyword-file (expand-file-name "keys" howm-directory)
+        howm-history-file (expand-file-name "history" howm-directory)
         howm-view-use-grep (not (not (locate-executable "grep"))))
 
   (mapc
