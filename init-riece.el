@@ -40,7 +40,15 @@
                           riece-menu riece-skk-kakutei riece-unread
                           riece-url)
 
-           riece-keywords '(("[Ee]lim" . 0)
+           riece-keywords '("えむりん"     "エムリン"
+                            "えりむ"       "エリム"
+                            "えりめらんく" "エリメランク"
+                            "えろす"       "エロス"
+                            "えろむ"       "エロム"
+                            "えろりむ"     "エロリム"
+                            "ろりむ"       "ロリム"
+                            "えりも"       "エリモ"        "襟裳"
+                            ("[Ee]lim"  . 0)
                             ("[Ee]macs" . 0)))
 
      (add-hook 'riece-startup-hook
