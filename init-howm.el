@@ -110,4 +110,16 @@ Offset is demanded when calling with C-u M-x."
            (setq day (calendar-date-string
                       (calendar-cursor-to-date t)))
            (exit-calendar)
-           (insert day))))))
+           (insert day)))))
+
+  ;; 使い捨てコード用のファイルを開く
+  ;; http://d.hatena.ne.jp/rubikitch/20080923/1222104034
+  (defun open-junk-file ()
+    (interactive)
+    (let* ((file (expand-file-name
+                  (format-time-string
+                   "%Y/%m/%Y-%m-%d-%H%M%S." (current-time))
+                  howm-directory))
+           (dir (file-name-directory file)))
+      (make-directory dir t)
+      (find-file-other-window (read-string "Junk Code: " file)))))
