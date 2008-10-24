@@ -10,7 +10,7 @@
 (when (featurep 'meadow)
   (setq explicit-shell-file-name (car
                                   (remove nil
-                                          (mapcar #'locate-executable
+                                          (mapcar #'executable-find
                                                   (list "zsh" "bash" "sh"))))
         shell-file-name explicit-shell-file-name
         shell-command-switch "-c"
@@ -22,7 +22,7 @@
                (set-buffer-process-coding-system
                 'undecided-dos 'sjis-unix)))
 
-  (and (mapcar #'locate-executable
+  (and (mapcar #'executable-find
                (list "getclip" "putclip"))
 
        (defadvice kill-new (after normalized-clipboard activate)

@@ -4,7 +4,7 @@
   (require 'snippet nil t)
   (require 'rails nil t)
 
-  (and (locate-executable "fri")
+  (and (executable-find "fri")
        (setq rails-ri-command "fri"))
 
   (setq rails-always-use-text-menus t)

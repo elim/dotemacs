@@ -48,6 +48,7 @@
                             "えろりむ"     "エロリム"
                             "ろりむ"       "ロリム"
                             "えりも"       "エリモ"        "襟裳"
+                            "たける"       "タケル"
                             ("[Ee]lim"  . 0)
                             ("[Ee]macs" . 0)))
 
@@ -60,7 +61,7 @@
          ((notify-sound-file (expand-file-name "~/sounds/notify.wav"))
           (notify-sound-player "mplayer"))
 
-       (and (locate-executable notify-sound-player)
+       (and (executable-find notify-sound-player)
             (file-exists-p notify-sound-file)
             (add-hook 'riece-notify-keyword-functions
                       `(lambda (keyword)

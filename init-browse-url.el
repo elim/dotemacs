@@ -19,11 +19,11 @@
    (window-system
     (car (remove nil
                  (mapcar #'(lambda (arg)
-                             (locate-executable arg))
+                             (executable-find arg))
                          (list "x-www-browser"
                                "firefox")))))
-   ((functionp 'w3m-browse-url)
-    (setq browse-url-browser-function 'w3m-browse-url))))
+   ((functionp #'w3m-browse-url)
+    (setq browse-url-browser-function #'w3m-browse-url))))
 
 
 ;; http://cgi.netlaputa.ne.jp/~kose/diary/?200209b&to=200209125#200209125

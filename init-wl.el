@@ -7,7 +7,7 @@
 
   (and window-system
        (locate-library "x-face-e21")
-       (locate-executable "compface")
+       (executable-find "compface")
        (autoload 'x-face-decode-message-header "x-face-e21" t)
        (setq wl-highlight-x-face-function 'x-face-decode-message-header))
 
