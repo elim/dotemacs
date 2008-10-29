@@ -1,8 +1,29 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
-;; system-type predicates
+;; functions
 (defun boolize (elem) (not (not elem)))
 
+(defun flatten (lis)
+  "Removes nestings from a list."
+  (cond ((atom lis) lis)
+        ((listp (car lis))
+         (append (flatten (car lis)) (flatten (cdr lis))))
+        (t (append (list (car lis)) (flatten (cdr lis))))))
+
+(defun enum/find (func seq)
+  "Returns the first for which seq is not nil.
+Like Enumerable#find of Ruby.
+
+  (enum/find '(0 1 2 3 4 5 6)
+           (lambda (elem)
+             (eq 0 (% elem 3)))) ;=> 3"
+
+  (car (remove nil
+               (mapcar
+                '(lambda (arg)
+                   (when (funcall func arg) arg)) seq))))
+
+;; system-type predicates
 (setq darwin-p  (eq system-type 'darwin)
       carbon-p  (eq window-system 'mac)
       linux-p   (eq system-type 'gnu/linux)
@@ -51,11 +72,11 @@
 
 (setq load-path
       (merge-path-without-duplicate
-       load-path
-       (list base-directory
-             preferences-directory
-             libraries-directory
-             "/usr/local/share/emacs/site-lisp/")))
+      load-path
+      (list base-directory
+            preferences-directory
+            libraries-directory
+            "/usr/local/share/emacs/site-lisp/")))
 
 (setq exec-path
       (merge-path-without-duplicate
