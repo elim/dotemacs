@@ -8,6 +8,7 @@
       frame-title-format `(" %b " (buffer-file-name "( %f )"))
       gc-cons-threshold (* 32 1024 1024)
       inhibit-startup-screen t
+      indent-tabs-mode nil
       kill-ring-max 300
       next-line-add-newlines nil
       system-time-locale "C"
