@@ -7,9 +7,18 @@
         simple-hatena-default-group "elim"
         simple-hatena-use-timestamp-permalink-flag t
         simple-hatena-time-offset 6
-        simple-hatena-option-debug-flag t)
+        simple-hatena-option-debug-flag nil)
 
-  (when (require 'hatenahelper-mode nil t)
+  (when (member '("utf-8-unix") coding-system-alist)
     (add-hook 'simple-hatena-mode-hook
               '(lambda ()
-                 (hatenahelper-mode 1)))))
+                 (setq buffer-file-coding-system 'utf-8-unix))))
+
+  (let
+      ((helper (or (require 'simple-hatenahelper-mode nil t)
+                   (require 'hatenahelper-mode nil t))))
+
+    (when helper
+      (add-hook 'simple-hatena-mode-hook
+                `(lambda ()
+                   (,helper 1))))))
