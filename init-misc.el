@@ -28,8 +28,10 @@
         (menu-bar-mode -1)
         (tool-bar-mode -1)
         (set-scroll-bar-mode 'right)
-        (scroll-bar-mode -1)
-        (show-paren-mode 1)))
+        (scroll-bar-mode -1)))
+
+(add-hook 'after-save-hook
+          'executable-make-buffer-file-executable-if-script-p)
 
 ;; 同一ファイル名のバッファ名を分かりやすく
 (when (require 'uniquify nil t)
