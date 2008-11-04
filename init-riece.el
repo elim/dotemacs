@@ -40,31 +40,47 @@
                           riece-menu riece-skk-kakutei riece-unread
                           riece-url)
 
-           riece-keywords '("えむりん"     "エムリン"
-                            "えりむ"       "エリム"
-                            "えりめらんく" "エリメランク"
-                            "えろす"       "エロス"
-                            "えろむ"       "エロム"
-                            "えろりむ"     "エロリム"
-                            "ろりむ"       "ロリム"
-                            "えりも"       "エリモ"        "襟裳"
-                            "たける"       "タケル"
-                            ("[Ee]lim"  . 0)
-                            ("[Ee]macs" . 0)))
+           riece-my-nicks (list
+                           "elim"         "Elim"
+                           "えむりん"     "エムリン"
+                           "えりむ"       "エリム"
+                           "えりめらんく" "エリメランク"
+                           "えろす"       "エロス"
+                           "えろむ"       "エロム"
+                           "えろりむ"     "エロリム"
+                           "ろりむ"       "ロリム"
+                           "えりも"       "エリモ"        "襟裳"
+                           "たける"       "タケル")
+
+           riece-keywords `(,@riece-my-nicks
+                            ("[Ee]macs" . 0)
+                            ("[Rr]uby"  . 0)
+                            ("[Zz]sh"   . 0))
+
+           riece-notify-sound-player
+           (enum/find '(lambda (fname)
+                         (executable-find fname))
+                      (list "mplayer" "aplay" "esdplay"))
+
+           riece-notify-sound
+           (enum/find '(lambda (fname)
+                         (file-readable-p fname))
+                      (list "~/sounds/notify.wav"
+                            "/System/Library/Sounds/Funk.aiff")))
+
+     (and riece-notify-sound
+          riece-notify-sound-player
+
+          (defun riece-notify-keyword-function (keyword)
+            (when (member keyword riece-my-nicks)
+              (start-process keyword "*Messages*"
+                             riece-notify-sound-player
+                             (expand-file-name riece-notify-sound))))
+
+          (add-hook 'riece-notify-keyword-functions
+                    #'riece-notify-keyword-function))
 
      (add-hook 'riece-startup-hook
                '(lambda ()
                   (define-key riece-command-mode-map [(control x) (n)]
-                    'riece-command-enter-message-as-notice)))
-
-     (let
-         ((notify-sound-file (expand-file-name "~/sounds/notify.wav"))
-          (notify-sound-player "mplayer"))
-
-       (and (executable-find notify-sound-player)
-            (file-exists-p notify-sound-file)
-            (add-hook 'riece-notify-keyword-functions
-                      `(lambda (keyword)
-                         (start-process
-                          keyword "*Messages*" ,notify-sound-player
-                          (expand-file-name ,notify-sound-file)))))))
+                    'riece-command-enter-message-as-notice))))
