@@ -7,7 +7,7 @@
       enable-recursive-minibuffers nil
       frame-title-format `(" %b " (buffer-file-name "( %f )"))
       gc-cons-threshold (* 32 1024 1024)
-      inhibit-splash-screen t
+      inhibit-startup-screen t
       kill-ring-max 300
       next-line-add-newlines nil
       system-time-locale "C"
