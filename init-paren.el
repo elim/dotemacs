@@ -33,8 +33,9 @@
                              scheme-font-lock-keywords-2))))
 
   ;; c-mode の色設定に追加
-  (setq c-font-lock-keywords-3
-        (append '(("(\\|)" . paren-face))
-                '(("{\\|}" . brace-face))
-                '(("\\[\\|\\]" . bracket-face))
-                c-font-lock-keywords-3)))
+  (eval-after-load "cc-mode"
+    '(setq c-font-lock-keywords-3
+           (append '(("(\\|)" . paren-face))
+                   '(("{\\|}" . brace-face))
+                   '(("\\[\\|\\]" . bracket-face))
+                   c-font-lock-keywords-3))))
