@@ -10,10 +10,14 @@
          (append (flatten (car lis)) (flatten (cdr lis))))
         (t (append (list (car lis)) (flatten (cdr lis))))))
 
-(defun fold (proc init lis)
-  "fold."
+(defun fold-right (proc init lis)
   (if lis
-      (funcall proc (car lis) (fold proc init (cdr lis))) init))
+      (funcall proc (car lis) (fold-right proc init (cdr lis))) init))
+
+(defun fold-left (proc init lis)
+  (if lis (fold-left proc (funcall proc init (car lis)) (cdr lis)) init))
+
+(defalias 'fold 'fold-right)
 
 ;; system-type predicates
 (setq darwin-p  (eq system-type 'darwin)
