@@ -1,7 +1,7 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
 ;; functions
-(defun boolize (elem) (not (not elem)))
+(defun x->bool (elem) (not (not elem)))
 
 (defun flatten (lis)
   "Removes nestings from a list."
@@ -10,25 +10,17 @@
          (append (flatten (car lis)) (flatten (cdr lis))))
         (t (append (list (car lis)) (flatten (cdr lis))))))
 
-(defun enum/find (func seq)
-  "Returns the first for which seq is not nil.
-Like Enumerable#find of Ruby.
-
-  (enum/find '(0 1 2 3 4 5 6)
-           (lambda (elem)
-             (eq 0 (% elem 3)))) ;=> 3"
-
-  (car (remove nil
-               (mapcar
-                '(lambda (arg)
-                   (when (funcall func arg) arg)) seq))))
+(defun fold (proc init lis)
+  "fold."
+  (if lis
+      (funcall proc (car lis) (fold proc init (cdr lis))) init))
 
 ;; system-type predicates
 (setq darwin-p  (eq system-type 'darwin)
       carbon-p  (eq window-system 'mac)
       linux-p   (eq system-type 'gnu/linux)
       colinux-p (and linux-p
-                     (boolize
+                     (x->bool
                       (with-temp-buffer
                         (insert-file-contents "/proc/modules")
                         (goto-char (point-min))
@@ -50,36 +42,26 @@ Like Enumerable#find of Ruby.
       custom-file
       (expand-file-name "customize.el" base-directory))
 
-(defun merge-path-without-duplicate (&rest path)
-  (let (lst)
-    (mapc '(lambda (seq)
-             (setq lst (append lst seq)))
-          (mapcar '(lambda (p)
-                     (cond
-                      ((listp p) p)
-                      ((stringp p) (list p))
-                      (t nil)))
-                  path))
-    (mapc '(lambda (seq)
-             (setq lst
-                   (cond
-                    ((file-accessible-directory-p seq)
-                     (cons seq (remove seq lst)))
-                    (t
-                     (remove seq lst)))))
-          (reverse (remove nil lst)))
-    lst))
+
+(defun merge-path-list (init lis)
+  (fold (lambda (x y)
+          (let ((expanded-name (expand-file-name x)))
+            (if (file-accessible-directory-p x)
+                (progn (delete x y) (delete expanded-name y)
+                       (append (list expanded-name) y))
+              y)))
+        init lis))
 
 (setq load-path
-      (merge-path-without-duplicate
-      load-path
-      (list base-directory
-            preferences-directory
-            libraries-directory
-            "/usr/local/share/emacs/site-lisp/")))
+      (merge-path-list
+       load-path
+       `(,base-directory
+          ,preferences-directory
+          ,libraries-directory
+          "/usr/local/share/emacs/site-lisp/")))
 
 (setq exec-path
-      (merge-path-without-duplicate
+      (merge-path-list
        exec-path
        (list "~/bin"
              "/bin/"
@@ -102,7 +84,8 @@ Like Enumerable#find of Ruby.
              "c:/program files/mozilla firefox")))
 
 (setq Info-additional-directory-list
-      (merge-path-without-duplicate
+      (merge-path-list
+       nil
        (list "/Applications/Emacs.app/Contents/Resources/info/"
              "/opt/local/share/info"
              "/sw/info"
@@ -120,7 +103,6 @@ Like Enumerable#find of Ruby.
     (mapc #'(lambda (file)
               (when (load file nil t)
                 (message "`%s' loaded." file))) files)))
-
 
 ;; load essential libraries.
 (load-directory-files libraries-directory "^.+el$")
