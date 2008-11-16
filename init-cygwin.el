@@ -8,10 +8,10 @@
 ;;   http://meadow.sourceforge.jp/cgi-bin/hiki.cgi?%B0%EC%C8%CC%C5%AA%A4%CA%BE%F0%CA%F3
 
 (when (featurep 'meadow)
-  (setq explicit-shell-file-name (car
-                                  (remove nil
-                                          (mapcar #'executable-find
-                                                  (list "zsh" "bash" "sh"))))
+  (setq explicit-shell-file-name
+        (fold-left (lambda (x y)
+                     (or x (executable-find y)))
+                   nil (list "zsh" "bash" "sh"))
         shell-file-name explicit-shell-file-name
         shell-command-switch "-c"
         ;; drive letter completion on shell-mode.
