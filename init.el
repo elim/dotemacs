@@ -46,13 +46,12 @@
       custom-file
       (expand-file-name "customize.el" base-directory))
 
-
 (defun merge-path-list (init lis)
   (fold (lambda (x y)
           (let ((expanded-name (expand-file-name x)))
             (if (file-accessible-directory-p x)
-                (progn (delete x y) (delete expanded-name y)
-                       (append (list expanded-name) y))
+                (append (list expanded-name)
+                        (delete x (delete expanded-name y)))
               y)))
         init lis))
 
@@ -60,9 +59,9 @@
       (merge-path-list
        load-path
        `(,base-directory
-          ,preferences-directory
-          ,libraries-directory
-          "/usr/local/share/emacs/site-lisp/")))
+         ,preferences-directory
+         ,libraries-directory
+         "/usr/local/share/emacs/site-lisp/")))
 
 (setq exec-path
       (merge-path-list
