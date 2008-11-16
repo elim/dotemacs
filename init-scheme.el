@@ -12,28 +12,28 @@
  '(lambda()
     (defun scheme-args-to-list (string)
       (if (string= string "") nil
-	(let ((where (string-match "[ \t]" string)))
-	  (cond ((null where) (list string))
-		((not (= where 0))
-		 (let ((qpos (string-match "^\"\\([^\"]*\\)\"" string)))
-		   (if (null qpos)
-		       (cons (substring string 0 where)
-			     (scheme-args-to-list
-			      (substring string (+ 1 where)
-					 (length string))))
-		     (cons (substring string
-				      (match-beginning 1)
-				      (match-end 1))
-			   (scheme-args-to-list
-			    (substring string
-				       (match-end 0)
-				       (length string)))))))
-		(t (let ((pos (string-match "[^ \t]" string)))
-		     (if (null pos)
-			 nil
-		       (scheme-args-to-list
-			(substring string pos
-				   (length string))))))))))))
+        (let ((where (string-match "[ \t]" string)))
+          (cond ((null where) (list string))
+                ((not (= where 0))
+                 (let ((qpos (string-match "^\"\\([^\"]*\\)\"" string)))
+                   (if (null qpos)
+                       (cons (substring string 0 where)
+                             (scheme-args-to-list
+                              (substring string (+ 1 where)
+                                         (length string))))
+                     (cons (substring string
+                                      (match-beginning 1)
+                                      (match-end 1))
+                           (scheme-args-to-list
+                            (substring string
+                                       (match-end 0)
+                                       (length string)))))))
+                (t (let ((pos (string-match "[^ \t]" string)))
+                     (if (null pos)
+                         nil
+                       (scheme-args-to-list
+                        (substring string pos
+                                   (length string))))))))))))
 
 ;; set gosh path
 (setq scheme-program-name (executable-find "gosh"))
