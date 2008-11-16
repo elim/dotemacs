@@ -7,12 +7,22 @@
         simple-hatena-default-group "elim"
         simple-hatena-use-timestamp-permalink-flag t
         simple-hatena-time-offset 6
-        simple-hatena-option-debug-flag nil)
+        simple-hatena-option-debug-flag nil
 
-  (when (member '("utf-8-unix") coding-system-alist)
-    (add-hook 'simple-hatena-mode-hook
-              '(lambda ()
-                 (setq buffer-file-coding-system 'utf-8-unix))))
+        file-coding-system-alist
+        (append
+         `((,simple-hatena-filename-regex utf-8-unix . utf-8-unix))
+         file-coding-system-alist))
+
+  '(add-hook 'simple-hatena-before-submit-hook
+            '(lambda ()
+               (setq buffer-file-coding-system 'utf-8-unix)))
+
+  (defadvice simple-hatena-internal-safe-find-file (after
+                                                    insert-fixed-expression
+                                                    activate)
+    (unless (file-exists-p (buffer-file-name))
+      (insert "delete\n*")))
 
   (let
       ((helper (or (require 'simple-hatenahelper-mode nil t)
@@ -22,3 +32,5 @@
       (add-hook 'simple-hatena-mode-hook
                 `(lambda ()
                    (,helper 1))))))
+
+
