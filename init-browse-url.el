@@ -1,7 +1,6 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
 (when (require 'browse-url nil t)
-
   (global-set-key "\C-xm" 'browse-url-at-point)
 
   (setq browse-url-browser-display t
@@ -17,13 +16,13 @@
     (setq browse-url-generic-program "open"))
 
    (window-system
-    (car (remove nil
-                 (mapcar #'(lambda (arg)
-                             (executable-find arg))
-                         (list "x-www-browser"
-                               "firefox")))))
+    (setq browse-url-generic-program
+          (fold-left (lambda (x y)
+                       (or x (executable-find y)))
+                     nil (list "x-www-browser"
+                               "firefox")))
    ((functionp #'w3m-browse-url)
-    (setq browse-url-browser-function #'w3m-browse-url))))
+    (setq browse-url-browser-function #'w3m-browse-url)))))
 
 
 ;; http://cgi.netlaputa.ne.jp/~kose/diary/?200209b&to=200209125#200209125
