@@ -8,7 +8,7 @@
         howm-directory (expand-file-name "~/.howm/")
         howm-keyword-file (expand-file-name "keys" howm-directory)
         howm-history-file (expand-file-name "history" howm-directory)
-        howm-view-use-grep (x->bool (executable-find "grep"))))
+        howm-view-use-grep (x->bool (executable-find "grep")))
 
   (mapc
    (lambda (f)
