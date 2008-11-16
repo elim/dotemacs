@@ -52,27 +52,32 @@
                            "えりも"       "エリモ"        "襟裳"
                            "たける"       "タケル")
 
+           riece-not-my-nicks (list
+                               "たけるんば" "タケルンバ")
+
            riece-keywords `(,@riece-my-nicks
+                            ,@riece-not-my-nicks
                             ("[Ee]macs" . 0)
                             ("[Rr]uby"  . 0)
                             ("[Zz]sh"   . 0))
 
            riece-notify-sound-player
-           (enum/find '(lambda (fname)
-                         (executable-find fname))
-                      (list "mplayer" "aplay" "esdplay"))
+           (fold-left (lambda (x y)
+                        (or x (executable-find y)))
+                      nil (list "mplayer" "aplay" "esdplay"))
 
            riece-notify-sound
-           (enum/find '(lambda (fname)
-                         (file-readable-p fname))
-                      (list "~/sounds/notify.wav"
-                            "/System/Library/Sounds/Funk.aiff")))
+           (fold-left (lambda (x y)
+                        (or x (and (file-readable-p y) y)))
+                      nil (list "~/sounds/notify.wav"
+                                "/System/Library/Sounds/Funk.aiff")))
 
      (and riece-notify-sound
           riece-notify-sound-player
 
           (defun riece-notify-keyword-function (keyword)
-            (when (member keyword riece-my-nicks)
+            (when (and (not (member keyword riece-not-my-nicks))
+                       (member keyword riece-my-nicks))
               (start-process keyword "*Messages*"
                              riece-notify-sound-player
                              (expand-file-name riece-notify-sound))))
