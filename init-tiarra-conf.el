@@ -1,3 +1,4 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
-(autoload-if-found 'tiarra-conf "tiarra-conf" nil t)
+(when (autoload-if-found 'tiarra-conf-mode "tiarra-conf")
+  (cons '("tiarra.conf" . tiarra-conf-mode) auto-mode-alist))
