@@ -6,7 +6,6 @@
   (setq browse-url-browser-display t
         browse-url-new-window-flag nil
         browse-url-browser-function 'browse-url-generic)
-
   (cond
    (windows-p
     (setq browse-url-generic-program "cmd"
@@ -20,9 +19,9 @@
           (fold-left (lambda (x y)
                        (or x (executable-find y)))
                      nil (list "x-www-browser"
-                               "firefox")))
+                               "firefox"))))
    ((functionp #'w3m-browse-url)
-    (setq browse-url-browser-function #'w3m-browse-url)))))
+    (setq browse-url-browser-function #'w3m-browse-url))))
 
 
 ;; http://cgi.netlaputa.ne.jp/~kose/diary/?200209b&to=200209125#200209125
