@@ -17,7 +17,7 @@
 (defun fold-left (proc init lis)
   (if lis (fold-left proc (funcall proc init (car lis)) (cdr lis)) init))
 
-(defalias 'fold 'fold-right)
+(defalias 'fold 'fold-left)
 
 ;; system-type predicates
 (setq darwin-p  (eq system-type 'darwin)
@@ -58,10 +58,10 @@
 (setq load-path
       (merge-path-list
        load-path
-       `(,base-directory
-         ,preferences-directory
-         ,libraries-directory
-         "/usr/local/share/emacs/site-lisp/")))
+       (list base-directory
+             preferences-directory
+             libraries-directory
+             "/usr/local/share/emacs/site-lisp/")))
 
 (setq exec-path
       (merge-path-list
@@ -103,9 +103,9 @@
                (file-accessible-directory-p dir)
                (directory-files dir 'full regex))))
 
-    (mapc #'(lambda (file)
-              (when (load file nil t)
-                (message "`%s' loaded." file))) files)))
+    (mapc (lambda (file)
+            (when (load file nil t)
+              (message "`%s' loaded." file))) files)))
 
 ;; load essential libraries.
 (load-directory-files libraries-directory "^.+el$")
