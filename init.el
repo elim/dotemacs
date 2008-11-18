@@ -1,7 +1,7 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
 ;; functions
-(defun x->bool (elem) (not (not elem)))
+(defun x->bool (elt) (not (not elt)))
 
 (defun flatten (lis)
   "Removes nestings from a list."
@@ -23,12 +23,15 @@
 (setq darwin-p  (eq system-type 'darwin)
       carbon-p  (eq window-system 'mac)
       linux-p   (eq system-type 'gnu/linux)
-      colinux-p (and linux-p
+      colinux-p (when linux-p
+                  (let ((file "/proc/modules"))
+                    (and
+                     (file-readable-p file)
                      (x->bool
                       (with-temp-buffer
-                        (insert-file-contents "/proc/modules")
+                        (insert-file-contents file)
                         (goto-char (point-min))
-                        (re-search-forward "^cofuse\.+" nil t))))
+                        (re-search-forward "^cofuse\.+" nil t))))))
       cygwin-p  (eq system-type 'cygwin)
       nt-p      (eq system-type 'windows-nt)
       meadow-p  (featurep 'meadow)
@@ -47,7 +50,7 @@
       (expand-file-name "customize.el" base-directory))
 
 (defun merge-path-list (init lis)
-  (fold (lambda (x y)
+  (fold-right (lambda (x y)
           (let ((expanded-name (expand-file-name x)))
             (if (file-accessible-directory-p x)
                 (append (list expanded-name)
