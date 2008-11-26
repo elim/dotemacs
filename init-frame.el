@@ -2,18 +2,35 @@
 
 (when window-system
   (setq-default line-spacing (if carbon-p nil 2))
-  (setq default-frame-alist
-        (append
-         '((foreground-color . "gray")
-           (background-color . "black")
-           (cursor-color  . "blue")
-           (alpha . (90 95)))
-         default-frame-alist))
+  (setq frame-alpha-lower-limit 20
+        frame-alpha-upper-limit 100
+        default-frame-alist (append
+                             '((foreground-color . "gray")
+                               (background-color . "black")
+                               (cursor-color  . "blue")
+                               (alpha . (90 95)))
+                             default-frame-alist)
+        initial-frame-alist (append
+                             '((fullscreen . fullboth))
+                             default-frame-alist))
 
-  (setq initial-frame-alist
-        (append
-         '((fullscreen . fullboth))
-         default-frame-alist))
+  (defun set-alpha (elt)
+    (interactive
+     (list (list
+            (set-alpha-internal-get-alpha-value
+             "Foreground(%): " (car (frame-parameter nil 'alpha)))
+            (set-alpha-internal-get-alpha-value
+             "Background(%): " (cadr (frame-parameter nil 'alpha))))))
+    (set-frame-parameter nil 'alpha elt))
+
+  (defun set-alpha-internal (prompt current)
+    (let (val)
+      (while
+          (not (and
+                (setq val (read-number prompt current))
+                (<= frame-alpha-lower-limit value)
+                (>= frame-alpha-upper-limit value))))
+      val))
 
   ;; http://lists.sourceforge.jp/mailman/archives/macemacsjp-english/2006-April/000569.html
   (when carbon-p
