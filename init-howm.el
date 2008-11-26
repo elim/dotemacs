@@ -32,7 +32,7 @@
                              howm-default-key-table))
        (howm-set-keymap)))
 
-  (when (functionp #'elscreen-display-version)
+  (when (require 'elscreen nil t)
     (defadvice howm-menu (before forced-elscreen-zero activate)
       (if (memq 0 (elscreen-get-screen-list))
           (elscreen-goto 0)
@@ -73,7 +73,7 @@ Offset is demanded when calling with C-u M-x."
       (unless (file-directory-p diary-directory)
         (make-directory diary-directory 'parents))
 
-      (if (functionp #'elscreen-find-file)
+      (if (require 'elscreen nil t)
           (elscreen-find-file diary-file)
         (find-file diary-file))
 
