@@ -8,7 +8,7 @@
                              '((foreground-color . "gray")
                                (background-color . "black")
                                (cursor-color  . "blue")
-                               (alpha . (90 95)))
+                               (alpha . (90 85)))
                              default-frame-alist)
         initial-frame-alist (append
                              '((fullscreen . fullboth))
@@ -17,9 +17,9 @@
   (defun set-alpha (elt)
     (interactive
      (list (list
-            (set-alpha-internal-get-alpha-value
+            (set-alpha-internal
              "Foreground(%): " (car (frame-parameter nil 'alpha)))
-            (set-alpha-internal-get-alpha-value
+            (set-alpha-internal
              "Background(%): " (cadr (frame-parameter nil 'alpha))))))
     (set-frame-parameter nil 'alpha elt))
 
@@ -28,9 +28,39 @@
       (while
           (not (and
                 (setq val (read-number prompt current))
-                (<= frame-alpha-lower-limit value)
-                (>= frame-alpha-upper-limit value))))
+                (<= frame-alpha-lower-limit val)
+                (>= frame-alpha-upper-limit val))))
       val))
+
+  ;; http://kuraku.net/krk/2007/10/emacs-lisp.html
+  (defun change-interactive-alpha ()
+    (interactive)
+    (let ((tr (car (frame-parameter nil 'alpha))))
+      (catch 'endFlg
+        (while t
+          (message "change alpha set. p:up n:down alpha:%s/%s" tr (- tr 10))
+          (setq c (read-char))
+          (cond ((= c ?p)
+                 (setq tr (or (and (> (+ tr 5) 100) 100) (+ tr 5)))
+                 (set-alpha (list tr (- tr 10))))
+                ((= c ?n)
+                 (setq tr (or (and (<= (- tr 5) 0) 1) (- tr 5)))
+                 (set-alpha (list tr (- tr 10))))
+                ((and (/= c ?p) (/= c ?n))
+                 (message "quit alpha:%s/%s" tr (- tr 10))
+                 (throw 'endFlg t)))))))
+  (global-set-key [(control c)(control x)(a)] 'change-interactive-alpha)
+
+  ;; http://groups.google.com/group/carbon-emacs/msg/287876a967948923
+  (defun toggle-fullscreen ()
+    (interactive)
+    (set-frame-parameter nil
+                         'fullscreen
+                         (if (frame-parameter nil
+                                              'fullscreen)
+                             nil 'fullboth)))
+
+  (global-set-key [(meta return)] 'toggle-fullscreen)
 
   ;; http://lists.sourceforge.jp/mailman/archives/macemacsjp-english/2006-April/000569.html
   (when carbon-p
@@ -47,15 +77,4 @@
        "tell application \"System Events\"
           set theFrontProcess to process 1 whose (frontmost is true) and (visible is true)
           set visible of theFrontProcess to false
-        end tell")))
-
-  ;; http://groups.google.com/group/carbon-emacs/msg/287876a967948923
-  (defun toggle-fullscreen ()
-    (interactive)
-    (set-frame-parameter nil
-                         'fullscreen
-                         (if (frame-parameter nil
-                                              'fullscreen)
-                             nil 'fullboth)))
-
-  (global-set-key [(meta return)] 'toggle-fullscreen))
+        end tell"))))
