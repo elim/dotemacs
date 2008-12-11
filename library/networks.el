@@ -22,36 +22,6 @@
                     (match-string 1))))))))
 (load-keychain)
 
-(defun get-ip-address ()
-  (interactive)
-  (let
-      ((traceroute
-        (or
-         (locate-library "traceroute" nil exec-path)
-         (locate-library "tracert.exe" nil exec-path)))
-       (host-name
-        (if (string-match "\\." system-name)
-            (progn
-              (string-match "^\\(.+?\\)\\." system-name)
-              (match-string-no-properties 1 system-name))
-          system-name)))
-
-    (if traceroute
-        (with-temp-buffer
-          (call-process traceroute nil t nil host-name)
-          (goto-char (point-min))
-          (if (re-search-forward "[^0-9]*\\([0-9]+\\(\.[0-9]+\\)+\\)" nil t)
-              (match-string 1)))
-      "unknown")))
-
-(defun domestic-network-member-p ()
-  (let
-      ((domestic-address "^192.168.119.")
-       (domestic-domain-name "fascinating.local$"))
-    (and
-     (string-match domestic-address (get-ip-address))
-     (string-match domestic-domain-name system-name))))
-
 ;; based upon
 ;; http://deisui.bug.org/%7Eueno/memo/emacs-ssh.html
 ;; http://triaez.kaisei.org/%7Ekaoru/ssh/emacs-ssh.html
