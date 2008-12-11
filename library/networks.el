@@ -1,24 +1,26 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-;;; $Id$
 
-(unless (getenv "SSH_AGENT_PID")
-  (let
-      ((keychain-output
-        (expand-file-name
-         (format "~/.keychain/%s-sh"
-                 (car (split-string (system-name) "\\."))))))
+(defun load-keychain ()
+  (interactive)
+  (unless (getenv "SSH_AGENT_PID")
+    (let
+        ((keychain-output
+          (expand-file-name
+           (format "~/.keychain/%s-sh"
+                   (car (split-string (system-name) "\\."))))))
 
-    (when (file-readable-p keychain-output)
-      (with-temp-buffer
-        (insert-file-contents keychain-output)
-        (setenv "SSH_AUTH_SOCK"
-                (when (re-search-forward
-                       "SSH_AUTH_SOCK=\\(.+[0-9]+\\);" nil t)
-                  (match-string 1)))
-        (setenv "SSH_AGENT_PID"
-                (when (re-search-forward
-                       "SSH_AGENT_PID=\\([0-9]+\\);" nil t)
-                  (match-string 1)))))))
+      (when (file-readable-p keychain-output)
+        (with-temp-buffer
+          (insert-file-contents keychain-output)
+          (setenv "SSH_AUTH_SOCK"
+                  (when (re-search-forward
+                         "SSH_AUTH_SOCK=\\(.+[0-9]+\\);" nil t)
+                    (match-string 1)))
+          (setenv "SSH_AGENT_PID"
+                  (when (re-search-forward
+                         "SSH_AGENT_PID=\\([0-9]+\\);" nil t)
+                    (match-string 1))))))))
+(load-keychain)
 
 (defun get-ip-address ()
   (interactive)
