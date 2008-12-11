@@ -1,5 +1,8 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
+;; Common Lisp extensions for Emacs(use it anyway).
+(require 'cl)
+
 ;; functions
 (defun x->bool (elt) (not (not elt)))
 
