@@ -6,7 +6,6 @@
               :host "localhost"
               :service 6667
               :coding utf-8))
-           riece-server "default"
            riece-ndcc-server-address "localhost"
            riece-channel-buffer-mode t
            riece-user-list-buffer-mode t
@@ -84,6 +83,11 @@
 
           (add-hook 'riece-notify-keyword-functions
                     #'riece-notify-keyword-function))
+
+     (defadvice riece (before
+                       force-connect-default-server
+                       activate)
+       (setq riece-server "default"))
 
      (add-hook 'riece-startup-hook
                '(lambda ()
