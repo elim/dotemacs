@@ -3,7 +3,7 @@
 (and (require 'tramp nil t)
      (setq
       tramp-verbose 10
-      tramp-debug-buffer t
+      tramp-debug-buffer nil
       tramp-methods
       (mapcar (lambda (x)
                 (if (string-equal (car x) "sudo")
