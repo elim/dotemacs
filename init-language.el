@@ -48,21 +48,7 @@
              (#x2e80 . #xd7a3) ; East Asian Scripts
              (#xff00 . #xffef)))))
 
-(unless window-system
-  (let
-      ((enc
-        (cond
-         (cygwin-p 'sjis-dos)
-         (t        'euc-jp-unix))))
-
-    (mapc #'(lambda (func)
-              (funcall func enc))
-          (list #'set-terminal-coding-system
-                #'set-keyboard-coding-system))
-
-    (unless cygwin-p
-      (string-equal "screen" (getenv "TERM"))
-      (call-process "screen" nil nil nil
-                    "-X" "eval"
-                    "encoding eucJP"
-                    "cjkwidth on"))))
+(and cygwin-p
+     (not window-system)
+     (set-terminal-coding-system 'sjis-dos)
+     (set-keyboard-coding-system 'sjis-dos))
