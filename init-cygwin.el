@@ -20,13 +20,14 @@
   (add-hook 'shell-mode-hook
             '(lambda ()
                (set-buffer-process-coding-system
-                'undecided-dos 'sjis-unix)))
+                'undecided-dos 'sjis-unix))))
 
+(when meadow-p
   (and (mapcar #'executable-find
                (list "getclip" "putclip"))
-
+       
        (defadvice kill-new (after normalized-clipboard activate)
          (start-process
           "normalization of the contents of the clipboard."
           "*Messages*" shell-file-name shell-command-switch
-          "getclip | setclip"))))
+          "getclip | petclip"))))
