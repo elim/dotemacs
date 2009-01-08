@@ -9,9 +9,9 @@
   (cond
    (windows-p
     (cond
-     ((executable-find "cygstart")
-      (setq browse-url-generic-program "cygstart"
-            browse-url-generic-args '("--open")))
+     ((executable-find "rundll32")
+      (setq browse-url-generic-program "rundll32"
+            browse-url-generic-args '("url.dll,FileProtocolHandler")))
      ((executable-find "cmd")
       (setq browse-url-generic-program "cmd"
             browse-url-generic-args '("/c" "start")))))
