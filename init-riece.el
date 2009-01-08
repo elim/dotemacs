@@ -84,10 +84,30 @@
           (add-hook 'riece-notify-keyword-functions
                     #'riece-notify-keyword-function))
 
-     (defadvice riece (before
-                       force-connect-default-server
-                       activate)
-       (setq riece-server "default"))
+     (defvar riece-notify-nicks (list))
+     (setq riece-notify-nicks (list "elim"))
+
+     (defadvice riece-keyword-message-filter
+       (around extended-riece-keyword-message-filter (message) activate)
+
+       (let ((speaker (aref (riece-message-speaker message) 0))
+             (message-text (riece-message-text message)))
+
+         (mapcar (lambda (nick)
+                   (when (string-match nick speaker)
+                     (put-text-property 0 (length speaker)
+                                        'riece-overlay-face
+                                        riece-keyword-face
+                                        speaker)))
+                 riece-notify-nicks))
+       ad-do-it)
+
+     (eval-after-load "riece"
+       (lambda ()
+         (ad-activate-regexp
+          "^extended-riece-keyword-message-filter$")
+         (ad-activate-regexp
+          "^riece-force-connect-default-server$")))
 
      (add-hook 'riece-startup-hook
                '(lambda ()
