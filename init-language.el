@@ -8,17 +8,14 @@
 ; default-keyboard-coding-system
 ; coding-category-list
 
-;; Mule-UCS settings.
-(and (>= 21 emacs-major-version)
-     (require 'un-define nil t) ; Unicode
-     (require 'jisx0213 nil t)) ; JIS X 0213
-
 (and (member '("utf-8-unix") coding-system-alist)
      (setenv "LANG"
              (or (getenv "LANG") "en_US.UTF-8"))
      (setenv "LC_CTYPE"
              (or (getenv "LC_CTYPE") "ja_JP.UTF-8"))
-     (set-language-environment 'utf-8)
+     (set-language-environment 'Japanese)
+     (setq default-process-coding-system
+           '(utf-8-unix . utf-8-unix))
 
      ;; modified coding detection priority. (low => high)
      (mapc  #'prefer-coding-system
