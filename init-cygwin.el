@@ -7,7 +7,7 @@
 ;;   http://mechanics.civil.tohoku.ac.jp/soft/node45.html
 ;;   http://meadow.sourceforge.jp/cgi-bin/hiki.cgi?%B0%EC%C8%CC%C5%AA%A4%CA%BE%F0%CA%F3
 
-(when (featurep 'meadow)
+(when windows-p
   (setq explicit-shell-file-name
         (fold-left (lambda (x y)
                      (or x (executable-find y)))
