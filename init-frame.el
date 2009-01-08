@@ -9,9 +9,6 @@
                                (background-color . "black")
                                (cursor-color  . "blue")
                                (alpha . (90 85)))
-                             default-frame-alist)
-        initial-frame-alist (append
-                             '((fullscreen . fullboth))
                              default-frame-alist))
 
   (defun set-alpha (elt)
@@ -49,18 +46,30 @@
                 ((and (/= c ?p) (/= c ?n))
                  (message "quit alpha:%s/%s" tr (- tr 10))
                  (throw 'endFlg t)))))))
+
   (global-set-key [(control c)(control x)(a)] 'change-interactive-alpha)
 
   ;; http://groups.google.com/group/carbon-emacs/msg/287876a967948923
+  ;; http://www.computerartisan.com/meadow/diary.txt
+  (defun frame-fullscreen ()
+    (interactive)
+    (set-frame-parameter nil 'fullscreen 'fullboth)
+    (when nt-p (w32-send-sys-command 61488)))
+
+  (defun frame-restore ()
+    (interactive)
+    (set-frame-parameter nil 'fullscreen nil)
+    (when nt-p (w32-send-sys-command 61728)))
+
   (defun toggle-fullscreen ()
     (interactive)
-    (set-frame-parameter nil
-                         'fullscreen
-                         (if (frame-parameter nil
-                                              'fullscreen)
-                             nil 'fullboth)))
+    (if (frame-parameter nil 'fullscreen)
+        (frame-restore)
+      (frame-fullscreen)))
 
   (global-set-key [(meta return)] 'toggle-fullscreen)
+
+  (add-hook 'window-setup-hook #'frame-fullscreen)
 
   ;; http://lists.sourceforge.jp/mailman/archives/macemacsjp-english/2006-April/000569.html
   (when carbon-p
