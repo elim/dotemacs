@@ -104,12 +104,6 @@
 
   (eval-after-load "riece"
     (lambda ()
-      (ad-activate-regexp
-       "^extended-riece-keyword-message-filter$")
-      (ad-activate-regexp
-       "^riece-force-connect-default-server$")))
-
-  (add-hook 'riece-startup-hook
-            '(lambda ()
-               (define-key riece-command-mode-map [(control x) (n)]
-                 'riece-command-enter-message-as-notice))))
+      (ad-activate-regexp ".+riece.+")
+      (define-key riece-command-mode-map [(control x) (n)]
+        'riece-command-enter-message-as-notice))))
