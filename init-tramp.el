@@ -2,7 +2,7 @@
 
 (and (require 'tramp nil t)
      (setq
-      tramp-verbose 10
+      tramp-verbose 9 ;; default => 9
       tramp-debug-buffer nil
       tramp-methods
       (mapcar (lambda (x)

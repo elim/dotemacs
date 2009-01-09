@@ -29,9 +29,7 @@
       (erase-buffer)
       (insert-file-contents file))))
 
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (read-scratch-data)))
+(add-hook 'emacs-startup-hook 'read-scratch-data)
 
 (defadvice elscreen-kill (before call-save-scratch-data
                                  activate)
