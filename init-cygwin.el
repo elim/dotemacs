@@ -20,7 +20,37 @@
   (add-hook 'shell-mode-hook
             '(lambda ()
                (set-buffer-process-coding-system
-                'undecided-dos 'sjis-unix))))
+                'undecided-dos 'sjis-unix)))
+
+  ;; http://ntemacsjp.sourceforge.jp/matsuan/IndexJp.html
+  ;; handle cygwin mount
+
+  (and (executable-find "mount.exe")
+       (require 'cygwin-mount nil t)
+       (cygwin-mount-activate))
+
+  ;; follow windows short cut
+  (and (setq w32-symlinks-handle-shortcuts t)
+       (require 'w32-symlinks nil t)
+
+       ;; http://www.bookshelf.jp/cgi-bin/goto.cgi?file=meadow&node=findfile%20symlink
+       (defadvice minibuffer-complete
+         (before expand-symlinks activate)
+         (let ((file (expand-file-name
+                      (buffer-substring-no-properties
+                       (line-beginning-position)
+                       (line-end-position)))))
+           (when (string-match ".lnk$" file)
+             (delete-region
+              (line-beginning-position)
+              (line-end-position))
+             (if (file-directory-p
+                  (w32-symlinks-parse-symlink file))
+                 (insert
+                  (concat
+                   (w32-symlinks-parse-symlink file) "/"))
+               (insert (w32-symlinks-parse-symlink file))))))))
+
 
 (when meadow-p
   (and (mapcar #'executable-find
