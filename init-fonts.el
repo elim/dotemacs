@@ -1,7 +1,8 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
-;; X Window System
-(when (eq window-system 'x)
+(cond
+ ;; X Window System
+ ((eq window-system 'x)
   (cond
    ;; emacs23
    ((= 23 emacs-major-version)
@@ -30,8 +31,8 @@
            "-shinonome-gothic-bold-i-normal--12-0-0-0-c-0-*-*"))
       (error (princ err))))))
 
-;; Meadow 2.x or greater
-(when (functionp 'w32-list-font)
+ ;; Meadow 2.x or greater
+ ((functionp 'w32-list-font)
   (not (w32-list-fonts "shinonome 14"))
 
   (let
@@ -72,14 +73,34 @@
        'default-frame-alist
        '(font . "shinonome 14")))))
 
-;; NTEmacs
-(when nt-p
-  (set-default-font "ＭＳ ゴシック-10"))
+ ;; NTEmacs
+ ;; http://ntemacsjp.sourceforge.jp/matsuan/FontSettingJp.html
+ (nt-p
+   (setq w32-enable-synthesized-fonts t
+         w32-use-w32-font-dialog nil)
 
-;; Carbon Emacs
-(when carbon-p
-  (require 'carbon-font nil t)
-  (add-to-list
-   'default-frame-alist
-   '(font . "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-osaka"))
-  (setq mac-allow-anti-aliasing nil))
+   (set-face-attribute 'default nil
+                       :family "ＭＳ ゴシック"
+                       :height 100)
+
+   (set-fontset-font "fontset-default"
+                     'japanese-jisx0208
+                     '("ＭＳ ゴシック*" . "jisx0208-sjis"))
+
+   (set-fontset-font "fontset-default"
+                     'katakana-jisx0201
+                     '("ＭＳ ゴシック*" . "jisx0201-katakana"))
+
+   (add-to-list 'face-font-rescale-alist
+                `(,(encode-coding-string ".*ＭＳ.*bold.*iso8859.*" 'emacs-mule) . 0.9))
+
+   (add-to-list 'face-font-rescale-alist
+                `(,(encode-coding-string ".*ＭＳ.*bold.*jisx02.*" 'emacs-mule) . 0.95)))
+
+  ;; Carbon Emacs
+  (carbon-p
+    (require 'carbon-font nil t)
+    (add-to-list
+     'default-frame-alist
+     '(font . "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-osaka"))
+    (setq mac-allow-anti-aliasing nil)))
