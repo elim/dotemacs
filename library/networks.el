@@ -35,8 +35,7 @@
              (host (or (plist-get plist :host) host))
              (service (or (plist-get plist :service) service))
              (process-connection-type nil))
-         (start-process-shell-command
-          name buffer
+         (start-process name buffer
           (or (plist-get plist :ssh) "ssh")
           (or (plist-get plist :sshflags) "-Caxq")
           (plist-get plist :relay)
