@@ -4,30 +4,7 @@
   (global-set-key "\C-xm" 'browse-url-at-point)
 
   (setq browse-url-browser-display t
-        browse-url-new-window-flag nil
-        browse-url-browser-function 'browse-url-generic)
-  (cond
-   (windows-p
-    (cond
-     ((executable-find "rundll32")
-      (setq browse-url-generic-program "rundll32"
-            browse-url-generic-args '("url.dll,FileProtocolHandler")))
-     ((executable-find "cmd")
-      (setq browse-url-generic-program "cmd"
-            browse-url-generic-args '("/c" "start")))))
-
-   (darwin-p
-    (setq browse-url-generic-program "open"))
-
-   (window-system
-    (setq browse-url-generic-program
-          (fold-left (lambda (x y)
-                       (or x (executable-find y)))
-                     nil (list "x-www-browser"
-                               "firefox"))))
-   ((functionp #'w3m-browse-url)
-    (setq browse-url-browser-function #'w3m-browse-url)))
-
+        browse-url-new-window-flag nil)
 
   ;; http://cgi.netlaputa.ne.jp/~kose/diary/?200209b&to=200209125#200209125
   (defadvice thing-at-point-url-at-point
