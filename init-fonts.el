@@ -92,10 +92,12 @@
                      '("ＭＳ ゴシック*" . "jisx0201-katakana"))
 
    (add-to-list 'face-font-rescale-alist
-                `(,(encode-coding-string ".*ＭＳ.*bold.*iso8859.*" 'emacs-mule) . 0.9))
+                `(,(encode-coding-string
+                    ".*ＭＳ.*bold.*iso8859.*" 'emacs-mule) . 0.9))
 
    (add-to-list 'face-font-rescale-alist
-                `(,(encode-coding-string ".*ＭＳ.*bold.*jisx02.*" 'emacs-mule) . 0.95)))
+                `(,(encode-coding-string
+                    ".*ＭＳ.*bold.*jisx02.*" 'emacs-mule) . 0.95)))
 
   ;; Carbon Emacs
   (carbon-p
@@ -103,4 +105,23 @@
     (add-to-list
      'default-frame-alist
      '(font . "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-osaka"))
-    (setq mac-allow-anti-aliasing nil)))
+    (setq mac-allow-anti-aliasing nil))
+
+  (ns-p
+   (setq my-font "-*-*-medium-r-normal--14-*-*-*-*-*-fontset-hiramaru")
+   (setq fixed-width-use-QuickDraw-for-ascii t)
+   (setq mac-allow-anti-aliasing nil)
+   (set-default-font my-font)
+   (add-to-list 'default-frame-alist `(font . ,my-font))
+   (set-fontset-font
+    (frame-parameter nil 'font)
+    'japanese-jisx0208
+    '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+   (setq face-font-rescale-alist
+         '(("^-apple-hiragino.*" . 1.2)
+           (".*osaka-bold.*" . 1.2)
+           (".*osaka-medium.*" . 1.2)
+           (".*courier-bold-.*-mac-roman" . 1.0)
+           (".*monaco cy-bold-.*-mac-cyrillic" . 0.9)
+           (".*monaco-bold-.*-mac-roman" . 0.9)
+           ("-cdac$" . 1.3)))))
