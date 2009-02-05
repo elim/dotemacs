@@ -1,43 +1,33 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
 (when (autoload-if-found 'riece "riece" nil t)
-  (setq riece-server-alist
-        '(("default"
-           :host "localhost"
-           :service 6667
-           :coding utf-8))
+  (setq riece-directory (expand-file-name "riece" base-directory)
+        riece-addon-directory (expand-file-name "addons" riece-directory)
+        riece-saved-variables-file (expand-file-name "save" riece-directory)
+        riece-variables-file (expand-file-name "init" riece-directory)
+        riece-variables-files (list riece-variables-file
+                                    riece-saved-variables-file)
+
+        riece-saved-forms nil
+        riece-addons '(riece-alias riece-button
+                                   riece-ctcp riece-ctlseq riece-guess
+                                   riece-highlight riece-history
+                                   riece-icon riece-keyword
+                                   riece-menu riece-skk-kakutei
+                                   riece-unread riece-url)
+
+        riece-server-alist '(("default"
+                              :host "localhost"
+                              :service 6667
+                              :coding utf-8))
+
         riece-ndcc-server-address "localhost"
         riece-channel-buffer-mode t
         riece-user-list-buffer-mode t
         riece-layout "middle-left"
 
-        riece-preference-directory
-        (expand-file-name "riece" base-directory)
-
-        riece-addon-directory
-        (expand-file-name "addons" riece-preference-directory)
-
-        riece-saved-variables-file
-        (expand-file-name "save" riece-preference-directory)
-
-        riece-variables-file
-        (expand-file-name "init" riece-preference-directory)
-
-        riece-variables-files (list riece-variables-file
-                                    riece-saved-variables-file)
-
-        riece-saved-forms '(riece-channel-buffer-mode
-                            riece-others-buffer-mode
-                            riece-user-list-buffer-mode
-                            riece-channel-list-buffer-mode
-                            riece-layout riece-addons)
-
-        riece-addons '(riece-alias
-                       riece-button
-                       riece-ctcp riece-guess riece-highlight
-                       riece-history riece-icon riece-keyword
-                       riece-menu riece-skk-kakutei riece-unread
-                       riece-url)
+        riece-nickname "elim"
+        riece-user-agent 'emacs-riece-config
 
         riece-my-nicks (list
                         "elim"         "Elim"
