@@ -5,7 +5,10 @@
       (if (= 23 emacs-major-version)
           22 emacs-major-version))) ; for Emacs23 !!Very dirty hack!!
 
-  (when (require 'w3m-load nil t)
+  (when (and
+         (executable-find "w3m")
+         (require 'w3m-load nil t))
+
     (setq w3m-preference-directory
           (expand-file-name "w3m" base-directory)
           w3m-init-file
