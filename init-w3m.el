@@ -33,7 +33,7 @@
         `("google"
           ,(concat
             "http://www.google.com/search?"
-            "hl=en&lr=lang_ja&q=%s&oe=utf-8&ie=utf-8") utf-8)))
+            "hl=en&lr=lang_ja&q=%s&oe=utf-8&ie=utf-8&safe=off") utf-8)))
 
     (require 'w3m-wget nil t)
 
