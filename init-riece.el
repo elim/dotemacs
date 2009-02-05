@@ -65,34 +65,40 @@
 
   (and riece-notify-sound
        riece-notify-sound-player
-
-       (defun riece-notify-keyword-function (keyword)
+       (defun riece-keyword-notify-function (keyword message)
          (when (and (not (member keyword riece-not-my-nicks))
                     (member keyword riece-my-nicks))
-           (start-process keyword "*Messages*"
+           (start-process keyword " *riece keyword*"
                           riece-notify-sound-player
-                          (expand-file-name riece-notify-sound))))
+                          (expand-file-name riece-notify-sound)))))
 
-       (add-hook 'riece-notify-keyword-functions
-                 #'riece-notify-keyword-function))
-
-  (defvar riece-notify-nicks (list))
-  (setq riece-notify-nicks (list "elim"))
 
   (defadvice riece-keyword-message-filter
     (around extended-riece-keyword-message-filter (message) activate)
 
     (let ((speaker (aref (riece-message-speaker message) 0))
-          (message-text (riece-message-text message)))
+          (message-text (riece-message-text message))
+          (channel (mapconcat (lambda (x) (format "%s" x))
+                              (riece-message-target message)""))
+          (message-type (riece-message-type message)))
 
       (mapcar (lambda (nick)
-                (when (string-match nick speaker)
+                (when (and (string-match nick speaker)
+                           (null message-type))
+                  (growl (format "%s\n%s: %s" channel speaker message-text))
                   (put-text-property 0 (length speaker)
                                      'riece-overlay-face
                                      riece-keyword-face
                                      speaker)))
               riece-notify-nicks))
     ad-do-it)
+
+  (add-hook 'riece-keyword-notify-functions
+            #'riece-keyword-notify-function)
+
+  (add-hook 'riece-after-load-startup-hook
+            (lambda ()
+              (setq riece-server "default")))
 
   (eval-after-load "riece"
     (lambda ()
