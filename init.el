@@ -24,6 +24,7 @@
 
 ;; system-type predicates
 (setq darwin-p  (eq system-type 'darwin)
+      ns-p      (featurep 'ns)
       carbon-p  (eq window-system 'mac)
       linux-p   (eq system-type 'gnu/linux)
       colinux-p (when linux-p

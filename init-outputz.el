@@ -42,20 +42,17 @@
                   outputz-interval-second
                   'symbiosis-outputz-auto-save-buffers)
 
-  (and (require 'growl nil t)
-       (add-hook 'outputz-mode-hook
-                 (lambda ()
-                   (set (make-local-variable 'outputz-latest-count) 0)))
+  (global-outputz-mode t)
 
-       (defun growl-outputz (&optional count)
-         (growl (format "You are %s bytes Outputz!"
-                        (or count
-                            outputz-latest-count))))
+  (when (require 'growl nil t)
+    (defun growl-outputz (&optional count)
+        (growl (format "You are %s bytes Outputz!"
+                       (or count
+                           outputz-latest-count))))
+    (defadvice outputz-post (before call-growl-outputz (count))
+      (growl-outputz (setq outputz-latest-count count)))
 
-       (defadvice outputz-post (before
-                                call-growl-outputz (count)
-                                activate)
-         (growl-outputz (setq outputz-latest-count count)))
-       (global-outputz-mode t)))
-
-(setq outputz-interval-second 1)
+    (add-hook 'outputz-mode-hook
+              (lambda ()
+                (set (make-local-variable 'outputz-latest-count) 0)
+                (ad-activate-regexp ".+outputz.+")))))
