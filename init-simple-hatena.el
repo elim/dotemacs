@@ -9,8 +9,8 @@
         simple-hatena-time-offset 6
         simple-hatena-option-debug-flag nil)
 
-        (add-to-list 'file-coding-system-alist
-                     `((,simple-hatena-filename-regex utf-8-unix . utf-8-unix)))
+;        (add-to-list 'file-coding-system-alist
+;                     `((,simple-hatena-filename-regex utf-8-unix . utf-8-unix)))
         
 
         (defadvice simple-hatena-internal-safe-find-file (after
