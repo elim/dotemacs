@@ -107,21 +107,26 @@
      '(font . "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-osaka"))
     (setq mac-allow-anti-aliasing nil))
 
+  ;; Cocoa Emacs
   (ns-p
-   (setq my-font "-*-*-medium-r-normal--14-*-*-*-*-*-fontset-hiramaru")
-   (setq fixed-width-use-QuickDraw-for-ascii t)
-   (setq mac-allow-anti-aliasing nil)
-   (set-default-font my-font)
-   (add-to-list 'default-frame-alist `(font . ,my-font))
-   (set-fontset-font
-    (frame-parameter nil 'font)
-    'japanese-jisx0208
-    '("Hiragino Maru Gothic Pro" . "iso10646-1"))
-   (setq face-font-rescale-alist
+   (ns-set-resource nil "Font" "Osaka")
+   (ns-set-resource nil "FontSize" "12")
+   
+   (setq ns-font "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-osaka"
+         fixed-width-use-QuickDraw-for-ascii nil
+         mac-allow-anti-aliasing nil
+         face-font-rescale-alist
          '(("^-apple-hiragino.*" . 1.2)
            (".*osaka-bold.*" . 1.2)
            (".*osaka-medium.*" . 1.2)
            (".*courier-bold-.*-mac-roman" . 1.0)
            (".*monaco cy-bold-.*-mac-cyrillic" . 0.9)
            (".*monaco-bold-.*-mac-roman" . 0.9)
-           ("-cdac$" . 1.3)))))
+           ("-cdac$" . 1.3)))
+
+   (set-default-font ns-font)
+   (add-to-list 'default-frame-alist `(font . ,ns-font))
+   (set-fontset-font
+    (frame-parameter nil 'font)
+    'japanese-jisx0208
+    '("osaka" . "iso10646-1"))))
