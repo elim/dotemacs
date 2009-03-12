@@ -61,20 +61,24 @@
         (fold-left (lambda (x y)
                      (or x (and (file-readable-p y) y)))
                    nil (list "~/sounds/notify.wav"
-                             "/System/Library/Sounds/Funk.aiff")))
+                             "/System/Library/Sounds/Funk.aiff"))
+
+        riece-growled-p nil)
 
   (and riece-notify-sound
        riece-notify-sound-player
-       (defun riece-keyword-notify-function (keyword message)
+       (defun riece-keyword-notify-sound (keyword message)
          (when (and (not (member keyword riece-not-my-nicks))
                     (member keyword riece-my-nicks))
-           (start-process keyword " *riece keyword*"
+           (start-process "riece-keyword" " *riece keyword*"
                           riece-notify-sound-player
-                          (expand-file-name riece-notify-sound)))))
-
+                          (expand-file-name riece-notify-sound))))
+       (add-hook 'riece-keyword-notify-functions #'riece-keyword-notify-sound))
 
   (defadvice riece-keyword-message-filter
     (around extended-riece-keyword-message-filter (message) activate)
+
+    (setq riece-growled-p nil)
 
     (let ((speaker (aref (riece-message-speaker message) 0))
           (message-text (riece-message-text message))
@@ -86,6 +90,7 @@
                 (when (and (string-match nick speaker)
                            (null message-type))
                   (growl (format "%s\n%s: %s" channel speaker message-text))
+                  (setq riece-growled-p t)
                   (put-text-property 0 (length speaker)
                                      'riece-overlay-face
                                      riece-keyword-face
@@ -93,15 +98,12 @@
               riece-notify-nicks))
     ad-do-it)
 
-  (add-hook 'riece-keyword-notify-functions
-            #'riece-keyword-notify-function)
-
   (add-hook 'riece-after-load-startup-hook
             (lambda ()
               (setq riece-server "default")))
 
   (eval-after-load "riece"
-    (lambda ()
-      (ad-activate-regexp ".+riece.+")
+    '(and
       (define-key riece-command-mode-map [(control x) (n)]
-        'riece-command-enter-message-as-notice))))
+        'riece-command-enter-message-as-notice)
+      (ad-activate-regexp ".+riece.+"))))
