@@ -1,9 +1,12 @@
-*~
-*stuckdump
 *core
+*stuckdump
+*~
 anything-c-adaptive-history
 auto-save-list
 customize.el
+ddskk/custom.el*
 framesize.el
-session*
 games
+riece/log
+session*
+url
