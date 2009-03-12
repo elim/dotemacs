@@ -242,9 +242,8 @@ NOTE: Many variables will overwrite in a template later."
 (defadvice wl-template-apply (after after-template-apply activate)
   (setq signature-file-name
         (expand-file-name
-         (if wl-template
-             wl-template
-           "default") wl-signature-directory)))
+         (or wl-template
+             "default") wl-signature-directory)))
 
 ;; Change headers in draft sending time.
 ;(setq wl-draft-config-alist
