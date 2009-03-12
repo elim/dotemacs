@@ -50,21 +50,6 @@
 (define-key global-map
   [(control c)(control s)] 'scheme-other-window)
 
-(mapc '(lambda (f)
-         (let ((func (car f)) (args (cdr f)))
-           (when (functionp func)
-             (apply func args))))
-      '((line-number-mode t)
-        (global-font-lock-mode t)
-        (temp-buffer-resize-mode t)
-        (keyboard-translate ?\C-h ?\C-?)
-        (column-number-mode t)
-        (display-time)
-        (menu-bar-mode -1)
-        (tool-bar-mode -1)
-        (set-scroll-bar-mode 'right)
-        (scroll-bar-mode -1)))
-
 ;; indent settings
 (put 'and-let* 'scheme-indent-function 1)
 (put 'begin0 'scheme-indent-function 0)
