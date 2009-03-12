@@ -6,4 +6,5 @@
 ;; http://homepage3.nifty.com/oatu/emacs/archives/auto-save-buffers.el
 
 (and (require 'auto-save-buffers nil t)
-     (run-with-idle-timer 0.5 t 'auto-save-buffers "" "/ss.+/" ))
+     (setq auto-save-buffers-interval 0.5)
+     (run-with-idle-timer auto-save-buffers-interval t 'auto-save-buffers "" "/ss.+/" ))
