@@ -26,6 +26,8 @@
         wl-biff-check-interval 30
         wl-biff-notify-hook '(ding))
 
+  (add-hook 'term-setup-hook
+            (lambda () (wl)))
   (add-hook
    'wl-draft-mode-hook
    '(lambda ()
