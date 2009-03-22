@@ -20,8 +20,8 @@
 
   (global-set-key [(control c)(,)(,)] 'howm-menu)
 
-  (add-hook 'term-setup-hook
-            (lambda () (howm-menu)))
+;;   (add-hook 'term-setup-hook
+;;             (lambda () (howm-menu)))
 
   (eval-after-load "howm-menu"
     '(progn
