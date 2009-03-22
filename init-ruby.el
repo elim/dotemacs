@@ -12,7 +12,7 @@
         (list '("\\.rb$" . ruby-mode)
               '("Rakefile" . ruby-mode)))
 
-  (define-key ruby-mode-map "\C-m" 'ruby-reindent-then-newline-and-indent)
+  (define-key ruby-mode-map "\C-m" 'reindent-then-newline-and-indent)
 
   (and (require 'ruby-electric nil t)
        (setq ruby-electric-expand-delimiters-list nil)
