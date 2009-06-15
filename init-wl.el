@@ -24,7 +24,11 @@
         wl-draft-use-frame nil
         wl-biff-check-folder-list '("%INBOX")
         wl-biff-check-interval 30
-        wl-biff-notify-hook '(ding))
+        wl-biff-notify-hook '(ding)
+
+        ssl-program-arguments
+        '("s_client" "-quiet" "-host" host "-port" service))
+
 
   (add-hook 'term-setup-hook
             (lambda () (wl)))
