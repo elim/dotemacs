@@ -23,10 +23,10 @@
        'search-buffers))
 
 (eval-after-load "color-moccur"
-  '(require 'moccur-edit))
+  '(require 'moccur-edit nil t))
 
 (eval-after-load "ibuffer"
-  '(require 'color-moccur))
+  '(require 'color-moccur nil t))
 
 (setq *moccur-buffer-name-exclusion-list*
       '(".+TAGS.+" "*Completions*" "*Messages*"
