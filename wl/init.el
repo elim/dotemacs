@@ -13,41 +13,36 @@
 (setq wl-subscribed-mailing-list nil)
 
 ;;; [[ Server Setting ]]
-;; IMAP server
-(setq elmo-imap4-default-server "localhost"
-      elmo-imap4-default-port 143
-      elmo-imap4-default-authenticate-type 'cram-md5)
+;; for Gmail.
 
-(defun wl-restore-default-settings ()
-  "reset variables.
+;; IMAP settings.
+(setq elmo-imap4-default-server "imap.gmail.com"
+      elmo-imap4-default-user "takeru.naito@gmail.com"
+      elmo-imap4-default-authenticate-type 'clear
+      elmo-imap4-default-port '993
+      elmo-imap4-default-stream-type 'ssl)
 
-NOTE: Many variables will overwrite in a template later."
+;; IMAP folder settings.
+(setq wl-dispose-folder-alist
+      (cons '("^%inbox" . remove) wl-dispose-folder-alist)
+      wl-folder-check-async t
+      wl-default-folder "%inbox"
+      ;wl-draft-folder "%[Gmail]/Drafts"
+      wl-draft-folder "+draft"
+      wl-trash-folder "%[Gmail]/Trash")
 
-  (setq ;; default settings
-   wl-from "nobody@example.net"
-   wl-local-domain nil
-   wl-message-id-use-wl-from t
-   wl-insert-message-id t
-
-   wl-fcc "%Sent"
-   wl-draft-folder "%Drafts"
-
-   ;;; [[ Server Setting ]]
-
-   ;; SMTP server
-   wl-smtp-posting-server "localhost"
-
-   ;; POP server
-   ;; Only a primary schoolchild can use the POP3.
-   ;; elmo-pop3-default-server nil
-
-   ;; NNTP server
-   elmo-nntp-default-server nil
-   wl-nntp-posting-server elmo-nntp-default-server))
-
-(wl-restore-default-settings)
+;; SMTP settings.
+(setq wl-smtp-connection-type 'starttls
+      wl-smtp-posting-port 587
+      wl-smtp-authenticate-type "plain"
+      wl-smtp-posting-user "takeru.naito@gmail.com"
+      wl-smtp-posting-server "smtp.gmail.com")
 
 ;;; [[ Basic Setting ]]
+
+(setq wl-from "takeru.naito@gmail.com"
+      wl-insert-message-id nil)
+
 ;; Default folder for `wl-summary-goto-folder'.
 (setq wl-default-folder "%INBOX")
 
@@ -136,7 +131,10 @@ NOTE: Many variables will overwrite in a template later."
             (wl-toggle-plugged 'on)))
 
 ;; Store draft message in queue folder if message is sent in unplugged status.
-(setq wl-draft-enable-queuing t)
+(setq wl-draft-enable-queuing t
+      wl-draft-add-references t
+      wl-draft-use-cache t)
+
 ;; when plug status is changed from unplugged to plugged,
 ;; queued message is flushed automatically.
 (setq wl-auto-flush-queue t)
@@ -209,41 +207,37 @@ NOTE: Many variables will overwrite in a template later."
 
 ;;; [[ Template ]]
 ;; signatures
-(setq signature-file-name nil)
-(setq wl-signature-directory
-      (expand-file-name "signatures" wl-preference-directory))
+;(setq signature-file-name nil)
+;(setq wl-signature-directory
+;      (expand-file-name "signatures" wl-preference-directory))
 
 ;; templates
-(setq wl-template-directory
-      (expand-file-name "templates" wl-preference-directory))
-(setq wl-template-alist nil)
+;(setq wl-template-directory
+;      (expand-file-name "templates" wl-preference-directory))
+;(setq wl-template-alist nil)
 
-(load-directory-files wl-template-directory "^.+el$")
+;(load-directory-files wl-template-directory "^.+el$")
 
-(add-hook 'wl-mail-setup-hook
-          (lambda ()
-            (wl-template-apply "default")
-            (setq wl-template "default")))
 
 ;; based upon
 ;; http://nijino.homelinux.net/diary/200305.shtml#200305121
-(add-hook 'wl-draft-send-hook
-          (lambda ()
-            (set (make-local-variable 'wl-from)
-                 (std11-fetch-field "From"))
-            (set (make-local-variable 'wl-fcc)
-                 (std11-fetch-field "Fcc"))
-            (set (make-local-variable 'wl-organization)
-                 (std11-fetch-field "Organization"))))
+;; (add-hook 'wl-draft-send-hook
+;;           (lambda ()
+;;             (set (make-local-variable 'wl-from)
+;;                  (std11-fetch-field "From"))
+;;             (set (make-local-variable 'wl-fcc)
+;;                  (std11-fetch-field "Fcc"))
+;;             (set (make-local-variable 'wl-organization)
+;;                  (std11-fetch-field "Organization"))))
 
-(defadvice wl-template-apply (before before-template-apply activate)
-  (wl-restore-default-settings))
+;; (defadvice wl-template-apply (before before-template-apply activate))
+;;   (wl-restore-default-settings))
 
-(defadvice wl-template-apply (after after-template-apply activate)
-  (setq signature-file-name
-        (expand-file-name
-         (or wl-template
-             "default") wl-signature-directory)))
+;; (defadvice wl-template-apply (after after-template-apply activate)
+;;   (setq signature-file-name
+;;         (expand-file-name
+;;          (or wl-template
+;;              "default") wl-signature-directory)))
 
 ;; Change headers in draft sending time.
 ;(setq wl-draft-config-alist
@@ -270,7 +264,7 @@ NOTE: Many variables will overwrite in a template later."
 ;  (ad-activate 'wl-draft))
 
 ;; Change headers in draft preparation time.
-(add-hook 'wl-mail-setup-hook
+'(add-hook 'wl-mail-setup-hook
           '(lambda ()
              (unless wl-draft-reedit  ; don't apply when reedit.
                (wl-draft-config-exec wl-draft-config-alist))))
