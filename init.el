@@ -119,3 +119,7 @@
 
 ;; load preferences.
 (load-directory-files preferences-directory "^init-.+el$")
+
+(defadvice riece (around disable-riece (&optional confirm))
+  (message "riece is disabled."))
+(ad-activate-regexp "^disable-riece$")
