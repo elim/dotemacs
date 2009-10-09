@@ -2,26 +2,28 @@
 
 (and (require 'tramp nil t)
      (setq
-      tramp-verbose 9 ;; default => 9
+      tramp-verbose 10 ;; default => 9
       tramp-debug-buffer nil
-      tramp-methods
-      (mapcar (lambda (x)
-                (if (string-equal (car x) "sudo")
-                    '("sudo"
-                      (tramp-connection-function tramp-open-connection-su)
-                      (tramp-login-program "env")
-                      (tramp-login-args ("SHELL=/bin/sh" "sudo"
-                                         "-u" "%u" "-s"
-                                         "-p" "Password:"))
-                      (tramp-copy-program nil)
-                      (tramp-remote-sh "/bin/sh")
-                      (tramp-copy-args nil)
-                      (tramp-copy-keep-date-arg nil)
-                      (tramp-password-end-of-line nil))
-                  x)) tramp-methods))
+      tramp-default-method "sshx")
+
+
+     (defadvice auto-save-buffers (around
+                                   auto-save-buffers-exclude-tramp
+                                   activate)
+       (unless (string-match tramp-file-name-regexp buffer-file-name)
+         ad-do-it))
+
+     (when (boundp 'tramp-default-proxies-alist)
+       (mapc (lambda (x)
+               (add-to-list 'tramp-default-proxies-alist x))
+             (list
+              '("\\'" "\\`root\\'" "/sshx:%h:")
+              `(,(format "%s\\'" (car (split-string (system-name) "\\."))
+                         "\\`root\\'" nil))
+              '("localhost\\'" "\\`root\\'" nil))))
+
 
      (when (boundp 'tramp-multi-connection-function-alist)
-       (setq tramp-default-method "sshx")
        (add-to-list
         'tramp-multi-connection-function-alist
         '("sshx" tramp-multi-connect-rlogin

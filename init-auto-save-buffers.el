@@ -7,4 +7,5 @@
 
 (and (require 'auto-save-buffers nil t)
      (setq auto-save-buffers-interval 0.5)
-     (run-with-idle-timer auto-save-buffers-interval t 'auto-save-buffers "" "/ss.+/" ))
+     (run-with-idle-timer auto-save-buffers-interval t
+                          'auto-save-buffers))
