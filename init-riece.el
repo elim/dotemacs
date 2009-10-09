@@ -75,29 +75,6 @@
                           (expand-file-name riece-notify-sound))))
        (add-hook 'riece-keyword-notify-functions #'riece-keyword-notify-sound))
 
-  (defadvice riece-keyword-message-filter
-    (around extended-riece-keyword-message-filter (message) activate)
-
-    (setq riece-growled-p nil)
-
-    (let ((speaker (aref (riece-message-speaker message) 0))
-          (message-text (riece-message-text message))
-          (channel (mapconcat (lambda (x) (format "%s" x))
-                              (riece-message-target message)""))
-          (message-type (riece-message-type message)))
-
-      (mapcar (lambda (nick)
-                (when (and (string-match nick speaker)
-                           (null message-type))
-                  (growl (format "%s\n%s: %s" channel speaker message-text))
-                  (setq riece-growled-p t)
-                  (put-text-property 0 (length speaker)
-                                     'riece-overlay-face
-                                     riece-keyword-face
-                                     speaker)))
-              riece-notify-nicks))
-    ad-do-it)
-
   (add-hook 'riece-after-load-startup-hook
             (lambda ()
               (setq riece-server "default")))
