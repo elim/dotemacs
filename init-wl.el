@@ -12,7 +12,7 @@
        (setq wl-highlight-x-face-function 'x-face-decode-message-header))
 
   (setq elmo-imap4-use-modified-utf7 t
-        wl-preference-directory (expand-file-name "wl" base-directory)
+        wl-preference-directory (expand-file-name "wl" user-emacs-directory)
         wl-init-file (expand-file-name "init.el" wl-preference-directory)
         wl-address-file (expand-file-name "addresses" wl-preference-directory)
         wl-folders-file (expand-file-name "folders" wl-preference-directory)

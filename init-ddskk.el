@@ -41,7 +41,7 @@
 
   ;; ~/.skk* なファイルがたくさんあるので整理したい
   (setq ddskk-preference-directory
-        (expand-file-name "ddskk" base-directory))
+        (expand-file-name "ddskk" user-emacs-directory))
   (setq skk-init-file
         (expand-file-name "init.el" ddskk-preference-directory)
         skk-custom-file

@@ -5,7 +5,7 @@
        (require 'w3m-load nil t))
 
   (setq w3m-preference-directory
-        (expand-file-name "w3m" base-directory)
+        (expand-file-name "w3m" user-emacs-directory)
         w3m-init-file
         (expand-file-name "init.el" w3m-preference-directory))
 

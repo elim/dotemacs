@@ -1,7 +1,7 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
 (when (autoload-if-found 'riece "riece" nil t)
-  (setq riece-directory (expand-file-name "riece" base-directory)
+  (setq riece-directory (expand-file-name "riece" user-emacs-directory)
         riece-addon-directory (expand-file-name "addons" riece-directory)
         riece-saved-variables-file (expand-file-name "save" riece-directory)
         riece-variables-file (expand-file-name "init" riece-directory)

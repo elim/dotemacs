@@ -9,5 +9,5 @@
                                   (file-name-history 255)))
   (setq session-globals-max-size 1024)
   (setq session-globals-max-string 1024)
-  (setq session-save-file (expand-file-name "session-save.el" base-directory))
+  (setq session-save-file (expand-file-name "session-save.el" user-emacs-directory))
   (add-hook 'after-init-hook 'session-initialize))

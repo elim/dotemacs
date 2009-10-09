@@ -46,12 +46,13 @@
   (setq default-directory (getenv "HOME")))
 
 ;; path and filenames.
-(setq base-directory "~/.emacs.d"
-      preferences-directory "~/.emacs.d"
-      libraries-directory (expand-file-name "library" base-directory)
+(when (> 23 emacs-major-version)
+(setq user-emacs-directory "~/.emacs.d"))
+(setq preferences-directory user-emacs-directory
+      libraries-directory (expand-file-name "library" user-emacs-directory)
 
       custom-file
-      (expand-file-name "customize.el" base-directory))
+      (expand-file-name "customize.el" user-emacs-directory))
 
 (defun merge-path-list (init lis)
   (fold-right (lambda (x y)
@@ -65,7 +66,7 @@
 (setq load-path
       (merge-path-list
        load-path
-       (list base-directory
+       (list user-emacs-directory
              preferences-directory
              libraries-directory
              "/usr/local/share/emacs/site-lisp/")))
