@@ -25,12 +25,16 @@
 (display-time)
 (menu-bar-mode (if darwin-p 1 -1))
 (transient-mark-mode nil)
-(tool-bar-mode -1)
+(when (boundp 'tool-bar-mode)
+  (tool-bar-mode -1))
 (set-scroll-bar-mode 'right)
 (scroll-bar-mode -1)
 
 (add-hook 'after-save-hook
-          'executable-make-buffer-file-executable-if-script-p)
+          (lambda ()
+            (unless (and (boundp 'tramp-file-name-regexp)
+                         (string-match tramp-file-name-regexp (buffer-file-name)))
+              (executable-make-buffer-file-executable-if-script-p))))
 
 ;; 同一ファイル名のバッファ名を分かりやすく
 (when (require 'uniquify nil t)
