@@ -44,8 +44,6 @@
         riece-not-my-nicks (list
                             "たけるんば" "タケルンバ")
 
-        riece-notify-nicks (list "ave-dx")
-
         riece-keywords `(,@riece-my-nicks
                          ,@riece-not-my-nicks
                          ("[Ee]macs" . 0)
