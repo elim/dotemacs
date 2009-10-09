@@ -3,6 +3,8 @@
 (global-set-key [delete] #'delete-char)
 
 (setq completion-ignore-case t
+      read-buffer-completion-ignore-case t
+      read-file-name-completion-ignore-case t
       display-time-24hr-format t
       enable-recursive-minibuffers nil
       frame-title-format `(" %b " (buffer-file-name "( %f )"))
