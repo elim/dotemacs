@@ -41,6 +41,7 @@
 ;;; [[ Basic Setting ]]
 
 (setq wl-from "takeru.naito@gmail.com"
+      wl-local-domain "gmail.com"
       wl-insert-message-id nil)
 
 ;; Default folder for `wl-summary-goto-folder'.
