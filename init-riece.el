@@ -78,5 +78,18 @@
   (eval-after-load "riece"
     '(and
       (define-key riece-command-mode-map [(control x) (n)]
-        'riece-command-enter-message-as-notice)
-      (ad-activate-regexp ".+riece.+"))))
+        'riece-command-enter-message-as-notice)))
+
+  (defvar riece-enable-p t)
+
+  (defun riece-toggle ()
+    (interactive)
+    (message "riese is %s."
+             (if (setq riece-enable-p (not riece-enable-p))
+                 "enabled" "disabled")))
+
+  (defadvice riece (around riece-wrapper (&optional confirm))
+    (if riece-enable-p
+        ad-do-it (message "riece is disabled.")))
+
+  (ad-activate-regexp "^riece-wrapper$"))
