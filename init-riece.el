@@ -59,9 +59,7 @@
         (fold-left (lambda (x y)
                      (or x (and (file-readable-p y) y)))
                    nil (list "~/sounds/notify.wav"
-                             "/System/Library/Sounds/Funk.aiff"))
-
-        riece-growled-p nil)
+                             "/System/Library/Sounds/Funk.aiff")))
 
   (and riece-notify-sound
        riece-notify-sound-player
