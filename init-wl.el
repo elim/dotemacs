@@ -29,9 +29,6 @@
         ssl-program-arguments
         '("s_client" "-quiet" "-host" host "-port" service))
 
-
-  (add-hook 'term-setup-hook
-            (lambda () (wl)))
   (add-hook
    'wl-draft-mode-hook
    '(lambda ()
