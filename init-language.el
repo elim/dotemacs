@@ -42,8 +42,3 @@
              (#x2600 . #x26FF) ; Miscellaneous Symbols
              (#x2e80 . #xd7a3) ; East Asian Scripts
              (#xff00 . #xffef)))))
-
-(and cygwin-p
-     (not window-system)
-     (set-terminal-coding-system 'sjis-dos)
-     (set-keyboard-coding-system 'sjis-dos))
