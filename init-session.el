@@ -3,6 +3,7 @@
 ;; http://d.hatena.ne.jp/higepon/20061230/1167447339
 (when (require 'session nil t)
   (setq history-length t
+        session-save-file-coding-system 'utf-8-unix
         session-initialize '(de-saveplace session keys menus places)
         session-globals-include '((kill-ring 255)
                                   (session-file-alist 255 t)
