@@ -45,7 +45,7 @@
                              (looking-at " "))
              dired-marker-char ?\040)))
     (dired-mark arg)
-    (dired-previous-line 1)))
+    (dired-next-line 0)))
 
 (add-hook 'dired-mode-hook
           (lambda ()
