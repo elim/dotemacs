@@ -109,8 +109,8 @@
 
   ;; Cocoa Emacs
   (ns-p
+
    (set-fontset-font
-    ;(frame-parameter nil 'font)x
     "fontset-default"
     'japanese-jisx0208
     '("Osaka" . "iso10646-1"))
