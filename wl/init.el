@@ -106,8 +106,8 @@
 (setq wl-summary-move-order 'unread)
 
 ;; notify mail arrival
-(setq wl-biff-check-folder-list (list "%INBOX"))
-(setq wl-biff-notify-hook '(ding))
+;(setq wl-biff-check-folder-list (list "%[Gmail]/All Mail")
+;      wl-biff-notify-hook '(ding))
 
 ;;; [[ Network ]]
 ;; cache setting.
