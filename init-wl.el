@@ -17,7 +17,7 @@
         wl-address-file (expand-file-name "addresses" wl-preference-directory)
         wl-folders-file (expand-file-name "folders" wl-preference-directory)
 
-        wl-summary-showto-folder-regexp "^\\%\\(Sent\\|Draft\\).*$"
+        wl-summary-showto-folder-regexp "^\\%.+\\(Sent\\|Draft\\).+$"
         wl-summary-weekday-name-lang 'en
         wl-demo-background-color "#ccccff"
         wl-auto-save-drafts-interval 30
