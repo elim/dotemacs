@@ -22,11 +22,9 @@
 
   ;; @@ 基本の設定
 
-  (setq skk-count-private-jisyo-candidates-exactly t)
-  (setq skk-share-private-jisyo t)
-
-  (when (>= 19 emacs-major-version)
-    (require 'skk-setup nil t))
+  (setq skk-jisyo-code 'utf-8
+        skk-count-private-jisyo-candidates-exactly t
+        skk-share-private-jisyo t)
 
   ;; SKK を Emacs の input method として使用する
   (setq default-input-method "japanese-skk")
