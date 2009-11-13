@@ -10,6 +10,13 @@
                                (cursor-color  . "blue")
                                (alpha . (90 85)))
                              default-frame-alist))
+  
+  (when ns-p
+    (setq default-frame-alist (append
+                               '((font . "Osaka mono-12"))
+                               default-frame-alist)))
+
+
 
   (defun set-alpha (elt)
     (interactive
