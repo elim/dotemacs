@@ -28,8 +28,9 @@
 (transient-mark-mode t)
 (when (boundp 'tool-bar-mode)
   (tool-bar-mode -1))
-(set-scroll-bar-mode 'right)
-(scroll-bar-mode -1)
+(when (boundp 'scroll-bar-mode)
+  (set-scroll-bar-mode 'right)
+  (scroll-bar-mode -1))
 
 (add-hook 'after-save-hook
           (lambda ()
