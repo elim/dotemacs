@@ -25,7 +25,7 @@
 (display-time)
 (menu-bar-mode (if (or (eq window-system 'ns)
                        (eq window-system 'mac)) 1 -1))
-(transient-mark-mode nil)
+(transient-mark-mode t)
 (when (boundp 'tool-bar-mode)
   (tool-bar-mode -1))
 (set-scroll-bar-mode 'right)
