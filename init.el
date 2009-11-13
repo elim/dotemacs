@@ -1,5 +1,9 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
+(setq user-full-name "Takeru Naito"
+      user-mail-address "takeru.naito@gmail.com")
+      
+
 ;; Common Lisp extensions for Emacs(use it anyway).
 (require 'cl)
 
