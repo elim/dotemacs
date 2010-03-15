@@ -81,7 +81,7 @@
 
   (cond
    ;; emacs23
-   ((= 23 emacs-major-version)
+   ((<= 23 emacs-major-version)
     (set-default-font "ＭＳ ゴシック-10")
     (set-fontset-font (frame-parameter nil 'font)
                       'japanese-jisx0208
