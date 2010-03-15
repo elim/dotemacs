@@ -13,11 +13,11 @@
              (or (getenv "LANG") "en_US.UTF-8"))
      (setenv "LC_CTYPE"
              (or (getenv "LC_CTYPE") "ja_JP.UTF-8"))
-     (set-language-environment 'Japanese)
+     (set-language-environment (if nt-p 'UTF-8 'Japanese))
    
      ;; modified coding detection priority. (low => high)
      (mapc  #'prefer-coding-system
-            '(shift_jis iso-2022-jp euc-jp utf-8))
+            '(utf-8 shift_jis iso-2022-jp euc-jp))
 
      ;; http://www.pqrs.org/~tekezo/emacs/doc/wide-character/index.html
      (and (functionp #'utf-translate-cjk-set-unicode-range)
