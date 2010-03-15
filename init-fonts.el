@@ -77,27 +77,36 @@
  ;; http://ntemacsjp.sourceforge.jp/matsuan/FontSettingJp.html
  (nt-p
    (setq w32-enable-synthesized-fonts t
-         w32-use-w32-font-dialog nil)
+         w32-use-w32-font-dialog t)
 
-   (set-face-attribute 'default nil
-                       :family "ＭＳ ゴシック"
-                       :height 100)
+  (cond
+   ;; emacs23
+   ((= 23 emacs-major-version)
+    (set-default-font "ＭＳ ゴシック-10")
+    (set-fontset-font (frame-parameter nil 'font)
+                      'japanese-jisx0208
+                      '("ＭＳ ゴシック" . "unicode-bmp")))
 
-   (set-fontset-font "fontset-default"
-                     'japanese-jisx0208
-                     '("ＭＳ ゴシック*" . "jisx0208-sjis"))
+    (t
+     (set-face-attribute 'default nil
+                         :family "ＭＳ ゴシック"
+                         :height 100)
 
-   (set-fontset-font "fontset-default"
-                     'katakana-jisx0201
-                     '("ＭＳ ゴシック*" . "jisx0201-katakana"))
+     (set-fontset-font "fontset-default"
+                       'japanese-jisx0208
+                       '("ＭＳ ゴシック*" . "jisx0208-sjis"))
 
-   (add-to-list 'face-font-rescale-alist
-                `(,(encode-coding-string
-                    ".*ＭＳ.*bold.*iso8859.*" 'emacs-mule) . 0.9))
+     (set-fontset-font "fontset-default"
+                       'katakana-jisx0201
+                       '("ＭＳ ゴシック*" . "jisx0201-katakana"))
 
-   (add-to-list 'face-font-rescale-alist
-                `(,(encode-coding-string
-                    ".*ＭＳ.*bold.*jisx02.*" 'emacs-mule) . 0.95)))
+     (add-to-list 'face-font-rescale-alist
+                  `(,(encode-coding-string
+                      ".*ＭＳ.*bold.*iso8859.*" 'emacs-mule) . 0.9))
+
+     (add-to-list 'face-font-rescale-alist
+                  `(,(encode-coding-string
+                      ".*ＭＳ.*bold.*jisx02.*" 'emacs-mule) . 0.95)))))
 
   ;; Carbon Emacs
   (carbon-p
