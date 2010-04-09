@@ -8,4 +8,4 @@
         browse-kill-ring-separator "-------"
         browse-kill-ring-highlight-current-entry t
         browse-kill-ring-separator-face 'region
-        browse-kill-ring-maximum-display-length 100))
+        browse-kill-ring-maximum-display-length 1000))
