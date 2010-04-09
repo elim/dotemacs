@@ -119,6 +119,21 @@
             (when (load file nil t)
               (message "`%s' loaded." file))) files)))
 
+;; load auto-install.el.
+
+(when (require 'auto-install nil t)
+  (setq auto-install-directory
+        (expand-file-name (concat
+                           user-emacs-directory
+                           "auto-install"))
+        load-path
+        (merge-path-list
+         load-path
+         (list auto-install-directory)))
+
+  (auto-install-update-emacswiki-package-name t)
+  (auto-install-compatibility-setup))
+
 ;; load essential libraries.
 (load-directory-files libraries-directory "^.+el$")
 
