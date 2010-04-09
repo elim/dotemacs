@@ -15,7 +15,8 @@
       next-line-add-newlines nil
       system-time-locale "C"
       visible-bell t
-      x-select-enable-clipboard t)
+      x-select-enable-clipboard t
+      line-move-visual nil)
 
 (line-number-mode t)
 (global-font-lock-mode t)
