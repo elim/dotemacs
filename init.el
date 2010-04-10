@@ -58,55 +58,53 @@
       custom-file
       (expand-file-name "customize.el" user-emacs-directory))
 
-(defun merge-path-list (init lis)
-  (fold-right (lambda (x y)
-          (let ((expanded-name (expand-file-name x)))
-            (if (file-accessible-directory-p x)
-                (append (list expanded-name)
-                        (delete x (delete expanded-name y)))
-              y)))
-        init lis))
+(defmacro xx (y)
+  (list 'print y))
 
-(setq load-path
-      (merge-path-list
-       load-path
-       (list user-emacs-directory
-             preferences-directory
-             libraries-directory
-             "/usr/local/share/emacs/site-lisp/")))
+(macroexpand '(xx 1))
 
-(setq exec-path
-      (merge-path-list
-       exec-path
-       (list "~/bin"
-             "/bin/"
-             "/opt/local/bin"
-             "/opt/local/sbin"
-             "/sw/bin"
-             "/sw/sbin/"
-             "/usr/local/bin"
-             "/usr/local/sbin"
-             "/sbin/"
-             "/usr/bin/"
-             "/usr/sbin/"
-             "/Developer/Tools"
-             "c:/cygwin/usr/bin"
-             "c:/cygwin/usr/sbin"
-             "c:/cygwin/usr/local/bin"
-             "c:/cygwin/usr/local/sbin"
-             "/usr/games"
-             "/usr/X11R6/bin"
-             "c:/program files/mozilla firefox")))
 
-(setq Info-additional-directory-list
-      (merge-path-list
-       nil
-       (list "/Applications/Emacs.app/Contents/Resources/info/"
-             "/opt/local/share/info"
-             "/sw/info"
-             "/sw/share/info"
-             "c:/cygwin/usr/share/info"
-             "c:/cygwin/usr/local/share/info")))
+(defmacro set-path (list-var list)
+  (list 'mapc `(lambda (x)
+                 (when (file-accessible-directory-p x)
+                   (add-to-list ',list-var x)))
+        list))
+
+(set-path load-path
+          (list user-emacs-directory
+                preferences-directory
+                libraries-directory
+               "/usr/local/share/emacs/site-lisp/"))
+
+(set-path exec-path
+          (list "~/bin"
+                "/bin/"
+                "/opt/local/bin"
+                "/opt/local/sbin"
+                "/sw/bin"
+                "/sw/sbin/"
+                "/usr/local/bin"
+                "/usr/local/sbin"
+                "/sbin/"
+                "/usr/bin/"
+                "/usr/sbin/"
+                "/Developer/Tools"
+                "c:/cygwin/usr/bin"
+                "c:/cygwin/usr/sbin"
+                "c:/cygwin/usr/local/bin"
+                "c:/cygwin/usr/local/sbin"
+                "/usr/games"
+                "/usr/X11R6/bin"
+                "c:/program files/mozilla firefox"))
+
+(eval-after-load "info"
+  '(set-path Info-additional-directory-list
+             (list "/Applications/Emacs.app/Contents/Resources/info/"
+                   "/opt/local/share/info"
+                   "/sw/info"
+                   "/sw/share/info"
+                   "c:/cygwin/usr/share/info"
+                   "c:/cygwin/usr/local/share/info")))
 
 (defun load-directory-files (dir &optional regex)
   (let*
