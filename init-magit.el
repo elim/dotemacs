@@ -7,3 +7,4 @@
               (define-key dired-mode-map "V" 'magit-status))))
   
 
+  (add-to-list 'auto-coding-alist '("COMMIT_EDITMSG" . utf-8-unix))
