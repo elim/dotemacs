@@ -1,9 +1,9 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
-(when (and (require 'anything nil t)
-           (when (executable-find "w3m")
-             (require 'anything-config nil t))
-           (require 'anything-startup))
+(when (require 'anything nil t)
+  (when (executable-find "w3m")
+    (require 'anything-config nil t))
+  (require 'anything-startup nil t)
 
   (when (require 'anything-complete nil t)
     (anything-lisp-complete-symbol-set-timer 150)
