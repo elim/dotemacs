@@ -60,13 +60,15 @@
   ;; http://www.computerartisan.com/meadow/diary.txt
   (defun frame-fullscreen ()
     (interactive)
-    (set-frame-parameter nil 'fullscreen 'fullboth)
-    (when nt-p (w32-send-sys-command 61488)))
+    (if nt-p
+        (w32-send-sys-command 61488)
+      (set-frame-parameter nil 'fullscreen 'fullboth)))
 
   (defun frame-restore ()
     (interactive)
-    (set-frame-parameter nil 'fullscreen nil)
-    (when nt-p (w32-send-sys-command 61728)))
+    (if nt-p
+        (w32-send-sys-command 61728)
+      (set-frame-parameter nil 'fullscreen nil)))
 
   (defun toggle-fullscreen ()
     (interactive)
