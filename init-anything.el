@@ -8,7 +8,8 @@
   (when (require 'anything-complete nil t)
     (anything-lisp-complete-symbol-set-timer 150)
 
-    (setq anything-sources
+    (setq anything-enable-shortcuts 'alphabet
+	  anything-sources
           (list anything-c-source-buffers
                 anything-c-source-file-name-history
                 anything-c-source-info-pages
