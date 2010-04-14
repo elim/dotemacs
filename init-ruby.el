@@ -5,8 +5,6 @@
         ruby-indent-tabs-mode nil
         ruby-deep-indent-paren-style nil)
 
-  (add-to-list 'auto-coding-alist '("\\.rb\\'" . utf-8-unix))
-
   (mapc '(lambda (arg)
            (cons arg auto-mode-alist))
         (list '("\\.rb$" . ruby-mode)
