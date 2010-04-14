@@ -2,21 +2,21 @@
 
 (global-set-key [delete] #'delete-char)
 
-(setq completion-ignore-case t
-      read-buffer-completion-ignore-case t
-      read-file-name-completion-ignore-case t
-      display-time-24hr-format t
-      enable-recursive-minibuffers nil
-      frame-title-format `(" %b " (buffer-file-name "( %f )"))
-      gc-cons-threshold (* 32 1024 1024)
-      inhibit-startup-screen t
-      indent-tabs-mode nil
-      kill-ring-max 300
-      next-line-add-newlines nil
-      system-time-locale "C"
-      visible-bell t
-      x-select-enable-clipboard t
-      line-move-visual nil)
+(setq-default completion-ignore-case t
+              read-buffer-completion-ignore-case t
+              read-file-name-completion-ignore-case t
+              display-time-24hr-format t
+              enable-recursive-minibuffers nil
+              frame-title-format `(" %b " (buffer-file-name "( %f )"))
+              gc-cons-threshold (* 32 1024 1024)
+              inhibit-startup-screen t
+              indent-tabs-mode nil
+              kill-ring-max 300
+              next-line-add-newlines nil
+              system-time-locale "C"
+              visible-bell t
+              x-select-enable-clipboard t
+              line-move-visual nil)
 
 (line-number-mode t)
 (global-font-lock-mode t)
