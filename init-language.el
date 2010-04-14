@@ -13,7 +13,7 @@
              (or (getenv "LANG") "en_US.UTF-8"))
      (setenv "LC_CTYPE"
              (or (getenv "LC_CTYPE") "ja_JP.UTF-8"))
-     (set-language-environment (if nt-p 'UTF-8 'Japanese))
+     (set-language-environment 'Japanese)
    
      ;; modified coding detection priority. (low => high)
      (mapc  #'prefer-coding-system
