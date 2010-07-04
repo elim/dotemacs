@@ -1,5 +1,5 @@
 ;;; auto-install.el --- Auto install elisp file
-;; $Id: auto-install.el,v 1.35 2010/04/07 20:16:10 rubikitch Exp rubikitch $
+;; $Id: auto-install.el,v 1.48 2010/05/20 23:29:10 rubikitch Exp $
 
 ;; Filename: auto-install.el
 ;; Description: Auto install elisp file
@@ -9,7 +9,7 @@
 ;; Copyright (C) 2008, 2009, Andy Stewart, all rights reserved.
 ;; Copyright (C) 2009, rubikitch, all rights reserved.
 ;; Created: 2008-12-11 13:56:50
-;; Version: $Revision: 1.35 $
+;; Version: $Revision: 1.48 $
 ;; URL: http://www.emacswiki.org/emacs/download/auto-install.el
 ;; Keywords: auto-install
 ;; Compatibility: GNU Emacs 22 ~ 23
@@ -24,7 +24,7 @@
 ;;   `url-util', `url-vars'.
 ;;
 
-(defvar auto-install-version "$Id: auto-install.el,v 1.35 2010/04/07 20:16:10 rubikitch Exp rubikitch $")
+(defvar auto-install-version "$Id: auto-install.el,v 1.48 2010/05/20 23:29:10 rubikitch Exp $")
 ;;; This file is NOT part of GNU Emacs
 
 ;;; License
@@ -130,7 +130,7 @@
 ;;    default = "wget"
 ;;  `auto-install-use-wget'
 ;;    *Use wget instead of `url-retrieve'.
-;;    default = (not (not (executable-find auto-install-wget-command)))
+;;    default = nil
 ;;  `auto-install-batch-list'
 ;;    This list contain packages information for batch install.
 ;;    default = nil
@@ -272,9 +272,72 @@
 ;;      M-x RET customize-group RET auto-install RET
 ;;
 
+
+;;; Bug Report:
+;;
+;; If you have problem, send a bug report via M-x auto-install-send-bug-report.
+;; The step is:
+;;  0) Setup mail in Emacs, the easiest way is:
+;;       (setq user-mail-address "your@mail.address")
+;;       (setq user-full-name "Your Full Name")
+;;       (setq smtpmail-smtp-server "your.smtp.server.jp")
+;;       (setq mail-user-agent 'message-user-agent)
+;;       (setq message-send-mail-function 'message-smtpmail-send-it)
+;;  1) Be sure to use the LATEST version of auto-install.el.
+;;  2) Enable debugger. M-x toggle-debug-on-error or (setq debug-on-error t)
+;;  3) Use Lisp version instead of compiled one: (load "auto-install.el")
+;;  4) Do it!
+;;  5) If you got an error, please do not close *Backtrace* buffer.
+;;  6) M-x auto-install-send-bug-report and M-x insert-buffer *Backtrace*
+;;  7) Describe the bug using a precise recipe.
+;;  8) Type C-c C-c to send.
+;;  # If you are a Japanese, please write in Japanese:-)
+
 ;;; Change log:
 ;;
 ;; $Log: auto-install.el,v $
+;; Revision 1.48  2010/05/20 23:29:10  rubikitch
+;; `auto-install-update-emacswiki-package-name': Check whether network is reachable
+;;
+;; Revision 1.47  2010/05/14 00:09:08  rubikitch
+;; Fixed a bug of `auto-install-batch' with argument.
+;;
+;; Pass extension-name argument to `auto-install-batch-real'.
+;;
+;; Revision 1.46  2010/05/04 08:46:21  rubikitch
+;; Added bug report command
+;;
+;; Revision 1.45  2010/05/01 01:24:25  rubikitch
+;; auto-install-batch: Dependency support
+;;
+;; Revision 1.44  2010/05/01 00:53:48  rubikitch
+;; auto-install-batch-real: refactoring
+;;
+;; Revision 1.43  2010/04/30 23:41:48  rubikitch
+;; Changed default value of `auto-install-use-wget' to nil.
+;;
+;; Revision 1.42  2010/04/25 02:30:27  rubikitch
+;; Avoid `auto-async-byte-compile'
+;;
+;; Revision 1.41  2010/04/25 01:59:20  rubikitch
+;; *** empty log message ***
+;;
+;; Revision 1.40  2010/04/25 01:58:17  rubikitch
+;; Do not save/compile up-to-date files from `auto-install-batch'.
+;;
+;; Revision 1.39  2010/04/25 01:11:33  rubikitch
+;; If downloaded file is not updated, kill download buffer.
+;; (auto-install-batch support is not yet)
+;;
+;; Revision 1.38  2010/04/25 00:10:49  rubikitch
+;; code cleanup: remove unneeded `format'
+;;
+;; Revision 1.37  2010/04/24 23:59:11  rubikitch
+;; comment change (no code change)
+;;
+;; Revision 1.36  2010/04/19 07:10:36  rubikitch
+;; Avoid updating time-stamp
+;;
 ;; Revision 1.35  2010/04/07 20:16:10  rubikitch
 ;; Fixed a typo
 ;;
@@ -539,6 +602,7 @@
 (require 'find-func)
 (require 'bytecomp)
 (require 'thingatpt)
+(require 'ffap)
 (eval-when-compile (require 'cl))
 (when (<= emacs-major-version 22)       ;Compatibility with 22.
   (autoload 'ignore-errors "cl-macs"))
@@ -613,7 +677,7 @@ Nil means no confirmation is needed."
   :type 'string  
   :group 'auto-install)
 
-(defcustom auto-install-use-wget (not (not (executable-find auto-install-wget-command)))
+(defcustom auto-install-use-wget nil
   "*Use wget instead of `url-retrieve'.
 
 It is enabled by default when wget is found."
@@ -628,7 +692,7 @@ Have four arguments per list:
 First argument is extension name.
 Second argument is delay time for batch install.
 Third argument is libraries number limit in delay time.
-Fourth argument is libraries url list.
+Fourth argument is list of libraries url or extension name.
 
 If you want to add files, please edit auto-install-batch-list.el in EmacsWiki.
 Use M-x `auto-install-batch-edit'. "
@@ -782,6 +846,10 @@ You can use this to download marked files in Dired asynchronously."
             (auto-install-download (concat auto-install-emacswiki-base-url (file-name-nondirectory file)))))
     (error "This command is only for `dired-mode'.")))
 
+(defun auto-install-network-available-p (host)
+  (ignore-errors (ffap-machine-p host 80 t)))
+;; (auto-install-network-available-p "www.emacswiki.org")
+
 (defun auto-install-update-emacswiki-package-name (&optional unforced)
   "Update the list of elisp package names from `EmacsWiki'.
 By default, this function will update package name forcibly.
@@ -789,8 +857,13 @@ If UNFORCED is non-nil, just update package name when `auto-install-package-name
   (interactive)
   (unless (and unforced
                auto-install-package-name-list)
-    (auto-install-download "http://www.emacswiki.org/cgi-bin/emacs?action=index;raw=1"
-                           'auto-install-handle-emacswiki-package-name)))
+    (if (auto-install-network-available-p "www.emacswiki.org")
+        (auto-install-download "http://www.emacswiki.org/cgi-bin/emacs?action=index;raw=1"
+                               'auto-install-handle-emacswiki-package-name)
+      (message
+       (concat "Network unreachable!\n"
+               "Try M-x auto-install-handle-emacswiki-package-name afterward."))
+      (sit-for 2))))
 
 (defun auto-install-dired-mark-files ()
   "Mark dired files that contain at `EmacsWiki.org'."
@@ -853,10 +926,11 @@ Note that non-elisp can be installed only via `auto-install-batch'"
       (auto-install-batch-real extension-name)
     (auto-install-download
      auto-install-batch-list-el-url
-     (lambda (buf)
-       (with-current-buffer buf
-         (eval-buffer)
-         (run-at-time 0 nil 'auto-install-batch-real))))))
+     (lexical-let ((extension-name extension-name))
+       (lambda (buf)
+         (with-current-buffer buf
+           (eval-buffer)
+           (run-at-time 0 nil 'auto-install-batch-real extension-name)))))))
 
 (defun auto-install-batch-edit ()
   "Edit auto-install-batch-list.el"
@@ -873,53 +947,106 @@ Note that non-elisp can be installed only via `auto-install-batch'"
   (setq auto-install-batch-using t)
   (when auto-install-add-exec-path-flag
       (add-to-list 'exec-path auto-install-directory))
-  (let (extension-info-list)
-    ;; Get extension information list.
-    (setq extension-info-list
-          (assoc (or
-                  ;; Get information list from give extension name.
-                  extension-name
-                  ;; Otherwise completion from user select.
-                  (completing-read "Extension name: " (mapcar 'car auto-install-batch-list-internal)))
-                 auto-install-batch-list-internal))
-    (if extension-info-list
-        ;; Install extension libraries.
-        (let ((extension-delay-time (nth 1 extension-info-list))
-              (extension-limit-number (nth 2 extension-info-list))
-              (extension-library-list (car (last extension-info-list))))
-          (setq auto-install-waiting-url-list extension-library-list
-                auto-install-url-queue extension-library-list)
-          (if (not (and
-                    ;; Delay time is above 0.
-                    extension-delay-time
-                    (> extension-delay-time 0)
-                    ;; Limit number is above 0.
-                    extension-limit-number
-                    (> extension-limit-number 0)))
-              (auto-install-from-url-list extension-library-list)
-            (let ((delay-counter 0)
-                    install-list)
-                (while extension-library-list
-                  (if (> (length extension-library-list) extension-limit-number)
-                      ;; Install apart libraries list under `extension-limit-number'
-                      (progn
-                        (setq install-list (nthcar extension-limit-number extension-library-list))
-                        (run-with-timer
-                         (* delay-counter extension-delay-time)
-                         nil
-                         'auto-install-from-url-list install-list)
-                        (setq extension-library-list (nthcdr+ extension-limit-number extension-library-list))
-                        (incf delay-counter))
-                    ;; Install remain libraries list.
-                    (setq install-list extension-library-list)
-                    (run-with-timer
-                     (* delay-counter extension-delay-time)
-                     nil
-                     'auto-install-from-url-list install-list)
-                    (setq extension-library-list nil))))))
-      ;; Notify message when haven't install information
-      ;; for libraries that user given.
-      (message "Haven't install information for `%s'." extension-name))))
+  (destructuring-bind (name delay-time limit-number (&rest urls))
+      (auto-install-batch-get-info
+       (or
+        ;; Get information list from give extension name.
+        extension-name
+        ;; Otherwise completion from user select.
+        (completing-read "Extension name: " (mapcar 'car auto-install-batch-list-internal)))
+       auto-install-batch-list-internal)
+    (or name (error "Haven't install information for `%s'." extension-name))
+    (setq auto-install-waiting-url-list urls
+          auto-install-url-queue urls)
+    (if (not (and
+              ;; Delay time is above 0.
+              delay-time
+              (> delay-time 0)
+              ;; Limit number is above 0.
+              limit-number
+              (> limit-number 0)))
+        (auto-install-from-url-list urls)
+      (let ((delay-counter 0)
+            install-list)
+        (while urls
+          (if (> (length urls) limit-number)
+              ;; Install apart libraries list under `limit-number'
+              (progn
+                (setq install-list (nthcar limit-number urls))
+                (run-with-timer
+                 (* delay-counter delay-time)
+                 nil
+                 'auto-install-from-url-list install-list)
+                (setq urls (nthcdr+ limit-number urls))
+                (incf delay-counter))
+            ;; Install remain libraries list.
+            (setq install-list urls)
+            (run-with-timer
+             (* delay-counter delay-time)
+             nil
+             'auto-install-from-url-list install-list)
+            (setq urls nil)))))))
+
+;;; borrowed from eev.el
+(defun auto-install-flatten (obj &rest rest)
+  (cond (rest (append (auto-install-flatten obj) (auto-install-flatten rest)))
+	((null obj) nil)
+	((listp obj) (append (auto-install-flatten (car obj)) (auto-install-flatten (cdr obj))))
+	(t (list obj))))
+
+(defun auto-install-batch-get-info (extension batch-list)
+  (let* ((it (assoc extension batch-list))
+         (urls (car (last it)))
+         (urlp (lambda (url) (string-match "^https?://" url))))
+    (cond ((not it)
+           '(nil nil nil (nil)))
+          ((loop for url in urls always (funcall urlp url))
+           it)
+          (t
+           (append
+            (butlast it)
+            (list (auto-install-flatten
+                   (loop for url in urls collect
+                         (if (funcall urlp url)
+                             url
+                           (car (last (auto-install-batch-get-info url batch-list))))))))))))
+
+;;;; unit test
+;; (install-elisp "http://www.emacswiki.org/cgi-bin/wiki/download/el-expectations.el")
+;; (install-elisp "http://www.emacswiki.org/cgi-bin/wiki/download/el-mock.el")
+(dont-compile
+  (when (fboundp 'expectations)
+    (expectations
+      (desc "auto-install-flatten")
+      (expect '(1 2 3 4 5 6 7 8 9)
+        (auto-install-flatten '((1 2 3) (4 5) (((6)) 7) nil nil 8 9)))
+      (expect '(1 2 3 4 5 6 7 8 9)
+        (auto-install-flatten '(1 2 3) '(4 5) '(((6)) 7) nil nil 8 9))
+      (desc "auto-install-batch-get-info")
+      (expect '(nil nil nil (nil))
+        (auto-install-batch-get-info
+         "not-found"
+         '(("foo" nil nil ("https://example.com/1.el")))))
+      (expect '("foo" nil nil ("http://example.com/1.el"))
+        (auto-install-batch-get-info
+         "foo"
+         '(("foo" nil nil ("http://example.com/1.el")))))
+      (expect '("withdep" nil nil ("http://example.com/1.el"
+                                   "http://example.com/2.el"))
+        (auto-install-batch-get-info
+         "withdep"
+         '(("foo" nil nil ("http://example.com/1.el"))
+           ("withdep" nil nil ("foo" "http://example.com/2.el")))))
+      (expect '("withdep-recursive" nil nil ("http://example.com/1.el"
+                                             "http://example.com/2.el"
+                                             "http://example.com/3.el"))
+        (auto-install-batch-get-info
+         "withdep-recursive"
+         '(("foo" nil nil ("http://example.com/1.el"))
+           ("withdep" nil nil ("foo" "http://example.com/2.el"))
+           ("withdep-recursive" nil nil ("withdep" "http://example.com/3.el")))))
+      )))
+
 
 (defun auto-install-download (url &optional handle-function)
   "Download elisp file from URL.
@@ -1041,8 +1168,23 @@ HANDLE-FUNCTION is function for handle download content."
                                            auto-install-download-buffer-alist)
                             ;; if single file
                             download-buffer))
-      (unless auto-install-save-confirm
-        (auto-install-buffer-save)))))
+      (if (not (and (not auto-install-batch-using) (auto-install-check-update)))
+          (unless auto-install-save-confirm
+            (auto-install-buffer-save))
+        (message "%s is up-to-date" (url-file-nondirectory auto-install-download-url))
+        (kill-buffer))
+      ;; (unless auto-install-save-confirm
+      ;;   (auto-install-buffer-save))
+      )))
+
+(defun auto-install-check-update ()
+  (let* ((new-file (url-file-nondirectory auto-install-download-url))
+         (old-file (auto-install-get-path new-file))
+         (old-content (and old-file
+                           (with-temp-buffer
+                             (insert-file-contents-literally old-file)
+                             (buffer-string)))))
+    (equal old-content (buffer-string))))
 
 (defun auto-install-handle-emacswiki-package-name (download-buffer &optional prompt-install)
   "Handle elisp package name from `EmacsWiki'.
@@ -1101,9 +1243,8 @@ This command just run when have exist old version."
         ;; Get filename
         (unless filename
           (setq filename (url-file-nondirectory auto-install-download-url)))
-        ;; Make sure file suffix with `.el'.
-        ;; FIXME unless via `auto-install-batch'
         (unless auto-install-batch-using
+          ;; Make sure file suffix with `.el'.
           (while (not (string-match ".*\.el$" filename))
            (setq filename (read-string "Please input file name suffix with `.el': "))))
         ;; Get file path.
@@ -1119,8 +1260,14 @@ This command just run when have exist old version."
                  auto-install-replace-confirm
                  (not (yes-or-no-p (format "Do you want replace file: '%s' ?" file-path))))
             (auto-install-quit)
-          (write-file file-path)
-          (auto-install-install file-path)))
+          (if (auto-install-check-update)
+              (auto-install-install-next-file)
+            (let ((before-save-hook before-save-hook)
+                  (auto-async-byte-compile-exclude-files-regexp
+                   (regexp-quote file-path)))
+              (remove-hook 'before-save-hook 'time-stamp)
+              (write-file file-path)
+              (auto-install-install file-path)))))
     (error "This command just use in `auto-install-minor-mode'.")))
 
 (defun auto-install-install (file-path)
@@ -1130,23 +1277,30 @@ This command just run when have exist old version."
       (auto-install-quit)
     (let (byte-compile-warnings) ;; suppress compile warnings
       ;; Compile and load file.
-      (setq auto-install-url-queue (cdr auto-install-url-queue))
       (when (and (string= "el" (file-name-extension file-path))
                  (not (ignore-errors (byte-compile-file file-path t))))
         ;; Show `ERROR' message if compile failed.
-        (message (format "Auto-Install ERROR: Compiled file '%s' failed." file-path)))
-      ;; Install next file.
-      (cond ((car auto-install-url-queue)
-             (switch-to-buffer (assoc-default (car auto-install-url-queue)
-                                              auto-install-download-buffer-alist))
-             (unless auto-install-save-confirm
-               (auto-install-buffer-save)))
-            (t                          ;completed
-             ;; cleanup
-             (setq auto-install-url-queue nil)
-             (setq auto-install-download-buffer-alist nil)
-             (setq auto-install-batch-using nil)
-             (message "Installation is completed."))))))
+        (message "Auto-Install ERROR: Compiled file '%s' failed." file-path))
+      (auto-install-install-next-file))))
+
+(defun auto-install-install-next-file ()
+  (setq auto-install-url-queue (cdr auto-install-url-queue))
+  (let (byte-compile-warnings)
+    (cond ((car auto-install-url-queue)
+           (switch-to-buffer (assoc-default (car auto-install-url-queue)
+                                            auto-install-download-buffer-alist))
+           (unless auto-install-save-confirm
+             (auto-install-buffer-save)))
+          (t                        ;completed
+           (auto-install-cleanup)
+           (message "Installation is completed.")))))
+
+(defun auto-install-cleanup ()
+  (while auto-install-minor-mode
+    (kill-buffer))
+  (setq auto-install-url-queue nil)
+  (setq auto-install-download-buffer-alist nil)
+  (setq auto-install-batch-using nil))
 
 (defun auto-install-quit ()
   "Quit auto-install."
@@ -1271,7 +1425,35 @@ If LIST length below N, return entire list.
 If LIST is nil, return nil."
   (reverse (nthcdr (- (length list) n) (reverse list))))
 
+;;;; Bug report
+(defvar auto-install-maintainer-mail-address
+  (concat "rubiki" "tch@ru" "by-lang.org"))
+(defvar auto-install-bug-report-salutation
+  "Describe bug below, using a precise recipe.
+
+When I executed M-x ...
+
+How to send a bug report:
+  1) Be sure to use the LATEST version of auto-install.el.
+  2) Enable debugger. M-x toggle-debug-on-error or (setq debug-on-error t)
+  3) Use Lisp version instead of compiled one: (load \"auto-install.el\")
+  4) If you got an error, please paste *Backtrace* buffer.
+  5) Type C-c C-c to send.
+# If you are a Japanese, please write in Japanese:-)")
+(defun auto-install-send-bug-report ()
+  (interactive)
+  (reporter-submit-bug-report
+   auto-install-maintainer-mail-address
+   "auto-install.el"
+   (apropos-internal "^auto-install-" 'boundp)
+   nil nil
+   auto-install-bug-report-salutation))
+
+
 (provide 'auto-install)
+
+;; TestCase
+;; (find-file-other-window "~/memo/junk/2010-04-25-094621.auto-install-check-update.test.el")
 
 ;; How to save (DO NOT REMOVE!!)
 ;; (emacswiki-post "auto-install.el")
