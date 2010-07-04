@@ -15,12 +15,16 @@
 ;;; [[ Server Setting ]]
 ;; for Gmail.
 
+;; http://d.hatena.ne.jp/buzztaiki/20090715/1247619151
+(require 'tls)
+(set-alist 'elmo-network-stream-type-alist "!opentls" '(opentls nil open-tls-stream))
+
 ;; IMAP settings.
 (setq elmo-imap4-default-server "imap.gmail.com"
       elmo-imap4-default-user "takeru.naito@gmail.com"
       elmo-imap4-default-authenticate-type 'clear
       elmo-imap4-default-port '993
-      elmo-imap4-default-stream-type 'ssl)
+      elmo-imap4-default-stream-type 'opentls)
 
 ;; IMAP folder settings.
 (setq wl-dispose-folder-alist
@@ -44,14 +48,12 @@
       wl-local-domain "gmail.com"
       wl-insert-message-id nil)
 
-;; Default folder for `wl-summary-goto-folder'.
-(setq wl-default-folder "%INBOX")
+;
+;(setq wl-default-folder "%INBOX")
 
 ;; Default string for folder name completion.
 (setq wl-default-spec "%")
 
-;; Trash folder
-(setq wl-trash-folder "%Trash")
 
 ;; Confirm before exitting Wanderlust.
 (setq wl-interactive-exit t)
