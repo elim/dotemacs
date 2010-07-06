@@ -122,9 +122,21 @@
       (concat user-emacs-directory "auto-install/"))
 (add-to-list 'load-path auto-install-directory)
 
-(when (require 'auto-install nil t)
-  (auto-install-update-emacswiki-package-name t)
-  (auto-install-compatibility-setup))
+(unless (locate-library "auto-install")
+  (let
+      ((url "http://www.emacswiki.org/emacs/download/auto-install.el")
+       (path (expand-file-name "auto-install.el" auto-install-directory)))
+    (cond
+     ((executable-find "curl")
+      (call-process "curl" nil nil nil "-o" path url))
+     ((executable-find "wget")
+      (call-process "wget" nil nil nil url "-O" path))
+     (t nil))))
+
+(and (require 'auto-install nil t)
+     (auto-install-update-emacswiki-package-name t)
+     (auto-install-compatibility-setup))
+
 
 ;; load essential libraries.
 (load-directory-files libraries-directory "^.+el$")
