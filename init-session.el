@@ -5,9 +5,9 @@
   (setq history-length t
         session-save-file-coding-system 'utf-8-unix
         session-initialize '(de-saveplace session keys menus places)
-        session-globals-include '((kill-ring 255)
-                                  (session-file-alist 255 t)
-                                  (file-name-history 255))
+        session-globals-include '((kill-ring 1024)
+                                  (session-file-alist 1024 t)
+                                  (file-name-history 1024))
         session-globals-max-size 1024
         session-globals-max-string 1024
         session-save-file (expand-file-name
