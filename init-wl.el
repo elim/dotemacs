@@ -22,7 +22,7 @@
         wl-demo-background-color "#ccccff"
         wl-auto-save-drafts-interval 30
         wl-draft-use-frame nil
-        wl-biff-check-folder-list '("%INBOX")
+        wl-biff-check-folder-list '("%INBOX" "%[Gmail]/All Mail")
         wl-biff-check-interval 30
         wl-biff-notify-hook '(ding))
 
