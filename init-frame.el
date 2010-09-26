@@ -79,13 +79,15 @@
 
   (defun toggle-fullscreen ()
     (interactive)
-    (if nt-p
-        (if nt-fullscreen-p
-            (frame-restore)
-          (frame-fullscreen))
-      (if (frame-parameter nil 'fullscreen)
-          (frame-restore)
-        (frame-fullscreen))))
+    (cond
+     ((and ns-p (fboundp 'ns-toggle-fullscreen))
+      (ns-toggle-fullscreen))
+     ((or (and nt-p nt-fullscreen-p)
+          (frame-parameter nil 'fullscreen))
+      (frame-restore))
+     ((or (and nt-p (not nt-fullscreen-p))
+          (not (frame-parameter nil 'fullscreen)))
+      (frame-fullscreen))))
 
   (global-set-key [(meta return)] 'toggle-fullscreen)
 
