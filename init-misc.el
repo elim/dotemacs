@@ -8,7 +8,7 @@
               display-time-24hr-format t
               enable-recursive-minibuffers nil
               frame-title-format `(" %b " (buffer-file-name "( %f )"))
-              gc-cons-threshold (* 32 1024 1024)
+              gc-cons-threshold (* 64 1024 1024)
               inhibit-startup-screen t
               indent-tabs-mode nil
               kill-ring-max 300
