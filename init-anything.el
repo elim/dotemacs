@@ -1,5 +1,6 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
+
 (when (require 'anything nil t)
   (when (executable-find "w3m")
     (require 'anything-config nil t))
@@ -16,6 +17,8 @@
                 anything-c-source-man-pages
                 anything-c-source-locate
                 anything-c-source-emacs-commands))
+
+    (define-key ctl-x-map "\C-y" 'anything-show-kill-ring)
 
     (mapc '(lambda (key)
              (global-set-key key 'anything))
