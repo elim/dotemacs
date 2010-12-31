@@ -16,9 +16,8 @@
 ;; for Gmail.
 
 ;; http://d.hatena.ne.jp/buzztaiki/20090715/1247619151
-(require 'tls)
-(set-alist 'elmo-network-stream-type-alist "!opentls" '(opentls nil open-tls-stream))
-
+(when (require 'tls nil t)
+  (set-alist 'elmo-network-stream-type-alist "!opentls" '(opentls nil open-tls-stream)))
 ;; IMAP settings.
 (setq elmo-imap4-default-server "imap.gmail.com"
       elmo-imap4-default-user "takeru.naito@gmail.com"
