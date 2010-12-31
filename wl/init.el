@@ -35,11 +35,17 @@
       wl-trash-folder "%[Gmail]/Trash")
 
 ;; SMTP settings.
-(setq wl-smtp-connection-type 'starttls
+;; (setq wl-smtp-connection-type 'starttls
+;;       wl-smtp-posting-port 587
+;;       wl-smtp-authenticate-type "plain"
+;;       wl-smtp-posting-user "takeru.naito@gmail.com"
+;;       wl-smtp-posting-server "smtp.gmail.com")
+
+(setq wl-smtp-connection-type nil
       wl-smtp-posting-port 587
       wl-smtp-authenticate-type "plain"
-      wl-smtp-posting-user "takeru.naito@gmail.com"
-      wl-smtp-posting-server "smtp.gmail.com")
+      wl-smtp-posting-user "tne0900"
+      wl-smtp-posting-server "smtp.elim.que.jp")
 
 ;;; [[ Basic Setting ]]
 
