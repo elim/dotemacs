@@ -1,5 +1,10 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
+(defun elim:set-default-frame-font (fontname)
+  (setq  default-frame-alist (append
+                              `((font . ,fontname))
+         default-frame-alist)))
+
 (cond
  ;; X Window System
  ((eq window-system 'x)
@@ -82,7 +87,7 @@
   (cond
    ;; emacs23
    ((<= 23 emacs-major-version)
-    (set-default-font "ＭＳ ゴシック-10")
+    (elim:set-default-frame-font "ＭＳ ゴシック-10")
     (set-fontset-font (frame-parameter nil 'font)
                       'japanese-jisx0208
                       '("ＭＳ ゴシック" . "unicode-bmp")))
@@ -118,6 +123,7 @@
 
   ;; Cocoa Emacs
   (ns-p
+   (elim:set-default-frame-font "Osaka mono-12")
 
    (set-fontset-font
     "fontset-default"
