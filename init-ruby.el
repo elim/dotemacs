@@ -5,6 +5,9 @@
         ruby-indent-tabs-mode nil
         ruby-deep-indent-paren-style nil)
 
+  (eval-after-load "develock"
+    '(plist-put develock-max-column-plist 'ruby-mode 100))
+
   (mapc '(lambda (arg)
            (cons arg auto-mode-alist))
         (list '("\\.rb$" . ruby-mode)
