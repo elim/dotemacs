@@ -16,6 +16,16 @@
 (setq skk-server-host "localhost")
 (setq skk-server-portnum 1178)
 
+(condition-case nil
+    (skk-server-version)
+  (error (let
+             ((dic-file "/usr/share/skk/SKK-JISYO.L"))
+           (and
+            (file-exists-p dic-file)
+
+            (setq skk-large-jisyo dic-file
+                  skk-jisyo-code nil)))))
+
 ;; @@ 表示の設定
 
 ;; メッセージを日本語で通知する
