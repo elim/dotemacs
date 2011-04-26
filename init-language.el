@@ -14,7 +14,7 @@
      (setenv "LC_CTYPE"
              (or (getenv "LC_CTYPE") "ja_JP.UTF-8"))
      (set-language-environment 'Japanese)
-   
+     (setq-default buffer-file-coding-system 'utf-8-unix)
      ;; modified coding detection priority. (low => high)
      (mapc  #'prefer-coding-system
             '(utf-8 shift_jis iso-2022-jp euc-jp))

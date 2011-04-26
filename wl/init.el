@@ -16,9 +16,8 @@
 ;; for Gmail.
 
 ;; http://d.hatena.ne.jp/buzztaiki/20090715/1247619151
-(require 'tls)
-(set-alist 'elmo-network-stream-type-alist "!opentls" '(opentls nil open-tls-stream))
-
+(when (require 'tls nil t)
+  (set-alist 'elmo-network-stream-type-alist "!opentls" '(opentls nil open-tls-stream)))
 ;; IMAP settings.
 (setq elmo-imap4-default-server "imap.gmail.com"
       elmo-imap4-default-user "takeru.naito@gmail.com"
@@ -36,11 +35,17 @@
       wl-trash-folder "%[Gmail]/Trash")
 
 ;; SMTP settings.
-(setq wl-smtp-connection-type 'starttls
+;; (setq wl-smtp-connection-type 'starttls
+;;       wl-smtp-posting-port 587
+;;       wl-smtp-authenticate-type "plain"
+;;       wl-smtp-posting-user "takeru.naito@gmail.com"
+;;       wl-smtp-posting-server "smtp.gmail.com")
+
+(setq wl-smtp-connection-type nil
       wl-smtp-posting-port 587
       wl-smtp-authenticate-type "plain"
-      wl-smtp-posting-user "takeru.naito@gmail.com"
-      wl-smtp-posting-server "smtp.gmail.com")
+      wl-smtp-posting-user "tne0900"
+      wl-smtp-posting-server "smtp.elim.que.jp")
 
 ;;; [[ Basic Setting ]]
 
