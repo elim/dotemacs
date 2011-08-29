@@ -10,11 +10,10 @@
     (anything-lisp-complete-symbol-set-timer 150)
 
     (setq anything-enable-shortcuts 'alphabet
-	  anything-sources
-          (list anything-c-source-buffers
+          anything-sources
+          (list anything-c-source-buffers+
+                anything-c-source-files-in-current-dir
                 anything-c-source-file-name-history
-                anything-c-source-info-pages
-                anything-c-source-man-pages
                 anything-c-source-locate
                 anything-c-source-emacs-commands))
 
