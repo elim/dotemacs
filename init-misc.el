@@ -1,5 +1,41 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
+;;;試行錯誤用ファイルを開くための設定
+;; (auto-install-from-emacswiki "open-junk-file.el")
+(when (require 'open-junk-file nil t)
+  (global-set-key (kbd "C-x C-z") 'open-junk-file))
+
+;;;式の評価結果を注釈するための設定
+;; (auto-install-from-emacswiki "lispxmp.el")
+(when (require 'lispxmp nil t)
+  (define-key emacs-lisp-mode-map (kbd "C-c C-d") 'lispxmp))
+
+;; (when (require 'paredit nil t)
+;;   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+;;   (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+;;   (add-hook 'lisp-mode-hook 'enable-paredit-mode)
+;;   (add-hook 'ielm-mode-hook 'enable-paredit-mode))
+
+;; (auto-install-from-emacswiki "auto-async-byte-compile.el")
+(when (require 'auto-async-byte-compile nil t)
+  (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
+  (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode))
+
+(when (require 'eldoc nil t)
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+  (setq eldoc-idle-delay 0.2)
+  (setq eldoc-minor-mode-string ""))
+
+;;改行と同時にインデントも行う
+;; (global-set-key "\C-m" 'newline)
+;; (global-set-key "\C-m" 'newline-and-indent)
+
+;; find-functionをキー割り当てする
+(find-function-setup-keys)
+
+
 (global-set-key [delete] #'delete-char)
 
 (setq-default
