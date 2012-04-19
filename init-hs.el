@@ -2,4 +2,4 @@
 
 (when (require 'hideshow nil t)
   (define-key hs-minor-mode-map
-    [(control c)(control meta c)] 'hs-toggle-hiding))
+    (kbd "C-c C-M-c") 'hs-toggle-hiding))
