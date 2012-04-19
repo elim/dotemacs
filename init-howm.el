@@ -18,7 +18,7 @@
                howm-list-grep howm-create
                howm-keyword-to-kill-ring))
 
-  (global-set-key [(control c)(,)(,)] 'howm-menu)
+  (global-set-key (kbd "C-c , ,") 'howm-menu)
 
 ;;   (add-hook 'term-setup-hook
 ;;             (lambda () (howm-menu)))
