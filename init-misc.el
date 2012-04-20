@@ -79,7 +79,7 @@
 
 
 
-(when (require 'open-junk-file) nil t
+(when (require 'open-junk-file nil t)
       (global-set-key (kbd "C-x C-z") 'open-junk-file))
 
 
