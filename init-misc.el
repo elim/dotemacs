@@ -77,6 +77,12 @@
                          (string-match tramp-file-name-regexp (buffer-file-name)))
               (executable-make-buffer-file-executable-if-script-p))))
 
+
+
+(when (require 'open-junk-file) nil t
+      (global-set-key (kbd "C-x C-z") 'open-junk-file))
+
+
 ;; 同一ファイル名のバッファ名を分かりやすく
 (when (require 'uniquify nil t)
   (setq uniquify-buffer-name-style 'post-forward-angle-brackets
@@ -93,6 +99,10 @@
 
 ;; grep-edit
 (require 'grep-edit nil t)
+
+;; 行末の空白をめだたせる M-x delete-trailing-whitespaceで削除出来る
+(when (boundp 'show-trailing-whitespace)
+  (setq-default show-trailing-whitespace t))
 
 ;;kill-ring に同じ内容の文字列を複数入れない
 (defadvice kill-new (before ys:no-kill-new-duplicates activate)
