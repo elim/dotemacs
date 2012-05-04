@@ -143,3 +143,12 @@
 
 ;; load preferences.
 (load-directory-files preferences-directory "^init-.+el$")
+
+;;; 追加の設定
+;; 標準Elispの設定
+(load "config/builtins")
+;; 非標準Elispの設定
+(load "config/packages")
+;; 個別の設定があったら読み込む
+;; 2012-02-15
+(load "config/local" t)
