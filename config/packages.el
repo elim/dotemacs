@@ -15,6 +15,9 @@
 (add-to-list 'el-get-recipe-path
              "~/.emacs.d/config/el-get/local-recipes")
 
+;;; auto-save-buffers-enhanced
+(el-get 'sync '(auto-save-buffers-enhanced))
+
 
 ;;; grep-edit
 ;; *grep*で編集できるようにする
