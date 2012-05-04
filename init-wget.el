@@ -1,8 +1,8 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
-(when (autoload-if-found
+(when (autoload
        'wget "wget" "wget interface for Emacs." t)
-  (autoload-if-found
+  (autoload
    'wget-web-page "wget" "wget interface to download whole web page." t)
 
   (setq wget-download-directory

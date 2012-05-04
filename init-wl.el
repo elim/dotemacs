@@ -1,9 +1,9 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
 (when (locate-library "wl")
-  (autoload-if-found 'wl "wl" "Wanderlust" t)
-  (autoload-if-found 'wl-other-frame "wl" "Wanderlust on new frame." t)
-  (autoload-if-found 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
+  (autoload 'wl "wl" "Wanderlust" t)
+  (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
+  (autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
 
   (and window-system
        (locate-library "x-face-e21")
@@ -48,7 +48,7 @@
                     (make-string day-of-week-name-width ??))))))
 
   ;; emacs の defualt MUA に
-  (autoload-if-found 'wl-user-agent-compose "wl-draft" nil t)
+  (autoload 'wl-user-agent-compose "wl-draft" nil t)
   (if (boundp 'mail-user-agent)
       (setq mail-user-agent 'wl-user-agent))
   (if (fboundp 'define-mail-user-agent)

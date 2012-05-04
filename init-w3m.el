@@ -13,7 +13,7 @@
         w3m-use-cookies t)
 
   (mapc '(lambda (lib)
-           (apply #'autoload-if-found lib))
+           (apply #'autoload lib))
         (list
          '(w3m "w3m" "*Interface for w3m on Emacs." t)
          '(w3m-filter "w3m-filter" "*w3m filter advertisements." t)

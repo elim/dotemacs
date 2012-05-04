@@ -12,7 +12,7 @@
 
   (mapc
    (lambda (f)
-     (autoload-if-found f
+     (autoload f
                         "howm" "Hitori Otegaru Wiki Modoki" t))
    '(howm-menu howm-list-all howm-list-recent
                howm-list-grep howm-create

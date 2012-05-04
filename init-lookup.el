@@ -2,7 +2,7 @@
 
 (unless darwin-p
   (when (mapc '(lambda (lib)
-                 (apply #'autoload-if-found lib))
+                 (apply #'autoload lib))
               (list
                '(lookup "lookup" nil t)
                '(lookup-word "lookup" nil t)

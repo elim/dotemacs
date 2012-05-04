@@ -9,7 +9,7 @@
   ;; (global-set-key "\C-xt" 'skk-tutorial)
 
   (mapc '(lambda (lib)
-           (apply #'autoload-if-found lib))
+           (apply #'autoload lib))
         (list
           '(skk "skk" nil t)
           '(skk-mode "skk" nil t)

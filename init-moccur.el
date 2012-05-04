@@ -8,7 +8,7 @@
 
 (mapc
  '(lambda (func)
-    (autoload-if-found func "color-moccur" nil t))
+    (autoload func "color-moccur" nil t))
  (list 'moccur-grep
        'moccur-grep-find
        'isearch-moccur

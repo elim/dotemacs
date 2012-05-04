@@ -1,6 +1,6 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
-(when (autoload-if-found
+(when (autoload
        'navi2ch "navi2ch" "Navigator for 2ch for Emacs" t)
   (setq navi2ch-mona-enable t)
   (setq navi2ch-list-bbstable-url
