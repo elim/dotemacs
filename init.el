@@ -58,12 +58,6 @@
       custom-file
       (expand-file-name "customize.el" user-emacs-directory))
 
-(defmacro xx (y)
-  (list 'print y))
-
-(macroexpand '(xx 1))
-
-
 (defmacro set-path (list-var list)
   (list 'mapc `(lambda (x)
                  (when (file-accessible-directory-p x)
