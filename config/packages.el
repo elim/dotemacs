@@ -18,6 +18,8 @@
 ;;; auto-save-buffers-enhanced
 (el-get 'sync '(auto-save-buffers-enhanced))
 
+(el-get 'sync '(open-junk-file))
+
 
 ;;; grep-edit
 ;; *grep*で編集できるようにする
