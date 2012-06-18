@@ -1,10 +1,5 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
-;;;試行錯誤用ファイルを開くための設定
-;; (auto-install-from-emacswiki "open-junk-file.el")
-(when (require 'open-junk-file nil t)
-  (global-set-key (kbd "C-x C-z") 'open-junk-file))
-
 ;;;式の評価結果を注釈するための設定
 ;; (auto-install-from-emacswiki "lispxmp.el")
 (when (require 'lispxmp nil t)
