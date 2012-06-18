@@ -20,6 +20,10 @@
 
 (el-get 'sync '(open-junk-file))
 
+;;; apache-mode
+;; 2012-06-18
+; (el-get 'sync '(apache-mode))
+
 
 ;;; grep-edit
 ;; *grep*で編集できるようにする
