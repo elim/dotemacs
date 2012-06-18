@@ -12,6 +12,12 @@
            (magit-status (file-name-directory path))))))
 (define-key dired-mode-map "V" 'dired-vc-status)
 
+
+;;; bs-show
+;;; バッファをざくざく殺したい時に.
+
+(global-set-key (kbd "C-x C-b") 'bs-show)
+
 
 ;;; スペルチェック
 ;;; 2011-03-09
