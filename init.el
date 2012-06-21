@@ -111,6 +111,14 @@
             (when (load file nil t)
               (message "`%s' loaded." file))) files)))
 
+(when nt-p
+  (setq explicit-shell-file-name
+        (expand-file-name "cmdproxy" (getenv "EMACSPATH"))
+        shell-file-name explicit-shell-file-name
+        shell-command-switch "-c"
+        ;;f drive letter completion on shell-mode.
+        shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-"))
+
 ;; load auto-install.el.
 (setq auto-install-directory
       (concat user-emacs-directory "auto-install/"))
