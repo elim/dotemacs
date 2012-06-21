@@ -2,7 +2,6 @@
 
 (setq user-full-name "Takeru Naito"
       user-mail-address "takeru.naito@gmail.com")
-      
 
 ;; Common Lisp extensions for Emacs(use it anyway).
 (require 'cl)
@@ -116,7 +115,7 @@
         (expand-file-name "cmdproxy" (getenv "EMACSPATH"))
         shell-file-name explicit-shell-file-name
         shell-command-switch "-c"
-        ;;f drive letter completion on shell-mode.
+        ;; drive letter completion on shell-mode.
         shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-"))
 
 ;; load auto-install.el.
@@ -138,7 +137,6 @@
 (and (require 'auto-install nil t)
      (auto-install-update-emacswiki-package-name t)
      (auto-install-compatibility-setup))
-
 
 ;; load essential libraries.
 (load-directory-files libraries-directory "^.+el$")
