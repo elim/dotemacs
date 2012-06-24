@@ -17,6 +17,14 @@
 
 ;;; auto-save-buffers-enhanced
 (el-get 'sync '(auto-save-buffers-enhanced))
+(setq auto-save-buffers-enhanced-include-regexps '(".+")
+      auto-save-buffers-enhanced-exclude-regexps '("^not-save-file" "\\.ignore$")
+      auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t
+      auto-save-buffers-enhanced-cooperate-elscreen-p t
+      auto-save-buffers-enhanced-quiet-save-p t)
+(global-set-key "\C-xas" 'auto-save-buffers-enhanced-toggle-activity))
+(auto-save-buffers-enhanced t)
+
 
 (el-get 'sync '(open-junk-file))
 
