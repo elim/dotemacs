@@ -22,7 +22,7 @@
       auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t
       auto-save-buffers-enhanced-cooperate-elscreen-p t
       auto-save-buffers-enhanced-quiet-save-p t)
-(global-set-key "\C-xas" 'auto-save-buffers-enhanced-toggle-activity))
+(global-set-key "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
 (auto-save-buffers-enhanced t)
 
 
@@ -40,7 +40,7 @@
          (interactive)
          (funcall (if (eq ',mode 'word)
                       #'ace-jump-word-mode
-                    #'ace-jump-char-mode) ,c)))))
+                    #'ace-jump-char-mode) ,c))))
 
   (loop for c from ?0 to ?9 do (add-keys-to-ace-jump-mode "H-" c))
   (loop for c from ?a to ?z do (add-keys-to-ace-jump-mode "H-" c))
