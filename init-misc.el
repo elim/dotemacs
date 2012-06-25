@@ -12,9 +12,9 @@
 ;;   (add-hook 'ielm-mode-hook 'enable-paredit-mode))
 
 ;; (auto-install-from-emacswiki "auto-async-byte-compile.el")
-(when (require 'auto-async-byte-compile nil t)
-  (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
-  (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode))
+;; (when (require 'auto-async-byte-compile nil t)
+;;   (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
+;;   (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode))
 
 (when (require 'eldoc nil t)
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
