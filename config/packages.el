@@ -24,6 +24,7 @@
       auto-save-buffers-enhanced-quiet-save-p t)
 (global-set-key "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
 (auto-save-buffers-enhanced t)
+(auto-save-mode -1)
 
 
 (el-get 'sync '(open-junk-file))
