@@ -1,7 +1,6 @@
 (:name ruby-mode-trunk
        :type svn
-       :url "http://svn.ruby-lang.org/repos/ruby/trunk"
-       :load-path ("misc")
+       :url "http://svn.ruby-lang.org/repos/ruby/trunk/misc"
        :after (lambda ()
                 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
                 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
