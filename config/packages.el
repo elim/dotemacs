@@ -42,46 +42,35 @@
            ("\.php$" . php-mode))
          auto-mode-alist))
 
-  (defun php-mode-hook ()
-    ;; c-mode のスタイル (コメントアウトした場合 "gnu")
-    ;; (c-set-style "bsd")
-    (c-set-style "stroustrup")
-
+  (defun php-mode-hook-func ()
+    (c-set-style "gnu")
     ;; 連続する空白の一括削除 (必要なければコメントアウトする)
     (c-toggle-hungry-state t)
-
-    ;; コメント行のインデント (必要なければコメントアウトする)
-    (setq c-comment-only-line-offset 0)
-
-    ;; コメントのスタイル (必要なければコメントアウトする)
-    (setq comment-start "// "
+    (setq tab-width 8
+          indent-tabs-mode nil
+          show-trailing-whitespace t
+          c-basic-offset 2
+          ;; コメントのスタイル (必要なければコメントアウトする)
+          comment-start "// "
           comment-end   ""
           comment-start-skip "// *")
 
-    ;; 勝手に改行モード (必要なければコメントアウトする)
-    (c-toggle-auto-hungry-state nil)
+    (c-set-offset 'arglist-intro '+)
+    (c-set-offset 'arglist-close 0)
+    (c-set-offset 'statement-cont 'c-lineup-math)
+    (flymake-mode 1))
+  (add-hook 'php-mode-hook 'php-mode-hook-func)
+  (add-to-list 'auto-mode-alist '("\\.ctp\\'" . php-mode))
 
-    (setq c-hanging-braces-alist
-          '(
-            (class-open nil)
-            (class-close nil)
-            (defun-open before after)
-            (defun-close nil)
-            (inline-open nil)
-            (inline-close nil)
-            (brace-list-open nil)
-            (brace-list-close nil)
-            (block-open nil)
-            (block-close nil)
-            (substatement-open before after)
-            (statement-case-open before after)
-            (extern-lang-open nil)
-            (extern-lang-close nil)
-            php-mode-force-pear t
-            tab-width 4
-            c-basic-offset 4
-            c-hanging-comment-ender-p nil
-            indent-tabs-mode nil))))
+  ;; C-c C-f でカーソル下の関数のマニュアルを検索
+  (setq php-search-url "http://jp.php.net/ja/")
+
+  ;; C-RET でマニュアルページにジャンプ
+  (setq php-manual-url "http://jp.php.net/manual/ja/")
+
+  ;; 前/次の関数にジャンプ。キーバインドはお好みで。
+  (define-key php-mode-map (kbd "C-c C-[") 'beginning-of-defun)
+  (define-key php-mode-map (kbd "C-c C-]") 'end-of-defun))
 
 
 
