@@ -1,0 +1,4 @@
+(:name egret-mode
+       :type git
+       :url "git://github.com/elim/egret.el.git"
+       :features (egret-mode))

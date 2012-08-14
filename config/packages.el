@@ -37,6 +37,12 @@
 ;;   (defvaralias 'last-command-char 'last-command-event))
 
 
+;;; egret-mode
+;;
+(el-get 'sync '(egret-mode))
+(global-set-key "\C-cec" #'egret-el-create-input-note-file)
+
+
 (el-get 'sync '(open-junk-file))
 
 
