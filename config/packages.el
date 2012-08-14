@@ -2,12 +2,14 @@
 ;; 複数のソースからパッケージをインストールできるパッケージ管理システム
 ;; 2012-03-15
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(unless (require 'el-get nil t)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (end-of-buffer)
-    (eval-print-last-sexp)))
+(let (el-get-master-branch)
+  (unless (require 'el-get nil t)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+      (end-of-buffer)
+      (eval-print-last-sexp))))
+
 ;; レシピ置き場
 (add-to-list 'el-get-recipe-path
              (concat (file-name-directory load-file-name) "/el-get/recipes"))
