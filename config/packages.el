@@ -26,6 +26,14 @@
 (global-set-key "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
 (auto-save-buffers-enhanced t)
 
+;;; elscreen
+;;
+(el-get 'sync '(knu-elscreen))
+(elscreen-set-prefix-key [(control l)])
+(setq elscreen-display-tab t)
+;; (unless (boundp 'last-command-char)
+;;   (defvaralias 'last-command-char 'last-command-event))
+
 
 (el-get 'sync '(open-junk-file))
 
