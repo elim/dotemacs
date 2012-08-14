@@ -18,6 +18,7 @@
              "~/.emacs.d/config/el-get/local-recipes")
 
 ;;; auto-save-buffers-enhanced
+;;
 (el-get 'sync '(auto-save-buffers-enhanced))
 (setq auto-save-default nil
       auto-save-buffers-enhanced-include-regexps '(".+")
@@ -43,6 +44,8 @@
 (global-set-key "\C-cec" #'egret-el-create-input-note-file)
 
 
+;;; open-junk-file
+;;
 (el-get 'sync '(open-junk-file))
 
 
