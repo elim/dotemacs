@@ -38,6 +38,10 @@
 ;;   (defvaralias 'last-command-char 'last-command-event))
 
 
+;;; less-css-mode
+;;
+(el-get 'sync '(less-css-mode))
+
 ;;; egret-mode
 ;;
 (el-get 'sync '(egret-mode))
