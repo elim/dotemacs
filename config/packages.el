@@ -38,6 +38,46 @@
 ;;   (defvaralias 'last-command-char 'last-command-event))
 
 
+;;; Anything
+;; iswitchbの代わり
+(let ((original-browse-url-browser-function browse-url-browser-function))
+  (el-get 'sync '(anything))
+  (require 'anything-config nil t)
+  (require 'anything-startup nil t)
+  (when (require 'anything-complete nil t)
+    (anything-lisp-complete-symbol-set-timer 150))
+  (anything-set-anything-command-map-prefix-key
+   'anything-command-map-prefix-key "C-c C-<SPC>")
+  (mapc '(lambda (key)
+           (global-set-key key 'anything))
+        (list
+         [(control ?:)]
+         [(control \;)]
+         [(control x)(control :)]
+         [(control x)(control \;)]))
+  (define-key global-map (kbd "C-x b") 'anything-for-files)
+  (define-key global-map (kbd "C-x g") 'anything-imenu) ; experimental
+  (define-key anything-map (kbd "C-z") nil)
+  (define-key anything-map (kbd "C-l") 'anything-execute-persistent-action)
+  (define-key anything-map (kbd "C-o") nil)
+  (define-key anything-map (kbd "C-M-n") 'anything-next-source)
+  (define-key anything-map (kbd "C-M-p") 'anything-previous-source)
+  (define-key ctl-x-map (kbd "C-y") 'anything-show-kill-ring)
+  (setq browse-url-browser-function original-browse-url-browser-function
+        anything-enable-shortcuts 'alphabet
+        anything-sources
+        (list anything-c-source-buffers+
+              anything-c-source-files-in-current-dir
+              anything-c-source-file-name-history
+              anything-c-source-locate
+              anything-c-source-emacs-commands)))
+
+
+;;; markdown-mode
+;;
+(el-get 'sync '(markdown-mode))
+
+
 ;;; less-css-mode
 ;;
 (el-get 'sync '(less-css-mode))
@@ -148,25 +188,7 @@
             (define-key ac-completing-map (kbd "C-n") 'ac-next)
             (define-key ac-completing-map (kbd "C-p") 'ac-previous)))
 
-
-;;; Anything
-;; iswitchbの代わり
-(let ((original-browse-url-browser-function browse-url-browser-function))
-  (el-get 'sync '(anything))
-  (require 'anything-config)
-  (anything-set-anything-command-map-prefix-key
-   'anything-command-map-prefix-key "C-c C-<SPC>")
-  (define-key global-map (kbd "C-x b") 'anything-for-files)
-  (define-key global-map (kbd "C-x g") 'anything-imenu) ; experimental
-  (define-key global-map (kbd "M-y") 'anything-show-kill-ring)
-  (define-key anything-map (kbd "C-z") nil)
-  (define-key anything-map (kbd "C-l") 'anything-execute-persistent-action)
-  (define-key anything-map (kbd "C-o") nil)
-  (define-key anything-map (kbd "C-M-n") 'anything-next-source)
-  (define-key anything-map (kbd "C-M-p") 'anything-previous-source)
-  (setq browse-url-browser-function original-browse-url-browser-function))
 
-
 ;;; Migemo
 ;; ローマ字で日本語をインクリメンタルサーチする。
 ;; 2012-03-19
