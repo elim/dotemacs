@@ -49,14 +49,16 @@
   (anything-set-anything-command-map-prefix-key
    'anything-command-map-prefix-key "C-c C-<SPC>")
   (mapc '(lambda (key)
-           (global-set-key key 'anything))
+           (define-key global-map key 'anything))
         (list
          [(control ?:)]
          [(control \;)]
          [(control x)(control :)]
          [(control x)(control \;)]))
+  (define-key global-map (kbd "C-x C-f") 'anything-find-file)
   (define-key global-map (kbd "C-x b") 'anything-for-files)
   (define-key global-map (kbd "C-x g") 'anything-imenu) ; experimental
+  (define-key global-map (kbd "M-x") 'anything-M-x)
   (define-key anything-map (kbd "C-z") nil)
   (define-key anything-map (kbd "C-l") 'anything-execute-persistent-action)
   (define-key anything-map (kbd "C-o") nil)
