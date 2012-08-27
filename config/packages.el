@@ -73,6 +73,19 @@
               anything-c-source-emacs-commands)))
 
 
+;;; popwin
+;;
+(el-get 'sync '(popwin))
+(require 'popwin)
+(setq display-buffer-function 'popwin:display-buffer
+      anything-samewindow nil)
+(push '("*anything*" :height 20) popwin:special-display-config)
+(push '("*anything M-x*" :height 20) popwin:special-display-config)
+(push '("*anything for files*" :height 20) popwin:special-display-config)
+(push '("*anything find-file*" :height 20) popwin:special-display-config)
+(push '(dired-mode :position top) popwin:special-display-config)
+
+
 ;;; markdown-mode
 ;;
 (el-get 'sync '(markdown-mode))
