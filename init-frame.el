@@ -91,7 +91,7 @@
 
   (global-set-key [(meta return)] 'toggle-fullscreen)
 
-  (add-hook 'window-setup-hook #'frame-fullscreen)
+  (add-hook 'window-setup-hook #'toggle-fullscreen)
 
   ;; http://lists.sourceforge.jp/mailman/archives/macemacsjp-english/2006-April/000569.html
   (when carbon-p
