@@ -115,6 +115,8 @@
 ;;; open-junk-file
 ;;
 (el-get 'sync '(open-junk-file))
+(setq open-junk-file-find-file-function #'find-file)
+(define-key global-map (kbd "C-x C-z") 'open-junk-file)
 
 
 ;;; php-mode
