@@ -34,7 +34,7 @@
       auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t
       auto-save-buffers-enhanced-cooperate-elscreen-p t
       auto-save-buffers-enhanced-quiet-save-p t)
-(global-set-key "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
+(define-key global-map "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
 (auto-save-buffers-enhanced t)
 
 ;;; elscreen
@@ -104,7 +104,7 @@
 ;;; egret-mode
 ;;
 (el-get 'sync '(egret-mode))
-(global-set-key (kbd "C-c e c") #'egret-el-create-input-buffer)
+(define-key global-map (kbd "C-c e c") #'egret-el-create-input-buffer)
 
 
 ;;; open-junk-file
