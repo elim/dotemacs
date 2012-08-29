@@ -302,6 +302,24 @@
 ;; JavaScript編集用のモード
 ;; 2012-04-05
 (el-get 'sync '(mooz-js2-mode))
+(when (executable-find "jsl")
+  (require 'flymake)
+  (defun flymake-jsl-init ()
+    (list "jsl" (list "-process" (flymake-init-create-temp-buffer-copy
+                                  'flymake-create-temp-inplace))))
+
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.js\\'" flymake-jsl-init))
+
+  (add-to-list 'flymake-err-line-patterns
+               '("^\\(.+\\)(\\([0-9]+\\)): \\(.*warning\\|SyntaxError\\): \\(.*\\)" 1 2 nil 4))
+
+  (defun js2-mode-hook-func ()
+    (setq flymake-check-was-interrupted t)
+    (flymake-mode 1)
+    (setq indent-tabs-mode nil))
+
+  (add-hook 'js2-mode-hook 'js2-mode-hook-func))
 
 
 ;;; coffe-mode
