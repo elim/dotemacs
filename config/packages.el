@@ -119,6 +119,13 @@
 (define-key global-map (kbd "C-x C-z") 'open-junk-file)
 
 
+;;; twittering-mode
+;;
+(el-get 'sync '(twittering-mode))
+(setq twittering-jojo-mode t
+      twittering-use-master-password t)
+
+
 ;;; php-mode
 ;; 2012-08-01
 (el-get 'sync '(php-mode))
