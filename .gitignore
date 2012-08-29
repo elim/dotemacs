@@ -9,7 +9,6 @@ auto-install/*
 auto-save-list
 customize.el
 ddskk/custom.el*
-el-get
 framesize.el
 games
 riece/log
