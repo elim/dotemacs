@@ -217,6 +217,7 @@
 ;; トリに入っているものを使う。
 ;; 2012-03-15
 (el-get 'sync '(ruby-mode-trunk))
+(el-get 'sync '(ruby-end))
 
 
 ;;; rabbit-mode
