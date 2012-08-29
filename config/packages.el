@@ -97,10 +97,11 @@
 ;;
 (el-get 'sync '(less-css-mode))
 
+
 ;;; egret-mode
 ;;
 (el-get 'sync '(egret-mode))
-(global-set-key "\C-cec" #'egret-el-create-input-note-file)
+(global-set-key (kbd "C-c e c") #'egret-el-create-input-buffer)
 
 
 ;;; open-junk-file
