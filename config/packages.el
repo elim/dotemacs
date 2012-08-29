@@ -146,45 +146,42 @@
 ;;; php-mode
 ;; 2012-08-01
 (el-get 'sync '(php-mode))
-(when (require 'php-mode nil t)
-  (add-hook 'php-mode-hook #'php-mode-hook)
+(el-get 'sync '(tetsujin-emacs-php-align))
+(setq auto-mode-alist
+      (append
+       '(("/\\(PEAR\\|pear\\)/" . php-mode)
+         ("\.php$" . php-mode))
+       auto-mode-alist))
 
-  (setq auto-mode-alist
-        (append
-         '(("/\\(PEAR\\|pear\\)/" . php-mode)
-           ("\.php$" . php-mode))
-         auto-mode-alist))
+(defun php-mode-hook-func ()
+  (c-set-style "gnu")
+  ;; 連続する空白の一括削除 (必要なければコメントアウトする)
+  (c-toggle-hungry-state t)
+  (setq tab-width 8
+        indent-tabs-mode nil
+        show-trailing-whitespace t
+        c-basic-offset 2
+        ;; コメントのスタイル (必要なければコメントアウトする)
+        comment-start "// "
+        comment-end   ""
+        comment-start-skip "// *")
 
-  (defun php-mode-hook-func ()
-    (c-set-style "gnu")
-    ;; 連続する空白の一括削除 (必要なければコメントアウトする)
-    (c-toggle-hungry-state t)
-    (setq tab-width 8
-          indent-tabs-mode nil
-          show-trailing-whitespace t
-          c-basic-offset 2
-          ;; コメントのスタイル (必要なければコメントアウトする)
-          comment-start "// "
-          comment-end   ""
-          comment-start-skip "// *")
+  (c-set-offset 'arglist-intro '+)
+  (c-set-offset 'arglist-close 0)
+  (c-set-offset 'statement-cont 'c-lineup-math)
+  (flymake-mode 1))
+(add-hook 'php-mode-hook 'php-mode-hook-func)
+(add-to-list 'auto-mode-alist '("\\.ctp\\'" . php-mode))
 
-    (c-set-offset 'arglist-intro '+)
-    (c-set-offset 'arglist-close 0)
-    (c-set-offset 'statement-cont 'c-lineup-math)
-    (flymake-mode 1))
-  (add-hook 'php-mode-hook 'php-mode-hook-func)
-  (add-to-list 'auto-mode-alist '("\\.ctp\\'" . php-mode))
+;; C-c C-f でカーソル下の関数のマニュアルを検索
+(setq php-search-url "http://jp.php.net/ja/")
 
-  ;; C-c C-f でカーソル下の関数のマニュアルを検索
-  (setq php-search-url "http://jp.php.net/ja/")
+;; C-RET でマニュアルページにジャンプ
+(setq php-manual-url "http://jp.php.net/manual/ja/")
 
-  ;; C-RET でマニュアルページにジャンプ
-  (setq php-manual-url "http://jp.php.net/manual/ja/")
-
-  ;; 前/次の関数にジャンプ。キーバインドはお好みで。
-  (define-key php-mode-map (kbd "C-c C-[") 'beginning-of-defun)
-  (define-key php-mode-map (kbd "C-c C-]") 'end-of-defun))
-
+;; 前/次の関数にジャンプ。キーバインドはお好みで。
+(define-key php-mode-map (kbd "C-c C-[") 'beginning-of-defun)
+(define-key php-mode-map (kbd "C-c C-]") 'end-of-defun)
 
 
 ;;; auto-jump-mode
