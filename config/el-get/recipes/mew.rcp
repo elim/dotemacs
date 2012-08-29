@@ -3,11 +3,10 @@
        :pkgname "kazu-yamamoto/Mew"
        :build `(("./configure" ,(concat "--with-emacs=" el-get-emacs)) "make")
        :post-init
-       (lambda ()
-         (progn
-           (autoload 'mew "mew" nil t)
-           (autoload 'mew-send "mew" nil t)
-           (let*
-               ((mew-path (car (el-get-load-path 'mew)))
+       (progn
+         (autoload 'mew "mew" nil t)
+         (autoload 'mew-send "mew" nil t)
+         (let*
+             ((mew-path (car (el-get-load-path 'mew)))
                 (mew-bin (expand-file-name "bin" mew-path)))
-             (add-to-list 'exec-path mew-bin)))))
+             (add-to-list 'exec-path mew-bin))))
