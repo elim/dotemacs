@@ -1,7 +1,0 @@
-(:name open-junk-file
-       :description nil
-       :type emacswiki
-       :features open-junk-file
-       :post-init (lambda ()
-                    (setq open-junk-file-find-file-function #'find-file)
-                    (global-set-key (kbd "C-x C-z") 'open-junk-file)))
