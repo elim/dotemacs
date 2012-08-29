@@ -13,6 +13,7 @@
        mac-function-modifier nil
        mac-option-modifier 'meta
 
+       ns-pop-up-frames nil
        ns-antialias-text nil
        ns-command-modifier 'meta
        x-select-enable-clipboard nil
