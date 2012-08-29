@@ -17,6 +17,14 @@
 (add-to-list 'el-get-recipe-path
              "~/.emacs.d/config/el-get/local-recipes")
 
+
+;;; lispxmp
+;; 式の評価結果を注釈するための設定
+(el-get 'sync '(lispxmp))
+(when (require 'lispxmp nil t)
+  (define-key emacs-lisp-mode-map (kbd "C-c C-d") 'lispxmp))
+
+
 ;;; auto-save-buffers-enhanced
 ;;
 (el-get 'sync '(auto-save-buffers-enhanced))
