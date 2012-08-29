@@ -1,4 +1,4 @@
 (:name egret-mode
-       :type git
-       :url "git://github.com/elim/egret.el.git"
-       :features (egret-mode))
+       :type github
+       :pkgname"elim/egret-mode"
+       :features egret-mode)
