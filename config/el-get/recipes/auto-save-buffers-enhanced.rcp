@@ -1,4 +1,5 @@
 (:name auto-save-buffers-enhanced
-       :type git
-       :url "https://github.com/kentaro/auto-save-buffers-enhanced.git"
+       :type github
+       :pkgname "elim/auto-save-buffers-enhanced"
+       :branch "improved-quiet-save-buffer"
        :features (auto-save-buffers-enhanced))
