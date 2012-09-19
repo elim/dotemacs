@@ -165,7 +165,6 @@
 ;;; php-mode
 ;; 2012-08-01
 (el-get 'sync '(php-mode))
-(el-get 'sync '(tetsujin-emacs-php-align))
 (setq auto-mode-alist
       (append
        '(("/\\(PEAR\\|pear\\)/" . php-mode)
