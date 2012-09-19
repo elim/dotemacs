@@ -42,6 +42,29 @@
 ;;
 (el-get 'sync '(knu-elscreen))
 (elscreen-set-prefix-key [(control l)])
+(set-face-attribute 'elscreen-tab-background-face nil
+                    :foreground "#fff"
+                    :background "#112"
+		    :underline nil
+                    :box nil)
+
+(set-face-attribute 'elscreen-tab-control-face nil
+                    :foreground "#fff"
+                    :background "#112"
+		    :underline nil
+                    :box nil)
+
+(set-face-attribute 'elscreen-tab-current-screen-face nil
+                    :foreground "#112"
+                    :background "#ccc"
+		    :underline nil
+                    :box nil)
+
+(set-face-attribute 'elscreen-tab-other-screen-face nil
+                    :foreground "#ccc"
+                    :background "#112"
+		    :underline nil
+                    :box nil)
 (setq elscreen-display-tab t)
 ;; (unless (boundp 'last-command-char)
 ;;   (defvaralias 'last-command-char 'last-command-event))
