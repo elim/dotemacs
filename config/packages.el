@@ -38,11 +38,6 @@
 (auto-save-buffers-enhanced t)
 
 
-;;; powerline
-;;
-(el-get 'sync '(powerline))
-
-
 ;;; elscreen
 ;;
 (el-get 'sync '(knu-elscreen))
@@ -50,6 +45,11 @@
 (setq elscreen-display-tab t)
 ;; (unless (boundp 'last-command-char)
 ;;   (defvaralias 'last-command-char 'last-command-event))
+
+
+;;; powerline
+;;
+(el-get 'sync '(powerline))
 
 
 ;;; Anything
