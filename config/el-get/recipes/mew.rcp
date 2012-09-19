@@ -3,6 +3,7 @@
        :pkgname "kazu-yamamoto/Mew"
        :build `(("./configure" ,(concat "--with-emacs=" el-get-emacs)) "make")
        :post-init
+       :info "info"
        (progn
          (autoload 'mew "mew" nil t)
          (autoload 'mew-send "mew" nil t)
