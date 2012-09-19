@@ -156,8 +156,10 @@
 ;;; twittering-mode
 ;;
 (el-get 'sync '(twittering-mode))
-(setq twittering-jojo-mode t
-      twittering-use-master-password t)
+(setq twittering-use-master-password t
+      twittering-icon-mode t
+      twittering-jojo-mode t
+      twittering-status-format "%FILL{%i%s %t%R}")
 
 
 ;;; php-mode
