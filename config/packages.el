@@ -37,6 +37,12 @@
 (define-key global-map "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
 (auto-save-buffers-enhanced t)
 
+
+;;; powerline
+;;
+(el-get 'sync '(powerline))
+
+
 ;;; elscreen
 ;;
 (el-get 'sync '(knu-elscreen))
