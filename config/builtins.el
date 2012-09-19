@@ -120,6 +120,7 @@
   (and elim:auto-delete-trailing-whitespace-enable-p
        (delete-trailing-whitespace)))
 
+(setq elim:auto-delete-trailing-whitespace-enable-p nil)
 (add-hook 'before-save-hook
           #'elim:auto-delete-trailing-whitespace)
 
@@ -144,6 +145,12 @@
            (magit-status (file-name-directory path))))))
 (define-key dired-mode-map "V" 'dired-vc-status)
 
+
+;;; html-mode
+;;
+(add-hook 'html-mode-hook
+	  (lambda ()
+	    (set (make-local-variable 'sgml-basic-offset) 00)))
 
 
 
