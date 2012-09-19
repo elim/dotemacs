@@ -173,8 +173,8 @@
 
 (defun php-mode-hook-func ()
   (c-set-style "gnu")
-  ;; 連続する空白の一括削除 (必要なければコメントアウトする)
-  (c-toggle-hungry-state t)
+  (define-key php-mode-map (kbd "C-c C-[") 'beginning-of-defun)
+  (define-key php-mode-map (kbd "C-c C-]") 'end-of-defun)
   (setq tab-width 8
         indent-tabs-mode nil
         show-trailing-whitespace t
@@ -198,8 +198,6 @@
 (setq php-manual-url "http://jp.php.net/manual/ja/")
 
 ;; 前/次の関数にジャンプ。キーバインドはお好みで。
-(define-key php-mode-map (kbd "C-c C-[") 'beginning-of-defun)
-(define-key php-mode-map (kbd "C-c C-]") 'end-of-defun)
 
 
 ;;; auto-jump-mode
