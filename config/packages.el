@@ -144,20 +144,20 @@
 (el-get 'sync '(knu-elscreen))
 (elscreen-set-prefix-key [(control l)])
 (set-face-attribute 'elscreen-tab-background-face nil
-                    :foreground "#fff"
-                    :background "#112"
+                    :foreground "#112"
+                    :background "#ccc"
 		    :underline nil
                     :box nil)
 
 (set-face-attribute 'elscreen-tab-control-face nil
-                    :foreground "#fff"
+                    :foreground "#ccc"
                     :background "#112"
 		    :underline nil
                     :box nil)
 
 (set-face-attribute 'elscreen-tab-current-screen-face nil
-                    :foreground "#112"
-                    :background "#ccc"
+                    :foreground "#ccc"
+                    :background "#336"
 		    :underline nil
                     :box nil)
 
@@ -167,13 +167,53 @@
 		    :underline nil
                     :box nil)
 (setq elscreen-display-tab t)
-;; (unless (boundp 'last-command-char)
-;;   (defvaralias 'last-command-char 'last-command-event))
 
 
 ;;; powerline
 ;;
 (el-get 'sync '(powerline))
+
+(setq powerline-arrow-shape 'curve)
+
+;; color
+(setq powerline-color1 "#223"
+      powerline-color2 "#334")
+
+(set-face-attribute 'mode-line nil
+                    :foreground "#ccc"
+                    :background "#113"
+                    :box nil)
+
+(set-face-attribute 'mode-line-inactive nil
+                    :foreground "#ccc"
+                    :background "#112"
+                    :box nil)
+                                        ;
+(defpowerline mule-info (caddr mode-line-mule-info))
+                                        ; とりあえず propertize だけ拾った
+(defpowerline remote    (propertize "%1@" 'help-eco "remote"))
+(defpowerline modified-ro "%*%&")
+(defpowerline position  "%p (%l,%c)")
+(defpowerline global    "%M")
+                                        ;
+(setq-default mode-line-format
+              (list  '(:eval (concat (powerline-make-text      "-"      nil )))
+                     '(:eval (concat (powerline-mule-info      'center  nil )))
+                     '(:eval (concat (powerline-make-text      ":"      nil )))
+                     '(:eval (concat (powerline-modified-ro    'center  nil )))
+                     '(:eval (concat (powerline-remote         'center  nil )))
+                     '(:eval (concat (powerline-buffer-id      'left    nil )))
+                     '(:eval (concat (powerline-narrow         'left    nil  powerline-color1  )))
+                     '(:eval (concat (powerline-major-mode     'left         powerline-color1 )))
+                     '(:eval (concat (powerline-narrow         'left         powerline-color1  powerline-color2  )))
+                     '(:eval (concat (powerline-minor-modes    'left                           powerline-color2  )))
+                     ;; Justify right by filling with spaces to right fringe - 16
+                     ;; (16 should be computed rahter than hardcoded)
+                     ;; '(:eval (propertize " " 'display '((space :align-to (- right-fringe 30)) powerline-color2)))
+                     '(:eval (concat (powerline-make-text       "                 "                            powerline-color2  )))
+                     '(:eval (concat (powerline-position       'right       powerline-color1  powerline-color2  )))
+                     '(:eval (concat (powerline-global         'right  nil  powerline-color1 )))
+                     ))
 
 
 ;;; Anything
