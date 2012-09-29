@@ -447,34 +447,7 @@
       (when (> offset 0) (forward-char offset)))))
 
 
-
-;;; rabbit-mode
-;; 2012-03-16
-(el-get 'sync '(rabbit-mode))
 
-
-;;; run-test
-;; テスト実行
-(el-get 'sync '(run-test))
-
-
-;;; Magit
-;; 2012-03-24
-(load "config/packages/magit")
-
-
-;;; rst-mode
-;; reStructuredText編集用のモード
-;; 2012-03-24
-(el-get 'sync '(rst-mode))
-
-
-;;; textile-mode
-;; Textile編集用のモード
-;; 2012-04-11
-(el-get 'sync '(textile-mode))
-
-
 ;;; js2-mode
 ;; JavaScript編集用のモード
 ;; 2012-04-05
