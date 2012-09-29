@@ -5,6 +5,9 @@
 (define-key global-map [delete] #'delete-char)
 (define-key global-map (kbd "C-m") 'newline-and-indent)
 
+;; no more hard tab
+(setq-default indent-tabs-mode nil)
+
 ;; startup screen
 (setq inhibit-startup-screen t)
 
