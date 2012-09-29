@@ -1,0 +1,5 @@
+(:name clmemo
+       :type github
+       :pkgname "ataka/clmemo"
+       :post-init (progn
+                    (autoload 'clmemo "clmemo" "ChangeLog MEMO mode." t)))

@@ -119,6 +119,41 @@
   (add-hook 'after-init-hook 'session-initialize))
 
 
+;;; New clmemo
+;; http://at-aka.blogspot.jp/2012/09/clmemo-blgrep-github.html
+;;
+
+(el-get 'sync '(clmemo))
+(define-key ctl-x-map "M" 'clmemo)
+(setq clmemo-file-name "~/Dropbox/clmemo.txt"
+      clmemo-time-string-with-weekday t
+      clmemo-title-list '("diary" "monay" "idea" "computer"))
+
+
+;;; blgrep (clgrep.el)
+;;
+(add-hook 'clmemo-mode-hook
+   '(lambda ()
+      (define-key clmemo-mode-map "\C-c\C-g" 'clgrep)
+      (define-key clmemo-mode-map "\C-c," 'quasi-howm)))
+
+(add-hook 'change-log-mode-hook
+   '(lambda ()
+      (define-key change-log-mode-map "\C-c\C-g" 'blg-changelog)
+      (define-key change-log-mode-map "\C-c\C-i" 'blg-changelog-item-heading)
+      (define-key change-log-mode-map "\C-c\C-d" 'blg-changelog-date)))
+
+(add-hook 'outline-mode-hook
+   '(lambda ()
+      (define-key outline-mode-map "\C-c\C-g" 'blg-outline)
+      (define-key outline-mode-map "\C-c1" 'blg-outline-line)))
+(add-hook 'outline-minor-mode-hook
+   '(lambda ()
+      (define-key outline-minor-mode-map "\C-c\C-g" 'blg-outline)
+      (define-key outline-minor-mode-map "\C-c1" 'blg-outline-line)))
+(el-get 'sync '(blgrep))
+
+
 ;;; lispxmp
 ;; 式の評価結果を注釈するための設定
 (el-get 'sync '(lispxmp))
