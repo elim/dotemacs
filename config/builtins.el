@@ -30,7 +30,7 @@
 (setq kill-ring-max 300)
 
 ;; menu bar
-(menu-bar-mode -1)
+(menu-bar-mode (if ns-p t -1))
 
 ;; tool bar
 (when (boundp 'tool-bar-mode)
