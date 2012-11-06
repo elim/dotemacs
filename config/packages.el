@@ -488,7 +488,7 @@
 ;;; js2-mode
 ;; JavaScript編集用のモード
 ;; 2012-04-05
-(el-get 'sync '(mooz-js2-mode))
+(el-get 'sync '(js2-mode))
 (when (executable-find "jsl")
   (require 'flymake)
   (defun flymake-jsl-init ()
