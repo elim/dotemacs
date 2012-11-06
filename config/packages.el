@@ -247,41 +247,22 @@
                      ))
 
 
-;;; Anything
-;; iswitchbの代わり
-(let ((original-browse-url-browser-function browse-url-browser-function))
-  (el-get 'sync '(anything))
-  (require 'anything-config nil t)
-  (require 'anything-startup nil t)
-  (when (require 'anything-complete nil t)
-    (anything-lisp-complete-symbol-set-timer 150))
-  (anything-set-anything-command-map-prefix-key
-   'anything-command-map-prefix-key "C-c C-<SPC>")
-  (mapc '(lambda (key)
-           (define-key global-map key 'anything))
-        (list
-         [(control ?:)]
-         [(control \;)]
-         [(control x)(control :)]
-         [(control x)(control \;)]))
-  (define-key global-map (kbd "C-x C-f") 'anything-find-file)
-  (define-key global-map (kbd "C-x b") 'anything-for-files)
-  (define-key global-map (kbd "C-x g") 'anything-imenu) ; experimental
-  (define-key global-map (kbd "M-x") 'anything-M-x)
-  (define-key anything-map (kbd "C-z") nil)
-  (define-key anything-map (kbd "C-l") 'anything-execute-persistent-action)
-  (define-key anything-map (kbd "C-o") nil)
-  (define-key anything-map (kbd "C-M-n") 'anything-next-source)
-  (define-key anything-map (kbd "C-M-p") 'anything-previous-source)
-  (define-key ctl-x-map (kbd "C-y") 'anything-show-kill-ring)
-  (setq browse-url-browser-function original-browse-url-browser-function
-        anything-enable-shortcuts 'alphabet
-        anything-sources
-        (list anything-c-source-buffers+
-              anything-c-source-files-in-current-dir
-              anything-c-source-file-name-history
-              anything-c-source-locate
-              anything-c-source-emacs-commands)))
+;;; Emacs-Helm
+;;
+(el-get 'sync '(helm))
+(require 'helm-config nil t)
+(mapc '(lambda (key)
+         (define-key global-map key 'helm-mini))
+      (list
+       [(control ?:)]
+       [(control \;)]
+       [(control x)(control :)]
+       [(control x)(control \;)]))
+(define-key ctl-x-map (kbd "C-y") 'helm-show-kill-ring)
+(define-key ctl-x-map (kbd "b") 'helm-buffers-list)
+(setq helm-enable-shortcuts 'alphabet)
+(helm-mode 1)
+
 
 
 ;;; popwin
