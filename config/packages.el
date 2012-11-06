@@ -125,30 +125,30 @@
 (define-key ctl-x-map "M" 'clmemo)
 (setq clmemo-file-name "~/Dropbox/clmemo.txt"
       clmemo-time-string-with-weekday t
-      clmemo-title-list '("diary" "monay" "idea" "computer"))
+      clmemo-title-list '("life" "work" "emacs" "idea" "computer"))
 
 
 ;;; blgrep (clgrep.el)
 ;;
 (add-hook 'clmemo-mode-hook
-   '(lambda ()
-      (define-key clmemo-mode-map "\C-c\C-g" 'clgrep)
-      (define-key clmemo-mode-map "\C-c," 'quasi-howm)))
+          '(lambda ()
+             (define-key clmemo-mode-map "\C-c\C-g" 'clgrep)
+             (define-key clmemo-mode-map "\C-c," 'quasi-howm)))
 
 (add-hook 'change-log-mode-hook
-   '(lambda ()
-      (define-key change-log-mode-map "\C-c\C-g" 'blg-changelog)
-      (define-key change-log-mode-map "\C-c\C-i" 'blg-changelog-item-heading)
-      (define-key change-log-mode-map "\C-c\C-d" 'blg-changelog-date)))
+          '(lambda ()
+             (define-key change-log-mode-map "\C-c\C-g" 'blg-changelog)
+             (define-key change-log-mode-map "\C-c\C-i" 'blg-changelog-item-heading)
+             (define-key change-log-mode-map "\C-c\C-d" 'blg-changelog-date)))
 
 (add-hook 'outline-mode-hook
-   '(lambda ()
-      (define-key outline-mode-map "\C-c\C-g" 'blg-outline)
-      (define-key outline-mode-map "\C-c1" 'blg-outline-line)))
+          '(lambda ()
+             (define-key outline-mode-map "\C-c\C-g" 'blg-outline)
+             (define-key outline-mode-map "\C-c1" 'blg-outline-line)))
 (add-hook 'outline-minor-mode-hook
-   '(lambda ()
-      (define-key outline-minor-mode-map "\C-c\C-g" 'blg-outline)
-      (define-key outline-minor-mode-map "\C-c1" 'blg-outline-line)))
+          '(lambda ()
+             (define-key outline-minor-mode-map "\C-c\C-g" 'blg-outline)
+             (define-key outline-minor-mode-map "\C-c1" 'blg-outline-line)))
 (el-get 'sync '(blgrep))
 
 
@@ -221,14 +221,12 @@
                     :foreground "#ccc"
                     :background "#112"
                     :box nil)
-                                        ;
 (defpowerline mule-info (caddr mode-line-mule-info))
-                                        ; とりあえず propertize だけ拾った
 (defpowerline remote    (propertize "%1@" 'help-eco "remote"))
 (defpowerline modified-ro "%*%&")
 (defpowerline position  "%p (%l,%c)")
 (defpowerline global    "%M")
-                                        ;
+
 (setq-default mode-line-format
               (list  '(:eval (concat (powerline-make-text      "-"      nil )))
                      '(:eval (concat (powerline-mule-info      'center  nil )))
