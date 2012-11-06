@@ -480,6 +480,10 @@
       (when (> offset 0) (forward-char offset)))))
 
 
+;;; puppet-mode
+;;
+(el-get 'sync '(puppet-mode))
+
 
 ;;; js2-mode
 ;; JavaScript編集用のモード
