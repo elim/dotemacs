@@ -3,7 +3,7 @@
 (defun elim:set-default-frame-font (fontname)
   (setq  default-frame-alist (append
                               `((font . ,fontname))
-         default-frame-alist)))
+                              default-frame-alist)))
 
 (cond
  ;; X Window System
@@ -81,8 +81,8 @@
  ;; NTEmacs
  ;; http://ntemacsjp.sourceforge.jp/matsuan/FontSettingJp.html
  (nt-p
-   (setq w32-enable-synthesized-fonts t
-         w32-use-w32-font-dialog t)
+  (setq w32-enable-synthesized-fonts t
+        w32-use-w32-font-dialog t)
 
   (cond
    ;; emacs23
@@ -92,48 +92,47 @@
                       'japanese-jisx0208
                       '("ＭＳ ゴシック" . "unicode-bmp")))
 
-    (t
-     (set-face-attribute 'default nil
-                         :family "ＭＳ ゴシック"
-                         :height 100)
+   (t
+    (set-face-attribute 'default nil
+                        :family "ＭＳ ゴシック"
+                        :height 100)
 
-     (set-fontset-font "fontset-default"
-                       'japanese-jisx0208
-                       '("ＭＳ ゴシック*" . "jisx0208-sjis"))
+    (set-fontset-font "fontset-default"
+                      'japanese-jisx0208
+                      '("ＭＳ ゴシック*" . "jisx0208-sjis"))
 
-     (set-fontset-font "fontset-default"
-                       'katakana-jisx0201
-                       '("ＭＳ ゴシック*" . "jisx0201-katakana"))
+    (set-fontset-font "fontset-default"
+                      'katakana-jisx0201
+                      '("ＭＳ ゴシック*" . "jisx0201-katakana"))
 
-     (add-to-list 'face-font-rescale-alist
-                  `(,(encode-coding-string
-                      ".*ＭＳ.*bold.*iso8859.*" 'emacs-mule) . 0.9))
+    (add-to-list 'face-font-rescale-alist
+                 `(,(encode-coding-string
+                     ".*ＭＳ.*bold.*iso8859.*" 'emacs-mule) . 0.9))
 
-     (add-to-list 'face-font-rescale-alist
-                  `(,(encode-coding-string
-                      ".*ＭＳ.*bold.*jisx02.*" 'emacs-mule) . 0.95)))))
+    (add-to-list 'face-font-rescale-alist
+                 `(,(encode-coding-string
+                     ".*ＭＳ.*bold.*jisx02.*" 'emacs-mule) . 0.95)))))
 
-  ;; Carbon Emacs
-  (carbon-p
-    (require 'carbon-font nil t)
-    (add-to-list
-     'default-frame-alist
-     '(font . "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-osaka"))
-    (setq mac-allow-anti-aliasing nil))
+ ;; Carbon Emacs
+ (carbon-p
+  (require 'carbon-font nil t)
+  (add-to-list
+   'default-frame-alist
+   '(font . "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-osaka"))
+  (setq mac-allow-anti-aliasing nil))
 
-  ;; Cocoa Emacs
-  (ns-p
-   (elim:set-default-frame-font "Osaka mono-12")
-
-   (set-fontset-font
-    "fontset-default"
-    'japanese-jisx0208
-    '("Osaka" . "iso10646-1"))
-   (setq face-font-rescale-alist
-         '(("^-apple-hiragino.*" . 1.2)
-           (".*osaka-bold.*" . 1.2)
-           (".*osaka-medium.*" . 1.2)
-           (".*courier-bold-.*-mac-roman" . 1.0)
-           (".*monaco cy-bold-.*-mac-cyrillic" . 0.9)
-           (".*monaco-bold-.*-mac-roman" . 0.9)
-           ("-cdac$" . 1.3)))))
+ ;; Cocoa Emacs
+ (ns-p
+  (setq ns-antialias-text t)
+  (let* ((size 16)
+         (asciifont "Ricty") ; ASCII fonts
+         (jpfont "Ricty") ; Japanese fonts
+         (h (* size 10))
+         (fontspec (font-spec :family asciifont :weight 'normal))
+         (jp-fontspec (font-spec :family jpfont :weight 'normal)))
+    (set-face-attribute 'default nil :family asciifont :height h)
+    (set-fontset-font nil 'japanese-jisx0213.2004-1 jp-fontspec)
+    (set-fontset-font nil 'japanese-jisx0213-2 jp-fontspec)
+    (set-fontset-font nil 'katakana-jisx0201 jp-fontspec)
+    (set-fontset-font nil '(#x0080 . #x024F) fontspec)
+    (set-fontset-font nil '(#x0370 . #x03FF) fontspec))))
