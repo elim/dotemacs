@@ -101,8 +101,7 @@
 
 ;;; session
 ;;
-; (el-get 'sync '(session))
-(el-get 'sync '(emacs-goodies-el))
+(el-get 'sync '(session))
 (when (require 'session nil t)
   (setq history-length t
         session-save-file-coding-system 'utf-8-unix
@@ -110,6 +109,7 @@
         session-globals-include '((kill-ring 1024)
                                   (session-file-alist 1024 t)
                                   (file-name-history 1024))
+        session-save-print-spec '(t nil 40000)
         session-globals-max-size 1024
         session-globals-max-string 1024
         session-save-file (expand-file-name
