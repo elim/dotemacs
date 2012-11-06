@@ -21,84 +21,82 @@
 
 ;;; ddskk
 ;;
-(defun elim:ddskk-setup ()
-  (el-get 'sync '(ddskk))
-  (setq skk-indicator-use-cursor-color nil)
-  (global-set-key "\C-x\C-j" 'skk-mode)
-  (global-set-key "\C-xj" nil)
-  (global-set-key "\C-xt" nil)
-  ;; (global-set-key "\C-xj" 'skk-auto-fill-mode)
-  ;; (global-set-key "\C-xt" 'skk-tutorial)
+(defun noninteractive ())
+(el-get 'sync '(ddskk))
 
-  (mapc '(lambda (lib)
-           (apply #'autoload lib))
-        (list
-         '(skk "skk" nil t)
-         '(skk-mode "skk" nil t)
-         '(skk-auto-fill-mode "skk" nil t)
-         '(skk-check-jisyo "skk-tools" nil t)
-         '(skk-merge "skk-tools" nil t)
-         '(skk-diff "skk-tools" nil t)
-         '(skk-isearch-mode-setup "skk-isearch" nil t)
-         '(skk-isearch-mode-cleanup "skk-isearch" nil t)))
+(setq skk-indicator-use-cursor-color nil)
+(global-set-key "\C-x\C-j" 'skk-mode)
+(global-set-key "\C-xj" nil)
+(global-set-key "\C-xt" nil)
+;; (global-set-key "\C-xj" 'skk-auto-fill-mode)
+;; (global-set-key "\C-xt" 'skk-tutorial)
 
-  ;; @@ 基本の設定
+(mapc '(lambda (lib)
+         (apply #'autoload lib))
+      (list
+       '(skk "skk" nil t)
+       '(skk-mode "skk" nil t)
+       '(skk-auto-fill-mode "skk" nil t)
+       '(skk-check-jisyo "skk-tools" nil t)
+       '(skk-merge "skk-tools" nil t)
+       '(skk-diff "skk-tools" nil t)
+       '(skk-isearch-mode-setup "skk-isearch" nil t)
+       '(skk-isearch-mode-cleanup "skk-isearch" nil t)))
 
-  (setq skk-jisyo-code 'utf-8
-        skk-count-private-jisyo-candidates-exactly t
-        skk-share-private-jisyo t)
+;; @@ 基本の設定
 
-  ;; SKK を Emacs の input method として使用する
-  (setq default-input-method "japanese-skk")
+(setq skk-jisyo-code 'utf-8
+      skk-count-private-jisyo-candidates-exactly t
+      skk-share-private-jisyo t)
 
-  ;; SKK を起動していなくても、いつでも skk-isearch を使う
-  (add-hook 'isearch-mode-hook 'skk-isearch-mode-setup)
-  (add-hook 'isearch-mode-end-hook 'skk-isearch-mode-cleanup)
-  ;; migemo を使うから skk-isearch にはおとなしくしていて欲しい
-  ;; (setq skk-isearch-start-mode 'latin)
+;; SKK を Emacs の input method として使用する
+(setq default-input-method "japanese-skk")
 
-  ;; @@ 応用的な設定
+;; SKK を起動していなくても、いつでも skk-isearch を使う
+(add-hook 'isearch-mode-hook 'skk-isearch-mode-setup)
+(add-hook 'isearch-mode-end-hook 'skk-isearch-mode-cleanup)
+;; migemo を使うから skk-isearch にはおとなしくしていて欲しい
+;; (setq skk-isearch-start-mode 'latin)
 
-  ;; ~/.skk* なファイルがたくさんあるので整理したい
-  (setq ddskk-preference-directory
-        (expand-file-name "ddskk" user-emacs-directory))
-  (setq skk-init-file
-        (expand-file-name "init.el" ddskk-preference-directory)
-        skk-custom-file
-        (expand-file-name "custom.el" ddskk-preference-directory)
-        skk-emacs-id-file
-        (expand-file-name "emacs-id" ddskk-preference-directory)
-        skk-record-file
-        (expand-file-name "record" ddskk-preference-directory))
-                                        ;        skk-jisyo "~/.ddskk/jisyo"
-                                        ;      skk-backup-jisyo "~/.ddskk/jisyo.bak")
+;; @@ 応用的な設定
+
+;; ~/.skk* なファイルがたくさんあるので整理したい
+(setq ddskk-preference-directory
+      (expand-file-name "ddskk" user-emacs-directory))
+(setq skk-init-file
+      (expand-file-name "init.el" ddskk-preference-directory)
+      skk-custom-file
+      (expand-file-name "custom.el" ddskk-preference-directory)
+      skk-emacs-id-file
+      (expand-file-name "emacs-id" ddskk-preference-directory)
+      skk-record-file
+      (expand-file-name "record" ddskk-preference-directory))
 
 
-  ;; super-smart-find のための設定 (意味あるかな？)
-  (setq super-smart-find-self-insert-command-list
-        '(canna-self-insert-command
-          egg-self-insert-command
-          self-insert-command
-          tcode-self-insert-command-maybe
-          skk-insert))
+;; super-smart-find のための設定 (意味あるかな？)
+(setq super-smart-find-self-insert-command-list
+      '(canna-self-insert-command
+        egg-self-insert-command
+        self-insert-command
+        tcode-self-insert-command-maybe
+        skk-insert))
 
-  ;; YaTeX のときだけ句読点を変更したい
-  (add-hook 'yatex-mode-hook
-            (lambda ()
-              (require 'skk)
-              (setq skk-kutouten-type 'en)))
+;; YaTeX のときだけ句読点を変更したい
+(add-hook 'yatex-mode-hook
+          (lambda ()
+            (require 'skk)
+            (setq skk-kutouten-type 'en)))
 
-  ;; 辞書を 10 分毎に自動保存
-  (defvar skk-auto-save-jisyo-interval 600)
-  (defun skk-auto-save-jisyo ()
-    (skk-save-jisyo)
-    (skk-bayesian-save-history)
-    (skk-bayesian-corpus-save))
-  (run-with-idle-timer skk-auto-save-jisyo-interval
-                       t
-                       'skk-auto-save-jisyo))
+;; 辞書を 10 分毎に自動保存
+(defvar skk-auto-save-jisyo-interval 600)
+(defun skk-auto-save-jisyo ()
+  (skk-save-jisyo)
+  (skk-bayesian-save-history)
+  (skk-bayesian-corpus-save))
+(run-with-idle-timer skk-auto-save-jisyo-interval
+                     t
+                     'skk-auto-save-jisyo)
 ;;(cancel-function-timers 'skk-auto-save-jisyo)
-(add-hook 'after-init-hook 'elim:ddskk-setup)
 
 
 ;;; session
