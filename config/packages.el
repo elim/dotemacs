@@ -117,6 +117,12 @@
   (add-hook 'after-init-hook 'session-initialize))
 
 
+;;; Egg is an Emacs interface to git.
+;;
+
+(el-get 'sync '(egg))
+
+
 ;;; New clmemo
 ;; http://at-aka.blogspot.jp/2012/09/clmemo-blgrep-github.html
 ;;
