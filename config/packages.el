@@ -448,6 +448,12 @@
 (el-get 'sync '(ruby-mode-trunk))
 (el-get 'sync '(ruby-end))
 
+
+;;; Rinari Is Not A Rails IDE
+;;
+(el-get 'sync '(rinari))
+
+
 ;; http://stackoverflow.com/questions/7961533/emacs-ruby-method-parameter-indentation
 (defadvice ruby-indent-line (after unindent-closing-paren activate)
   (let ((column (current-column))
