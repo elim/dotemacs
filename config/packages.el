@@ -524,3 +524,9 @@
 ;; 個別の設定があったら読み込む
 ;; 2012-03-15
 (load "config/packages/local" t)
+
+;;; expand-region
+;;
+(el-get 'sync '(expand-region))
+(global-set-key (kbd "C-=") 'er/expand-region)
+
