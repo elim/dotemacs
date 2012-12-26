@@ -1,12 +1,14 @@
 ;;; basics
 
+;; enable mature method(s)
+(put 'narrow-to-region 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
+
 ;; keyboard setting
 (keyboard-translate ?\C-h ?\C-?)
 (define-key global-map [delete] #'delete-char)
 (define-key global-map (kbd "C-m") 'newline-and-indent)
 (define-key global-map [ns-drag-file] 'ns-find-file)
-
-
 
 ;; Cocoa
 (when ns-p
