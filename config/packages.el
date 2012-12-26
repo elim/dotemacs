@@ -266,9 +266,8 @@
        [(control x)(control \;)]))
 (define-key ctl-x-map (kbd "C-y") 'helm-show-kill-ring)
 (define-key ctl-x-map (kbd "b") 'helm-buffers-list)
-(setq helm-enable-shortcuts 'alphabet)
-(helm-mode 1)
-
+(global-set-key (kbd "M-x") 'helm-M-x)
+(helm-mode -1)
 
 
 ;;; popwin
