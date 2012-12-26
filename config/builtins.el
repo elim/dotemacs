@@ -4,6 +4,21 @@
 (keyboard-translate ?\C-h ?\C-?)
 (define-key global-map [delete] #'delete-char)
 (define-key global-map (kbd "C-m") 'newline-and-indent)
+(define-key global-map [ns-drag-file] 'ns-find-file)
+
+
+
+;; Cocoa
+(when ns-p
+  (add-hook 'term-setup-hook
+            #'(lambda ()
+                (setq ns-pop-up-frames nil
+                      ns-antialias-text t
+                      ns-command-modifier 'meta
+                      ns-alternate-modifier 'meta
+                      x-select-enable-clipboard nil
+                      x-select-enable-primary t
+                      select-active-regions nil))))
 
 ;; no more hard tab
 (setq-default indent-tabs-mode nil)
