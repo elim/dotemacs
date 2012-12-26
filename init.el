@@ -60,7 +60,7 @@
 (defmacro set-path (list-var list)
   (list 'mapc `(lambda (x)
                  (when (file-accessible-directory-p x)
-                   (add-to-list ',list-var x)))
+                   (add-to-list ',list-var (expand-file-name x))))
         list))
 
 (set-path load-path
@@ -70,7 +70,8 @@
                "/usr/local/share/emacs/site-lisp/"))
 
 (set-path exec-path
-          (list "~/bin"
+          (list "~/.rbenv/shims/"
+                "~/bin"
                 "/bin/"
                 "/opt/local/bin"
                 "/opt/local/sbin"
