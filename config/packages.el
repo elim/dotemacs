@@ -447,10 +447,20 @@
 (el-get 'sync '(ruby-mode-trunk))
 (el-get 'sync '(ruby-end))
 
+(add-hook 'ruby-mode-hook
+          #'(lambda ()
+              (setq show-trailing-whitespace t)))
+
 
 ;;; Rinari Is Not A Rails IDE
 ;;
 (el-get 'sync '(rinari))
+(el-get 'sync '(rhtml-mode))
+(eval-after-load "rhtml-mode"
+    '(lambda ()
+       (set-face-foreground 'erb-face "#aaffff")
+       (set-face-background 'erb-face "#090909")
+       (set-face-background 'erb-out-delim-face "#090909")))
 
 
 ;; http://stackoverflow.com/questions/7961533/emacs-ruby-method-parameter-indentation
