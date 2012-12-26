@@ -452,6 +452,11 @@
               (setq show-trailing-whitespace t)))
 
 
+;;; rspec-mode
+;;
+(el-get 'sync '(rspec-mode))
+
+
 ;;; Rinari Is Not A Rails IDE
 ;;
 (el-get 'sync '(rinari))
