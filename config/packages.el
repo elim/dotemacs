@@ -181,7 +181,7 @@
 ;;; elscreen
 ;;
 (el-get 'sync '(knu-elscreen))
-(elscreen-set-prefix-key [(control l)])
+(elscreen-set-prefix-key [(control z)])
 (set-face-attribute 'elscreen-tab-background-face nil
                     :foreground "#112"
                     :background "#ccc"
