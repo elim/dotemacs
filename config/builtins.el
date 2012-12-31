@@ -1,5 +1,15 @@
 ;;; basics
 
+;; server
+(when (require 'server nil t)
+  (setq server-window 'pop-to-buffer)
+  (unless (server-running-p)
+    (server-start))
+  (remove-hook
+   'kill-buffer-query-functions
+   'server-kill-buffer-query-function))
+
+
 ;; enable mature method(s)
 (put 'narrow-to-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
