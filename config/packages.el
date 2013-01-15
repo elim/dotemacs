@@ -490,6 +490,11 @@
 (el-get 'sync '(puppet-mode))
 
 
+;;; yaml-mode
+;;
+(el-get 'sync '(yaml-mode))
+
+
 ;;; js2-mode
 ;; JavaScript編集用のモード
 ;; 2012-04-05
