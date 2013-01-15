@@ -462,11 +462,10 @@
 ;;
 (el-get 'sync '(rinari))
 (el-get 'sync '(rhtml-mode))
-(eval-after-load "rhtml-mode"
-    '(lambda ()
-       (set-face-foreground 'erb-face "#aaffff")
-       (set-face-background 'erb-face "#090909")
-       (set-face-background 'erb-out-delim-face "#090909")))
+(when (require 'rhtml-mode nil t)
+  (set-face-foreground 'erb-face "#aaffff")
+  (set-face-background 'erb-face "#090909")
+  (set-face-background 'erb-out-delim-face "#090909"))
 
 
 ;; http://stackoverflow.com/questions/7961533/emacs-ruby-method-parameter-indentation
