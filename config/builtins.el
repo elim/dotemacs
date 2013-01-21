@@ -161,6 +161,11 @@
   (setq kill-ring (delete (ad-get-arg 0) kill-ring)))
 
 
+;;; dired
+;; 
+(load "config/builtins/dired")
+
+
 ;;; バージョン管理システム
 ;; diredから適切なバージョン管理システムの*-statusを起動
 (defun dired-vc-status (&rest args)
@@ -172,7 +177,7 @@
           ((string-match-p "\\.svn$" path)
            (svn-status (file-name-directory path)))
           ((string-match-p "\\.git$" path)
-           (magit-status (file-name-directory path))))))
+           (egg-status (file-name-directory path))))))
 (define-key dired-mode-map "V" 'dired-vc-status)
 
 
@@ -180,13 +185,47 @@
 ;;
 (add-hook 'html-mode-hook
 	  (lambda ()
-	    (set (make-local-variable 'sgml-basic-offset) 02)))
+	    (set (make-local-variable 'sgml-basic-offset) 2)))
 
 
 ;;; css-mode
 ;;
 (when (autoload 'css-mode "css-mode" nil t nil)
   (setq css-indent-offset 2))
+
+
+;;; scheme-mode
+;; 
+(load "config/builtins/scheme-mode")
+
+
+;;; hide-show
+;;
+(when (require 'hideshow nil t)
+  (define-key hs-minor-mode-map
+    (kbd "C-c C-M-c") 'hs-toggle-hiding))
+
+
+;;; shell-script-mode
+;;
+(when (locate-library "sh-script")
+  (setq sh-basic-offset 2))
+
+
+;;; paren
+;; 
+(load "config/builtins/paren")
+
+
+;;; align
+;; 
+(load "config/builtins/align")
+
+
+;;; dictionary
+;; 
+(load "config/builtins/dictionary")
+
 
 
 ;;; スペルチェック

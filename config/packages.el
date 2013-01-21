@@ -271,6 +271,11 @@
 (helm-mode -1)
 
 
+;;; helm-rails
+;;
+(el-get 'sync '(helm-rails))
+
+
 ;;; popwin
 ;;
 (el-get 'sync '(popwin))
@@ -451,6 +456,20 @@
 (add-hook 'ruby-mode-hook
           #'(lambda ()
               (setq show-trailing-whitespace t)))
+
+(setq ruby-indent-level 2
+      ruby-indent-tabs-mode nil
+      ruby-deep-indent-paren-style nil)
+
+(eval-after-load "develock"
+  '(plist-put develock-max-column-plist 'ruby-mode 100))
+
+(mapc '(lambda (arg)
+         (cons arg auto-mode-alist))
+      (list '("\\.rb$" . ruby-mode)
+            '("Rakefile" . ruby-mode)))
+
+(define-key ruby-mode-map "\C-m" 'reindent-then-newline-and-indent)
 
 
 ;;; rspec-mode
