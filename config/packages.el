@@ -31,8 +31,8 @@
 ;; (global-set-key "\C-xj" 'skk-auto-fill-mode)
 ;; (global-set-key "\C-xt" 'skk-tutorial)
 
-(mapc '(lambda (lib)
-         (apply #'autoload lib))
+(mapc #'(lambda (lib)
+          (apply #'autoload lib))
       (list
        '(skk "skk" nil t)
        '(skk-mode "skk" nil t)
@@ -83,9 +83,9 @@
 
 ;; YaTeX のときだけ句読点を変更したい
 (add-hook 'yatex-mode-hook
-          (lambda ()
-            (require 'skk)
-            (setq skk-kutouten-type 'en)))
+          #'(lambda ()
+              (require 'skk)
+              (setq skk-kutouten-type 'en)))
 
 ;; 辞書を 10 分毎に自動保存
 (defvar skk-auto-save-jisyo-interval 600)
@@ -138,24 +138,24 @@
 ;;; blgrep (clgrep.el)
 ;;
 (add-hook 'clmemo-mode-hook
-          '(lambda ()
-             (define-key clmemo-mode-map "\C-c\C-g" 'clgrep)
-             (define-key clmemo-mode-map "\C-c," 'quasi-howm)))
+          #'(lambda ()
+              (define-key clmemo-mode-map "\C-c\C-g" 'clgrep)
+              (define-key clmemo-mode-map "\C-c," 'quasi-howm)))
 
 (add-hook 'change-log-mode-hook
-          '(lambda ()
-             (define-key change-log-mode-map "\C-c\C-g" 'blg-changelog)
-             (define-key change-log-mode-map "\C-c\C-i" 'blg-changelog-item-heading)
-             (define-key change-log-mode-map "\C-c\C-d" 'blg-changelog-date)))
+          #'(lambda ()
+              (define-key change-log-mode-map "\C-c\C-g" 'blg-changelog)
+              (define-key change-log-mode-map "\C-c\C-i" 'blg-changelog-item-heading)
+              (define-key change-log-mode-map "\C-c\C-d" 'blg-changelog-date)))
 
 (add-hook 'outline-mode-hook
-          '(lambda ()
-             (define-key outline-mode-map "\C-c\C-g" 'blg-outline)
-             (define-key outline-mode-map "\C-c1" 'blg-outline-line)))
+          #'(lambda ()
+              (define-key outline-mode-map "\C-c\C-g" 'blg-outline)
+              (define-key outline-mode-map "\C-c1" 'blg-outline-line)))
 (add-hook 'outline-minor-mode-hook
-          '(lambda ()
-             (define-key outline-minor-mode-map "\C-c\C-g" 'blg-outline)
-             (define-key outline-minor-mode-map "\C-c1" 'blg-outline-line)))
+          #'(lambda ()
+              (define-key outline-minor-mode-map "\C-c\C-g" 'blg-outline)
+              (define-key outline-minor-mode-map "\C-c1" 'blg-outline-line)))
 (el-get 'sync '(blgrep))
 
 
@@ -429,10 +429,11 @@
 ;; 2012-03-16
 (el-get 'sync '(popup))
 
-
+
 ;;; Auto Complete
 ;; 自動補完
 (el-get 'sync '(auto-complete))
+(global-auto-complete-mode t))
 (add-hook 'auto-complete-mode-hook
           (lambda ()
             (define-key ac-completing-map (kbd "C-n") 'ac-next)
@@ -464,8 +465,8 @@
 (eval-after-load "develock"
   '(plist-put develock-max-column-plist 'ruby-mode 100))
 
-(mapc '(lambda (arg)
-         (cons arg auto-mode-alist))
+(mapc #'(lambda (arg)
+          (cons arg auto-mode-alist))
       (list '("\\.rb$" . ruby-mode)
             '("Rakefile" . ruby-mode)))
 
