@@ -183,6 +183,11 @@
 	    (set (make-local-variable 'sgml-basic-offset) 02)))
 
 
+;;; css-mode
+;;
+(when (autoload 'css-mode "css-mode" nil t nil)
+  (setq css-indent-offset 2))
+
 
 ;;; スペルチェック
 ;;; 2011-03-09
