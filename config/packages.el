@@ -186,34 +186,37 @@
 (set-face-attribute 'elscreen-tab-background-face nil
                     :foreground "#112"
                     :background "#ccc"
-		    :underline nil
+                    :underline nil
+                    :height 1.2
                     :box nil)
 
 (set-face-attribute 'elscreen-tab-control-face nil
                     :foreground "#ccc"
                     :background "#112"
-		    :underline nil
+                    :underline nil
+                    :height 1.2
                     :box nil)
 
 (set-face-attribute 'elscreen-tab-current-screen-face nil
                     :foreground "#ccc"
                     :background "#336"
-		    :underline nil
+                    :underline nil
+                    :height 1.2
                     :box nil)
 
 (set-face-attribute 'elscreen-tab-other-screen-face nil
                     :foreground "#ccc"
                     :background "#112"
-		    :underline nil
+                    :underline nil
+                    :height 1.2
                     :box nil)
-(setq elscreen-display-tab t)
 
+(setq elscreen-display-tab t)
 
 ;;; powerline
 ;;
 (el-get 'sync '(powerline))
-
-(setq powerline-arrow-shape 'curve)
+(setq powerline-arrow-shape 'helf)
 
 ;; color
 (setq powerline-color1 "#223"
@@ -222,12 +225,14 @@
 (set-face-attribute 'mode-line nil
                     :foreground "#ccc"
                     :background "#113"
+                    :height 170
                     :box nil)
 
 (set-face-attribute 'mode-line-inactive nil
                     :foreground "#ccc"
                     :background "#112"
                     :box nil)
+
 (defpowerline mule-info (caddr mode-line-mule-info))
 (defpowerline remote    (propertize "%1@" 'help-eco "remote"))
 (defpowerline modified-ro "%*%&")
