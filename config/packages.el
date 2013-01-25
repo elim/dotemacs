@@ -453,6 +453,8 @@
 ;; 2012-03-15
 (el-get 'sync '(ruby-mode-trunk))
 (el-get 'sync '(ruby-end))
+(unless (boundp 'last-command-char)
+  (defvaralias 'last-command-char 'last-command-event))
 
 (add-hook 'ruby-mode-hook
           #'(lambda ()
