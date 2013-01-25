@@ -438,7 +438,8 @@
 ;;; Auto Complete
 ;; 自動補完
 (el-get 'sync '(auto-complete))
-(global-auto-complete-mode t))
+(require 'auto-complete)
+(global-auto-complete-mode t)
 (add-hook 'auto-complete-mode-hook
           (lambda ()
             (define-key ac-completing-map (kbd "C-n") 'ac-next)
