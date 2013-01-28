@@ -276,11 +276,6 @@
 (helm-mode -1)
 
 
-;;; helm-rails
-;;
-(el-get 'sync '(helm-rails))
-
-
 ;;; popwin
 ;;
 (el-get 'sync '(popwin))
