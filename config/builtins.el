@@ -187,6 +187,12 @@
 	  (lambda ()
 	    (set (make-local-variable 'sgml-basic-offset) 2)))
 
+(defun sgml-mode-hook-func ()
+  (setq indent-tabs-mode nil)
+  (setq show-trailing-whitespace t))
+
+(add-hook 'sgml-mode-hook 'sgml-mode-hook-func)
+
 
 ;;; css-mode
 ;;
