@@ -308,8 +308,8 @@
 
 ;;; egret-mode
 ;;
-(el-get 'sync '(egret-mode))
-(define-key global-map (kbd "C-c e c") #'egret-el-create-input-buffer)
+;; (el-get 'sync '(egret-mode))
+;; (define-key global-map (kbd "C-c e c") #'egret-el-create-input-buffer)
 
 
 ;;; open-junk-file
