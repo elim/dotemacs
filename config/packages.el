@@ -391,26 +391,26 @@
 ;;; auto-jump-mode
 ;; 2012-06-23
 ;; based upon http://d.hatena.ne.jp/rkworks/20120520/1337528737
-(el-get 'sync '(ace-jump-mode))
-(when (require 'ace-jump-mode nil t)
-  (defun add-keys-to-ace-jump-mode (prefix c &optional mode)
-    (define-key global-map
-      (read-kbd-macro (concat prefix (string c)))
-      `(lambda ()
-         (interactive)
-         (funcall (if (eq ',mode 'word)
-                      #'ace-jump-word-mode
-                    #'ace-jump-char-mode) ,c))))
+;; (el-get 'sync '(ace-jump-mode))
+;; (when (require 'ace-jump-mode nil t)
+;;   (defun add-keys-to-ace-jump-mode (prefix c &optional mode)
+;;     (define-key global-map
+;;       (read-kbd-macro (concat prefix (string c)))
+;;       `(lambda ()
+;;          (interactive)
+;;          (funcall (if (eq ',mode 'word)
+;;                       #'ace-jump-word-mode
+;;                     #'ace-jump-char-mode) ,c))))
 
-  (loop for c from ?0 to ?9 do (add-keys-to-ace-jump-mode "H-" c))
-  (loop for c from ?a to ?z do (add-keys-to-ace-jump-mode "H-" c))
-  (loop for c from ?0 to ?9 do (add-keys-to-ace-jump-mode "H-M-" c 'word))
-  (loop for c from ?a to ?z do (add-keys-to-ace-jump-mode "H-M-" c 'word))
+;;   (loop for c from ?0 to ?9 do (add-keys-to-ace-jump-mode "H-" c))
+;;   (loop for c from ?a to ?z do (add-keys-to-ace-jump-mode "H-" c))
+;;   (loop for c from ?0 to ?9 do (add-keys-to-ace-jump-mode "H-M-" c 'word))
+;;   (loop for c from ?a to ?z do (add-keys-to-ace-jump-mode "H-M-" c 'word))
 
-  (setq ns-command-modifier (quote meta)
-        ns-right-command-modifier (quote hyper)
-        ns-alternate-modifier (quote super)
-        ns-right-alternate-modifier (quote alt)))
+;;   (setq ns-command-modifier (quote meta)
+;;         ns-right-command-modifier (quote hyper)
+;;         ns-alternate-modifier (quote super)
+;;         ns-right-alternate-modifier (quote alt)))
 
 ;;; apache-mode
 ;; 2012-06-18
