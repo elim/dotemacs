@@ -200,6 +200,9 @@
 
 (add-hook 'sgml-mode-hook 'sgml-mode-hook-func)
 
+;; cursor-in-non-selected-windows
+(setq-default cursor-in-non-selected-windows nil)
+
 
 ;;; css-mode
 ;;
