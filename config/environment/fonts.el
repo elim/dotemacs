@@ -33,4 +33,4 @@
 
 (when (eq window-system 'ns)
   (setq ns-antialias-text t)
-  (elim:set-text-height 210))
+  (elim:set-text-height 180))
