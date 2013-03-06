@@ -455,7 +455,8 @@
 
 (add-hook 'ruby-mode-hook
           #'(lambda ()
-              (setq show-trailing-whitespace t)))
+              (set (make-local-variable 'show-trailing-whitespace) t)
+              (set (make-local-variable 'dabbrev-abbrev-skip-leading-regexp) ":")))
 
 (setq ruby-indent-level 2
       ruby-indent-tabs-mode nil
