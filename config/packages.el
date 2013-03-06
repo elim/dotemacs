@@ -274,6 +274,7 @@
 (define-key ctl-x-map (kbd "b") 'helm-buffers-list)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (helm-mode -1)
+(setq helm-buffer-max-length 40)
 
 
 ;;; popwin
