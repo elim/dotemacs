@@ -425,11 +425,6 @@
             (define-key grep-mode-map
               (kbd "C-c C-c") 'grep-edit-finish-edit)))
 
-
-;;; ポップアップ
-;; 2012-03-16
-(el-get 'sync '(popup))
-
 
 ;;; Auto Complete
 ;; 自動補完
