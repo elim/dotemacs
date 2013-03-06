@@ -74,6 +74,10 @@
 ;; column number
 (column-number-mode t)
 
+;; hl-line
+(global-hl-line-mode 1)
+(set-face-attribute 'hl-line nil :background "#111")
+
 ;; other
 (setq visible-bell t)
 (setq line-move-visual nil)
