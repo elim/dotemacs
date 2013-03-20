@@ -469,7 +469,8 @@
 ;;; rspec-mode
 ;;
 (el-get 'sync '(rspec-mode))
-
+;; http://d.hatena.ne.jp/uk-ar/20110424/1303604763
+(setq shell-file-name "/bin/sh")
 
 ;;; Rinari Is Not A Rails IDE
 ;;
