@@ -39,7 +39,7 @@
 (setq inhibit-startup-screen t)
 
 ;; expansion GC threshold
-(setq gc-cons-threshold (* 64 1024 1024))
+; (setq gc-cons-threshold (* 64 1024 1024))
 
 ;; frame title
 (setq frame-title-format `(" %b " (buffer-file-name "( %f )")))
