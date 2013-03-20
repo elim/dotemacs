@@ -83,7 +83,7 @@
 
 ;; other
 (setq visible-bell t)
-(setq line-move-visual nil)
+(setq line-move-visual t)
 
 (temp-buffer-resize-mode t)
 (global-font-lock-mode t)
