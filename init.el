@@ -49,56 +49,32 @@
   (setq default-directory (getenv "HOME")))
 
 ;; path and filenames.
-(when (> 23 emacs-major-version)
-(setq user-emacs-directory "~/.emacs.d"))
 (setq preferences-directory user-emacs-directory
       libraries-directory (expand-file-name "library" user-emacs-directory)
 
       custom-file
       (expand-file-name "customize.el" user-emacs-directory))
 
-(defmacro set-path (list-var list)
-  (list 'mapc `(lambda (x)
-                 (when (file-accessible-directory-p x)
-                   (add-to-list ',list-var (expand-file-name x))))
-        list))
+(dolist (dir (list
+              user-emacs-directory
+              preferences-directory
+              libraries-directory
+              "/usr/local/share/emacs/site-lisp/"))
+  (when (and (file-exists-p dir) (not (member dir load-path)))
+    (setq load-path (append (list dir) load-path))))
 
-(set-path load-path
-          (list user-emacs-directory
-                preferences-directory
-                libraries-directory
-               "/usr/local/share/emacs/site-lisp/"))
+(dolist (dir (list
+              "/sbin"
+              "/usr/sbin"
+              "/bin"
+              "/usr/bin"
+              "/usr/local/bin"
+              (expand-file-name "~/bin")
+              (expand-file-name "~/.rbenv/shims")))
 
-(set-path exec-path
-          (list "~/.rbenv/shims/"
-                "~/bin"
-                "/bin/"
-                "/opt/local/bin"
-                "/opt/local/sbin"
-                "/sw/bin"
-                "/sw/sbin/"
-                "/usr/local/bin"
-                "/usr/local/sbin"
-                "/sbin/"
-                "/usr/bin/"
-                "/usr/sbin/"
-                "/Developer/Tools"
-                "c:/cygwin/usr/bin"
-                "c:/cygwin/usr/sbin"
-                "c:/cygwin/usr/local/bin"
-                "c:/cygwin/usr/local/sbin"
-                "/usr/games"
-                "/usr/X11R6/bin"
-                "c:/program files/mozilla firefox"))
-
-(eval-after-load "info"
-  '(set-path Info-additional-directory-list
-             (list "/Applications/Emacs.app/Contents/Resources/info/"
-                   "/opt/local/share/info"
-                   "/sw/info"
-                   "/sw/share/info"
-                   "c:/cygwin/usr/share/info"
-                   "c:/cygwin/usr/local/share/info")))
+  (when (and (file-exists-p dir) (not (member dir exec-path)))
+    (setenv "PATH" (concat dir ":" (getenv "PATH")))
+    (setq exec-path (append (list dir) exec-path))))
 
 (defun load-directory-files (dir &optional regex)
   (let*
