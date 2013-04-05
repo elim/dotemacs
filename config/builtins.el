@@ -35,6 +35,9 @@
 ;; no more hard tab
 (setq-default indent-tabs-mode nil)
 
+;; truncate lines
+(setq-default truncate-lines t)
+
 ;; startup screen
 (setq inhibit-startup-screen t)
 
