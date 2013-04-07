@@ -183,6 +183,10 @@
 
 ;;; elscreen
 ;;
+(setq elscreen-tab-display-control nil
+      elscreen-tab-display-kill-screen nil
+      elscreen-display-tab t)
+
 (el-get 'sync '(knu-elscreen))
 (elscreen-set-prefix-key [(control z)])
 (set-face-attribute 'elscreen-tab-background-face nil
@@ -212,8 +216,8 @@
                     :underline nil
                     :height 1.2
                     :box nil)
+(elscreen-start)
 
-(setq elscreen-display-tab t)
 
 ;;; powerline
 ;;
