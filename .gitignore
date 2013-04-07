@@ -5,13 +5,13 @@
 .org-id-locations
 /ac-comphist.dat
 /auto-save-list
-/customize.el
-/config/packages/ddskk/record
 /config/packages/ddskk/emacs-id
+/config/packages/ddskk/record
+/customize.el
+/el-get
 /games
 /riece/log
 /server
 /session-save.el
 /tramp
 /url
-/el-get
