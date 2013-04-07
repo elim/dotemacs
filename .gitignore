@@ -6,7 +6,8 @@
 /ac-comphist.dat
 /auto-save-list
 /customize.el
-/ddskk/custom.el*
+/config/packages/ddskk/record
+/config/packages/ddskk/emacs-id
 /games
 /riece/log
 /server
