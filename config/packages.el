@@ -369,9 +369,10 @@
   (c-set-style "gnu")
   (define-key php-mode-map (kbd "C-c C-[") 'beginning-of-defun)
   (define-key php-mode-map (kbd "C-c C-]") 'end-of-defun)
-  (setq tab-width 8
+  (setq tab-width 2
         indent-tabs-mode nil
         show-trailing-whitespace t
+        require-final-newline t
         c-basic-offset 2
         ;; コメントのスタイル (必要なければコメントアウトする)
         comment-start "// "
@@ -380,8 +381,7 @@
 
   (c-set-offset 'arglist-intro '+)
   (c-set-offset 'arglist-close 0)
-  (c-set-offset 'statement-cont 'c-lineup-math)
-  (flymake-mode 1))
+  (c-set-offset 'statement-cont 'c-lineup-math))
 (add-hook 'php-mode-hook 'php-mode-hook-func)
 (add-to-list 'auto-mode-alist '("\\.ctp\\'" . php-mode))
 
