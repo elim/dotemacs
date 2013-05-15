@@ -22,6 +22,18 @@
                  (modes  . '(ruby-mode))))
 
   (add-to-list 'align-rules-list
+               '(javascript-assignment-literal
+                 (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
+                 (repeat . t)
+                 (modes  . '(javascript-mode))))
+
+  (add-to-list 'align-rules-list
+               '(javascript-assignment-literal
+                 (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
+                 (repeat . t)
+                 (modes  . '(js2-mode))))
+
+  (add-to-list 'align-rules-list
                '(ruby-comma-delimiter
                  (regexp . ",\\(\\s-*\\)[^# \t\n]")
                  (repeat . t)
