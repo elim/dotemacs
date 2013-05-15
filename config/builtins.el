@@ -222,7 +222,9 @@
 ;;
 (when (require 'hideshow nil t)
   (define-key hs-minor-mode-map
-    (kbd "C-c C-M-c") 'hs-toggle-hiding))
+    (kbd "C-c C-M-c") 'hs-toggle-hiding)
+  (define-key hs-minor-mode-map
+    (kbd "C-c h") 'hs-toggle-hiding))
 
 
 ;;; shell-script-mode
