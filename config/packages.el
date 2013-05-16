@@ -519,6 +519,19 @@
 ;; JavaScript編集用のモード
 ;; 2012-04-05
 (el-get 'sync '(js2-mode))
+(setq auto-mode-alist (append '(("\.js$" . js2-mode)) auto-mode-alist)
+      indent-tabs-mode nil
+      show-trailing-whitespace t
+      flymake-check-was-interrupted t
+      show-trailing-whitespace t
+      js2-include-browser-externs t
+      js2-include-node-externs t
+      js2-global-externs '("define" "describe" "xdescribe" "expect" "it" "xit" "require" "$" "_" "Backbone" "JSON" "setTimeout" "jasmine" "beforeEach" "afterEach" "spyOn"))
+
+(add-hook 'js2-mode-hook
+          #'(lambda ()
+              (hs-minor-mode 1)))
+
 (when (executable-find "jsl")
   (require 'flymake)
   (defun flymake-jsl-init ()
@@ -531,12 +544,10 @@
   (add-to-list 'flymake-err-line-patterns
                '("^\\(.+\\)(\\([0-9]+\\)): \\(.*warning\\|SyntaxError\\): \\(.*\\)" 1 2 nil 4))
 
-  (defun js2-mode-hook-func ()
-    (setq flymake-check-was-interrupted t)
-    (flymake-mode 1)
-    (setq indent-tabs-mode nil))
+  (add-hook 'js2-mode-hook
+            #'(lambda ()
+                (flymake-mode 1))))
 
-  (add-hook 'js2-mode-hook 'js2-mode-hook-func))
 
 
 ;;; coffe-mode
