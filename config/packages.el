@@ -282,6 +282,9 @@
 (helm-mode -1)
 (setq helm-buffer-max-length 40)
 
+(el-get 'sync '(helm-descbinds))
+(require 'helm-descbinds)
+
 
 ;;; popwin
 ;;
