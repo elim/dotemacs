@@ -519,17 +519,20 @@
 ;; JavaScript編集用のモード
 ;; 2012-04-05
 (el-get 'sync '(js2-mode))
-(setq auto-mode-alist (append '(("\.js$" . js2-mode)) auto-mode-alist)
-      indent-tabs-mode nil
-      show-trailing-whitespace t
-      flymake-check-was-interrupted t
-      show-trailing-whitespace t
-      js2-include-browser-externs t
-      js2-include-node-externs t
-      js2-global-externs '("define" "describe" "xdescribe" "expect" "it" "xit" "require" "$" "_" "Backbone" "JSON" "setTimeout" "jasmine" "beforeEach" "afterEach" "spyOn"))
+(setq auto-mode-alist (append '(("\.js$" . js2-mode)) auto-mode-alist))
 
 (add-hook 'js2-mode-hook
           #'(lambda ()
+              (setq indent-tabs-mode nil
+                    show-trailing-whitespace t
+                    flymake-check-was-interrupted t
+                    show-trailing-whitespace t
+                    js2-include-browser-externs t
+                    js2-include-node-externs t
+                    js2-global-externs
+                    '("define" "describe" "xdescribe" "expect" "it" "xit"
+                      "require" "$" "_" "Backbone" "JSON" "setTimeout" "jasmine"
+                      "beforeEach" "afterEach" "spyOn"))
               (hs-minor-mode 1)))
 
 (when (executable-find "jsl")
