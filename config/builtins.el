@@ -224,7 +224,9 @@
   (define-key hs-minor-mode-map
     (kbd "C-c C-M-c") 'hs-toggle-hiding)
   (define-key hs-minor-mode-map
-    (kbd "C-c h") 'hs-toggle-hiding))
+    (kbd "C-c h") 'hs-toggle-hiding)
+  (define-key hs-minor-mode-map
+    (kbd "C-c l") 'hs-hide-level))
 
 
 ;;; shell-script-mode
