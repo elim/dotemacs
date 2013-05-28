@@ -383,6 +383,7 @@
         comment-end   ""
         comment-start-skip "// *")
 
+  (hs-minor-mode 1)
   (c-set-offset 'arglist-intro '+)
   (c-set-offset 'arglist-close 0)
   (c-set-offset 'statement-cont 'c-lineup-math))
