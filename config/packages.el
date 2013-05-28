@@ -313,6 +313,7 @@
 ;;; less-css-mode
 ;;
 (el-get 'sync '(less-css-mode))
+(setq css-indent-offset 4)
 
 
 ;;; egret-mode
