@@ -36,7 +36,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; truncate lines
-(setq-default truncate-lines t)
+(setq-default truncate-lines nil)
 
 ;; startup screen
 (setq inhibit-startup-screen t)
