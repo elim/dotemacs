@@ -557,6 +557,11 @@
                 (flymake-mode 1))))
 
 
+;;; hyde.el
+;;
+(el-get 'sync '(hyde))
+
+
 
 ;;; coffe-mode
 ;; CoffeeScript編集用のモード
