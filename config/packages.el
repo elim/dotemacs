@@ -279,8 +279,14 @@
 (define-key ctl-x-map (kbd "C-y") 'helm-show-kill-ring)
 (define-key ctl-x-map (kbd "b") 'helm-buffers-list)
 (global-set-key (kbd "M-x") 'helm-M-x)
-(helm-mode -1)
-(setq helm-buffer-max-length 40)
+(helm-mode 1)
+(setq helm-idle-delay             0.3
+      helm-input-idle-delay       0.3
+      helm-candidate-number-limit 200
+      helm-buffer-max-length 40
+      helm-ff-auto-update-initial-value nil)
+(define-key helm-c-read-file-map (kbd "C-h") 'delete-backward-char)
+(define-key helm-c-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
 
 (el-get 'sync '(helm-descbinds))
 (require 'helm-descbinds)
