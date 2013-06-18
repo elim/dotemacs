@@ -90,9 +90,7 @@
 ;; 辞書を 10 分毎に自動保存
 (defvar skk-auto-save-jisyo-interval 600)
 (defun skk-auto-save-jisyo ()
-  (skk-save-jisyo)
-  (skk-bayesian-save-history)
-  (skk-bayesian-corpus-save))
+  (skk-save-jisyo))
 (run-with-idle-timer skk-auto-save-jisyo-interval
                      t
                      'skk-auto-save-jisyo)
