@@ -49,4 +49,16 @@
                '(php-assignment-literal
                  (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
                  (repeat . t)
-                 (modes  . '(php-mode)))))
+                 (modes  . '(php-mode))))
+
+  (add-to-list 'align-rules-list
+               '(puppet-assignment-literal
+                 (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
+                 (repeat . t)
+                 (modes  . '(puppet-mode))))
+
+  (add-to-list 'align-rules-list
+               '(puppet-set-value-literal
+                 (regexp . "\\(\\s-*\\)=>\\s-*[^# \t\n]")
+                 (repeat . t)
+                 (modes  . '(puppet-mode)))))
