@@ -320,7 +320,7 @@
 ;;; less-css-mode
 ;;
 (el-get 'sync '(less-css-mode))
-(setq css-indent-offset 4)
+(setq css-indent-offset 2)
 
 
 ;;; egret-mode
@@ -567,7 +567,7 @@
 ;;; hyde.el
 ;;
 (el-get 'sync '(hyde))
-
+(setq hyde/jekyll-command "bundle exec jekyll build")
 
 
 ;;; coffe-mode
