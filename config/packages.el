@@ -269,6 +269,7 @@
 ;;
 (el-get 'sync '(helm))
 (require 'helm-config nil t)
+(require 'helm-elisp nil t)
 (mapc '(lambda (key)
          (define-key global-map key 'helm-mini))
       (list
