@@ -121,7 +121,17 @@
 (el-get 'sync '(egg))
 (add-to-list 'process-coding-system-alist '("git" utf-8 . utf-8))
 (global-set-key (kbd "C-x v s") 'egg-status)
-
+(setq egg-cmd-select-special-buffer t
+      egg-buffer-hide-section-type-on-start nil
+      egg-buffer-hide-sub-blocks-on-start nil
+      egg-confirm-staging nil
+      egg-enable-tooltip t
+      egg-quit-window-actions
+      '((egg-status-buffer-mode kill restore-windows)
+        (egg-log-buffer-mode kill restore-windows)
+        (egg-commit-buffer-mode kill restore-windows)
+        (egg-diff-buffer-mode kill restore-windows)
+        (egg-file-log-buffer-mode kill restore-windows)))
 
 
 ;;; New clmemo
