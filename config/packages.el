@@ -580,8 +580,9 @@
 
 ;;; hyde.el
 ;;
-(el-get 'sync '(hyde))
+(el-get 'sync '(Hyde))
 (setq hyde/jekyll-command "bundle exec jekyll build")
+
 
 
 ;;; coffe-mode
