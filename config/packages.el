@@ -588,6 +588,14 @@
 ;; CoffeeScript編集用のモード
 ;; 2012-04-04
 (el-get 'sync '(coffee-mode))
+(defun coffee-custom ()
+  "coffee-mode-hook"
+  (setq tab-width 2
+        coffee-tab-width 2
+        show-trailing-whitespace t))
+
+(add-hook 'coffee-mode-hook
+  '(lambda() (coffee-custom)))
 
 
 ;;; 追加の設定
