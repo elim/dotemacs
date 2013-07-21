@@ -300,6 +300,10 @@
 (el-get 'sync '(helm-descbinds))
 (require 'helm-descbinds)
 
+(el-get 'sync '(helm-project))
+(require 'helm-project)
+(global-set-key (kbd "M-t") 'helm-project)
+
 
 ;;; popwin
 ;;
