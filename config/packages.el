@@ -288,6 +288,7 @@
 (define-key ctl-x-map (kbd "C-y") 'helm-show-kill-ring)
 (define-key ctl-x-map (kbd "b") 'helm-buffers-list)
 (global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-z h") 'helm-elscreen)
 (helm-mode 1)
 (setq helm-idle-delay             0.3
       helm-input-idle-delay       0.3
