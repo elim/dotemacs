@@ -35,6 +35,9 @@
 ;; no more hard tab
 (setq-default indent-tabs-mode nil)
 
+;; force final newline
+(setq-default require-final-newline t)
+
 ;; truncate lines
 (setq-default truncate-lines nil)
 
