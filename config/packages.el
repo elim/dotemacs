@@ -612,12 +612,6 @@
                 (flymake-mode 1))))
 
 
-;;; hyde.el
-;;
-(el-get 'sync '(Hyde))
-(setq hyde/jekyll-command "bundle exec jekyll build")
-
-
 
 ;;; coffe-mode
 ;; CoffeeScript編集用のモード
