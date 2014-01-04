@@ -612,6 +612,11 @@
                 (flymake-mode 1))))
 
 
+;;; tiarra-conf-mode
+;;
+(el-get 'sync '(tiarra-conf-mode))
+
+
 
 ;;; coffe-mode
 ;; CoffeeScript編集用のモード
