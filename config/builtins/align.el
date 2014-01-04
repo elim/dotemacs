@@ -52,6 +52,32 @@
                  (modes  . '(php-mode))))
 
   (add-to-list 'align-rules-list
+               '(php-comma-delimiter
+                 (regexp . ",\\(\\s-*\\)[^/ \t\n]")
+                 (justify .t)
+                 (tab-stop . nil)
+                 (modes . '(php-mode))))
+
+  (add-to-list 'align-rules-list
+               '(web-array-literal
+                 (regexp . "\\(\\s-*\\)=>\\s-*[^# \t\n]")
+                 (repeat . t)
+                 (modes  . '(web-mode))))
+
+  (add-to-list 'align-rules-list
+               '(web-assignment-literal
+                 (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
+                 (repeat . t)
+                 (modes  . '(web-mode))))
+
+  (add-to-list 'align-rules-list
+               '(web-comma-delimiter
+                 (regexp . ",\\(\\s-*\\)[^/ \t\n]")
+                 (justify .t)
+                 (tab-stop . nil)
+                 (modes . '(web-mode))))
+
+  (add-to-list 'align-rules-list
                '(puppet-assignment-literal
                  (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
                  (repeat . t)
