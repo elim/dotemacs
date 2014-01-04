@@ -428,6 +428,32 @@
 ;; 前/次の関数にジャンプ。キーバインドはお好みで。
 
 
+;;; web-mode
+;;
+(el-get 'sync '(web-mode))
+(setq auto-mode-alist
+      (append
+       '(("/\\(PEAR\\|pear\\)/" . php-mode)
+         ("\.html?$" . web-mode)
+         ("\.ctp$" . web-mode))
+       auto-mode-alist))
+
+(setq web-mode-hook nil)
+(add-hook 'web-mode-hook
+          #'(lambda ()
+              (setq tab-width 2
+                    indent-tabs-mode nil
+                    show-trailing-whitespace t
+                    require-final-newline t
+                    c-basic-offset 2
+                    ;; コメントのスタイル (必要なければコメントアウトする)
+                    comment-start "// "
+                    comment-end   ""
+                    comment-start-skip "// *")
+              (hs-minor-mode 1)
+              (set (make-local-variable 'dabbrev-abbrev-skip-leading-regexp) "$")))
+
+
 ;;; auto-jump-mode
 ;; 2012-06-23
 ;; based upon http://d.hatena.ne.jp/rkworks/20120520/1337528737
