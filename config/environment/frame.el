@@ -71,6 +71,7 @@
           (setq nt-fullscreen-p nil))
       (set-frame-parameter nil 'fullscreen nil)))
 
+  (setq ns-use-native-fullscreen nil)
   (defun toggle-fullscreen ()
     (interactive)
     (cond
