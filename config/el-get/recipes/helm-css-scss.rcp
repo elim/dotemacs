@@ -1,0 +1,6 @@
+(:name helm-css-scss
+       :type github
+       :pkgname "ShingoFukuyama/helm-css-scss"
+       :description "This emacs program makes your CSS/SCSS coding faster and easier than ever."
+       :depends (helm)
+       :post-init (require 'helm-css-scss))

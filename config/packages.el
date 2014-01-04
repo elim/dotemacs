@@ -338,6 +338,11 @@
 (setq css-indent-offset 2)
 
 
+;;; helm-css-scss
+;;
+(el-get 'sync '(helm-css-scss))
+
+
 ;;; egret-mode
 ;;
 ;; (el-get 'sync '(egret-mode))
