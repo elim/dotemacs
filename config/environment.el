@@ -1,13 +1,13 @@
 ;;; 
 ;;
-(load "config/environment/language")
+(load "environment/language")
 
 
 ;;; 
 ;;
-(load "config/environment/frame")
+(load "environment/frame")
 
 
 ;;; 
 ;;
-(load "config/environment/fonts")
+(load "environment/fonts")

@@ -56,9 +56,7 @@
       (expand-file-name "customize.el" user-emacs-directory))
 
 (dolist (dir (list
-              user-emacs-directory
-              preferences-directory
-              libraries-directory
+              (expand-file-name "config" user-emacs-directory)
               "/usr/local/share/emacs/site-lisp/"))
   (when (and (file-exists-p dir) (not (member dir load-path)))
     (setq load-path (append (list dir) load-path))))
@@ -101,7 +99,7 @@
 ;; load preferences.
 (load-directory-files preferences-directory "^init-.+el$")
 
-(load "config/environment")
-(load "config/builtins")
-(load "config/packages")
-(load "config/local" t)
+(load "environment")
+(load "builtins")
+(load "packages")
+(load "local" t)
