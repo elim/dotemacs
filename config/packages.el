@@ -397,6 +397,8 @@
 
 (defun php-mode-hook-func ()
   (c-set-style "gnu")
+  (flymake-mode 1)
+
   (define-key php-mode-map (kbd "C-c C-[") 'beginning-of-defun)
   (define-key php-mode-map (kbd "C-c C-]") 'end-of-defun)
   (setq tab-width 2
