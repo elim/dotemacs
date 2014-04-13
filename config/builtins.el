@@ -176,7 +176,7 @@
 
 ;;; dired
 ;; 
-(load "config/builtins/dired")
+(load "builtins/dired")
 
 
 ;;; バージョン管理システム
@@ -218,7 +218,7 @@
 
 ;;; scheme-mode
 ;; 
-(load "config/builtins/scheme-mode")
+(load "builtins/scheme-mode")
 
 
 ;;; hide-show
@@ -240,17 +240,17 @@
 
 ;;; paren
 ;; 
-(load "config/builtins/paren")
+(load "builtins/paren")
 
 
 ;;; align
 ;; 
-(load "config/builtins/align")
+(load "builtins/align")
 
 
 ;;; dictionary
 ;; 
-(load "config/builtins/dictionary")
+(load "builtins/dictionary")
 
 
 
@@ -267,25 +267,25 @@
 
 ;;; diff-mode
 ;;; 2012-04-02
-(load "config/builtins/diff-mode")
+(load "builtins/diff-mode")
 
 
 ;;; text-mode
 ;; 2012-03-18
-(load "config/builtins/text-mode")
+(load "builtins/text-mode")
 
 
 ;;; cc-mode
 ;; 2012-03-18
-(load "config/builtins/cc-mode")
+(load "builtins/cc-mode")
 
 
 ;;; emacs-lisp-mode
 ;; 2012-03-18
-(load "config/builtins/emacs-lisp-mode")
+(load "builtins/emacs-lisp-mode")
 
 
 ;;; 追加の設定
 ;; 個別の設定があったら読み込む
 ;; 2012-03-18
-(load "config/builtins/local" t)
+(load "builtins/local" t)

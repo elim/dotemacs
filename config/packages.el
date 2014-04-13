@@ -635,4 +635,4 @@
 ;;; 追加の設定
 ;; 個別の設定があったら読み込む
 ;; 2012-03-15
-(load "config/packages/local" t)
+(load "packages/local" t)
