@@ -21,8 +21,7 @@
 
 ;;; ddskk
 ;;
-(defun noninteractive ())
-'(el-get 'sync '(ddskk))
+(el-get 'sync '(ddskk))
 
 (setq skk-indicator-use-cursor-color nil)
 (global-set-key "\C-x\C-j" 'skk-mode)
