@@ -435,7 +435,13 @@
        '(("/\\(PEAR\\|pear\\)/" . php-mode)
          ("\.html?$" . web-mode)
          ("\.ctp$" . web-mode))
-       auto-mode-alist))
+       auto-mode-alist)
+      web-mode-block-padding 2
+      web-mode-comment-style 2
+      web-mode-indent-style 2
+      web-mode-script-padding 2
+      web-mode-style-padding 2)
+
 
 (setq web-mode-hook nil)
 (add-hook 'web-mode-hook
