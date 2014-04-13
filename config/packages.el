@@ -586,6 +586,7 @@
                     show-trailing-whitespace t
                     flymake-check-was-interrupted t
                     show-trailing-whitespace t
+                    js2-basic-offset 2
                     js2-include-browser-externs t
                     js2-include-node-externs t
                     js2-global-externs
