@@ -52,10 +52,10 @@
 (setq default-input-method "japanese-skk")
 
 ;; SKK を起動していなくても、いつでも skk-isearch を使う
-(add-hook 'isearch-mode-hook 'skk-isearch-mode-setup)
-(add-hook 'isearch-mode-end-hook 'skk-isearch-mode-cleanup)
+;; (add-hook 'isearch-mode-hook 'skk-isearch-mode-setup)
+;; (add-hook 'isearch-mode-end-hook 'skk-isearch-mode-cleanup)
 ;; migemo を使うから skk-isearch にはおとなしくしていて欲しい
-;; (setq skk-isearch-start-mode 'latin)
+(setq skk-isearch-start-mode 'latin)
 
 ;; @@ 応用的な設定
 
@@ -94,6 +94,11 @@
                      t
                      'skk-auto-save-jisyo)
 ;;(cancel-function-timers 'skk-auto-save-jisyo)
+
+
+;;; cmigemo
+;;
+(el-get 'sync '(cmigemo))
 
 
 ;;; session
