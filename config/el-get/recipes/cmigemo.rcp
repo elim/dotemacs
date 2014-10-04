@@ -1,0 +1,14 @@
+(:name cmigemo
+       :type github
+       :pkgname "emacs-jp/migemo"
+       :post-init (progn
+                    (when (and
+                           (executable-find "cmigemo")
+                           (require 'migemo nil t))
+                      (setq migemo-dictionary "/usr/local/share/migemo/utf-8/migemo-dict"
+                          migemo-command "cmigemo"
+                          migemo-options '("-q" "--emacs")
+                          migemo-user-dictionary nil
+                          migemo-coding-system 'utf-8
+                          migemo-regex-dictionary nil)
+                      (migemo-init))))
