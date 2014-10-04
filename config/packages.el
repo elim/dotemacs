@@ -304,6 +304,11 @@
 (define-key helm-c-read-file-map (kbd "C-h") 'delete-backward-char)
 (define-key helm-c-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
 
+(setq helm-mini-default-sources
+      '(helm-source-buffers-list
+        helm-source-recentf
+        helm-source-buffer-not-found))
+
 (el-get 'sync '(helm-descbinds))
 (require 'helm-descbinds)
 
