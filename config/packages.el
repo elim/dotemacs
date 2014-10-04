@@ -352,6 +352,7 @@
   (define-key markdown-mode-map (kbd "M-RET")   'markdown-insert-list-item))
 
 (add-hook 'markdown-mode-hook '(lambda() (markdown-mode-hook-func)))
+(add-to-list 'auto-mode-alist '("\.md$" . gfm-mode))
 
 
 ;;; less-css-mode
