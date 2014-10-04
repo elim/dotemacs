@@ -335,6 +335,24 @@
 ;;
 (el-get 'sync '(markdown-mode))
 
+(defun markdown-mode-hook-func ()
+  "markdown-mode-hook"
+  (setq markdown-indent-on-enter nil)
+  (define-key markdown-mode-map (kbd "C-c f")   'markdown-indent-region)
+  (define-key markdown-mode-map (kbd "C-c b")   'markdown-exdent-region)
+  (define-key markdown-mode-map (kbd "C-i")     'markdown-demote)
+  (define-key markdown-mode-map (kbd "<tab>")   'markdown-demote)
+  (define-key markdown-mode-map (kbd "S-C-i")   'markdown-promote)
+  (define-key markdown-mode-map (kbd "<S-tab>") 'markdown-promote)
+  (define-key markdown-mode-map (kbd "<C-tab>") 'markdown-promote)
+  (define-key markdown-mode-map (kbd "C-c 1")   'markdown-insert-header-setext-1)
+  (define-key markdown-mode-map (kbd "C-c 2")   'markdown-insert-header-setext-2)
+  (define-key markdown-mode-map (kbd "C-c 3")   'markdown-insert-header-atx-3)
+  (define-key markdown-mode-map (kbd "C-c 4")   'markdown-insert-header-atx-4)
+  (define-key markdown-mode-map (kbd "M-RET")   'markdown-insert-list-item))
+
+(add-hook 'markdown-mode-hook '(lambda() (markdown-mode-hook-func)))
+
 
 ;;; less-css-mode
 ;;
