@@ -235,7 +235,9 @@
 ;;; shell-script-mode
 ;;
 (when (locate-library "sh-script")
-  (setq sh-basic-offset 2))
+  (setq sh-basic-offset 2
+        sh-indentation 2))
+
 
 
 ;;; paren
