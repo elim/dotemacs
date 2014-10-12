@@ -101,6 +101,11 @@
 (el-get 'sync '(cmigemo))
 
 
+;;; git-modes
+;;
+(el-get 'sync '(git-modes))
+
+
 ;;; session
 ;;
 ;; (el-get 'sync '(session))
