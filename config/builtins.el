@@ -216,6 +216,14 @@
   (setq css-indent-offset 2))
 
 
+;;; python-mode
+(defun python-mode-hook-func ()
+  (flymake-mode 1)
+  (setq show-trailing-whitespace t))
+
+(add-hook 'python-mode-hook 'python-mode-hook-func)
+
+
 ;;; scheme-mode
 ;; 
 (load "builtins/scheme-mode")
