@@ -1,5 +1,9 @@
 ;;; 
 ;;
+(setq select-enable-clipboard t)
+
+;;;
+;;
 (load "environment/language")
 
 
