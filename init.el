@@ -1,5 +1,7 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
+(setq load-prefer-newer t)
+
 (setq user-full-name "Takeru Naito"
       user-mail-address "takeru.naito@gmail.com")
 
