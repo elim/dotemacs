@@ -480,15 +480,6 @@
 ;; http://d.hatena.ne.jp/uk-ar/20110424/1303604763
 (setq shell-file-name "/bin/sh")
 
-;;; Rinari Is Not A Rails IDE
-;;
-(el-get 'sync '(rinari))
-(el-get 'sync '(rhtml-mode))
-(when (require 'rhtml-mode nil t)
-  (set-face-foreground 'erb-face "#aaffff")
-  (set-face-background 'erb-face "#090909")
-  (set-face-background 'erb-out-delim-face "#090909"))
-
 
 ;; http://stackoverflow.com/questions/7961533/emacs-ruby-method-parameter-indentation
 (defadvice ruby-indent-line (after unindent-closing-paren activate)
