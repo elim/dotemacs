@@ -143,41 +143,6 @@
         (egg-file-log-buffer-mode kill restore-windows)))
 
 
-;;; New clmemo
-;; http://at-aka.blogspot.jp/2012/09/clmemo-blgrep-github.html
-;;
-
-;; (el-get 'sync '(clmemo))
-;; (define-key ctl-x-map "M" 'clmemo)
-;; (setq clmemo-file-name "~/Dropbox/clmemo.txt"
-;;       clmemo-time-string-with-weekday t
-;;       clmemo-title-list '("life" "work" "emacs" "idea" "computer"))
-
-
-;;; blgrep (clgrep.el)
-;;
-;; (add-hook 'clmemo-mode-hook
-;;           #'(lambda ()
-;;               (define-key clmemo-mode-map "\C-c\C-g" 'clgrep)
-;;               (define-key clmemo-mode-map "\C-c," 'quasi-howm)))
-
-;; (add-hook 'change-log-mode-hook
-;;           #'(lambda ()
-;;               (define-key change-log-mode-map "\C-c\C-g" 'blg-changelog)
-;;               (define-key change-log-mode-map "\C-c\C-i" 'blg-changelog-item-heading)
-;;               (define-key change-log-mode-map "\C-c\C-d" 'blg-changelog-date)))
-
-;; (add-hook 'outline-mode-hook
-;;           #'(lambda ()
-;;               (define-key outline-mode-map "\C-c\C-g" 'blg-outline)
-;;               (define-key outline-mode-map "\C-c1" 'blg-outline-line)))
-;; (add-hook 'outline-minor-mode-hook
-;;           #'(lambda ()
-;;               (define-key outline-minor-mode-map "\C-c\C-g" 'blg-outline)
-;;               (define-key outline-minor-mode-map "\C-c1" 'blg-outline-line)))
-;; (el-get 'sync '(blgrep))
-
-
 ;;; lispxmp
 ;; 式の評価結果を注釈するための設定
 ;; (el-get 'sync '(lispxmp))
@@ -238,49 +203,49 @@
 
 ;;; powerline
 ;;
-(when window-system
-  (el-get 'sync '(powerline))
-  (setq powerline-arrow-shape 'helf)
+(el-get 'sync '(powerline))
+(setq powerline-arrow-shape 'helf)
 
-  ;; color
-  (setq powerline-color1 "#223"
-        powerline-color2 "#334")
+;; color
+(setq powerline-color1 "#223"
+      powerline-color2 "#334")
 
-  (set-face-attribute 'mode-line nil
-                      :foreground "#ccc"
-                      :background "#113"
-                      :height 170
-                      :box nil)
+(set-face-attribute 'mode-line nil
+                    :foreground "#ccc"
+                    :background "#113"
+                    :height 170
+                    :box nil)
 
-  (set-face-attribute 'mode-line-inactive nil
-                      :foreground "#ccc"
-                      :background "#112"
-                      :box nil)
+(set-face-attribute 'mode-line-inactive nil
+                    :foreground "#ccc"
+                    :background "#112"
+                    :box nil)
 
-  (defpowerline mule-info (caddr mode-line-mule-info))
-  (defpowerline remote    (propertize "%1@" 'help-eco "remote"))
-  (defpowerline modified-ro "%*%&")
-  (defpowerline position  "%p (%l,%c)")
-  (defpowerline global    "%M")
+(defpowerline mule-info (caddr mode-line-mule-info))
+(defpowerline remote    (propertize "%1@" 'help-eco "remote"))
+(defpowerline modified-ro "%*%&")
+(defpowerline position  "%p (%l,%c)")
+(defpowerline global    "%M")
 
-  (setq-default mode-line-format
-                (list
-                 '(:eval (concat (powerline-make-text      "-"      nil )))
-                 '(:eval (concat (powerline-mule-info      'center  nil )))
-                 '(:eval (concat (powerline-make-text      ":"      nil )))
-                 '(:eval (concat (powerline-modified-ro    'center  nil )))
-                 '(:eval (concat (powerline-remote         'center  nil )))
-                 '(:eval (concat (powerline-buffer-id      'left    nil )))
-                 '(:eval (concat (powerline-narrow         'left    nil  powerline-color1  )))
-                 '(:eval (concat (powerline-major-mode     'left         powerline-color1 )))
-                 '(:eval (concat (powerline-narrow         'left         powerline-color1  powerline-color2  )))
-                 '(:eval (concat (powerline-minor-modes    'left                           powerline-color2  )))
-                 ;; Justify right by filling with spaces to right fringe - 16
-                 ;; (16 should be computed rahter than hardcoded)
-                 ;; '(:eval (propertize " " 'display '((space :align-to (- right-fringe 30)) powerline-color2)))
-                 '(:eval (concat (powerline-make-text       "                 "                            powerline-color2  )))
-                 '(:eval (concat (powerline-position       'right       powerline-color1  powerline-color2  )))
-                 '(:eval (concat (powerline-global         'right  nil  powerline-color1 ))))))
+(setq-default mode-line-format
+              (list  '(:eval (concat (powerline-make-text      "-"      nil )))
+                     '(:eval (concat (powerline-mule-info      'center  nil )))
+                     '(:eval (concat (powerline-make-text      ":"      nil )))
+                     '(:eval (concat (powerline-modified-ro    'center  nil )))
+                     '(:eval (concat (powerline-remote         'center  nil )))
+                     '(:eval (concat (powerline-buffer-id      'left    nil )))
+                     '(:eval (concat (powerline-narrow         'left    nil  powerline-color1  )))
+                     '(:eval (concat (powerline-major-mode     'left         powerline-color1 )))
+                     '(:eval (concat (powerline-narrow         'left         powerline-color1  powerline-color2  )))
+                     '(:eval (concat (powerline-minor-modes    'left                           powerline-color2  )))
+                     ;; Justify right by filling with spaces to right fringe - 16
+                     ;; (16 should be computed rahter than hardcoded)
+                     ;; '(:eval (propertize " " 'display '((space :align-to (- right-fringe 30)) powerline-color2)))
+                     '(:eval (concat (powerline-make-text       "                 "                            powerline-color2  )))
+                     '(:eval (concat (powerline-position       'right       powerline-color1  powerline-color2  )))
+                     '(:eval (concat (powerline-global         'right  nil  powerline-color1 )))
+                     ))
+
 
 ;;; Emacs-Helm
 ;;
