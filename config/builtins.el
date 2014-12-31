@@ -81,8 +81,9 @@
 (column-number-mode t)
 
 ;; hl-line
-(global-hl-line-mode 1)
-(set-face-attribute 'hl-line nil :background "#111")
+(when window-system
+  (global-hl-line-mode 1)
+  (set-face-attribute 'hl-line nil :background "#111"))
 
 ;; scroll conservatively
 (setq scroll-conservatively 1)
