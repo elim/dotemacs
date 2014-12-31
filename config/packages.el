@@ -106,24 +106,6 @@
 (el-get 'sync '(git-modes))
 
 
-;;; session
-;;
-;; (el-get 'sync '(session))
-;; (when (require 'session nil t)
-;;   (setq history-length t
-;;         session-save-file-coding-system 'utf-8-unix
-;;         session-initialize '(de-saveplace session keys menus places)
-;;         session-globals-include '((kill-ring 8192)
-;;                                   (session-file-alist 8192 t)
-;;                                   (file-name-history 8192))
-;;         session-save-print-spec '(t nil 65536)
-;;         session-globals-max-size 8192
-;;         session-globals-max-string 8192
-;;         session-save-file (expand-file-name
-;;                            "session-save.el" user-emacs-directory))
-;;   (add-hook 'after-init-hook 'session-initialize))
-
-
 ;;; Egg is an Emacs interface to git.
 ;;
 
@@ -141,48 +123,6 @@
         (egg-commit-buffer-mode kill restore-windows)
         (egg-diff-buffer-mode kill restore-windows)
         (egg-file-log-buffer-mode kill restore-windows)))
-
-
-;;; New clmemo
-;; http://at-aka.blogspot.jp/2012/09/clmemo-blgrep-github.html
-;;
-
-;; (el-get 'sync '(clmemo))
-;; (define-key ctl-x-map "M" 'clmemo)
-;; (setq clmemo-file-name "~/Dropbox/clmemo.txt"
-;;       clmemo-time-string-with-weekday t
-;;       clmemo-title-list '("life" "work" "emacs" "idea" "computer"))
-
-
-;;; blgrep (clgrep.el)
-;;
-;; (add-hook 'clmemo-mode-hook
-;;           #'(lambda ()
-;;               (define-key clmemo-mode-map "\C-c\C-g" 'clgrep)
-;;               (define-key clmemo-mode-map "\C-c," 'quasi-howm)))
-
-;; (add-hook 'change-log-mode-hook
-;;           #'(lambda ()
-;;               (define-key change-log-mode-map "\C-c\C-g" 'blg-changelog)
-;;               (define-key change-log-mode-map "\C-c\C-i" 'blg-changelog-item-heading)
-;;               (define-key change-log-mode-map "\C-c\C-d" 'blg-changelog-date)))
-
-;; (add-hook 'outline-mode-hook
-;;           #'(lambda ()
-;;               (define-key outline-mode-map "\C-c\C-g" 'blg-outline)
-;;               (define-key outline-mode-map "\C-c1" 'blg-outline-line)))
-;; (add-hook 'outline-minor-mode-hook
-;;           #'(lambda ()
-;;               (define-key outline-minor-mode-map "\C-c\C-g" 'blg-outline)
-;;               (define-key outline-minor-mode-map "\C-c1" 'blg-outline-line)))
-;; (el-get 'sync '(blgrep))
-
-
-;;; lispxmp
-;; 式の評価結果を注釈するための設定
-;; (el-get 'sync '(lispxmp))
-;; (when (require 'lispxmp nil t)
-;;   (define-key emacs-lisp-mode-map (kbd "C-c C-d") 'lispxmp))
 
 
 ;;; auto-save-buffers-enhanced
@@ -238,49 +178,49 @@
 
 ;;; powerline
 ;;
-(when window-system
-  (el-get 'sync '(powerline))
-  (setq powerline-arrow-shape 'helf)
+(el-get 'sync '(powerline))
+(setq powerline-arrow-shape 'helf)
 
-  ;; color
-  (setq powerline-color1 "#223"
-        powerline-color2 "#334")
+;; color
+(setq powerline-color1 "#223"
+      powerline-color2 "#334")
 
-  (set-face-attribute 'mode-line nil
-                      :foreground "#ccc"
-                      :background "#113"
-                      :height 170
-                      :box nil)
+(set-face-attribute 'mode-line nil
+                    :foreground "#ccc"
+                    :background "#113"
+                    :height 170
+                    :box nil)
 
-  (set-face-attribute 'mode-line-inactive nil
-                      :foreground "#ccc"
-                      :background "#112"
-                      :box nil)
+(set-face-attribute 'mode-line-inactive nil
+                    :foreground "#ccc"
+                    :background "#112"
+                    :box nil)
 
-  (defpowerline mule-info (caddr mode-line-mule-info))
-  (defpowerline remote    (propertize "%1@" 'help-eco "remote"))
-  (defpowerline modified-ro "%*%&")
-  (defpowerline position  "%p (%l,%c)")
-  (defpowerline global    "%M")
+(defpowerline mule-info (caddr mode-line-mule-info))
+(defpowerline remote    (propertize "%1@" 'help-eco "remote"))
+(defpowerline modified-ro "%*%&")
+(defpowerline position  "%p (%l,%c)")
+(defpowerline global    "%M")
 
-  (setq-default mode-line-format
-                (list
-                 '(:eval (concat (powerline-make-text      "-"      nil )))
-                 '(:eval (concat (powerline-mule-info      'center  nil )))
-                 '(:eval (concat (powerline-make-text      ":"      nil )))
-                 '(:eval (concat (powerline-modified-ro    'center  nil )))
-                 '(:eval (concat (powerline-remote         'center  nil )))
-                 '(:eval (concat (powerline-buffer-id      'left    nil )))
-                 '(:eval (concat (powerline-narrow         'left    nil  powerline-color1  )))
-                 '(:eval (concat (powerline-major-mode     'left         powerline-color1 )))
-                 '(:eval (concat (powerline-narrow         'left         powerline-color1  powerline-color2  )))
-                 '(:eval (concat (powerline-minor-modes    'left                           powerline-color2  )))
-                 ;; Justify right by filling with spaces to right fringe - 16
-                 ;; (16 should be computed rahter than hardcoded)
-                 ;; '(:eval (propertize " " 'display '((space :align-to (- right-fringe 30)) powerline-color2)))
-                 '(:eval (concat (powerline-make-text       "                 "                            powerline-color2  )))
-                 '(:eval (concat (powerline-position       'right       powerline-color1  powerline-color2  )))
-                 '(:eval (concat (powerline-global         'right  nil  powerline-color1 ))))))
+(setq-default mode-line-format
+              (list  '(:eval (concat (powerline-make-text      "-"      nil )))
+                     '(:eval (concat (powerline-mule-info      'center  nil )))
+                     '(:eval (concat (powerline-make-text      ":"      nil )))
+                     '(:eval (concat (powerline-modified-ro    'center  nil )))
+                     '(:eval (concat (powerline-remote         'center  nil )))
+                     '(:eval (concat (powerline-buffer-id      'left    nil )))
+                     '(:eval (concat (powerline-narrow         'left    nil  powerline-color1  )))
+                     '(:eval (concat (powerline-major-mode     'left         powerline-color1 )))
+                     '(:eval (concat (powerline-narrow         'left         powerline-color1  powerline-color2  )))
+                     '(:eval (concat (powerline-minor-modes    'left                           powerline-color2  )))
+                     ;; Justify right by filling with spaces to right fringe - 16
+                     ;; (16 should be computed rahter than hardcoded)
+                     ;; '(:eval (propertize " " 'display '((space :align-to (- right-fringe 30)) powerline-color2)))
+                     '(:eval (concat (powerline-make-text       "                 "                            powerline-color2  )))
+                     '(:eval (concat (powerline-position       'right       powerline-color1  powerline-color2  )))
+                     '(:eval (concat (powerline-global         'right  nil  powerline-color1 )))
+                     ))
+
 
 ;;; Emacs-Helm
 ;;
@@ -332,16 +272,6 @@
 (push '("\*anything.+" :height 20 :regexp t) popwin:special-display-config)
 
 
-;;; direx
-;;
-;; (el-get 'sync '(direx))
-;; (push '(direx:direx-mode :position left :width 25 :dedicated t)
-;;       popwin:special-display-config)
-
-;; (define-key global-map (kbd "C-x C-f") 'direx:jump-to-directory-other-window)
-;; (define-key direx:direx-mode-map (kbd "C-x C-f") 'find-file)
-
-
 ;;; markdown-mode
 ;;
 (el-get 'sync '(markdown-mode))
@@ -375,12 +305,6 @@
 ;;; helm-css-scss
 ;;
 (el-get 'sync '(helm-css-scss))
-
-
-;;; egret-mode
-;;
-;; (el-get 'sync '(egret-mode))
-;; (define-key global-map (kbd "C-c e c") #'egret-el-create-input-buffer)
 
 
 ;;; open-junk-file
@@ -497,30 +421,6 @@
               (set (make-local-variable 'dabbrev-abbrev-skip-leading-regexp) "$")))
 
 
-;;; auto-jump-mode
-;; 2012-06-23
-;; based upon http://d.hatena.ne.jp/rkworks/20120520/1337528737
-;; (el-get 'sync '(ace-jump-mode))
-;; (when (require 'ace-jump-mode nil t)
-;;   (defun add-keys-to-ace-jump-mode (prefix c &optional mode)
-;;     (define-key global-map
-;;       (read-kbd-macro (concat prefix (string c)))
-;;       `(lambda ()
-;;          (interactive)
-;;          (funcall (if (eq ',mode 'word)
-;;                       #'ace-jump-word-mode
-;;                     #'ace-jump-char-mode) ,c))))
-
-;;   (loop for c from ?0 to ?9 do (add-keys-to-ace-jump-mode "H-" c))
-;;   (loop for c from ?a to ?z do (add-keys-to-ace-jump-mode "H-" c))
-;;   (loop for c from ?0 to ?9 do (add-keys-to-ace-jump-mode "H-M-" c 'word))
-;;   (loop for c from ?a to ?z do (add-keys-to-ace-jump-mode "H-M-" c 'word))
-
-;;   (setq ns-command-modifier (quote meta)
-;;         ns-right-command-modifier (quote hyper)
-;;         ns-alternate-modifier (quote super)
-;;         ns-right-alternate-modifier (quote alt)))
-
 ;;; apache-mode
 ;; 2012-06-18
 ; (el-get 'sync '(apache-mode))
@@ -580,15 +480,6 @@
 (el-get 'sync '(rspec-mode))
 ;; http://d.hatena.ne.jp/uk-ar/20110424/1303604763
 (setq shell-file-name "/bin/sh")
-
-;;; Rinari Is Not A Rails IDE
-;;
-(el-get 'sync '(rinari))
-(el-get 'sync '(rhtml-mode))
-(when (require 'rhtml-mode nil t)
-  (set-face-foreground 'erb-face "#aaffff")
-  (set-face-background 'erb-face "#090909")
-  (set-face-background 'erb-out-delim-face "#090909"))
 
 
 ;; http://stackoverflow.com/questions/7961533/emacs-ruby-method-parameter-indentation
