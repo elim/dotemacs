@@ -306,12 +306,6 @@
 (el-get 'sync '(helm-css-scss))
 
 
-;;; egret-mode
-;;
-;; (el-get 'sync '(egret-mode))
-;; (define-key global-map (kbd "C-c e c") #'egret-el-create-input-buffer)
-
-
 ;;; open-junk-file
 ;;
 (el-get 'sync '(open-junk-file))
