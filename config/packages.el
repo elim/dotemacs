@@ -143,13 +143,6 @@
         (egg-file-log-buffer-mode kill restore-windows)))
 
 
-;;; lispxmp
-;; 式の評価結果を注釈するための設定
-;; (el-get 'sync '(lispxmp))
-;; (when (require 'lispxmp nil t)
-;;   (define-key emacs-lisp-mode-map (kbd "C-c C-d") 'lispxmp))
-
-
 ;;; auto-save-buffers-enhanced
 ;;
 (el-get 'sync '(auto-save-buffers-enhanced))
