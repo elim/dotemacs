@@ -294,6 +294,7 @@
       (list
        [(control ?:)]
        [(control \;)]
+       [(control x)(\;)]
        [(control x)(control :)]
        [(control x)(control \;)]))
 (define-key ctl-x-map (kbd "C-y") 'helm-show-kill-ring)
