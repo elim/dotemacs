@@ -106,24 +106,6 @@
 (el-get 'sync '(git-modes))
 
 
-;;; session
-;;
-;; (el-get 'sync '(session))
-;; (when (require 'session nil t)
-;;   (setq history-length t
-;;         session-save-file-coding-system 'utf-8-unix
-;;         session-initialize '(de-saveplace session keys menus places)
-;;         session-globals-include '((kill-ring 8192)
-;;                                   (session-file-alist 8192 t)
-;;                                   (file-name-history 8192))
-;;         session-save-print-spec '(t nil 65536)
-;;         session-globals-max-size 8192
-;;         session-globals-max-string 8192
-;;         session-save-file (expand-file-name
-;;                            "session-save.el" user-emacs-directory))
-;;   (add-hook 'after-init-hook 'session-initialize))
-
-
 ;;; Egg is an Emacs interface to git.
 ;;
 
