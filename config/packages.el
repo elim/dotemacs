@@ -271,16 +271,6 @@
 (push '("\*anything.+" :height 20 :regexp t) popwin:special-display-config)
 
 
-;;; direx
-;;
-;; (el-get 'sync '(direx))
-;; (push '(direx:direx-mode :position left :width 25 :dedicated t)
-;;       popwin:special-display-config)
-
-;; (define-key global-map (kbd "C-x C-f") 'direx:jump-to-directory-other-window)
-;; (define-key direx:direx-mode-map (kbd "C-x C-f") 'find-file)
-
-
 ;;; markdown-mode
 ;;
 (el-get 'sync '(markdown-mode))
