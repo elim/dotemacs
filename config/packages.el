@@ -316,9 +316,8 @@
 
 ;;; Mew
 ;;
-;; Note: Use the source, Luke. (Instead of el-get's recipe).
-;; (el-get 'sync '(mew))
-
+(el-get 'sync '(mew))
+ 
 ;; Optional setup (Read Mail menu):
 (setq read-mail-command 'mew
       mew-debug t
