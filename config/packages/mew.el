@@ -1,5 +1,6 @@
 (setq mew-debug t
       mew-use-master-passwd t
+      mew-imap-size 0
       mew-config-alist
       '((default
           (name              "Takeru Naito")
