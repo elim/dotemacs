@@ -28,8 +28,8 @@
                       ns-antialias-text t
                       ns-command-modifier 'meta
                       ns-alternate-modifier 'meta
-                      x-select-enable-clipboard nil
-                      x-select-enable-primary t
+                      select-enable-clipboard t
+                      select-enable-primary t
                       select-active-regions nil))))
 
 ;; no more hard tab
