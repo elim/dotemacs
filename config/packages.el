@@ -414,6 +414,7 @@
         indent-tabs-mode nil
         show-trailing-whitespace t
         require-final-newline t
+        php-mode-coding-style 'PSR-2
         c-basic-offset 2
         ;; コメントのスタイル (必要なければコメントアウトする)
         comment-start "// "
