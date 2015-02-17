@@ -56,6 +56,14 @@
 
 (global-set-key (kbd "C-c t") 'google-translate-enja-or-jaen)
 
+
+;;; visual-regexp
+;;
+(el-get 'sync 'visual-regexp)
+(global-set-key (kbd "M-%")   'vr/query-replace)
+(global-set-key (kbd "C-M-%") 'vr/replace)
+
+
 ;;; editorconfig
 ;;
 (el-get 'sync 'editorconfig)
