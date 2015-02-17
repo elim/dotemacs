@@ -56,6 +56,11 @@
 
 (global-set-key (kbd "C-c t") 'google-translate-enja-or-jaen)
 
+;;; editorconfig
+;;
+(el-get 'sync 'editorconfig)
+
+
 ;;; ddskk
 ;;
 (el-get 'sync '(ddskk))
