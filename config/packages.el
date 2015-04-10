@@ -20,7 +20,8 @@
 
 
 ;;; clipboard-to-kill-ring
-;; http://hitode909.hatenablog.com/epntry/20110924/1316853933
+;; original: http://hitode909.hatenablog.com/entry/20110924/1316853933
+;; modified: https://gist.github.com/elim/666807b53f2b2cf503c1
 (el-get-bundle gist:666807b53f2b2cf503c1:clipboard-to-kill-ring
   :depends (deferred))
 
