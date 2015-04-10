@@ -19,6 +19,15 @@
              "~/.emacs.d/config/el-get/local-recipes")
 
 
+;;; clipboard-to-kill-ring
+;; http://hitode909.hatenablog.com/epntry/20110924/1316853933
+(el-get-bundle gist:666807b53f2b2cf503c1:clipboard-to-kill-ring
+  :depends (deferred))
+
+(when (require 'clipboard-to-kill-ring nil t)
+  (clipboard-to-kill-ring t))
+
+
 ;;; google-translate
 ;;
 (el-get 'sync '(google-translate))
@@ -576,7 +585,7 @@
                     js2-include-node-externs t
                     js2-global-externs
                     '("define" "describe" "xdescribe" "expect" "it" "xit"
-                      "require" "$" "_" "Backbone" "JSON" "setTimeout" "jasmine"
+                      "require" "$" "_" "angular" "Backbone" "JSON" "setTimeout" "jasmine"
                       "beforeEach" "afterEach" "spyOn"))
               (hs-minor-mode 1)))
 
