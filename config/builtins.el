@@ -247,7 +247,10 @@
   (setq sh-basic-offset 2
         sh-indentation 2))
 
-
+;;; dired
+;;
+(when (executable-find "gls")
+  (setq insert-directory-program "gls"))
 
 ;;; paren
 ;; 
