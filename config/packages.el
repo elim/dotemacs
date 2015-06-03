@@ -568,6 +568,11 @@
 ;;
 (el-get 'sync '(yaml-mode))
 
+;;; go-mode
+(el-get 'sync '(go-mode))
+(add-hook 'go-mode-hook
+          #'(lambda ()
+              (setq tab-width 4)))
 
 ;;; js2-mode
 ;; JavaScript編集用のモード
