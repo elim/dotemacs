@@ -66,6 +66,11 @@
 
 (global-set-key (kbd "C-c t") 'google-translate-enja-or-jaen)
 
+;;; ginger-api
+;;
+(el-get 'sync '(ginger-api))
+(global-set-key (kbd "C-c g") 'ginger-region)
+
 
 ;;; visual-regexp
 ;;
