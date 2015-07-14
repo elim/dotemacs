@@ -583,6 +583,11 @@
           #'(lambda ()
               (setq tab-width 4)))
 
+;;; flycheck
+;;
+;;
+(el-get 'sync '(flycheck))
+
 ;;; js2-mode
 ;; JavaScript編集用のモード
 ;; 2012-04-05
@@ -604,22 +609,9 @@
                       "beforeEach" "afterEach" "spyOn"))
               (hs-minor-mode 1)))
 
-(when (executable-find "jsl")
-  (require 'flymake)
-  (defun flymake-jsl-init ()
-    (list "jsl" (list "-process" (flymake-init-create-temp-buffer-copy
-                                  'flymake-create-temp-inplace))))
-
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.js\\'" flymake-jsl-init))
-
-  (add-to-list 'flymake-err-line-patterns
-               '("^\\(.+\\)(\\([0-9]+\\)): \\(.*warning\\|SyntaxError\\): \\(.*\\)" 1 2 nil 4))
-
-  (add-hook 'js2-mode-hook
-            #'(lambda ()
-                (flymake-mode 1))))
-
+(add-hook 'js2-mode-hook
+          #'(lambda ()
+              (flycheck-mode t)))
 
 ;;; tiarra-conf-mode
 ;;
