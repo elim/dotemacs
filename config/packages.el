@@ -71,6 +71,10 @@
 (el-get 'sync '(ginger-api))
 (global-set-key (kbd "C-c g") 'ginger-region)
 
+;;; ginger-rephrase-api
+;;
+(el-get 'sync '(ginger-rephrase-api))
+(global-set-key (kbd "C-c r") 'ginger-rephrase)
 
 ;;; visual-regexp
 ;;
