@@ -1,7 +1,7 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
 (when window-system
-  (setq-default line-spacing (if darwin-p nil 2))
+  (setq-default line-spacing 4)
   (setq frame-alpha-lower-limit 20
         frame-alpha-upper-limit 100
         default-frame-alist (append
