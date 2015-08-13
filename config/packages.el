@@ -258,7 +258,7 @@
 (set-face-attribute 'mode-line nil
                     :foreground "#ccc"
                     :background "#113"
-                    :height 170
+                    :height 120
                     :box nil)
 
 (set-face-attribute 'mode-line-inactive nil
