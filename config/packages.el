@@ -85,7 +85,8 @@
 
 ;;; editorconfig
 ;;
-(el-get 'sync 'editorconfig)
+(when (executable-find "editorconfig")
+  (el-get 'sync 'editorconfig))
 
 
 ;;; ddskk
