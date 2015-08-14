@@ -332,15 +332,16 @@
 (require 'helm-project)
 (global-set-key (kbd "M-t") 'helm-project)
 
-
 ;;; popwin
 ;;
 (el-get 'sync '(popwin))
 (require 'popwin)
 (setq display-buffer-function 'popwin:display-buffer
-      anything-samewindow nil)
-(push '("\*anything.+" :height 20 :regexp t) popwin:special-display-config)
-
+      popwin:popup-window-position 'bottom
+      popwin:popup-window-height 20)
+(push '("*Google Translate*") popwin:special-display-config)
+(push '("*ginger*") popwin:special-display-config)
+(push '("*rephrase*") popwin:special-display-config)
 
 ;;; markdown-mode
 ;;
