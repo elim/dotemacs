@@ -31,6 +31,9 @@
           (throw 'end:flag t)))
         (elim:set-text-height height)))))
 
-(when (eq window-system 'ns)
+(cond
+ ((eq window-system 'ns)
   (setq ns-antialias-text t)
   (elim:set-text-height 180))
+ ((eq window-system 'x)
+  (elim:set-text-height 140)))
