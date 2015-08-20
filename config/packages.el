@@ -294,8 +294,6 @@
 
 ;;; Emacs-Helm
 ;;
-(defalias 'edmacro-subseq 'cl-subseq)
-
 (el-get 'sync '(helm))
 (require 'helm-config nil t)
 (require 'helm-elisp nil t)
