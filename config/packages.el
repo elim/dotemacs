@@ -295,8 +295,12 @@
 ;;; Emacs-Helm
 ;;
 (el-get 'sync '(helm))
+(el-get 'sync '(projectile))
 (require 'helm-config nil t)
 (require 'helm-elisp nil t)
+(require 'helm-projectile)
+(helm-projectile-on)
+
 (mapc '(lambda (key)
          (define-key global-map key 'helm-mini))
       (list
@@ -319,16 +323,17 @@
 (define-key helm-c-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
 
 (setq helm-mini-default-sources
-      '(helm-source-buffers-list
+      '(helm-source-projectile-buffers-list
+        helm-source-projectile-recentf-list
+        helm-source-projectile-files-list
+        helm-source-projectile-projects
+        helm-source-buffers-list
         helm-source-recentf
         helm-source-buffer-not-found))
-
 (el-get 'sync '(helm-descbinds))
 (require 'helm-descbinds)
 
-(el-get 'sync '(helm-project))
-(require 'helm-project)
-(global-set-key (kbd "M-t") 'helm-project)
+(global-set-key (kbd "M-t") 'helm-projectile)
 
 ;;; popwin
 ;;
