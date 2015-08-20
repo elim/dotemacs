@@ -34,6 +34,11 @@
 
 (defalias 'fold 'fold-left)
 
+(defun sort-lines-nocase ()
+  (interactive)
+  (let ((sort-fold-case t))
+    (call-interactively 'sort-lines)))
+
 ;; system-type predicates
 (setq darwin-p  (eq system-type 'darwin)
       ns-p      (featurep 'ns)
