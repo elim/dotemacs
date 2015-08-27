@@ -178,7 +178,7 @@
 
 ;;; Egg is an Emacs interface to git.
 ;;
-
+(defalias 'edmacro-subseq 'cl-subseq)
 (el-get 'sync '(egg))
 (add-to-list 'process-coding-system-alist '("git" utf-8 . utf-8))
 (global-set-key (kbd "C-x v s") 'egg-status)
