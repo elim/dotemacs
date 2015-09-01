@@ -1,5 +1,4 @@
 (:name auto-save-buffers-enhanced
        :type github
        :pkgname "elim/auto-save-buffers-enhanced"
-       :branch "improved-quiet-save-buffer"
        :features (auto-save-buffers-enhanced))
