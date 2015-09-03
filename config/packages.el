@@ -76,6 +76,11 @@
 (el-get 'sync '(ginger-rephrase-api))
 (global-set-key (kbd "C-c r") 'ginger-rephrase)
 
+;;; json-mode
+;;
+(el-get-bundle json-mode)
+(add-to-list 'auto-mode-alist '("\.json$" . json-mode))
+
 ;;; visual-regexp
 ;;
 (el-get 'sync 'visual-regexp)
