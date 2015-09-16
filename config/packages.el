@@ -31,8 +31,7 @@
 
 ;;; google-translate
 ;;
-(el-get 'sync '(google-translate))
-
+(el-get-bundle elim/google-translate)
 (autoload 'google-translate-translate "google-translate" nil t)
 
 (defvar google-translate-english-chars "[:ascii:]"
