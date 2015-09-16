@@ -18,6 +18,12 @@
 (add-to-list 'el-get-recipe-path
              "~/.emacs.d/config/el-get/local-recipes")
 
+;;; Essential packages
+
+(el-get-bundle flycheck
+  (add-hook 'after-init-hook #'global-flycheck-mode))
+
+;;; Other
 
 ;;; clipboard-to-kill-ring
 ;; original: http://hitode909.hatenablog.com/entry/20110924/1316853933
@@ -575,10 +581,6 @@
           #'(lambda ()
               (setq tab-width 4)))
 
-;;; flycheck
-;;
-;;
-(el-get 'sync '(flycheck))
 
 ;;; js2-mode
 ;; JavaScript編集用のモード
@@ -600,10 +602,6 @@
                       "require" "$" "_" "angular" "Backbone" "JSON" "setTimeout" "jasmine"
                       "beforeEach" "afterEach" "spyOn"))
               (hs-minor-mode 1)))
-
-(add-hook 'js2-mode-hook
-          #'(lambda ()
-              (flycheck-mode t)))
 
 ;;; tiarra-conf-mode
 ;;
