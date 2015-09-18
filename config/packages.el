@@ -377,7 +377,8 @@
 ;;; open-junk-file
 ;;
 (el-get 'sync '(open-junk-file))
-(setq open-junk-file-find-file-function #'find-file)
+(setq open-junk-file-format "~/.junk/%Y/%m/%d-%H%M%S."
+      open-junk-file-find-file-function #'find-file)
 (define-key global-map (kbd "C-x C-z") 'open-junk-file)
 
 
