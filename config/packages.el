@@ -37,7 +37,7 @@
 
 ;;; google-translate
 ;;
-(el-get-bundle elim/google-translate)
+(el-get-bundle elim/google-translate :branch "redo")
 (autoload 'google-translate-translate "google-translate" nil t)
 
 (defvar google-translate-english-chars "[:ascii:]"
