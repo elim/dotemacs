@@ -243,6 +243,7 @@
 ;;
 (el-get 'sync '(powerline))
 (setq powerline-arrow-shape 'helf)
+(powerline-default-theme)
 
 ;; color
 (setq powerline-color1 "#223"
