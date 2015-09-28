@@ -1,4 +1,0 @@
-(:name ginger-api
-       :type git
-       :url "git@gist.github.com:/5457732.git"
-       :depends (request json))

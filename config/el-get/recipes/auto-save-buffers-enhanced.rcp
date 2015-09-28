@@ -1,4 +1,0 @@
-(:name auto-save-buffers-enhanced
-       :type github
-       :pkgname "elim/auto-save-buffers-enhanced"
-       :features (auto-save-buffers-enhanced))

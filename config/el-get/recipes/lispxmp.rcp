@@ -1,4 +1,0 @@
-(:name lispxmp
-       :description "LispXmp is mode like Ruby’s xmpfilter."
-       :type emacswiki
-       :features "lispxmp")

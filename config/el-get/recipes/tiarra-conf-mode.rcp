@@ -1,7 +1,0 @@
-(:name tiarra-conf-mode
-       :description "Emacs mode for editing Tiarra configuration."
-       :type svn
-       :url "http://svn.coderepos.org/share/lang/perl/tiarra/trunk"
-       :prepare
-       (autoload 'tiarra-conf-mode "tiarra-conf"
-         "Major mode for editing Tiarra configuration file." t))
