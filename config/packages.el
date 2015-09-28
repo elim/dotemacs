@@ -25,7 +25,7 @@
 ;; ag.elとwgrep-ag.elをlist-packageでMelpaなどからインストールしておく
 (el-get-bundle ag
   :features ag
-  :depends wgrep
+  :depends (dash s wgrep)
 
   (custom-set-variables
    '(ag-highlight-search t)  ; 検索結果の中の検索語をハイライトする
@@ -262,16 +262,6 @@
 
   (global-set-key (kbd "C-c t") 'google-translate-enja-or-jaen))
 
-;;; grep-edit
-;; *grep*で編集できるようにする
-(el-get-bundle emacswiki:grep-edit
-  :features grep-edit
-  (with-eval-after-load-feature 'grep
-    (add-hook 'grep-setup-hook
-              #'(lambda ()
-                (define-key grep-mode-map
-                  (kbd "C-c C-c") 'grep-edit-finish-edit)))))
-
 ;;; Helm
 ;;
 (el-get-bundle helm
@@ -329,8 +319,6 @@
     (add-hook 'js2-mode-hook
               #'(lambda ()
                   (setq indent-tabs-mode nil
-                        show-trailing-whitespace t
-                        flymake-check-was-interrupted t
                         show-trailing-whitespace t
                         js2-basic-offset 2
                         js2-include-browser-externs t
