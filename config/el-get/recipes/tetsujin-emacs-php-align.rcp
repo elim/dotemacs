@@ -1,7 +1,0 @@
-(:name tetsujin-emacs-php-align
-       :type github
-       :pkgname "tetsujin/emacs-php-align"
-       :features (php-align)
-       :post-init (progn
-                    (add-hook 'php-mode-hook
-                              (lambda () (require 'php-align) (php-align-setup)))))

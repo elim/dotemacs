@@ -1,8 +1,0 @@
-(:name rabbit-mode
-       :type git
-       :url "https://github.com/shockers/rabbit.git"
-       :load-path ("misc/emacs")
-       :after (progn
-                (autoload 'rabbit-mode "rabbit-mode" "major mode for Rabbit" t)
-                (add-to-list 'auto-mode-alist
-                             '("\\.\\(rbt\\|rab\\)$" . rabbit-mode))))

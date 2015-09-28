@@ -1,6 +1,0 @@
-(:name mooz-js2-mode
-       :type github
-       :pkgname "mooz/js2-mode"
-       :features (js2-mode)
-       :post-init (progn
-                    (autoload 'js2-mode "js2-mode" nil t)))

@@ -1,3 +1,0 @@
-(:name grep-edit
-       :type emacswiki
-       :features (grep-edit))

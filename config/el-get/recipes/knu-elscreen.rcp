@@ -1,6 +1,0 @@
-(:name knu-elscreen
-       :description "Screen Manager for Emacsen"
-       :depends apel
-       :type git
-       :url "https://github.com/knu/elscreen.git"
-       :features (elscreen))

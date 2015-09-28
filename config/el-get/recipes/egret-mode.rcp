@@ -1,4 +1,0 @@
-(:name egret-mode
-       :type github
-       :pkgname"elim/egret-mode"
-       :features egret-mode)
