@@ -25,7 +25,7 @@
 ;; ag.elとwgrep-ag.elをlist-packageでMelpaなどからインストールしておく
 (el-get-bundle ag
   :features ag
-  :depends wgrep
+  :depends (dash s wgrep)
 
   (custom-set-variables
    '(ag-highlight-search t)  ; 検索結果の中の検索語をハイライトする
