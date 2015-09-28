@@ -262,16 +262,6 @@
 
   (global-set-key (kbd "C-c t") 'google-translate-enja-or-jaen))
 
-;;; grep-edit
-;; *grep*で編集できるようにする
-(el-get-bundle emacswiki:grep-edit
-  :features grep-edit
-  (with-eval-after-load-feature 'grep
-    (add-hook 'grep-setup-hook
-              #'(lambda ()
-                (define-key grep-mode-map
-                  (kbd "C-c C-c") 'grep-edit-finish-edit)))))
-
 ;;; Helm
 ;;
 (el-get-bundle helm
