@@ -13,6 +13,8 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
+(setq el-get-user-package-directory (locate-user-emacs-file "config/packages"))
+
 (el-get-bundle tarao/with-eval-after-load-feature-el)
 
 ;;; ag
