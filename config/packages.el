@@ -13,6 +13,9 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
+
+(setq el-get-user-package-directory "~/.emacs.d/config/packages/")
+
 (el-get-bundle tarao/with-eval-after-load-feature-el)
 
 ;;; ag
@@ -264,41 +267,7 @@
 
 ;;; Helm
 ;;
-(el-get-bundle helm
-  :features (helm-config helm-elisp)
-
-  (mapc #'(lambda (key)
-           (define-key global-map key 'helm-mini))
-        (list
-         [(control ?:)]
-         [(control \;)]
-         [(control x)(\;)]
-         [(control x)(control :)]
-         [(control x)(control \;)]))
-  (define-key ctl-x-map (kbd "C-y") 'helm-show-kill-ring)
-  (define-key ctl-x-map (kbd "b") 'helm-buffers-list)
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "C-z h") 'helm-elscreen)
-  (helm-mode 1)
-  (setq helm-idle-delay             0.3
-        helm-input-idle-delay       0.3
-        helm-candidate-number-limit 200
-        helm-buffer-max-length 40
-        helm-ff-auto-update-initial-value nil)
-
-  (with-eval-after-load-feature 'helm
-    (define-key helm-read-file-map (kbd "C-h") 'delete-backward-char)
-    (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action))
-
-  (setq helm-mini-default-sources
-        '(helm-source-projectile-buffers-list
-          helm-source-projectile-recentf-list
-          helm-source-projectile-files-list
-          helm-source-projectile-projects
-          helm-source-buffers-list
-          helm-source-recentf
-          helm-source-buffer-not-found)))
-
+(el-get-bundle helm)
 (el-get-bundle helm-css-scss)
 
 (el-get-bundle helm-descbinds
