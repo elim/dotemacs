@@ -13,8 +13,7 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
-
-(setq el-get-user-package-directory "~/.emacs.d/config/packages/")
+(setq el-get-user-package-directory (locate-user-emacs-file "config/packages"))
 
 (el-get-bundle tarao/with-eval-after-load-feature-el)
 
@@ -375,7 +374,6 @@
 
     (defun php-mode-hook-func ()
       (c-set-style "gnu")
-      (flymake-mode 1)
 
       (define-key php-mode-map (kbd "C-c C-[") 'beginning-of-defun)
       (define-key php-mode-map (kbd "C-c C-]") 'end-of-defun)
@@ -411,8 +409,8 @@
 ;;
 (el-get-bundle popwin
   :features popwin
-  '(setq display-buffer-alist 'popwin:display-buffer
-        popwin:popup-window-position 'bottom
+  (popwin-mode 1)
+  (setq popwin:popup-window-position 'bottom
         popwin:popup-window-height 20)
   (push '("*Google Translate*") popwin:special-display-config)
   (push '("*ginger*") popwin:special-display-config)
