@@ -366,17 +366,11 @@
     ;; C-RET でマニュアルページにジャンプ
     (setq php-manual-url "http://jp.php.net/manual/ja/")))
 
-;;; popwin
-;;
 (el-get-bundle popwin)
 (el-get-bundle powerline)
 (el-get-bundle puppet-mode)
+(el-get-bundle rspec-mode)
 
-;;; rspec-mode
-;;
-(el-get-bundle rspec-mode
-  ;; http://d.hatena.ne.jp/uk-ar/20110424/1303604763
-  (setq shell-file-name "/bin/sh"))
 
 ;;; ruby-mode
 ;;
