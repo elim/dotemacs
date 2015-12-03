@@ -408,24 +408,7 @@
 ;;; popwin
 ;;
 (el-get-bundle popwin)
-
-;;; powerline
-;;
-(el-get-bundle powerline
-  (set-face-attribute 'mode-line nil
-                      :foreground "#ccc"
-                      :background "#113"
-                      :height 1.0
-                      :box nil)
-
-  (set-face-attribute 'mode-line-inactive nil
-                      :foreground "#ccc"
-                      :background "#112"
-                      :box nil)
-  (powerline-default-theme))
-
-;;; puppet-mode
-;;
+(el-get-bundle powerline)
 (el-get-bundle puppet-mode)
 
 ;;; rspec-mode
