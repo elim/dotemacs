@@ -224,9 +224,12 @@
 
 (add-hook 'python-mode-hook 'python-mode-hook-func)
 
+;;; resentf
+;;
+(setq recentf-max-menu-items nil)
 
 ;;; scheme-mode
-;; 
+;;
 (load "builtins/scheme-mode")
 
 
