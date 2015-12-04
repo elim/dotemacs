@@ -419,10 +419,6 @@
   :prepare (autoload 'tiarra-conf-mode "tiarra-conf"
              "Major mode for editing Tiarra configuration file." t))
 
-(el-get-bundle visual-regexp
-  (global-set-key (kbd "M-%")   'vr/query-replace)
-  (global-set-key (kbd "C-M-%") 'vr/replace))
-
 (el-get-bundle web-mode
   (with-eval-after-load-feature 'web-mode
     (setq auto-mode-alist
@@ -457,6 +453,7 @@
 
 
 (el-get-bundle twittering-mode)
+(el-get-bundle visual-regexp)
 (el-get-bundle yaml-mode)
 
 ;;; packages.el ends here
