@@ -419,13 +419,10 @@
   :prepare (autoload 'tiarra-conf-mode "tiarra-conf"
              "Major mode for editing Tiarra configuration file." t))
 
-(el-get-bundle wgrep
-  :features (wgrep wgrep-ag))
-
-
 (el-get-bundle twittering-mode)
 (el-get-bundle visual-regexp)
 (el-get-bundle web-mode)
+(el-get-bundle wgrep)
 (el-get-bundle yaml-mode)
 
 ;;; packages.el ends here
