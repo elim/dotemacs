@@ -415,7 +415,7 @@
 
 (el-get-bundle hg:tiarra-conf-mode
   :description "Emacs mode for editing Tiarra configuration."
-  :url "ssh://hg@bitbucket.org/topia/tiarra"
+  :url "https://bitbucket.org/topia/tiarra"
   :prepare (autoload 'tiarra-conf-mode "tiarra-conf"
              "Major mode for editing Tiarra configuration file." t))
 
