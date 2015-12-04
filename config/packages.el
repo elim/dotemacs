@@ -419,22 +419,16 @@
   :prepare (autoload 'tiarra-conf-mode "tiarra-conf"
              "Major mode for editing Tiarra configuration file." t))
 
-;;; twittering-mode
-;;
 (el-get-bundle twittering-mode
   (setq twittering-use-master-password t
         twittering-icon-mode t
         twittering-jojo-mode t
         twittering-status-format "%FILL{%i%s %t%R}"))
 
-;;; visual-regexp
-;;
 (el-get-bundle visual-regexp
   (global-set-key (kbd "M-%")   'vr/query-replace)
   (global-set-key (kbd "C-M-%") 'vr/replace))
 
-;;; web-mode
-;;
 (el-get-bundle web-mode
   (with-eval-after-load-feature 'web-mode
     (setq auto-mode-alist
@@ -464,14 +458,10 @@
                   (with-eval-after-load-feature 'dabbrev
                     (set (make-local-variable 'dabbrev-abbrev-skip-leading-regexp) "$"))))))
 
-;;; wgrep
-;;
 (el-get-bundle wgrep
   :features (wgrep wgrep-ag))
 
 
-;;; yaml-mode
-;;
 (el-get-bundle yaml-mode)
 
 ;;; packages.el ends here
