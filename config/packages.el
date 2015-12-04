@@ -419,59 +419,10 @@
   :prepare (autoload 'tiarra-conf-mode "tiarra-conf"
              "Major mode for editing Tiarra configuration file." t))
 
-;;; twittering-mode
-;;
-(el-get-bundle twittering-mode
-  (setq twittering-use-master-password t
-        twittering-icon-mode t
-        twittering-jojo-mode t
-        twittering-status-format "%FILL{%i%s %t%R}"))
-
-;;; visual-regexp
-;;
-(el-get-bundle visual-regexp
-  (global-set-key (kbd "M-%")   'vr/query-replace)
-  (global-set-key (kbd "C-M-%") 'vr/replace))
-
-;;; web-mode
-;;
-(el-get-bundle web-mode
-  (with-eval-after-load-feature 'web-mode
-    (setq auto-mode-alist
-          (append
-           '(("/\\(PEAR\\|pear\\)/" . php-mode)
-             ("\.html?$" . web-mode)
-             ("\.ctp$" . web-mode))
-           auto-mode-alist)
-          web-mode-block-padding 2
-          web-mode-comment-style 2
-          web-mode-indent-style 2
-          web-mode-script-padding 2
-          web-mode-style-padding 2)
-
-    (add-hook 'web-mode-hook
-              #'(lambda ()
-                  (setq tab-width 2
-                        indent-tabs-mode nil
-                        show-trailing-whitespace t
-                        require-final-newline t
-                        c-basic-offset 2
-                        ;; コメントのスタイル (必要なければコメントアウトする)
-                        comment-start "// "
-                        comment-end   ""
-                        comment-start-skip "// *")
-                  (hs-minor-mode 1)
-                  (with-eval-after-load-feature 'dabbrev
-                    (set (make-local-variable 'dabbrev-abbrev-skip-leading-regexp) "$"))))))
-
-;;; wgrep
-;;
-(el-get-bundle wgrep
-  :features (wgrep wgrep-ag))
-
-
-;;; yaml-mode
-;;
+(el-get-bundle twittering-mode)
+(el-get-bundle visual-regexp)
+(el-get-bundle web-mode)
+(el-get-bundle wgrep)
 (el-get-bundle yaml-mode)
 
 ;;; packages.el ends here
