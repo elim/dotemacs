@@ -27,8 +27,8 @@
       helm-buffer-max-length       40
       helm-ff-auto-update-initial-value nil
       helm-mini-default-sources
-      '(helm-source-recentf
-        helm-source-buffers-list
+      '(helm-source-buffers-list
+        helm-source-recentf
         helm-source-projectile-recentf-list
         helm-source-projectile-buffers-list
         helm-source-projectile-files-list
