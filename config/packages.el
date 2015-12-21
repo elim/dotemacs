@@ -370,48 +370,8 @@
 (el-get-bundle powerline)
 (el-get-bundle puppet-mode)
 (el-get-bundle rspec-mode)
-
-
-;;; ruby-mode
-;;
-(el-get-bundle ruby-mode
-  (el-get-bundle ruby-end)
-
-  (unless (boundp 'last-command-char)
-    (defvaralias 'last-command-char 'last-command-event))
-
-  (with-eval-after-load-feature 'dabbrev
-    (add-hook 'ruby-mode-hook
-              #'(lambda ()
-                  (set (make-local-variable 'show-trailing-whitespace) t)
-                  (set (make-local-variable 'dabbrev-abbrev-skip-leading-regexp) ":"))))
-
-  (setq ruby-indent-level 2
-        ruby-indent-tabs-mode nil
-        ruby-deep-indent-paren-style nil)
-
-  (mapc #'(lambda (arg)
-            (cons arg auto-mode-alist))
-        (list '("\\.rb$" . ruby-mode)
-              '("Rakefile" . ruby-mode)))
-
-  (define-key ruby-mode-map "\C-m" 'reindent-then-newline-and-indent)
-
-  ;; http://stackoverflow.com/questions/7961533/emacs-ruby-method-parameter-indentation
-  (defadvice ruby-indent-line (after unindent-closing-paren activate)
-    (let ((column (current-column))
-          indent offset)
-      (save-excursion
-        (back-to-indentation)
-        (let ((state (syntax-ppss)))
-          (setq offset (- column (current-column)))
-          (when (and (eq (char-after) ?\))
-                     (not (zerop (car state))))
-            (goto-char (cadr state))
-            (setq indent (current-indentation)))))
-      (when indent
-        (indent-line-to indent)
-        (when (> offset 0) (forward-char offset))))))
+(el-get-bundle ruby-mode)
+(el-get-bundle ruby-end)
 
 (el-get-bundle hg:tiarra-conf-mode
   :description "Emacs mode for editing Tiarra configuration."
