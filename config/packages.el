@@ -336,6 +336,7 @@
 (el-get-bundle rspec-mode)
 (el-get-bundle ruby-mode)
 (el-get-bundle ruby-end)
+(el-get-bundle slim-mode)
 
 (el-get-bundle hg:tiarra-conf-mode
   :description "Emacs mode for editing Tiarra configuration."
