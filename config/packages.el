@@ -197,7 +197,7 @@
 (el-get-bundle helm-descbinds
     :features helm-descbinds)
 
-(el-get-bundle projectile
+(el-get-bundle helm-projectile
     :features helm-projectile
     (helm-projectile-on)
     (global-set-key (kbd "M-t") 'helm-projectile))
