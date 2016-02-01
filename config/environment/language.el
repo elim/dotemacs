@@ -13,8 +13,11 @@
         (or (getenv "LANG") "en_US.UTF-8"))
 (setenv "LC_CTYPE"
         (or (getenv "LC_CTYPE") "ja_JP.UTF-8"))
-(set-language-environment 'Japanese)
+
 (setq default-buffer-file-coding-system 'utf-8-unix)
+(setq default-process-coding-system 'utf-8)
+(setq coding-system-for-read 'utf-8)
+(setq coding-system-for-write 'utf-8)
 
 ;; http://nijino.homelinux.net/emacs/emacs23-ja.html
 ;; for Windows
