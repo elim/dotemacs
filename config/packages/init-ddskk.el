@@ -61,7 +61,7 @@
   ;; (cancel-function-timers 'skk-auto-save-jisyo)
   (run-with-idle-timer skk-auto-save-jisyo-interval
                        t
-                       'skk-auto-save-jisyo)))
+                       'skk-auto-save-jisyo))
 
 (provide 'init-ddskk)
 ;;; init-ddskk.el ends here
