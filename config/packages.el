@@ -18,6 +18,18 @@
 (el-get-bundle tarao/with-eval-after-load-feature-el)
 (el-get-bundle ag)
 (el-get-bundle ddskk)
+(el-get-bundle popwin)
+(el-get-bundle powerline)
+(el-get-bundle puppet-mode)
+(el-get-bundle rspec-mode)
+(el-get-bundle ruby-mode)
+(el-get-bundle ruby-end)
+(el-get-bundle slim-mode)
+(el-get-bundle twittering-mode)
+(el-get-bundle visual-regexp)
+(el-get-bundle web-mode)
+(el-get-bundle wgrep)
+(el-get-bundle yaml-mode)
 
 ;;; Auto Complete
 ;; 自動補完
@@ -265,13 +277,6 @@
     ;; C-RET でマニュアルページにジャンプ
     (setq php-manual-url "http://jp.php.net/manual/ja/")))
 
-(el-get-bundle popwin)
-(el-get-bundle powerline)
-(el-get-bundle puppet-mode)
-(el-get-bundle rspec-mode)
-(el-get-bundle ruby-mode)
-(el-get-bundle ruby-end)
-(el-get-bundle slim-mode)
 
 (el-get-bundle hg:tiarra-conf-mode
   :description "Emacs mode for editing Tiarra configuration."
@@ -279,10 +284,5 @@
   :prepare (autoload 'tiarra-conf-mode "tiarra-conf"
              "Major mode for editing Tiarra configuration file." t))
 
-(el-get-bundle twittering-mode)
-(el-get-bundle visual-regexp)
-(el-get-bundle web-mode)
-(el-get-bundle wgrep)
-(el-get-bundle yaml-mode)
 
 ;;; packages.el ends here
