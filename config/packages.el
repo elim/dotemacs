@@ -226,10 +226,7 @@
       (hs-minor-mode 1)
       (c-set-offset 'arglist-intro '+)
       (c-set-offset 'arglist-close 0)
-      (c-set-offset 'statement-cont 'c-lineup-math)
-
-      (with-eval-after-load-feature 'dabbrev
-        (set (make-local-variable dabbrev-abbrev-skip-leading-regexp) "\\$")))
+      (c-set-offset 'statement-cont 'c-lineup-math))
 
     (add-hook 'php-mode-hook 'php-mode-hook-func)
     (add-to-list 'auto-mode-alist '("\\.ctp\\'" . php-mode))
