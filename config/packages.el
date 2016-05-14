@@ -17,6 +17,7 @@
 
 (el-get-bundle tarao/with-eval-after-load-feature-el)
 (el-get-bundle ag)
+(el-get-bundle anzu)
 (el-get-bundle ddskk)
 (el-get-bundle elscreen)
 (el-get-bundle popwin)
@@ -27,7 +28,6 @@
 (el-get-bundle ruby-end)
 (el-get-bundle slim-mode)
 (el-get-bundle twittering-mode)
-(el-get-bundle visual-regexp)
 (el-get-bundle web-mode)
 (el-get-bundle wgrep)
 (el-get-bundle yaml-mode)
