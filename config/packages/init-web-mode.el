@@ -25,9 +25,7 @@
                     comment-start "// "
                     comment-end   ""
                     comment-start-skip "// *")
-              (hs-minor-mode 1)
-              (with-eval-after-load-feature 'dabbrev
-                (set (make-local-variable 'dabbrev-abbrev-skip-leading-regexp) "\\$"))))
+              (hs-minor-mode 1)))
 
 (provide 'init-web-mode)
 ;;; init-web-mode.el ends here
