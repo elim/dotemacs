@@ -114,6 +114,7 @@
 (load-directory-files preferences-directory "^init-.+el$")
 
 (load "environment")
+(load "theme")
 (load "builtins")
 (load "packages")
 (load "local" t)

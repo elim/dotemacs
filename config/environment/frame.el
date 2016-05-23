@@ -8,9 +8,9 @@
                              '((foreground-color . "gray")
                                (background-color . "black")
                                (cursor-color  . "blue")
-                               (alpha . (90 85)))
+                               (alpha . (99 95)))
                              default-frame-alist))
-  
+
 
   (defun set-alpha (elt)
     (interactive
