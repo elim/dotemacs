@@ -8,17 +8,6 @@
 ;; (global-set-key "\C-xj" 'skk-auto-fill-mode)
 ;; (global-set-key "\C-xt" 'skk-tutorial)
 
-(mapc #'(lambda (lib)
-          (apply #'autoload lib))
-      (list
-       '(skk "skk" nil t)
-       '(skk-mode "skk" nil t)
-       '(skk-auto-fill-mode "skk" nil t)
-       '(skk-check-jisyo "skk-tools" nil t)
-       '(skk-merge "skk-tools" nil t)
-       '(skk-diff "skk-tools" nil t)
-       '(skk-isearch-mode-setup "skk-isearch" nil t)
-       '(skk-isearch-mode-cleanup "skk-isearch" nil t)))
 
 ;; @@ 基本の設定
 (setq skk-jisyo-code 'utf-8
