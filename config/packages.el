@@ -16,10 +16,12 @@
 (setq el-get-user-package-directory (locate-user-emacs-file "config/packages"))
 
 (el-get-bundle tarao/with-eval-after-load-feature-el)
+
 (el-get-bundle ag)
 (el-get-bundle anzu)
 (el-get-bundle ddskk)
 (el-get-bundle elscreen)
+(el-get-bundle json-mode)
 (el-get-bundle popwin)
 (el-get-bundle powerline)
 (el-get-bundle puppet-mode)
