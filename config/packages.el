@@ -19,6 +19,7 @@
 
 (el-get-bundle ag)
 (el-get-bundle anzu)
+(el-get-bundle auto-complete)
 (el-get-bundle ddskk)
 (el-get-bundle elscreen)
 (el-get-bundle fujimisakari/microsoft-translator)
@@ -36,15 +37,6 @@
 (el-get-bundle wgrep)
 (el-get-bundle yaml-mode)
 
-;;; Auto Complete
-;; 自動補完
-(el-get-bundle auto-complete
-  :features auto-complete
-  (global-auto-complete-mode t)
-  (add-hook 'auto-complete-mode-hook
-            #'(lambda ()
-              (define-key ac-completing-map (kbd "C-n") 'ac-next)
-              (define-key ac-completing-map (kbd "C-p") 'ac-previous))))
 
 ;;; auto-save-buffers-enhanced
 ;;
