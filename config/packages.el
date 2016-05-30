@@ -21,6 +21,7 @@
 (el-get-bundle anzu)
 (el-get-bundle auto-complete)
 (el-get-bundle ddskk)
+(el-get-bundle editorconfig)
 (el-get-bundle elscreen)
 (el-get-bundle fujimisakari/microsoft-translator)
 (el-get-bundle json-mode)
@@ -59,10 +60,6 @@
   :features (clipboard-to-kill-ring)
   (clipboard-to-kill-ring t))
 
-;;; editorconfig
-;;
-(when (executable-find "editorconfig")
-  (el-get-bundle editorconfig))
 
 
 ;;; Flycheck
