@@ -21,6 +21,7 @@
 (el-get-bundle anzu)
 (el-get-bundle ddskk)
 (el-get-bundle elscreen)
+(el-get-bundle fujimisakari/microsoft-translator)
 (el-get-bundle json-mode)
 (el-get-bundle popwin)
 (el-get-bundle powerline)
