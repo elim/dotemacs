@@ -24,6 +24,10 @@
 (el-get-bundle editorconfig)
 (el-get-bundle elscreen)
 (el-get-bundle fujimisakari/microsoft-translator)
+(el-get-bundle helm)
+(el-get-bundle helm-css-scss)
+(el-get-bundle helm-descbinds)
+(el-get-bundle helm-projectile)
 (el-get-bundle json-mode)
 (el-get-bundle popwin)
 (el-get-bundle powerline)
@@ -37,7 +41,6 @@
 (el-get-bundle web-mode)
 (el-get-bundle wgrep)
 (el-get-bundle yaml-mode)
-
 
 ;;; auto-save-buffers-enhanced
 ;;
@@ -92,18 +95,6 @@
 
 (el-get-bundle google-translate)
 
-;;; Helm
-;;
-(el-get-bundle helm)
-(el-get-bundle helm-css-scss)
-
-(el-get-bundle helm-descbinds
-    :features helm-descbinds)
-
-(el-get-bundle helm-projectile
-    :features helm-projectile
-    (helm-projectile-on)
-    (global-set-key (kbd "M-t") 'helm-projectile))
 
 ;;; js2-mode
 ;; JavaScript編集用のモード
