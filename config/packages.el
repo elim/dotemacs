@@ -29,6 +29,7 @@
 (el-get-bundle helm-descbinds)
 (el-get-bundle helm-projectile)
 (el-get-bundle helm-git-grep)
+(el-get-bundle js2-mode)
 (el-get-bundle json-mode)
 (el-get-bundle popwin)
 (el-get-bundle powerline)
@@ -97,25 +98,6 @@
 (el-get-bundle google-translate)
 
 
-;;; js2-mode
-;; JavaScript編集用のモード
-;; 2012-04-05
-(el-get-bundle js2-mode
-  (setq auto-mode-alist (append '(("\.js$" . js2-mode)) auto-mode-alist))
-
-  (with-eval-after-load-feature 'js2-mode
-    (add-hook 'js2-mode-hook
-              #'(lambda ()
-                  (setq indent-tabs-mode nil
-                        show-trailing-whitespace t
-                        js2-basic-offset 2
-                        js2-include-browser-externs t
-                        js2-include-node-externs t
-                        js2-global-externs
-                        '("define" "describe" "xdescribe" "expect" "it" "xit"
-                          "require" "$" "_" "angular" "Backbone" "JSON" "setTimeout" "jasmine"
-                          "beforeEach" "afterEach" "spyOn"))
-                  (hs-minor-mode 1)))))
 
 ;;; less-css-mode
 ;;
