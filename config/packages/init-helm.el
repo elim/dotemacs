@@ -32,10 +32,10 @@
       helm-mini-default-sources
       '(helm-source-buffers-list
         helm-source-recentf
-        helm-source-projectile-recentf-list
-        helm-source-projectile-buffers-list
-        helm-source-projectile-files-list
-        helm-source-projectile-projects
+        ;; helm-source-projectile-recentf-list
+        ;; helm-source-projectile-buffers-list
+        ;; helm-source-projectile-files-list
+        ;; helm-source-projectile-projects
         helm-source-buffer-not-found))
 
 (provide 'init-helm)
