@@ -23,6 +23,7 @@
 (el-get-bundle ddskk)
 (el-get-bundle editorconfig)
 (el-get-bundle elscreen)
+(el-get-bundle flycheck)
 (el-get-bundle fujimisakari/microsoft-translator)
 (el-get-bundle helm)
 (el-get-bundle helm-css-scss)
@@ -66,11 +67,6 @@
   (clipboard-to-kill-ring t))
 
 
-
-;;; Flycheck
-;;
-(el-get-bundle flycheck
-  (add-hook 'after-init-hook #'global-flycheck-mode))
 
 ;;; ginger-api
 ;;
