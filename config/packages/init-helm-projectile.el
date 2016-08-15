@@ -2,9 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'helm-projectile )
+(require 'helm-projectile)
 (helm-projectile-on)
 (global-set-key (kbd "M-t") 'helm-projectile)
+
+(custom-set-variables '(projectile-enable-caching t))
+(projectile-global-mode t)
 
 (provide 'init-helm-projectile)
 ;;; init-helm-projectile.el ends here
