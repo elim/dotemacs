@@ -30,7 +30,6 @@
 (el-get-bundle helm-descbinds)
 (el-get-bundle helm-git-grep)
 (el-get-bundle helm-projectile)
-(el-get-bundle js2-mode)
 (el-get-bundle json-mode)
 (el-get-bundle popwin)
 (el-get-bundle powerline)
