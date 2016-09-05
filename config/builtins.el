@@ -89,7 +89,10 @@
 (setq scroll-conservatively 1)
 
 ;; other
-(setq visible-bell t)
+(if ns-p
+    (setq ring-bell-function 'ignore)
+  (setq visible-bell t))
+
 (setq line-move-visual t)
 
 (temp-buffer-resize-mode t)
