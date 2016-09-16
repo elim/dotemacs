@@ -6,6 +6,8 @@
 (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
 
 (defun elim:js2-mode-hook-func ()
+  (set-face-underline 'js2-warning nil)
+
   (setq indent-tabs-mode nil
         show-trailing-whitespace t
         js2-basic-offset 2
