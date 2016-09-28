@@ -5,8 +5,6 @@
 .org-id-locations
 /ac-comphist.dat
 /auto-save-list
-/config/packages/ddskk/emacs-id
-/config/packages/ddskk/record
 /customize.el
 /el-get
 /elpa
