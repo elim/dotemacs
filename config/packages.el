@@ -22,6 +22,8 @@
 (el-get-bundle ddskk)
 (el-get-bundle editorconfig)
 (el-get-bundle elscreen)
+(el-get-bundle company-mode)
+(el-get-bundle company-quickhelp)
 (el-get-bundle flycheck)
 (el-get-bundle fujimisakari/microsoft-translator)
 (el-get-bundle git-modes)
