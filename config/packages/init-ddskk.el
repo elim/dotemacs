@@ -66,6 +66,9 @@
      skk-auto-save-jisyo-interval t
      #'skk-save-jisyo)))
 
+;; ロードしておく
+(skk-mode -1)
+
 (provide 'init-ddskk)
 
 ;;; init-ddskk.el ends here
