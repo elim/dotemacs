@@ -24,6 +24,8 @@
 (el-get-bundle elscreen)
 (el-get-bundle flycheck)
 (el-get-bundle fujimisakari/microsoft-translator)
+(el-get-bundle git-modes)
+(el-get-bundle google-translate)
 (el-get-bundle helm)
 (el-get-bundle helm-css-scss)
 (el-get-bundle helm-descbinds)
@@ -31,6 +33,7 @@
 (el-get-bundle helm-projectile)
 (el-get-bundle js2-mode)
 (el-get-bundle json-mode)
+(el-get-bundle migemo)
 (el-get-bundle php-mode)
 (el-get-bundle popwin)
 (el-get-bundle powerline)
@@ -66,8 +69,6 @@
   :features (clipboard-to-kill-ring)
   (clipboard-to-kill-ring t))
 
-
-
 ;;; ginger-api
 ;;
 (el-get-bundle gist:5457732:ginger-api
@@ -80,20 +81,12 @@
   :depends (popwin request)
   (global-set-key (kbd "C-c r") 'ginger-rephrase))
 
-;;; git-modes
-;;
-(el-get-bundle git-modes)
-
 ;;; go-mode
 ;;
 (el-get-bundle go-mode
   (add-hook 'go-mode-hook
             #'(lambda ()
                 (setq tab-width 4))))
-
-(el-get-bundle google-translate)
-
-
 
 ;;; less-css-mode
 ;;
@@ -148,10 +141,6 @@
         'mew-draft-kill
         'mew-send-hook)))
 
-;;; migemo
-;;
-(el-get-bundle migemo)
-
 ;;; open-junk-file
 ;;
 (el-get-bundle open-junk-file
@@ -165,6 +154,5 @@
   :url "https://bitbucket.org/topia/tiarra"
   :prepare (autoload 'tiarra-conf-mode "tiarra-conf"
              "Major mode for editing Tiarra configuration file." t))
-
 
 ;;; packages.el ends here
