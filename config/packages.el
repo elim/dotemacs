@@ -19,7 +19,6 @@
 
 (el-get-bundle ag)
 (el-get-bundle anzu)
-(el-get-bundle auto-complete)
 (el-get-bundle ddskk)
 (el-get-bundle editorconfig)
 (el-get-bundle elscreen)
