@@ -10,6 +10,7 @@
     (define-key php-mode-map (kbd "C-c C-[") 'beginning-of-defun)
     (define-key php-mode-map (kbd "C-c C-]") 'end-of-defun)
 
+    (setq-local shell-file-name "/bin/sh")
     (setq flycheck-phpcs-standard "PSR2")
     (setq php-mode-coding-style (quote PSR-2))
     (php-enable-psr2-coding-style)
