@@ -24,6 +24,7 @@
 (el-get-bundle company-quickhelp)
 (el-get-bundle ddskk)
 (el-get-bundle editorconfig)
+(el-get-bundle elim/auto-save-buffers-enhanced)
 (el-get-bundle elscreen)
 (el-get-bundle flycheck)
 (el-get-bundle fujimisakari/microsoft-translator)
@@ -49,19 +50,6 @@
 (el-get-bundle web-mode)
 (el-get-bundle wgrep)
 (el-get-bundle yaml-mode)
-
-;;; auto-save-buffers-enhanced
-;;
-(el-get-bundle elim/auto-save-buffers-enhanced
-  :features auto-save-buffers-enhanced
-  (setq auto-save-default nil
-        auto-save-buffers-enhanced-include-regexps '(".+")
-        auto-save-buffers-enhanced-exclude-regexps '("^not-save-file" "\\.ignore$")
-        auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t
-        auto-save-buffers-enhanced-cooperate-elscreen-p t
-        auto-save-buffers-enhanced-quiet-save-p t)
-  (define-key global-map "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
-  (auto-save-buffers-enhanced t))
 
 ;;; clipboard-to-kill-ring
 ;; original: http://hitode909.hatenablog.com/entry/20110924/1316853933
