@@ -78,11 +78,6 @@
             #'(lambda ()
                 (setq tab-width 4))))
 
-;;; less-css-mode
-;;
-(el-get-bundle less-css-mode
-  (setq css-indent-offset 2))
-
 ;;; magit
 ;;
 (el-get-bundle magit
