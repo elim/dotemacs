@@ -4,7 +4,6 @@
 
 (with-eval-after-load-feature 'php-mode
   (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
-  (add-to-list 'auto-mode-alist '("\\.ctp\\'" . php-mode))
 
   (defun elim:php-mode-hook-func ()
     (define-key php-mode-map (kbd "C-c C-[") 'beginning-of-defun)

@@ -3,6 +3,7 @@
 ;;; Code:
 
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ctp\\'"  . web-mode))
 
 (setq web-mode-block-padding 2)
 (setq web-mode-comment-style 2)
