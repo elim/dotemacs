@@ -38,6 +38,7 @@
 (el-get-bundle js2-mode)
 (el-get-bundle json-mode)
 (el-get-bundle migemo)
+(el-get-bundle open-junk-file)
 (el-get-bundle php-mode)
 (el-get-bundle popwin)
 (el-get-bundle puppet-mode)
@@ -125,14 +126,6 @@
         'mew-draft-send-message
         'mew-draft-kill
         'mew-send-hook)))
-
-;;; open-junk-file
-;;
-(el-get-bundle open-junk-file
-  (setq open-junk-file-format "~/.junk/%Y/%m/%d-%H%M%S."
-        open-junk-file-find-file-function #'find-file)
-  (define-key global-map (kbd "C-x C-z") 'open-junk-file))
-
 
 (el-get-bundle hg:tiarra-conf-mode
   :description "Emacs mode for editing Tiarra configuration."
