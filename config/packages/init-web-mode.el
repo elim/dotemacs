@@ -7,6 +7,7 @@
 
 (setq web-mode-block-padding 2)
 (setq web-mode-comment-style 2)
+(setq web-mode-enable-engine-detection t)
 (setq web-mode-indent-style 2)
 (setq web-mode-script-padding 2)
 (setq web-mode-style-padding 2)
