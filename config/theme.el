@@ -1,5 +1,5 @@
 (add-to-list 'custom-theme-load-path
-             (expand-file-name "config/theme" preferences-directory))
+             (expand-file-name "config/theme" user-emacs-directory))
 
 (defun elim:apply-theme()
   (load-theme 'cake t)

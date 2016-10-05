@@ -63,13 +63,9 @@
 (when (and meadow-p (not (file-directory-p default-directory)))
   (setq default-directory (getenv "HOME")))
 
+(setq custom-file (expand-file-name "customize.el" user-emacs-directory))
+
 ;; path and filenames.
-(setq preferences-directory user-emacs-directory
-      libraries-directory (expand-file-name "library" user-emacs-directory)
-
-      custom-file
-      (expand-file-name "customize.el" user-emacs-directory))
-
 (dolist (dir (list
               (expand-file-name "config" user-emacs-directory)
               "/usr/local/share/emacs/site-lisp/"))
@@ -89,17 +85,6 @@
     (setenv "PATH" (concat dir ":" (getenv "PATH")))
     (setq exec-path (append (list dir) exec-path))))
 
-(defun load-directory-files (dir &optional regex)
-  (let*
-      ((regex (or regex ".+"))
-       (files (and
-               (file-accessible-directory-p dir)
-               (directory-files dir 'full regex))))
-
-    (mapc (lambda (file)
-            (when (load file nil t)
-              (message "`%s' loaded." file))) files)))
-
 (when nt-p
   (setq explicit-shell-file-name
         (expand-file-name "cmdproxy" (getenv "EMACSPATH"))
@@ -109,10 +94,6 @@
         shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-"))
 
 ;; load essential libraries.
-(load-directory-files libraries-directory "^.+el$")
-
-;; load preferences.
-(load-directory-files preferences-directory "^init-.+el$")
 
 (load "environment")
 (load "theme")
