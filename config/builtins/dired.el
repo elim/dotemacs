@@ -10,12 +10,8 @@
         ("\\.zip\\'" "unzip -l")
         ("\\.\\(g\\|\\) z\\'" "zcat")))
 
-(cond
- (carbon-p
-  (and (load "utf-8m" t)
-       (set-file-name-coding-system 'utf-8m)))
- (windows-p
-  (set-file-name-coding-system 'sjis-dos)))
+(when windows-p
+  (set-file-name-coding-system 'sjis-dos))
 
 ;; sorter
 (add-hook 'dired-load-hook

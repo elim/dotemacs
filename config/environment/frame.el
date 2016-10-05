@@ -86,21 +86,4 @@
 
   (global-set-key [(meta return)] 'toggle-fullscreen)
 
-  (add-hook 'window-setup-hook #'toggle-fullscreen)
-
-  ;; http://lists.sourceforge.jp/mailman/archives/macemacsjp-english/2006-April/000569.html
-  (when carbon-p
-    (defun hide-others ()
-      (interactive)
-      (do-applescript
-       "tell application \"System Events\"
-          set visible of every process whose (frontmost is false) and (visible is true) to false
-        end tell"))
-
-    (defun hide-emacs ()
-      (interactive)
-      (do-applescript
-       "tell application \"System Events\"
-          set theFrontProcess to process 1 whose (frontmost is true) and (visible is true)
-          set visible of theFrontProcess to false
-        end tell"))))
+  (add-hook 'window-setup-hook #'toggle-fullscreen))

@@ -40,7 +40,6 @@
 ;; system-type predicates
 (setq darwin-p  (eq system-type 'darwin)
       ns-p      (featurep 'ns)
-      carbon-p  (eq window-system 'mac)
       linux-p   (eq system-type 'gnu/linux)
       cygwin-p  (eq system-type 'cygwin)
       nt-p      (eq system-type 'windows-nt)
