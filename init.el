@@ -1,5 +1,6 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
-
+;;; init.el --- A setting of my own Emacs.
+;;; Commentary:
+;;; Code:
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -118,3 +119,6 @@
 (load "builtins")
 (load "packages")
 (load "local" t)
+
+(provide 'init)
+;;; init.el ends here
