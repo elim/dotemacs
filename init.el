@@ -42,12 +42,7 @@
       ns-p      (featurep 'ns)
       linux-p   (eq system-type 'gnu/linux)
       nt-p      (eq system-type 'windows-nt)
-      meadow-p  (featurep 'meadow)
-      windows-p (or nt-p meadow-p))
-
-;; provisional measures for cygwin $PWD environment variable on Meadow.
-(when (and meadow-p (not (file-directory-p default-directory)))
-  (setq default-directory (getenv "HOME")))
+      windows-p nt-p)
 
 (setq custom-file (expand-file-name "customize.el" user-emacs-directory))
 (load custom-file)
