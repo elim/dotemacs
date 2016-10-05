@@ -40,7 +40,6 @@
 ;; system-type predicates
 (setq darwin-p  (eq system-type 'darwin)
       ns-p      (featurep 'ns)
-      linux-p   (eq system-type 'gnu/linux)
       nt-p      (eq system-type 'windows-nt))
 
 (setq custom-file (expand-file-name "customize.el" user-emacs-directory))
