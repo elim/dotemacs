@@ -20,17 +20,13 @@
 (define-key global-map (kbd "C-m") 'newline-and-indent)
 (define-key global-map [ns-drag-file] 'ns-find-file)
 
-;; Cocoa
-(when ns-p
-  (add-hook 'term-setup-hook
-            #'(lambda ()
-                (setq ns-pop-up-frames nil
-                      ns-antialias-text t
-                      ns-command-modifier 'meta
-                      ns-alternate-modifier 'meta
-                      select-enable-clipboard t
-                      select-enable-primary t
-                      select-active-regions nil))))
+(setq select-enable-primary t)
+(setq ns-pop-up-frames nil)
+(setq ns-antialias-text t)
+(setq ns-command-modifier 'meta)
+(setq ns-alternate-modifier 'meta)
+(setq select-enable-primary t)
+(setq select-active-regions nil)
 
 ;; no more hard tab
 (setq-default indent-tabs-mode nil)
@@ -63,7 +59,7 @@
 (setq kill-ring-max 300)
 
 ;; menu bar
-(menu-bar-mode (if ns-p t -1))
+(menu-bar-mode +1)
 
 ;; tool bar
 (when (boundp 'tool-bar-mode)
@@ -89,7 +85,7 @@
 (setq scroll-conservatively 1)
 
 ;; other
-(if ns-p
+(if (featurep 'ns)
     (setq ring-bell-function 'ignore)
   (setq visible-bell t))
 

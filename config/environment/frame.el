@@ -75,7 +75,7 @@
   (defun toggle-fullscreen ()
     (interactive)
     (cond
-     ((and ns-p (fboundp 'ns-toggle-fullscreen))
+     ((fboundp 'ns-toggle-fullscreen)
       (ns-toggle-fullscreen))
      ((or (and nt-p nt-fullscreen-p)
           (frame-parameter nil 'fullscreen))

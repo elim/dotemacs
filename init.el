@@ -38,9 +38,8 @@
     (call-interactively 'sort-lines)))
 
 ;; system-type predicates
-(setq darwin-p  (eq system-type 'darwin)
-      ns-p      (featurep 'ns)
-      nt-p      (eq system-type 'windows-nt))
+(setq darwin-p (eq system-type 'darwin)
+      nt-p     (eq system-type 'windows-nt))
 
 (setq custom-file (expand-file-name "customize.el" user-emacs-directory))
 (load custom-file)
