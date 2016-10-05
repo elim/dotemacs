@@ -64,6 +64,7 @@
   (setq default-directory (getenv "HOME")))
 
 (setq custom-file (expand-file-name "customize.el" user-emacs-directory))
+(load custom-file)
 
 ;; path and filenames.
 (dolist (dir (list
