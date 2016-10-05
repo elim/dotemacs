@@ -41,10 +41,9 @@
 (setq darwin-p  (eq system-type 'darwin)
       ns-p      (featurep 'ns)
       linux-p   (eq system-type 'gnu/linux)
-      cygwin-p  (eq system-type 'cygwin)
       nt-p      (eq system-type 'windows-nt)
       meadow-p  (featurep 'meadow)
-      windows-p (or cygwin-p nt-p meadow-p))
+      windows-p (or nt-p meadow-p))
 
 ;; provisional measures for cygwin $PWD environment variable on Meadow.
 (when (and meadow-p (not (file-directory-p default-directory)))
