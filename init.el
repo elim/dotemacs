@@ -16,22 +16,6 @@
 ;; Common Lisp extensions for Emacs(use it anyway).
 (require 'cl)
 
-(defun flatten (lis)
-  "Removes nestings from a list."
-  (cond ((atom lis) lis)
-        ((listp (car lis))
-         (append (flatten (car lis)) (flatten (cdr lis))))
-        (t (append (list (car lis)) (flatten (cdr lis))))))
-
-(defun fold-right (proc init lis)
-  (if lis
-      (funcall proc (car lis) (fold-right proc init (cdr lis))) init))
-
-(defun fold-left (proc init lis)
-  (if lis (fold-left proc (funcall proc init (car lis)) (cdr lis)) init))
-
-(defalias 'fold 'fold-left)
-
 (defun sort-lines-nocase ()
   (interactive)
   (let ((sort-fold-case t))
