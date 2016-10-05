@@ -1,6 +1,6 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
-(when darwin-p
+(when (eq system-type 'darwin)
   (defun dictionary-search (word)
     (browse-url
      (concat "dict:///" (url-hexify-string word))))
