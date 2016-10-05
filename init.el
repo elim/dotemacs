@@ -16,9 +16,6 @@
 ;; Common Lisp extensions for Emacs(use it anyway).
 (require 'cl)
 
-;; functions
-(defun x->bool (elt) (not (not elt)))
-
 (defun flatten (lis)
   "Removes nestings from a list."
   (cond ((atom lis) lis)
@@ -45,15 +42,6 @@
       ns-p      (featurep 'ns)
       carbon-p  (eq window-system 'mac)
       linux-p   (eq system-type 'gnu/linux)
-      colinux-p (when linux-p
-                  (let ((file "/proc/modules"))
-                    (and
-                     (file-readable-p file)
-                     (x->bool
-                      (with-temp-buffer
-                        (insert-file-contents file)
-                        (goto-char (point-min))
-                        (re-search-forward "^cofuse\.+" nil t))))))
       cygwin-p  (eq system-type 'cygwin)
       nt-p      (eq system-type 'windows-nt)
       meadow-p  (featurep 'meadow)
