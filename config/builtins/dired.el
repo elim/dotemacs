@@ -10,7 +10,7 @@
         ("\\.zip\\'" "unzip -l")
         ("\\.\\(g\\|\\) z\\'" "zcat")))
 
-(when windows-p
+(when nt-p
   (set-file-name-coding-system 'sjis-dos))
 
 ;; sorter
