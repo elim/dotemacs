@@ -44,14 +44,6 @@
     (setenv "PATH" (concat dir ":" (getenv "PATH")))
     (setq exec-path (append (list dir) exec-path))))
 
-(when (eq system-type 'windows-nt)
-  (setq explicit-shell-file-name
-        (expand-file-name "cmdproxy" (getenv "EMACSPATH"))
-        shell-file-name explicit-shell-file-name
-        shell-command-switch "-c"
-        ;; drive letter completion on shell-mode.
-        shell-file-name-chars "~/A-Za-z0-9_^$!#%&{}@`'.,:()-"))
-
 ;; load essential libraries.
 
 (load "environment")
