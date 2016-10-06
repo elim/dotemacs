@@ -53,11 +53,11 @@
   ;; http://groups.google.com/group/carbon-emacs/msg/287876a967948923
   ;; http://www.computerartisan.com/meadow/diary.txt
 
-  (when nt-p (defvar nt-fullscreen-p nil))
+  (when (eq system-type 'windows-nt) (defvar nt-fullscreen-p nil))
 
   (defun frame-fullscreen ()
     (interactive)
-    (if nt-p
+    (if (eq system-type 'windows-nt)
         (progn
           (w32-send-sys-command 61488)
           (setq nt-fullscreen-p t))
@@ -65,7 +65,7 @@
 
   (defun frame-restore ()
     (interactive)
-    (if nt-p
+    (if (eq system-type 'windows-nt)
         (progn
           (w32-send-sys-command 61728)
           (setq nt-fullscreen-p nil))
@@ -77,10 +77,10 @@
     (cond
      ((fboundp 'ns-toggle-fullscreen)
       (ns-toggle-fullscreen))
-     ((or (and nt-p nt-fullscreen-p)
+     ((or (and (eq system-type 'windows-nt) nt-fullscreen-p)
           (frame-parameter nil 'fullscreen))
       (frame-restore))
-     ((or (and nt-p (not nt-fullscreen-p))
+     ((or (and (eq system-type 'windows-nt) (not nt-fullscreen-p))
           (not (frame-parameter nil 'fullscreen)))
       (frame-fullscreen))))
 

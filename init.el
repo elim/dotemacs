@@ -37,9 +37,6 @@
   (let ((sort-fold-case t))
     (call-interactively 'sort-lines)))
 
-;; system-type predicates
-(setq nt-p (eq system-type 'windows-nt))
-
 (setq custom-file (expand-file-name "customize.el" user-emacs-directory))
 (load custom-file)
 
@@ -63,7 +60,7 @@
     (setenv "PATH" (concat dir ":" (getenv "PATH")))
     (setq exec-path (append (list dir) exec-path))))
 
-(when nt-p
+(when (eq system-type 'windows-nt)
   (setq explicit-shell-file-name
         (expand-file-name "cmdproxy" (getenv "EMACSPATH"))
         shell-file-name explicit-shell-file-name
