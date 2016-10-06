@@ -31,21 +31,7 @@
   (when (and (file-exists-p dir) (not (member dir load-path)))
     (setq load-path (append (list dir) load-path))))
 
-(dolist (dir (list
-              "/sbin"
-              "/usr/sbin"
-              "/bin"
-              "/usr/bin"
-              "/usr/local/bin"
-              (expand-file-name "~/bin")
-              (expand-file-name "~/.rbenv/shims")))
-
-  (when (and (file-exists-p dir) (not (member dir exec-path)))
-    (setenv "PATH" (concat dir ":" (getenv "PATH")))
-    (setq exec-path (append (list dir) exec-path))))
-
 ;; load essential libraries.
-
 (load "environment")
 (load "theme")
 (load "builtins")
