@@ -28,7 +28,11 @@
 (el-get-bundle elscreen)
 (el-get-bundle flycheck)
 (el-get-bundle fujimisakari/microsoft-translator :depends (request))
+(el-get-bundle gist:5457732:ginger-api :depends (json popwin request))
+(el-get-bundle gist:666807b53f2b2cf503c1:clipboard-to-kill-ring :depends (deferred))
+(el-get-bundle gist:7349439:ginger-rephrase-api :depends (popwin request))
 (el-get-bundle git-modes)
+(el-get-bundle go-mode)
 (el-get-bundle google-translate)
 (el-get-bundle helm)
 (el-get-bundle helm-css-scss)
@@ -37,6 +41,8 @@
 (el-get-bundle helm-projectile)
 (el-get-bundle js2-mode)
 (el-get-bundle json-mode)
+(el-get-bundle magit)
+(el-get-bundle markdown-mode)
 (el-get-bundle migemo)
 (el-get-bundle open-junk-file)
 (el-get-bundle php-mode)
@@ -52,58 +58,6 @@
 (el-get-bundle wgrep)
 (el-get-bundle yaml-mode)
 
-;;; clipboard-to-kill-ring
-;; original: http://hitode909.hatenablog.com/entry/20110924/1316853933
-;; modified: https://gist.github.com/elim/666807b53f2b2cf503c1
-(el-get-bundle gist:666807b53f2b2cf503c1:clipboard-to-kill-ring
-  :depends (deferred)
-  :features (clipboard-to-kill-ring)
-  (clipboard-to-kill-ring t))
-
-;;; ginger-api
-;;
-(el-get-bundle gist:5457732:ginger-api
-  :depends (json popwin request)
-  (global-set-key (kbd "C-c g") 'ginger-region))
-
-;;; ginger-rephrase-api
-;;
-(el-get-bundle gist:7349439:ginger-rephrase-api
-  :depends (popwin request)
-  (global-set-key (kbd "C-c r") 'ginger-rephrase))
-
-;;; go-mode
-;;
-(el-get-bundle go-mode
-  (add-hook 'go-mode-hook
-            #'(lambda ()
-                (setq tab-width 4))))
-
-;;; magit
-;;
-(el-get-bundle magit
-  (global-set-key (kbd "C-x v s") 'magit-status)
-  (add-to-list 'process-coding-system-alist '("git" utf-8 . utf-8)))
-
-;;; markdown-mode
-;;
-(el-get-bundle markdown-mode
-  (add-to-list 'auto-mode-alist '("\.md$" . gfm-mode))
-
-  (with-eval-after-load-feature 'markdown-mode
-    (setq markdown-indent-on-enter nil)
-    (define-key markdown-mode-map (kbd "C-c f")   'markdown-indent-region)
-    (define-key markdown-mode-map (kbd "C-c b")   'markdown-exdent-region)
-    (define-key markdown-mode-map (kbd "C-i")     'markdown-demote)
-    (define-key markdown-mode-map (kbd "<tab>")   'markdown-demote)
-    (define-key markdown-mode-map (kbd "S-C-i")   'markdown-promote)
-    (define-key markdown-mode-map (kbd "<S-tab>") 'markdown-promote)
-    (define-key markdown-mode-map (kbd "<C-tab>") 'markdown-promote)
-    (define-key markdown-mode-map (kbd "C-c 1")   'markdown-insert-header-setext-1)
-    (define-key markdown-mode-map (kbd "C-c 2")   'markdown-insert-header-setext-2)
-    (define-key markdown-mode-map (kbd "C-c 3")   'markdown-insert-header-atx-3)
-    (define-key markdown-mode-map (kbd "C-c 4")   'markdown-insert-header-atx-4)
-    (define-key markdown-mode-map (kbd "M-RET")   'markdown-insert-list-item)))
 
 (el-get-bundle hg:tiarra-conf-mode
   :description "Emacs mode for editing Tiarra configuration."
