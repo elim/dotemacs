@@ -59,10 +59,4 @@
 (el-get-bundle yaml-mode)
 
 
-(el-get-bundle hg:tiarra-conf-mode
-  :description "Emacs mode for editing Tiarra configuration."
-  :url "https://bitbucket.org/topia/tiarra"
-  :prepare (autoload 'tiarra-conf-mode "tiarra-conf"
-             "Major mode for editing Tiarra configuration file." t))
-
 ;;; packages.el ends here
