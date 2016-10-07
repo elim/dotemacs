@@ -27,7 +27,7 @@
 (el-get-bundle elim/auto-save-buffers-enhanced)
 (el-get-bundle elscreen)
 (el-get-bundle flycheck)
-(el-get-bundle fujimisakari/microsoft-translator)
+(el-get-bundle fujimisakari/microsoft-translator :depends (request))
 (el-get-bundle git-modes)
 (el-get-bundle google-translate)
 (el-get-bundle helm)
