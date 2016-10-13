@@ -4,10 +4,10 @@
 
 (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
 
-(defun elim:markdown-mode-hook-fun()
+(defun elim:markdown-mode-hook-func()
   (define-key gfm-mode-map "`" 'self-insert-command))
 
-(add-hook 'markdown-mode-hook #'elim:markdown-mode-hook-fun)
+(add-hook 'markdown-mode-hook #'elim:markdown-mode-hook-func)
 
 (provide 'init-markdown-mode)
 
