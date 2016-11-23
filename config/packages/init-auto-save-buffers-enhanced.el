@@ -6,6 +6,7 @@
 
 (setq auto-save-default nil
       auto-save-buffers-enhanced-cooperate-elscreen-p t
+      auto-save-buffers-enhanced-exclude-regexps '("COMMIT_EDITMSG")
       auto-save-buffers-enhanced-quiet-save-p t
       auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
 (define-key global-map "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
