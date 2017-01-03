@@ -52,11 +52,13 @@
 (el-get-bundle rspec-mode)
 (el-get-bundle ruby-end)
 (el-get-bundle ruby-mode)
+(el-get-bundle Simplify/flycheck-typescript-tslint)
 (el-get-bundle slim-mode)
+(el-get-bundle tide)
 (el-get-bundle twittering-mode)
+(el-get-bundle typescript-mode)
 (el-get-bundle web-mode)
 (el-get-bundle wgrep)
 (el-get-bundle yaml-mode)
-
 
 ;;; packages.el ends here
