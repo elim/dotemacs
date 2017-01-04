@@ -57,6 +57,7 @@
 (el-get-bundle tide)
 (el-get-bundle twittering-mode)
 (el-get-bundle typescript-mode)
+(el-get-bundle w-vi/apib-mode)
 (el-get-bundle web-mode)
 (el-get-bundle wgrep)
 (el-get-bundle yaml-mode)
