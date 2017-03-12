@@ -242,12 +242,14 @@
   (define-key hs-minor-mode-map
     (kbd "C-c l") 'hs-hide-level))
 
-
 ;;; shell-script-mode
 ;;
 (when (locate-library "sh-script")
   (setq sh-basic-offset 2
         sh-indentation 2))
+
+(add-to-list 'auto-mode-alist '("\\.env\\'"         . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.env.sample\\'"  . sh-mode))
 
 ;;; dired
 ;;
