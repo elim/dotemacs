@@ -4,6 +4,8 @@
 
 ;;; basics
 
+(setq-default dabbrev-abbrev-skip-leading-regexp "\\$")
+
 ;; server
 (when (require 'server nil t)
   (setq server-window 'pop-to-buffer)
