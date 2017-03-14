@@ -17,6 +17,7 @@
 
 ;; Preferred libraries
 (el-get-bundle exec-path-from-shell)
+(el-get-bundle keychain-environment)
 (el-get-bundle tarao/with-eval-after-load-feature-el)
 
 (el-get-bundle ag)
