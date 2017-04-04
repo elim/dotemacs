@@ -7,9 +7,10 @@
   (setq tab-width 2
         indent-tabs-mode nil))
 
-(add-to-list 'auto-mode-alist '("\\.sls\\'"   . saltstack-mode))
-(add-to-list 'auto-mode-alist '("\\master\\'" . saltstack-mode))
-(add-to-list 'auto-mode-alist '("\\roster\\'" . saltstack-mode))
+(add-to-list 'auto-mode-alist '("\\.sls\\'"     . saltstack-mode))
+(add-to-list 'auto-mode-alist '("\\master\\'"   . saltstack-mode))
+(add-to-list 'auto-mode-alist '("\\roster\\'"   . saltstack-mode))
+(add-to-list 'auto-mode-alist '("\\Saltfile\\'" . saltstack-mode))
 
 (provide 'init-yaml-mode)
 
