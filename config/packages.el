@@ -17,9 +17,9 @@
 
 ;; Preferred libraries
 (el-get-bundle tarao/with-eval-after-load-feature-el)
-(el-get-bundle jwiegley/emacs-async)
 
 (el-get-bundle ag)
+(el-get-bundle elpa:async)
 (el-get-bundle anzu)
 (el-get-bundle buffer-move)
 (el-get-bundle company-mode)
@@ -38,7 +38,7 @@
 (el-get-bundle glynnforrest/salt-mode)
 (el-get-bundle go-mode)
 (el-get-bundle google-translate)
-(el-get-bundle helm)
+(el-get-bundle helm :depends (async))
 (el-get-bundle helm-css-scss)
 (el-get-bundle helm-descbinds)
 (el-get-bundle helm-git-grep)
