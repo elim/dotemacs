@@ -17,6 +17,7 @@
 
 ;; Preferred libraries
 (el-get-bundle tarao/with-eval-after-load-feature-el)
+(el-get-bundle jwiegley/emacs-async)
 
 (el-get-bundle ag)
 (el-get-bundle anzu)
