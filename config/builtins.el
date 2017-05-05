@@ -69,7 +69,8 @@
 
 ;; tool bar
 (when (boundp 'tool-bar-mode)
-  (tool-bar-mode -1))
+  (defun elim:disable-tool-bar () (tool-bar-mode -1))
+  (add-hook 'window-setup-hook #'elim:disable-tool-bar))
 
 ;; scroll bar
 (when (boundp 'scroll-bar-mode)
