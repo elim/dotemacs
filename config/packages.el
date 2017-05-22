@@ -19,7 +19,6 @@
 (el-get-bundle tarao/with-eval-after-load-feature-el)
 
 (el-get-bundle ag)
-(el-get-bundle elpa:async)
 (el-get-bundle anzu)
 (el-get-bundle buffer-move)
 (el-get-bundle company-mode)
@@ -27,6 +26,7 @@
 (el-get-bundle ddskk)
 (el-get-bundle editorconfig)
 (el-get-bundle elim/auto-save-buffers-enhanced)
+(el-get-bundle elpa:async)
 (el-get-bundle elscreen)
 (el-get-bundle emacs-helm/helm-elscreen :depends (elscreen helm))
 (el-get-bundle flycheck)
