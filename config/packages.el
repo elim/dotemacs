@@ -28,6 +28,7 @@
 (el-get-bundle editorconfig)
 (el-get-bundle elim/auto-save-buffers-enhanced)
 (el-get-bundle elscreen)
+(el-get-bundle emacs-helm/helm-elscreen :depends (elscreen helm))
 (el-get-bundle flycheck)
 (el-get-bundle fujimisakari/microsoft-translator :depends (request))
 (el-get-bundle gist:5457732:ginger-api :depends (json popwin request))

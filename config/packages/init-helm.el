@@ -21,8 +21,7 @@
 (define-key helm-read-file-map  (kbd "TAB") 'helm-execute-persistent-action)
 (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
 
-(define-key global-map (kbd "C-z h") 'helm-elscreen)
-(define-key ctl-x-map  (kbd "C-y")   'helm-show-kill-ring)
+(define-key ctl-x-map  (kbd "C-y") 'helm-show-kill-ring)
 
 (setq helm-idle-delay       0.3
       helm-input-idle-delay 0.3
