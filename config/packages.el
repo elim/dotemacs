@@ -19,6 +19,7 @@
 (el-get-bundle tarao/with-eval-after-load-feature-el)
 
 (el-get-bundle ag)
+(el-get-bundle alpha22jp/atomic-chrome :depends (let-alist websocket))
 (el-get-bundle anzu)
 (el-get-bundle buffer-move)
 (el-get-bundle company-mode)
