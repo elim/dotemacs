@@ -24,6 +24,7 @@
 (el-get-bundle buffer-move)
 (el-get-bundle company-mode)
 (el-get-bundle company-quickhelp)
+(el-get-bundle daichirata/emacs-rotate)
 (el-get-bundle ddskk)
 (el-get-bundle editorconfig)
 (el-get-bundle elim/auto-save-buffers-enhanced)
