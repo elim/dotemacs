@@ -2,11 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(with-eval-after-load-feature 'anzu
+(when (require 'anzu nil t)
   (setq anzu-use-migemo t
-        anzu-mode-lighter ""
-        anzu-deactivate-region t
-        anzu-search-threshold 1000)
+    anzu-mode-lighter ""
+    anzu-deactivate-region t
+    anzu-search-threshold 1000)
 
   (global-anzu-mode +1)
   (global-set-key [remap query-replace] 'anzu-query-replace)
