@@ -26,6 +26,9 @@
 (define-key global-map (kbd "C-m") 'newline-and-indent)
 (define-key global-map [ns-drag-file] 'ns-find-file)
 
+(bind-key "C-x |" 'split-window-right)
+(bind-key "C-x -" 'split-window-below)
+
 (setq select-enable-primary t)
 (setq ns-pop-up-frames nil)
 (setq ns-antialias-text t)

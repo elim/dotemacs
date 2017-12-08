@@ -29,10 +29,10 @@
     (setq load-path (append (list dir) load-path))))
 
 ;; load essential libraries.
+(load "packages")
 (load "environment")
 (load "theme")
 (load "builtins")
-(load "packages")
 (load "local" t)
 
 (provide 'init)
