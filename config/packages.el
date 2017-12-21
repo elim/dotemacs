@@ -32,7 +32,6 @@
 (el-get-bundle elscreen)
 (el-get-bundle emacs-helm/helm-elscreen :depends (elscreen helm))
 (el-get-bundle flycheck)
-(el-get-bundle fujimisakari/microsoft-translator :depends (request))
 (el-get-bundle gist:5457732:ginger-api :depends (json popwin request))
 (el-get-bundle gist:666807b53f2b2cf503c1:clipboard-to-kill-ring :depends (deferred))
 (el-get-bundle gist:7349439:ginger-rephrase-api :depends (popwin request))
