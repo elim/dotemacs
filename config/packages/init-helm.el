@@ -21,7 +21,6 @@
               ("C-h" . delete-backward-char)
               ("TAB" . helm-execute-persistent-action))
 
-            (setq helm-idle-delay 0.3)
             (set-variable 'helm-input-idle-delay 0.3)
             (set-variable 'helm-candidate-number-limit 200)
             (set-variable 'helm-buffer-max-length 40)
