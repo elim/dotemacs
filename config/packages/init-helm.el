@@ -2,40 +2,38 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'helm-config)
-(helm-mode 1)
+(use-package helm-config
+  :bind (("M-x"      . helm-M-x)
+          ("C-:"     . helm-mini)
+          ("C-;"     . helm-mini)
+          ("C-x :"   . helm-mini)
+          ("C-x ;"   . helm-mini)
+          ("C-x C-:" . helm-mini)
+          ("C-x C-;" . helm-mini)
+          ("C-x C-y" . helm-show-kill-ring)
+          ("C-x C-f" . helm-find-files))
 
-(define-key global-map (kbd "M-x") 'helm-M-x)
-(define-key global-map (kbd "C-x C-f") 'helm-find-files)
+  :config (progn
+            (helm-mode 1)
+            (bind-key "C-h" #'delete-backward-char helm-map)
+            (bind-key "TAB" #'helm-execute-persistent-action helm-find-files-map)
+            (bind-keys :map helm-read-file-map
+              ("C-h" . delete-backward-char)
+              ("TAB" . helm-execute-persistent-action))
 
-(define-key global-map (kbd "C-:") 'helm-mini)
-(define-key global-map (kbd "C-;") 'helm-mini)
-(define-key ctl-x-map  (kbd ":")   'helm-mini)
-(define-key ctl-x-map  (kbd ";")   'helm-mini)
-(define-key ctl-x-map  (kbd "C-:") 'helm-mini)
-(define-key ctl-x-map  (kbd "C-;") 'helm-mini)
+            (set-variable 'helm-input-idle-delay 0.3)
+            (set-variable 'helm-candidate-number-limit 200)
+            (set-variable 'helm-buffer-max-length 40)
+            (set-variable 'helm-ff-auto-update-initial-value nil)
 
-(define-key helm-map           (kbd "C-h") 'delete-backward-char)
-(define-key helm-read-file-map (kbd "C-h") 'delete-backward-char)
-
-(define-key helm-read-file-map  (kbd "TAB") 'helm-execute-persistent-action)
-(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
-
-(define-key ctl-x-map  (kbd "C-y") 'helm-show-kill-ring)
-
-(setq helm-idle-delay       0.3
-      helm-input-idle-delay 0.3
-      helm-candidate-number-limit 200
-      helm-buffer-max-length       40
-      helm-ff-auto-update-initial-value nil
-      helm-mini-default-sources
-      '(helm-source-buffers-list
-        helm-source-recentf
-        helm-source-projectile-recentf-list
-        helm-source-projectile-buffers-list
-        helm-source-projectile-files-list
-        helm-source-projectile-projects
-        helm-source-buffer-not-found))
+            (set-variable helm-mini-default-sources
+              '(helm-source-buffers-list
+                 helm-source-recentf
+                 helm-source-projectile-recentf-list
+                 helm-source-projectile-buffers-list
+                 helm-source-projectile-files-list
+                 helm-source-projectile-projects
+                 helm-source-buffer-not-found))))
 
 (provide 'init-helm)
 ;;; init-helm.el ends here
