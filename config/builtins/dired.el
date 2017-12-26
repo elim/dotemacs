@@ -19,10 +19,8 @@
             (require 'sorter nil t)))
 
 ;; dired-x
-(when (locate-library "dired-x")
-  (add-hook 'dired-load-hook
-            (lambda ()
-              (load "dired-x"))))
+(use-package dired-x
+  :bind (("C-x C-j" . skk-mode)))
 
 ;; wdired
 (when (require 'wdired nil t)
