@@ -26,7 +26,7 @@
             (set-variable 'helm-buffer-max-length 40)
             (set-variable 'helm-ff-auto-update-initial-value nil)
 
-            (set-variable helm-mini-default-sources
+            (set-variable 'helm-mini-default-sources
               '(helm-source-buffers-list
                  helm-source-recentf
                  helm-source-projectile-recentf-list
