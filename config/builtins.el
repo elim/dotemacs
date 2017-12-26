@@ -151,12 +151,14 @@
 
 ;;; add occur to isearch
 ;; http://www.emacsblog.org/2007/02/27/quick-tip-add-occur-to-isearch/
-(define-key isearch-mode-map (kbd "C-o")
-  (lambda ()
-    (interactive)
-    (let ((case-fold-search isearch-case-fold-search))
-      (occur (if isearch-regexp isearch-string
-               (regexp-quote isearch-string))))))
+(defun elim:occur-in-isearch ()
+  "Call the occur function during an incremental search."
+  (interactive)
+  (let ((case-fold-search isearch-case-fold-search))
+    (occur (if isearch-regexp isearch-string
+             (regexp-quote isearch-string)))))
+
+(bind-key "C-o" #'elim:occur-in-isearch isearch-mode-map)
 
 
 ;;; show-trailing-whitespace
