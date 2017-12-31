@@ -239,11 +239,6 @@
 ;;
 (setq recentf-max-menu-items nil)
 
-;;; scheme-mode
-;;
-(load "builtins/scheme-mode")
-
-
 ;;; hide-show
 ;;
 (when (require 'hideshow nil t)
