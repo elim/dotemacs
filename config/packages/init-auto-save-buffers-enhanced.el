@@ -2,15 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'auto-save-buffers-enhanced)
-
-(setq auto-save-default nil
-      auto-save-buffers-enhanced-cooperate-elscreen-p t
-      auto-save-buffers-enhanced-exclude-regexps '("COMMIT_EDITMSG")
-      auto-save-buffers-enhanced-quiet-save-p t
-      auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
-(define-key global-map "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
-(auto-save-buffers-enhanced t)
+(use-package auto-save-buffers-enhanced
+  :bind (("C-x as" . auto-save-buffers-enhanced-toggle-activity))
+  :config
+  (set-variable 'auto-save-default nil)
+  (set-variable 'auto-save-buffers-enhanced-cooperate-elscreen-p t)
+  (set-variable 'auto-save-buffers-enhanced-quiet-save-p t)
+  (set-variable 'auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
+  (auto-save-buffers-enhanced t))
 
 (provide 'init-auto-save-buffers-enhanced)
 
