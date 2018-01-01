@@ -25,6 +25,7 @@
 
   :init
   (add-to-list 'process-coding-system-alist '("ag" utf-8 . utf-8))
+  (set-variable 'ag-group-matches nil)  ; HACK: https://github.com/Wilfred/ag.el/issues/120
   (set-variable 'ag-highlight-search t) ; 検索結果の中の検索語をハイライトする
   (set-variable 'ag-reuse-buffers nil)  ; 現在のバッファを検索結果表示に使う
   (set-variable 'ag-reuse-window nil)   ; 現在のウィンドウを検索結果表示に使う
