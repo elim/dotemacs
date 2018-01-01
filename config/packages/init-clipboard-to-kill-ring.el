@@ -4,18 +4,18 @@
 ;;; Modified: https://gist.github.com/elim/666807b53f2b2cf503c1
 ;;; Code:
 
-(require 'clipboard-to-kill-ring)
+(use-package clipboard-to-kill-ring
+  :bind (("C-x ck" . elim:toggle-clipboard-to-kill-ring))
+  :config
+  (defun elim:toggle-clipboard-to-kill-ring ()
+    "Toggle `clipboard-to-kill-ring' activity."
+    (interactive)
+    (let* ((enabled-p clipboard-to-kill-ring:timer)
+           (after-value (not enabled-p)))
+      (clipboard-to-kill-ring after-value)
+      (message "clipboard-to-kill-ring %s" (if after-value "on" "off"))))
 
-(defun elim:toggle-clipboard-to-kill-ring ()
-  "Toggle `clipboard-to-kill-ring' activity"
-  (interactive)
-  (let ((desired-state (not clipboard-to-kill-ring:timer)))
-    (clipboard-to-kill-ring desired-state)
-    (message "clipboard-to-kill-ring %s" (if desired-state "on" "off"))))
-
-(define-key ctl-x-map (kbd "ck") 'elim:toggle-clipboard-to-kill-ring)
-
-(clipboard-to-kill-ring +1)
+  (clipboard-to-kill-ring +1))
 
 (provide 'init-clipboard-to-kill-ring)
 
