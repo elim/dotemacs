@@ -2,7 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(define-key global-map (kbd "C-z h") 'helm-elscreen)
+(use-package helm-elscreen
+  :bind ("C-z h" . helm-elscreen))
 
 (provide 'init-helm-elscren)
 ;;; init-helm-elscren.el ends here
