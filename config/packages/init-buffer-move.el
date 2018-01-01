@@ -2,10 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(global-set-key (kbd "M-g h") 'buf-move-left)
-(global-set-key (kbd "M-g j") 'buf-move-down)
-(global-set-key (kbd "M-g k") 'buf-move-up)
-(global-set-key (kbd "M-g l") 'buf-move-right)
+(use-package buffer-move
+  :bind (("M-g h" . buf-move-left)
+         ("M-g j" . buf-move-down)
+         ("M-g k" . buf-move-up)
+         ("M-g l" . buf-move-right)))
 
 (provide 'init-buffer-move)
 
