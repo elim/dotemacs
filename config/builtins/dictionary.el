@@ -15,5 +15,6 @@
     (dictionary-search
      (buffer-substring-no-properties beg end)))
 
-  (define-key ctl-x-map "e" 'dictionary-word)
-  (define-key ctl-x-map "y" 'dictionary-region))
+  (bind-keys :map global-map
+    ("C-x e" . dictionary-word)
+    ("C-x y" . dictionary-region)))
