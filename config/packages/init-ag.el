@@ -29,6 +29,9 @@
   (set-variable 'ag-reuse-buffers nil)  ; 現在のバッファを検索結果表示に使う
   (set-variable 'ag-reuse-window nil)   ; 現在のウィンドウを検索結果表示に使う
 
+  :config
+  (add-to-list 'ag-arguments "--hidden")
+
   (defun elim:ag ()
     "Open and select the ag result buffer."
     (interactive)
