@@ -2,15 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 
-(when (require 'anzu nil t)
-  (setq anzu-use-migemo t
-    anzu-mode-lighter ""
-    anzu-deactivate-region t
-    anzu-search-threshold 1000)
-
-  (global-anzu-mode +1)
-  (global-set-key [remap query-replace] 'anzu-query-replace)
-  (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp))
+(use-package anzu
+  :bind (([remap query-replace]        . anzu-query-replace)
+         ([remap query-replace-regexp] . anzu-query-replace-regexp))
+  :init
+  (set-variable 'anzu-uxse-migemo t)
+  (set-variable 'anzu-mode-lighter "")
+  (set-variable 'anzu-deactivate-region t)
+  (set-variable 'anzu-search-threshold 1000)
+  :config
+  (global-anzu-mode +1))
 
 (provide 'init-anzu)
 
