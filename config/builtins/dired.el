@@ -4,13 +4,16 @@
 
 (use-package dired
   :bind (:map dired-mode-map
-              ("SPC" . dired-toggle-mark))
+              ("SPC" . elim:dired-toggle-mark)
+              ("V"   . elim:dired-vc-status))
+
   :init
   (set-variable 'dired-recursive-copies 'always)
   (set-variable 'dired-recursive-deletes 'always)
 
+  :config
   ;; スペースでマークする (FD like)
-  (defun dired-toggle-mark (arg)
+  (defun elim:dired-toggle-mark (arg)
     "Toggle the current (or next ARG) files."
     ;; S.Namba Sat Aug 10 12:20:36 1996
     (interactive "P")
@@ -19,7 +22,18 @@
                                (looking-at " "))
                dired-marker-char ?\040)))
       (dired-mark arg)
-      (dired-next-line 0))))
+      (dired-next-line 0)))
+
+  (defun elim:dired-vc-status (&rest args)
+    (interactive)
+    (let ((path (find-path-in-parents (dired-current-directory)
+                                      '(".svn" ".git"))))
+      (cond ((null path)
+             (message "not version controlled."))
+            ((string-match-p "\\.svn$" path)
+             (svn-status (file-name-directory path)))
+            ((string-match-p "\\.git$" path)
+             (egg-status (file-name-directory path)))))))
 
 (use-package dired-x
   :bind (("C-x C-j" . skk-mode))

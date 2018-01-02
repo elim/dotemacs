@@ -2,315 +2,191 @@
 ;;; Commentary:
 ;;; Code:
 
-;;; basics
+;; Key settings
+(keyboard-translate ?\C-h ?\C-?)
 
-(setq-default dabbrev-abbrev-skip-leading-regexp "\\$")
+(bind-keys :map global-map
+           ("<ns-drag-file>" . ns-find-file)
 
-;; server
-(when (require 'server nil t)
-  (setq server-window 'pop-to-buffer)
-  (unless (server-running-p)
-    (server-start))
+           ("<delete>" . delete-char)
+           ("C-h"      . delete-char)
+           ("C-m"      . newline-and-indent)
+
+           ("C-x |" . split-window-right)
+           ("C-x -" . split-window-below))
+
+;; Enable mature methods
+(put 'narrow-to-region 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
+
+(set-variable 'cursor-in-non-selected-windows nil)
+(set-variable 'frame-title-format `(" %b " (buffer-file-name "( %f )")))
+(set-variable 'indent-tabs-mode nil)
+(set-variable 'inhibit-startup-screen t)
+(set-variable 'read-buffer-completion-ignore-case t)
+(set-variable 'read-file-name-completion-ignore-case t)
+(set-variable 'require-final-newline t)
+(set-variable 'ring-bell-function 'ignore)
+(set-variable 'scroll-conservatively 1)
+(set-variable 'select-active-regions nil)
+(set-variable 'show-trailing-whitespace nil)
+(set-variable 'truncate-lines nil)
+(set-variable 'visible-bell t)
+
+(use-package browse-url
+  :bind ("C-x m" . browse-url-at-point))
+
+(use-package bs
+  :bind ("C-x C-b" . bs-show))
+
+(use-package css-mode
+  :mode "\\.css\\'"
+  :init (set-variable 'css-indent-offset 2))
+
+(use-package dabbrev
+  :init
+  (set-variable 'dabbrev-abbrev-skip-leading-regexp "\\$"))
+
+(use-package eldoc
+  :init
+  (set-variable 'eldoc-idle-delay 0.2)
+  (set-variable 'eldoc-minor-mode-string "")
+  :hook
+  ((emacs-lisp-mode . turn-on-eldoc-mode)
+   (lisp-interaction-mode . turn-on-eldoc-mode)
+   (ielm-mode-hook . turn-on-eldoc-mode)))
+
+(use-package executable
+  :hook (after-save . elim:executable-make-buffer-file-executable-if-script-p)
+  :config
+  (defun elim:executable-make-buffer-file-executable-if-script-p ()
+    (unless (string-match tramp-file-name-regexp (buffer-file-name))
+      (executable-make-buffer-file-executable-if-script-p))))
+
+(use-package files
+  :if (executable-find "gls")
+  :init (set-variable 'insert-directory-program "gls"))
+
+(use-package find-func
+  :config
+  ;; C-x F => Find Function
+  ;; C-x V => Find Variable
+  ;; C-x K => Find Function on Key
+  (find-function-setup-keys))
+
+(use-package flyspell
+  :init
+  ;; M-TABのキーバインドを変更しない
+  (set-variable 'flyspell-use-meta-tab nil)
+  ;; デフォルトで自動スペルチェック機能を有効にする
+  (set-variable 'flyspell-mode t)
+  ;; スペルチェックには英語の辞書を使う
+  (set-variable 'ispell-dictionary "american"))
+
+(use-package font-core
+  :config (global-font-lock-mode t))
+
+(use-package help
+  :config (temp-buffer-resize-mode t))
+
+(use-package hideshow
+  :bind (:map hs-minor-mode-map
+              ("C-c C-M-c" . hs-toggle-hiding)
+              ("C-c h"     . hs-toggle-hiding)
+              ("C-c l"     . hs-hide-level)))
+
+(use-package hl-line
+  :config (global-hl-line-mode 1))
+
+(use-package isearch
+  :bind (:map isearch-mode-map
+              ("C-o" . elim:occur-in-isearch))
+  :config
+  ;; Quick Tip: Add occur to isearch
+  ;; http://www.emacsblog.org/2007/02/27/quick-tip-add-occur-to-isearch/
+  (defun elim:occur-in-isearch ()
+    "Call the occur function during an incremental search."
+    (interactive)
+    (let ((case-fold-search isearch-case-fold-search))
+      (occur (if isearch-regexp isearch-string
+               (regexp-quote isearch-string))))))
+
+(use-package menu-bar
+  :config (menu-bar-mode +1))
+
+(use-package ns-win
+  :init
+  (set-variable 'ns-pop-up-frames nil)
+  (set-variable 'ns-antialias-text t)
+  (set-variable 'ns-command-modifier 'meta)
+  (set-variable 'ns-alternate-modifier 'meta))
+
+(use-package select
+  :init
+  (set-variable 'select-enable-primary t))
+
+(use-package server
+  :init
+  (set-variable 'server-window 'pop-to-buffer)
+  :config
+  (unless (server-running-p) (server-start))
   (remove-hook
    'kill-buffer-query-functions
    'server-kill-buffer-query-function))
 
+(use-package sh-script
+  :mode ("\\.env\\'" "\\.env.sample\\'")
+  :init
+  (set-variable 'sh-basic-offset 2)
+  (set-variable 'sh-indentation 2))
 
-;; enable mature method(s)
-(put 'narrow-to-region 'disabled nil)
-(put 'dired-find-alternate-file 'disabled nil)
+(use-package time
+  :init (set-variable 'display-time-24hr-format t)
+  :config (display-time))
 
-;; keyboard setting
-(keyboard-translate ?\C-h ?\C-?)
-(define-key global-map [delete] #'delete-char)
-(define-key global-map (kbd "C-m") 'newline-and-indent)
-(define-key global-map [ns-drag-file] 'ns-find-file)
+(use-package uniquify
+  :init
+  (set-variable 'uniquify-buffer-name-style 'post-forward-angle-brackets)
+  (set-variable 'uniquify-ignore-buffers-re "*[^*]+*")
+  (set-variable 'uniquify-min-dir-content 1))
 
-(bind-key "C-x |" 'split-window-right)
-(bind-key "C-x -" 'split-window-below)
-
-(setq select-enable-primary t)
-(setq ns-pop-up-frames nil)
-(setq ns-antialias-text t)
-(setq ns-command-modifier 'meta)
-(setq ns-alternate-modifier 'meta)
-(setq select-enable-primary t)
-(setq select-active-regions nil)
-
-;; no more hard tab
-(setq-default indent-tabs-mode nil)
-
-;; force final newline
-(setq-default require-final-newline t)
-
-;; truncate lines
-(setq-default truncate-lines nil)
-
-;; startup screen
-(setq inhibit-startup-screen t)
-
-;; expansion GC threshold
-; (setq gc-cons-threshold (* 64 1024 1024))
-
-;; frame title
-(setq frame-title-format `(" %b " (buffer-file-name "( %f )")))
-
-;; ignore case
-(setq completion-ignore-case t
-      read-buffer-completion-ignore-case t
-      read-file-name-completion-ignore-case t)
-
-;; display time
-(setq display-time-24hr-format t)
-(display-time)
-
-;; kill ring
-(setq kill-ring-max 300)
-
-;; menu bar
-(menu-bar-mode +1)
-
-;; tool bar
-(when (boundp 'tool-bar-mode)
-  (defun elim:disable-tool-bar () (tool-bar-mode -1))
-  (add-hook 'window-setup-hook #'elim:disable-tool-bar))
-
-;; scroll bar
-(when (boundp 'scroll-bar-mode)
+(use-package scroll-bar
+  :config
+  (column-number-mode +1)
   (set-scroll-bar-mode 'right)
   (scroll-bar-mode -1))
 
-;; line number
-(line-number-mode t)
+(use-package simple
+  :hook (before-save . elim:auto-delete-trailing-whitespace)
 
-;; column number
-(column-number-mode t)
+  :init
+  (set-variable 'kill-ring-max 300)
+  (set-variable 'line-move-visual t)
+  (defvar elim:auto-delete-trailing-whitespace-enable-p t)
 
-;; hl-line
-(when window-system
-  (global-hl-line-mode 1)
-  (set-face-attribute 'hl-line nil :background "#111"))
+  :config
+  (line-number-mode +1)
+  (transient-mark-mode t)
 
-;; scroll conservatively
-(setq scroll-conservatively 1)
+  (advice-add 'kill-new :before #'elim:dedup-kill-new)
+  (defun elim:dedup-kill-new (arg)
+    (setq kill-ring (delete arg kill-ring)))
 
-;; other
-(if (featurep 'ns)
-    (setq ring-bell-function 'ignore)
-  (setq visible-bell t))
+  (defun elim:auto-delete-trailing-whitespace ()
+    (and elim:auto-delete-trailing-whitespace-enable-p
+         (delete-trailing-whitespace))))
 
-(setq line-move-visual t)
+(use-package tool-bar
+  :hook (window-setup . elim:disable-tool-bar)
+  :config
+  (defun elim:disable-tool-bar () (tool-bar-mode -1)))
 
-(temp-buffer-resize-mode t)
-(global-font-lock-mode t)
-
-
-;;; transient-mark-mode
-(transient-mark-mode t)
-
-
-;;; find-function-setup-keys
-;;
-;; C-x F => Find Function
-;; C-x V => Find Variable
-;; C-x K => Find Function on Key
-(find-function-setup-keys)
-
-;; browse-url
-(define-key global-map (kbd "C-x m") 'browse-url-at-point)
-
-;; bs-show
-(define-key global-map (kbd "C-x C-b") 'bs-show)
-
-;; eldoc
-(when (require 'eldoc nil t)
-  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
-  (setq eldoc-idle-delay 0.2)
-  (setq eldoc-minor-mode-string ""))
-
-
-;;; executable-make-buffer-file-executable-if-script-p
-;;
-(defun elim:executable-make-buffer-file-executable-if-script-p ()
-  (unless (string-match tramp-file-name-regexp (buffer-file-name))
-    (executable-make-buffer-file-executable-if-script-p)))
-
-(add-hook 'after-save-hook
-          #'elim:executable-make-buffer-file-executable-if-script-p)
-
-
-;;; uniquify
-;; 同一ファイル名のバッファ名を分かりやすく
-(when (require 'uniquify nil t)
-  (setq uniquify-buffer-name-style 'post-forward-angle-brackets
-        uniquify-ignore-buffers-re "*[^*]+*"
-        uniquify-min-dir-content 1))
-
-
-;;; add occur to isearch
-;; http://www.emacsblog.org/2007/02/27/quick-tip-add-occur-to-isearch/
-(defun elim:occur-in-isearch ()
-  "Call the occur function during an incremental search."
-  (interactive)
-  (let ((case-fold-search isearch-case-fold-search))
-    (occur (if isearch-regexp isearch-string
-             (regexp-quote isearch-string)))))
-
-(bind-key "C-o" #'elim:occur-in-isearch isearch-mode-map)
-
-
-;;; show-trailing-whitespace
-;; 行末の空白をめだたせる
-;; M-x delete-trailing-whitespace で削除出来る
-(when (boundp 'show-trailing-whitespace)
-  (setq-default show-trailing-whitespace nil))
-
-
-;;; auto delete-trailing-whitespace before save
-;;
-(defvar elim:auto-delete-trailing-whitespace-enable-p t)
-(defun elim:auto-delete-trailing-whitespace ()
-  (and elim:auto-delete-trailing-whitespace-enable-p
-       (delete-trailing-whitespace)))
-
-(setq elim:auto-delete-trailing-whitespace-enable-p nil)
-(add-hook 'before-save-hook
-          #'elim:auto-delete-trailing-whitespace)
-
-
-;;; no kill new duplicates
-;; kill-ring に同じ内容の文字列を複数入れない
-(defadvice kill-new (before elim:no-kill-new-duplicates activate)
-  (setq kill-ring (delete (ad-get-arg 0) kill-ring)))
-
-
-;;; dired
-;; 
-(load "builtins/dired")
-
-
-;;; バージョン管理システム
-;; diredから適切なバージョン管理システムの*-statusを起動
-(defun dired-vc-status (&rest args)
-  (interactive)
-  (let ((path (find-path-in-parents (dired-current-directory)
-                                    '(".svn" ".git"))))
-    (cond ((null path)
-           (message "not version controlled."))
-          ((string-match-p "\\.svn$" path)
-           (svn-status (file-name-directory path)))
-          ((string-match-p "\\.git$" path)
-           (egg-status (file-name-directory path))))))
-(define-key dired-mode-map "V" 'dired-vc-status)
-
-
-;;; html-mode
-;;
-(add-hook 'html-mode-hook
-	  (lambda ()
-	    (set (make-local-variable 'sgml-basic-offset) 2)))
-
-(defun sgml-mode-hook-func ()
-  (setq indent-tabs-mode nil)
-  (setq show-trailing-whitespace t))
-
-(add-hook 'sgml-mode-hook 'sgml-mode-hook-func)
-
-;; cursor-in-non-selected-windows
-(setq-default cursor-in-non-selected-windows nil)
-
-
-;;; css-mode
-;;
-(when (autoload 'css-mode "css-mode" nil t nil)
-  (setq css-indent-offset 2))
-
-
-;;; python-mode
-(defun python-mode-hook-func ()
-  (flymake-mode 1)
-  (setq show-trailing-whitespace t))
-
-(add-hook 'python-mode-hook 'python-mode-hook-func)
-
-;;; resentf
-;;
-(setq recentf-max-menu-items nil)
-
-;;; hide-show
-;;
-(when (require 'hideshow nil t)
-  (define-key hs-minor-mode-map
-    (kbd "C-c C-M-c") 'hs-toggle-hiding)
-  (define-key hs-minor-mode-map
-    (kbd "C-c h") 'hs-toggle-hiding)
-  (define-key hs-minor-mode-map
-    (kbd "C-c l") 'hs-hide-level))
-
-;;; shell-script-mode
-;;
-(when (locate-library "sh-script")
-  (setq sh-basic-offset 2
-        sh-indentation 2))
-
-(add-to-list 'auto-mode-alist '("\\.env\\'"         . sh-mode))
-(add-to-list 'auto-mode-alist '("\\.env.sample\\'"  . sh-mode))
-
-;;; dired
-;;
-(when (executable-find "gls")
-  (setq insert-directory-program "gls"))
-
-;;; paren
-;; 
-(load "builtins/paren")
-
-
-;;; align
-;; 
 (load "builtins/align")
-
-
-;;; dictionary
-;; 
+(load "builtins/cc-mode")
 (load "builtins/dictionary")
-
-
-
-;;; スペルチェック
-;;; 2011-03-09
-
-;; M-TABのキーバインドを変更しない
-;; 2011-03-27
-(setq flyspell-use-meta-tab nil)
-;; デフォルトで自動スペルチェック機能を有効にする
-(setq-default flyspell-mode t)
-;; スペルチェックには英語の辞書を使う
-(setq ispell-dictionary "american")
-
-;;; diff-mode
-;;; 2012-04-02
 (load "builtins/diff-mode")
-
-
-;;; text-mode
-;; 2012-03-18
+(load "builtins/dired")
+(load "builtins/paren")
 (load "builtins/text-mode")
 
-
-;;; cc-mode
-;; 2012-03-18
-(load "builtins/cc-mode")
-
-
-;;; emacs-lisp-mode
-;; 2012-03-18
-(load "builtins/emacs-lisp-mode")
-
-
-;;; 追加の設定
-;; 個別の設定があったら読み込む
-;; 2012-03-18
-(load "builtins/local" t)
+;;; builtins.el ends here
