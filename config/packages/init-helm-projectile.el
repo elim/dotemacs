@@ -2,12 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'helm-projectile)
-(helm-projectile-on)
-(global-set-key (kbd "M-t") 'helm-projectile)
+(use-package helm-projectile
+  :bind ("M-t" . helm-projectile)
+  :init (set-variable 'projectile-enable-caching t)
+  :config
+  (projectile-global-mode t)
+  (helm-projectile-on))
 
-(custom-set-variables '(projectile-enable-caching t))
-(projectile-global-mode t)
-
-(provide 'init-helm-projectile)
 ;;; init-helm-projectile.el ends here
