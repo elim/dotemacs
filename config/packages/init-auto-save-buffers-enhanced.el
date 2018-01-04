@@ -5,11 +5,12 @@
 (use-package auto-save-buffers-enhanced
   :demand t
   :bind ("C-x as" . auto-save-buffers-enhanced-toggle-activity)
+  :custom
+  (auto-save-default nil)
+  (auto-save-buffers-enhanced-cooperate-elscreen-p t)
+  (auto-save-buffers-enhanced-quiet-save-p t)
+  (auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
   :config
-  (set-variable 'auto-save-default nil)
-  (set-variable 'auto-save-buffers-enhanced-cooperate-elscreen-p t)
-  (set-variable 'auto-save-buffers-enhanced-quiet-save-p t)
-  (set-variable 'auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
   (auto-save-buffers-enhanced t))
 
 (provide 'init-auto-save-buffers-enhanced)
