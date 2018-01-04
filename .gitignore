@@ -3,6 +3,7 @@
 *stuckdump
 *~
 .org-id-locations
+/.emacs.desktop*
 /ac-comphist.dat
 /auto-save-list
 /customize.el
