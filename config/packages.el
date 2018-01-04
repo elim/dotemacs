@@ -65,6 +65,7 @@
 (el-get-bundle ruby-mode)
 (el-get-bundle Simplify/flycheck-typescript-tslint :depends (flycheck))
 (el-get-bundle slim-mode)
+(el-get-bundle terraform-mode)
 (el-get-bundle tide)
 (el-get-bundle twittering-mode)
 (el-get-bundle typescript-mode)
