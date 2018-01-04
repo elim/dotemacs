@@ -13,6 +13,4 @@
   :config
   (auto-save-buffers-enhanced t))
 
-(provide 'init-auto-save-buffers-enhanced)
-
 ;;; init-auto-save-buffers-enhanced.el ends here
