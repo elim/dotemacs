@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package auto-save-buffers-enhanced
-  :bind (("C-x as" . auto-save-buffers-enhanced-toggle-activity))
+  :bind ("C-x as" . auto-save-buffers-enhanced-toggle-activity)
   :config
   (set-variable 'auto-save-default nil)
   (set-variable 'auto-save-buffers-enhanced-cooperate-elscreen-p t)
