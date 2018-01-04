@@ -3,6 +3,7 @@
 ;;; Code:
 
 (use-package auto-save-buffers-enhanced
+  :demand t
   :bind ("C-x as" . auto-save-buffers-enhanced-toggle-activity)
   :config
   (set-variable 'auto-save-default nil)
