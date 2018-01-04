@@ -63,7 +63,7 @@
 (el-get-bundle rspec-mode)
 (el-get-bundle ruby-end)
 (el-get-bundle ruby-mode)
-(el-get-bundle Simplify/flycheck-typescript-tslint)
+(el-get-bundle Simplify/flycheck-typescript-tslint :depends (flycheck))
 (el-get-bundle slim-mode)
 (el-get-bundle tide)
 (el-get-bundle twittering-mode)
