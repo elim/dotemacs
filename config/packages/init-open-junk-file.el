@@ -4,9 +4,9 @@
 
 (use-package open-junk-file
   :bind ("C-x C-z" . open-junk-file)
-  :config
-  (set-variable 'open-junk-file-format "~/.junk/%Y/%m/%d-%H%M%S.")
-  (set-variable 'open-junk-file-find-file-function #'find-file))
+  :custom
+  (open-junk-file-format "~/.junk/%Y/%m/%d-%H%M%S.")
+  (open-junk-file-find-file-function #'find-file))
 
 (provide 'init-open-junk-file)
 

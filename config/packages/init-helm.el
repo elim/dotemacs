@@ -19,21 +19,24 @@
          :map helm-read-file-map
          ("C-h" . delete-backward-char)
          ("TAB" . helm-execute-persistent-action))
-  :config
-  (helm-mode 1)
-  (set-variable 'helm-input-idle-delay 0.3)
-  (set-variable 'helm-candidate-number-limit 200)
-  (set-variable 'helm-buffer-max-length 40)
-  (set-variable 'helm-ff-auto-update-initial-value nil)
 
-  (set-variable 'helm-mini-default-sources
-                '(helm-source-buffers-list
-                  helm-source-recentf
-                  helm-source-projectile-recentf-list
-                  helm-source-projectile-buffers-list
-                  helm-source-projectile-files-list
-                  helm-source-projectile-projects
-                  helm-source-buffer-not-found)))
+  :custom
+  (helm-input-idle-delay 0.3)
+  (helm-candidate-number-limit 200)
+  (helm-buffer-max-length 40)
+  (helm-ff-auto-update-initial-value nil)
+
+  (helm-mini-default-sources
+   '(helm-source-buffers-list
+     helm-source-recentf
+     helm-source-projectile-recentf-list
+     helm-source-projectile-buffers-list
+     helm-source-projectile-files-list
+     helm-source-projectile-projects
+     helm-source-buffer-not-found))
+
+  :config
+  (helm-mode 1))
 
 (provide 'init-helm)
 ;;; init-helm.el ends here

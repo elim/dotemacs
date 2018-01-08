@@ -7,9 +7,9 @@
               ("C-c C-[" . beginning-of-defun)
               ("C-c C-]" . end-of-defun))
 
-  :init
-  (set-variable 'php-mode-coding-style 'psr2)
+  :custom (php-mode-coding-style 'psr2)
 
+  :config
   (defun elim:php-mode-hook-func ()
     (setq-local shell-file-name "/bin/sh")
     (setq-local flycheck-phpcs-standard "PSR2")

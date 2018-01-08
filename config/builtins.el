@@ -41,15 +41,13 @@
 
 (use-package css-mode
   :mode "\\.css\\'"
-  :init (set-variable 'css-indent-offset 2))
+  :custom (css-indent-offset 2))
 
 (use-package dabbrev
-  :init
-  (set-variable 'dabbrev-abbrev-skip-leading-regexp "\\$"))
+  :custom (dabbrev-abbrev-skip-leading-regexp "\\$"))
 
 (use-package desktop
-  :init
-  (set-variable 'desktop-save-mode +1)
+  :custom (desktop-save-mode +1)
   :config
   (add-to-list 'desktop-globals-to-save 'extended-command-history)
   (add-to-list 'desktop-globals-to-save 'kill-ring)
@@ -57,9 +55,9 @@
   (add-to-list 'desktop-globals-to-save 'read-expression-history))
 
 (use-package eldoc
-  :init
-  (set-variable 'eldoc-idle-delay 0.2)
-  (set-variable 'eldoc-minor-mode-string "")
+  :custom
+  (eldoc-idle-delay 0.2)
+  (eldoc-minor-mode-string "")
   :hook
   ((emacs-lisp-mode . turn-on-eldoc-mode)
    (lisp-interaction-mode . turn-on-eldoc-mode)
@@ -80,7 +78,7 @@
 
 (use-package files
   :if (executable-find "gls")
-  :init (set-variable 'insert-directory-program "gls"))
+  :custom (insert-directory-program "gls"))
 
 (use-package find-func
   :config
@@ -90,13 +88,13 @@
   (find-function-setup-keys))
 
 (use-package flyspell
-  :init
+  :custom
   ;; M-TABのキーバインドを変更しない
-  (set-variable 'flyspell-use-meta-tab nil)
+  (flyspell-use-meta-tab nil)
   ;; デフォルトで自動スペルチェック機能を有効にする
-  (set-variable 'flyspell-mode t)
+  (flyspell-mode t)
   ;; スペルチェックには英語の辞書を使う
-  (set-variable 'ispell-dictionary "american"))
+  (ispell-dictionary "american"))
 
 (use-package font-core
   :config (global-font-lock-mode t))
@@ -130,19 +128,17 @@
   :config (menu-bar-mode +1))
 
 (use-package ns-win
-  :init
-  (set-variable 'ns-pop-up-frames nil)
-  (set-variable 'ns-antialias-text t)
-  (set-variable 'ns-command-modifier 'meta)
-  (set-variable 'ns-alternate-modifier 'meta))
+  :custom
+  (ns-pop-up-frames nil)
+  (ns-antialias-text t)
+  (ns-command-modifier 'meta)
+  (ns-alternate-modifier 'meta))
 
 (use-package select
-  :init
-  (set-variable 'select-enable-primary t))
+  :custom (select-enable-primary t))
 
 (use-package server
-  :init
-  (set-variable 'server-window 'pop-to-buffer)
+  :custom (server-window 'pop-to-buffer)
   :config
   (unless (server-running-p) (server-start))
   (remove-hook
@@ -151,19 +147,19 @@
 
 (use-package sh-script
   :mode ("\\.env\\'" "\\.env.sample\\'")
-  :init
-  (set-variable 'sh-basic-offset 2)
-  (set-variable 'sh-indentation 2))
+  :custom
+  (sh-basic-offset 2)
+  (sh-indentation 2))
 
 (use-package time
-  :init (set-variable 'display-time-24hr-format t)
+  :custom (display-time-24hr-format t)
   :config (display-time))
 
 (use-package uniquify
-  :init
-  (set-variable 'uniquify-buffer-name-style 'post-forward-angle-brackets)
-  (set-variable 'uniquify-ignore-buffers-re "*[^*]+*")
-  (set-variable 'uniquify-min-dir-content 1))
+  :custom
+  (uniquify-buffer-name-style 'post-forward-angle-brackets)
+  (uniquify-ignore-buffers-re "*[^*]+*")
+  (uniquify-min-dir-content 1))
 
 (use-package scroll-bar
   :config
@@ -174,9 +170,11 @@
 (use-package simple
   :hook (before-save . elim:auto-delete-trailing-whitespace)
 
+  :custom
+  (kill-ring-max 300)
+  (line-move-visual t)
+
   :init
-  (set-variable 'kill-ring-max 300)
-  (set-variable 'line-move-visual t)
   (defvar elim:auto-delete-trailing-whitespace-enable-p t)
 
   :config

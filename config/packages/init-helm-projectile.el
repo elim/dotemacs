@@ -4,7 +4,7 @@
 
 (use-package helm-projectile
   :bind ("M-t" . helm-projectile)
-  :init (set-variable 'projectile-enable-caching t)
+  :custom (projectile-enable-caching t)
   :config
   (with-eval-after-load 'helm
     (message "loaded helm"

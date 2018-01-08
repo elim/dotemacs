@@ -7,9 +7,9 @@
               ("SPC" . elim:dired-toggle-mark)
               ("V"   . elim:dired-vc-status))
 
-  :init
-  (set-variable 'dired-recursive-copies 'always)
-  (set-variable 'dired-recursive-deletes 'always)
+  :custom
+  (dired-recursive-copies 'always)
+  (dired-recursive-deletes 'always)
 
   :config
   ;; スペースでマークする (FD like)
@@ -37,14 +37,14 @@
 
 (use-package dired-x
   :bind (("C-x C-j" . skk-mode))
-  :init
-  (set-variable 'dired-bind-jump nil)
-  (set-variable 'dired-guess-shell-alist-user
-                        '(("\\.tar\\.gz\\'"  "tar tzvf")
-                          ("\\.taz\\'" "tar ztvf")
-                          ("\\.tar\\.bz2\\'" "tar tjvf")
-                          ("\\.zip\\'" "unzip -l")
-                          ("\\.\\(g\\|\\) z\\'" "zcat"))))
+  :custom
+  (dired-bind-jump nil)
+  (dired-guess-shell-alist-user
+   '(("\\.tar\\.gz\\'"  "tar tzvf")
+     ("\\.taz\\'" "tar ztvf")
+     ("\\.tar\\.bz2\\'" "tar tjvf")
+     ("\\.zip\\'" "unzip -l")
+     ("\\.\\(g\\|\\) z\\'" "zcat"))))
 
 (use-package wdired
   :bind (:map dired-mode-map

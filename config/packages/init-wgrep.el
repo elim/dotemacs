@@ -3,8 +3,7 @@
 ;;; Code:
 
 (use-package wgrep
-  :config
-  (set-variable 'wgrep-auto-save-buffer t))
+  :custom (wgrep-auto-save-buffer t))
 
 (provide 'init-wgrep)
 ;;; init-wgrep.el ends here
