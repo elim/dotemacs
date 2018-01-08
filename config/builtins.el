@@ -19,9 +19,9 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
 
+(set-default 'indent-tabs-mode nil)
 (set-variable 'cursor-in-non-selected-windows nil)
 (set-variable 'frame-title-format `(" %b " (buffer-file-name "( %f )")))
-(set-variable 'indent-tabs-mode nil)
 (set-variable 'inhibit-startup-screen t)
 (set-variable 'read-buffer-completion-ignore-case t)
 (set-variable 'read-file-name-completion-ignore-case t)
