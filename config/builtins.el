@@ -128,6 +128,7 @@
   :config (menu-bar-mode +1))
 
 (use-package ns-win
+  :if (featurep 'ns)
   :custom
   (ns-pop-up-frames nil)
   (ns-antialias-text t)
