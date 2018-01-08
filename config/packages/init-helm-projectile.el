@@ -6,7 +6,9 @@
   :bind ("M-t" . helm-projectile)
   :init (set-variable 'projectile-enable-caching t)
   :config
-  (projectile-global-mode t)
-  (helm-projectile-on))
+  (with-eval-after-load 'helm
+    (message "loaded helm"
+    (projectile-global-mode t)
+    (helm-projectile-on))))
 
 ;;; init-helm-projectile.el ends here
