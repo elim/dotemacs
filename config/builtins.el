@@ -53,7 +53,8 @@
   :config
   (add-to-list 'desktop-globals-to-save 'extended-command-history)
   (add-to-list 'desktop-globals-to-save 'kill-ring)
-  (add-to-list 'desktop-globals-to-save 'log-edit-comment-ring))
+  (add-to-list 'desktop-globals-to-save 'log-edit-comment-ring)
+  (add-to-list 'desktop-globals-to-save 'read-expression-history))
 
 (use-package eldoc
   :init
