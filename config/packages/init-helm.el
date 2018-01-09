@@ -3,6 +3,8 @@
 ;;; Code:
 
 (use-package helm-config
+  :after (helm-projectile)
+
   :bind (("M-x"     . helm-M-x)
          ("C-:"     . helm-mini)
          ("C-;"     . helm-mini)
@@ -20,6 +22,9 @@
          ("C-h" . delete-backward-char)
          ("TAB" . helm-execute-persistent-action))
 
+  :config
+  (helm-mode 1)
+
   :custom
   (helm-input-idle-delay 0.3)
   (helm-candidate-number-limit 200)
@@ -35,8 +40,7 @@
      helm-source-projectile-projects
      helm-source-buffer-not-found))
 
-  :config
-  (helm-mode 1))
+  :demand t)
 
 (provide 'init-helm)
 ;;; init-helm.el ends here

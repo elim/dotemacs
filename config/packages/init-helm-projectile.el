@@ -4,11 +4,10 @@
 
 (use-package helm-projectile
   :bind ("M-t" . helm-projectile)
-  :custom (projectile-enable-caching t)
   :config
-  (with-eval-after-load 'helm
-    (message "loaded helm"
-    (projectile-global-mode t)
-    (helm-projectile-on))))
+  (projectile-global-mode t)
+  (helm-projectile-on)
+  :custom (projectile-enable-caching t)
+  :demand t)
 
 ;;; init-helm-projectile.el ends here
