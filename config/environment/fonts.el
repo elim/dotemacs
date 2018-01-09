@@ -1,16 +1,20 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
+;;; fonts.el --- A setting of the fonts.
+;;; Commentary:
+;;; Code:
 
 (defun elim:set-text-height (height)
+  "Set to the HEIGHT and the family to the default face and some faces."
   (let* ((asciifont "Ricty") ; ASCII fonts
          (jpfont "Ricty") ; Japanese fonts
          (fontspec (font-spec :family asciifont :weight 'normal))
          (jp-fontspec (font-spec :family jpfont :weight 'normal)))
-    (set-face-attribute 'default nil :family asciifont :height height)
+    (set-face-attribute 'default     nil :family asciifont :height height)
+    (set-face-attribute 'fixed-pitch nil :family asciifont :height height)
     (set-fontset-font nil 'japanese-jisx0213.2004-1 jp-fontspec)
-    (set-fontset-font nil 'japanese-jisx0213-2 jp-fontspec)
-    (set-fontset-font nil 'katakana-jisx0201 jp-fontspec)
-    (set-fontset-font nil '(#x0080 . #x024F) fontspec)
-    (set-fontset-font nil '(#x0370 . #x03FF) fontspec)))
+    (set-fontset-font nil 'japanese-jisx0213-2      jp-fontspec)
+    (set-fontset-font nil 'katakana-jisx0201        jp-fontspec)
+    (set-fontset-font nil '(#x0080 . #x024F)           fontspec)
+    (set-fontset-font nil '(#x0370 . #x03FF)           fontspec)))
 
 (defun elim:change-interactive-text-height ()
   (interactive)
@@ -37,3 +41,5 @@
   (elim:set-text-height 180))
  ((eq window-system 'x)
   (elim:set-text-height 140)))
+
+;;; fonts.el ends here
