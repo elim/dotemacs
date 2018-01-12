@@ -6,6 +6,7 @@
 
 (use-package clipboard-to-kill-ring
   :bind (("C-x ck" . elim:toggle-clipboard-to-kill-ring))
+
   :config
   (defun elim:toggle-clipboard-to-kill-ring ()
     "Toggle `clipboard-to-kill-ring' activity."
@@ -15,8 +16,8 @@
       (clipboard-to-kill-ring after-value)
       (message "clipboard-to-kill-ring %s" (if after-value "on" "off"))))
 
-  (clipboard-to-kill-ring +1))
+  (clipboard-to-kill-ring +1)
 
-(provide 'init-clipboard-to-kill-ring)
+  :demand t)
 
 ;;; init-clipboard-to-kill-ring.el ends here
