@@ -8,6 +8,7 @@
   :init (add-to-list 'process-coding-system-alist '("git" utf-8 . utf-8))
   :config
   (defun elim:git-commit-setup-hook-func ()
+    (flyspell-mode +1)
     (set (make-local-variable
           'elim:auto-delete-trailing-whitespace-enable-p) nil))
   :demand t)
