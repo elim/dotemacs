@@ -183,11 +183,16 @@
   (transient-mark-mode t)
 
   (advice-add 'kill-new :before #'elim:dedup-kill-new)
+
   (defun elim:dedup-kill-new (arg)
     (setq kill-ring (delete arg kill-ring)))
 
+  (defun elim:editorconfig-mode-enabled-p ()
+    (not (not (memq 'editorconfig-mode (mapcar #'car minor-mode-alist)))))
+
   (defun elim:auto-delete-trailing-whitespace ()
     (and elim:auto-delete-trailing-whitespace-enable-p
+         (not (elim:editorconfig-mode-enabled-p))
          (delete-trailing-whitespace))))
 
 (use-package tool-bar
