@@ -91,8 +91,6 @@
   :custom
   ;; M-TABのキーバインドを変更しない
   (flyspell-use-meta-tab nil)
-  ;; デフォルトで自動スペルチェック機能を有効にする
-  (flyspell-mode t)
   ;; スペルチェックには英語の辞書を使う
   (ispell-dictionary "american"))
 
