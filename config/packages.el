@@ -17,7 +17,7 @@
 
 ;; Preferred libraries
 (el-get-bundle tarao/with-eval-after-load-feature-el)
-(el-get-bundle use-package)
+(el-get-bundle use-package :depends (delight))
 
 (el-get-bundle ag)
 (el-get-bundle alpaca :type http :url "http://www.mew.org/~kazu/proj/cipher/alpaca.el")

@@ -2,6 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
+(use-package projectile
+  :delight '(:eval (concat " [" (projectile-project-name) "]")))
+
 (use-package helm-projectile
   :bind ("M-t" . helm-projectile)
   :config

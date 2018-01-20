@@ -2,7 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(editorconfig-mode 1)
+(use-package editorconfig
+  :delight
+  :config (editorconfig-mode 1)
+  :demand t)
 
-(provide 'init-editorconfig)
 ;;; init-editorconfig.el ends here
