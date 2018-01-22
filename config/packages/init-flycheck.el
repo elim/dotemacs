@@ -2,24 +2,26 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(setq flycheck-checker-error-threshold 5000)
-(setq flycheck-command-wrapper-function #'elim:flycheck-command-wrapper)
+(use-package flycheck
+  :hook (after-init . global-flycheck-mode)
 
-(defun elim:flycheck-command-wrapper (command-list)
-  (let
-    ((bundled-executables (list "rubocop" "slim-lint" "scss-lint"))
-      (executable (car command-list))
-      (arguments (cdr command-list))
-      (replaced-command-list))
+  :custom
+  (flycheck-checker-error-threshold 5000)
+  (flycheck-command-wrapper-function #'elim:flycheck-command-wrapper)
 
-    (dolist (bundled-executable bundled-executables)
-      (when (string-match bundled-executable executable)
-        (setq replaced-command-list
-          (append (list "bundle" "exec" bundled-executable) arguments))))
+  :config
+  (defun elim:flycheck-command-wrapper (command-list)
+    (let
+        ((bundled-executables (list "rubocop" "slim-lint" "scss-lint"))
+         (executable (car command-list))
+         (arguments (cdr command-list))
+         (replaced-command-list))
 
-    (or replaced-command-list command-list)))
+      (dolist (bundled-executable bundled-executables)
+        (when (string-match bundled-executable executable)
+          (setq replaced-command-list
+                (append (list "bundle" "exec" bundled-executable) arguments))))
 
-(provide 'init-flycheck)
+      (or replaced-command-list command-list))))
 
 ;;; init-flycheck.el ends here
