@@ -11,17 +11,13 @@
 
   :config
   (defun elim:flycheck-command-wrapper (command-list)
-    (let
-        ((bundled-executables (list "rubocop" "slim-lint" "scss-lint"))
+    (let*
+        ((wrapper-alist '((rubocop   . ("bundle" "exec"))
+                          (slim-lint . ("bundle" "exec"))
+                          (scss-lint . ("bundle" "exec"))))
          (executable (car command-list))
-         (arguments (cdr command-list))
-         (replaced-command-list))
+         (wrapper (cdr (assq (intern executable) wrapper-alist))))
 
-      (dolist (bundled-executable bundled-executables)
-        (when (string-match bundled-executable executable)
-          (setq replaced-command-list
-                (append (list "bundle" "exec" bundled-executable) arguments))))
-
-      (or replaced-command-list command-list))))
+      (append wrapper command-list))))
 
 ;;; init-flycheck.el ends here
