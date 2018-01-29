@@ -14,7 +14,8 @@
     (let*
         ((wrapper-alist '((rubocop   . ("bundle" "exec"))
                           (slim-lint . ("bundle" "exec"))
-                          (scss-lint . ("bundle" "exec"))))
+                          (scss-lint . ("bundle" "exec"))
+                          (stylelint . ("npx"))))
          (executable (car command-list))
          (wrapper (cdr (assq (intern executable) wrapper-alist))))
 
