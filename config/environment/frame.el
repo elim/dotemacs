@@ -53,7 +53,7 @@
   ;; http://groups.google.com/group/carbon-emacs/msg/287876a967948923
   ;; http://www.computerartisan.com/meadow/diary.txt
 
-  (when (eq system-type 'windows-nt) (defvar nt-fullscreen-p nil))
+  (defvar nt-fullscreen-p nil)
 
   (defun frame-fullscreen ()
     (interactive)
