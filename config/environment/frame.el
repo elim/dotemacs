@@ -72,7 +72,8 @@
       (set-frame-parameter nil 'fullscreen nil)))
 
   (setq ns-use-native-fullscreen nil)
-  (defun toggle-fullscreen ()
+
+  (defun elim:toggle-fullscreen ()
     (interactive)
     (cond
      ((fboundp 'ns-toggle-fullscreen)
@@ -84,6 +85,6 @@
           (not (frame-parameter nil 'fullscreen)))
       (frame-fullscreen))))
 
-  (global-set-key [(meta return)] 'toggle-fullscreen)
+  (global-set-key [(meta return)] 'elim:toggle-fullscreen)
 
-  (add-hook 'window-setup-hook #'toggle-fullscreen))
+  (add-hook 'window-setup-hook #'elim:toggle-fullscreen))
