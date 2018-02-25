@@ -19,7 +19,6 @@
 (el-get-bundle tarao/with-eval-after-load-feature-el)
 (el-get-bundle use-package :depends (delight))
 
-(el-get-bundle ag)
 (el-get-bundle alpaca :type http :url "http://www.mew.org/~kazu/proj/cipher/alpaca.el")
 (el-get-bundle anzu)
 (el-get-bundle atomic-chrome)
@@ -43,6 +42,7 @@
 (el-get-bundle go-mode)
 (el-get-bundle google-translate)
 (el-get-bundle helm)
+(el-get-bundle helm-ag)
 (el-get-bundle helm-css-scss)
 (el-get-bundle helm-descbinds)
 (el-get-bundle helm-git-grep)
