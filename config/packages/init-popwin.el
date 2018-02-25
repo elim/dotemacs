@@ -12,5 +12,4 @@
 (push '("*ginger*")           popwin:special-display-config)
 (push '("*rephrase*")         popwin:special-display-config)
 
-(provide 'init-popwin)
 ;;; init-popwin.el ends here

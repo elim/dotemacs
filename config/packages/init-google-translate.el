@@ -35,5 +35,4 @@
 
 (global-set-key (kbd "C-c t") 'google-translate-enja-or-jaen)
 
-(provide 'init-google-translate)
 ;;; init-google-translate.el ends here

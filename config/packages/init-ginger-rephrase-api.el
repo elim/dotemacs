@@ -4,6 +4,4 @@
 
 (global-set-key (kbd "C-c r") 'ginger-rephrase)
 
-(provide 'init-ginger-rephrase-api)
-
 ;;; init-ginger-rephrase-api.el ends here

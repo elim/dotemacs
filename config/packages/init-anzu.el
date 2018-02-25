@@ -14,6 +14,4 @@
   :config
   (global-anzu-mode +1))
 
-(provide 'init-anzu)
-
 ;;; init-anzu.el ends here

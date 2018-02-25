@@ -35,5 +35,5 @@
 (load "builtins")
 (load "local" t)
 
-(provide 'init)
+
 ;;; init.el ends here

@@ -9,6 +9,4 @@
 
   (add-hook 'go-mode-hook #'elim:go-mode-hook-func))
 
-(provide 'init-go-mode)
-
 ;;; init-go-mode.el ends here

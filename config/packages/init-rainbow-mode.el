@@ -8,5 +8,4 @@
   (add-hook 'php-mode-hook 'rainbow-mode)
   (add-hook 'html-mode-hook 'rainbow-mode))
 
-(provide 'init-rainbow-mode)
 ;;; init-rainbow-mode.el ends here

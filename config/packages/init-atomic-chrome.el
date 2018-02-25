@@ -12,5 +12,4 @@
 
 (atomic-chrome-start-server)
 
-(provide 'init-atomic-chrome)
 ;;; init-atomic-chrome.el ends here

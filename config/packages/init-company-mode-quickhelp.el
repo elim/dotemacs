@@ -4,6 +4,4 @@
 
 (company-quickhelp-mode +1)
 
-(provide 'init-company-quickhelp)
-
 ;;; init-company-quickhelp.el ends here

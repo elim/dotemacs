@@ -69,6 +69,4 @@
 ;; ロードしておく
 (skk-mode -1)
 
-(provide 'init-ddskk)
-
 ;;; init-ddskk.el ends here

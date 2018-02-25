@@ -39,5 +39,4 @@
 
 (elscreen-start)
 
-(provide 'init-elscreen)
 ;;; init-elscreen.el ends here

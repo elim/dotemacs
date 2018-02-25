@@ -4,6 +4,4 @@
 
 (add-to-list 'auto-mode-alist '("\\.jinja\\'"  . jinja2-mode))
 
-(provide 'init-jinja2-mode)
-
 ;;; init-jinja2-mode.el ends here

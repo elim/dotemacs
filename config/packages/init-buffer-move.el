@@ -8,6 +8,4 @@
          ("M-g k" . buf-move-up)
          ("M-g l" . buf-move-right)))
 
-(provide 'init-buffer-move)
-
 ;;; init-buffer-move.el ends here

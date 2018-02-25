@@ -18,6 +18,4 @@
 
   :hook (php-mode-hook . elim:php-mode-hook-func))
 
-(provide 'init-php-mode)
-
 ;;; init-php-mode.el ends here

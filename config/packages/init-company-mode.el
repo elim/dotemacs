@@ -31,6 +31,4 @@
                       :background "gray40")
   :hook (after-init . global-company-mode))
 
-(provide 'init-company-mode)
-
 ;;; init-company-mode.el ends here

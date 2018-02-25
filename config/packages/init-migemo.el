@@ -11,5 +11,4 @@
 
 (migemo-init)
 
-(provide 'init-migemo)
 ;;; init-migemo.el ends here

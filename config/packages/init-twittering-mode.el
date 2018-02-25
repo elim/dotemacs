@@ -7,5 +7,4 @@
       twittering-jojo-mode t
       twittering-status-format "%FILL{%i%s %t%R}")
 
-(provide 'init-twittering-mode)
 ;;; init-twittering-mode.el ends here

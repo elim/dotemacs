@@ -47,5 +47,3 @@
  '(web-mode-html-tag-face          ((t (:foreground "#fe728b"))))
  '(web-mode-server-comment-face    ((t (:foreground "#796b68"))))
  '(web-mode-css-string-face        ((t (:foreground "#d99f81")))))
-
-(provide-theme 'cake)

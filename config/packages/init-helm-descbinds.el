@@ -4,5 +4,4 @@
 
 (require 'helm-descbinds)
 
-(provide 'init-helm-descbinds)
 ;;; init-helm-descbinds.el ends here

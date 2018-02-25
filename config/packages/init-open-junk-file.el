@@ -8,6 +8,4 @@
   (open-junk-file-format "~/.junk/%Y/%m/%d-%H%M%S.")
   (open-junk-file-find-file-function #'find-file))
 
-(provide 'init-open-junk-file)
-
 ;;; init-open-junk-file.el ends here

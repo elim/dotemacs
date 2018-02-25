@@ -25,6 +25,4 @@
 
 (add-hook 'js2-mode-hook #'elim:js2-mode-hook-func)
 
-(provide 'init-js2-mode)
-
 ;;; init-js2-mode.el ends here

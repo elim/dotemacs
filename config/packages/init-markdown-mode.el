@@ -8,6 +8,4 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode)))
 
-(provide 'init-markdown-mode)
-
 ;;; init-markdown-mode.el ends here

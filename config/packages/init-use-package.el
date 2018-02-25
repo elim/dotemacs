@@ -4,5 +4,4 @@
 
 (require 'use-package)
 
-(provide 'init-use-package)
 ;;; init-use-package.el ends here

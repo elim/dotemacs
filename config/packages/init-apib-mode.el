@@ -6,6 +6,4 @@
         "Major mode for editing API Blueprint files" t)
 (add-to-list 'auto-mode-alist '("\\.apib\\'" . apib-mode))
 
-(provide 'init-apib-mode)
-
 ;;; init-apib-mode.el ends here

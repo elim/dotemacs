@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-
 (defun elim:typescript-mode-hook-func ()
   (tide-setup)
   (flycheck-mode t)
@@ -11,7 +10,5 @@
   (company-mode-on))
 
 (add-hook 'typescript-mode-hook #'elim:typescript-mode-hook-func)
-
-(provide 'init-typescript-mode)
 
 ;;; init-typescript-mode.el ends here

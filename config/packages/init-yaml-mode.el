@@ -2,6 +2,4 @@
 ;;; Commentary:
 ;;; Code:
 
-(provide 'init-yaml-mode)
-
 ;;; init-yaml-mode.el ends here

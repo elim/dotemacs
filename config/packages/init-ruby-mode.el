@@ -9,5 +9,4 @@
   (ruby-deep-indent-paren-style nil)
   (ruby-insert-encoding-magic-comment nil))
 
-(provide 'init-ruby-mode)
 ;;; init-ruby-mode.el ends here
