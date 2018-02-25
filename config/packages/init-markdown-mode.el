@@ -4,7 +4,8 @@
 
 (use-package markdown-mode
   :bind ((:map gfm-mode-map
-               ("`" . self-insert-command)))
+               ("`" . self-insert-command)
+               ([(meta return)] . elim:toggle-fullscreen)))
   :config
   (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode)))
 
