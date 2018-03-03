@@ -29,6 +29,8 @@
                       :background "orange")
   (set-face-attribute 'company-scrollbar-bg nil
                       :background "gray40")
+
+  :delight
   :hook (after-init . global-company-mode))
 
 ;;; init-company-mode.el ends here

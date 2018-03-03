@@ -40,6 +40,7 @@
      helm-source-projectile-projects
      helm-source-buffer-not-found))
 
+  :delight helm-mode
   :demand t)
 
 ;;; init-helm.el ends here

@@ -11,6 +11,7 @@
     (flyspell-mode +1)
     (set (make-local-variable
           'elim:auto-delete-trailing-whitespace-enable-p) nil))
+  :delight auto-revert-mode
   :demand t)
 
 ;;; init-magit.el ends here
