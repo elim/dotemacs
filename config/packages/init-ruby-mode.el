@@ -7,6 +7,7 @@
                ("C-m" . reindent-then-newline-and-indent))
   :custom
   (ruby-deep-indent-paren-style nil)
-  (ruby-insert-encoding-magic-comment nil))
+  (ruby-insert-encoding-magic-comment nil)
+  (ruby-use-smie nil))
 
 ;;; init-ruby-mode.el ends here
