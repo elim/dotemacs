@@ -28,7 +28,14 @@
 (el-get-bundle daichirata/emacs-rotate)
 (el-get-bundle ddskk)
 (el-get-bundle docker-tramp)
-(el-get-bundle dockerfile-mode)
+(el-get-bundle dockerfile-mode
+       :description "An emacs mode for handling Dockerfiles."
+       :type github
+       :pkgname "spotify/dockerfile-mode"
+       :depends (s)
+       :prepare (progn
+                  (add-to-list 'auto-mode-alist
+                               '("Dockerfile\\'" . dockerfile-mode))))
 (el-get-bundle editorconfig)
 (el-get-bundle elim/auto-save-buffers-enhanced)
 (el-get-bundle elscreen)
