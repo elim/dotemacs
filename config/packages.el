@@ -28,6 +28,7 @@
 (el-get-bundle daichirata/emacs-rotate)
 (el-get-bundle ddskk)
 (el-get-bundle docker-tramp)
+(el-get-bundle dockerfile-mode)
 (el-get-bundle editorconfig)
 (el-get-bundle elim/auto-save-buffers-enhanced)
 (el-get-bundle elscreen)
