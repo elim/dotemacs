@@ -19,6 +19,13 @@
 (el-get-bundle tarao/with-eval-after-load-feature-el)
 (el-get-bundle use-package :depends (delight))
 
+
+;; For vue-mode.
+(el-get-bundle Fanael/edit-indirect)
+(el-get-bundle AdamNiederer/ssass-mode)
+(el-get-bundle AdamNiederer/vue-html-mode)
+(el-get-bundle AdamNiederer/vue-mode)
+
 (el-get-bundle alpaca :type http :url "http://www.mew.org/~kazu/proj/cipher/alpaca.el")
 (el-get-bundle anzu)
 (el-get-bundle atomic-chrome)
