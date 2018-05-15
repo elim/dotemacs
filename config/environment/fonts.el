@@ -4,8 +4,8 @@
 
 (defun elim:set-text-height (height)
   "Set to the HEIGHT and the family to the default face and some faces."
-  (let* ((asciifont "Ricty") ; ASCII fonts
-         (jpfont "Ricty") ; Japanese fonts
+  (let* ((asciifont "Cica") ; ASCII fonts
+         (jpfont "Cica") ; Japanese fonts
          (fontspec (font-spec :family asciifont :weight 'normal))
          (jp-fontspec (font-spec :family jpfont :weight 'normal)))
     (set-face-attribute 'default     nil :family asciifont :height height)
