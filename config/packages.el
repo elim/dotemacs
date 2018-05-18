@@ -83,5 +83,6 @@
 (el-get-bundle web-mode)
 (el-get-bundle wgrep)
 (el-get-bundle yaml-mode)
+(el-get-bundle zk-phi/sky-color-clock)
 
 ;;; packages.el ends here
