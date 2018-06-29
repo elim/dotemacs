@@ -20,7 +20,7 @@
 (put 'dired-find-alternate-file 'disabled nil)
 
 (set-default 'indent-tabs-mode nil)
-(set-variable 'cursor-in-non-selected-windows nil)
+(set-default 'cursor-in-non-selected-windows nil)
 (set-variable 'frame-title-format `(" %b " (buffer-file-name "( %f )")))
 (set-variable 'inhibit-startup-screen t)
 (set-variable 'read-buffer-completion-ignore-case t)
