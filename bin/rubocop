@@ -1,4 +1,4 @@
-#!/bin/bash -eu
+#!/bin/bash -u
 
 export PATH="$HOME/.anyenv/envs/rbenv/bin:$PATH"
 eval "$(rbenv init -)"
