@@ -50,41 +50,6 @@
 
   (global-set-key [(control c)(control x)(a)] 'change-interactive-alpha)
 
-  ;; http://groups.google.com/group/carbon-emacs/msg/287876a967948923
-  ;; http://www.computerartisan.com/meadow/diary.txt
-
-  (defvar nt-fullscreen-p nil)
-
-  (defun frame-fullscreen ()
-    (interactive)
-    (if (eq system-type 'windows-nt)
-        (progn
-          (w32-send-sys-command 61488)
-          (setq nt-fullscreen-p t))
-      (set-frame-parameter nil 'fullscreen 'fullboth)))
-
-  (defun frame-restore ()
-    (interactive)
-    (if (eq system-type 'windows-nt)
-        (progn
-          (w32-send-sys-command 61728)
-          (setq nt-fullscreen-p nil))
-      (set-frame-parameter nil 'fullscreen nil)))
-
   (setq ns-use-native-fullscreen nil)
 
-  (defun elim:toggle-fullscreen ()
-    (interactive)
-    (cond
-     ((fboundp 'ns-toggle-fullscreen)
-      (ns-toggle-fullscreen))
-     ((or (and (eq system-type 'windows-nt) nt-fullscreen-p)
-          (frame-parameter nil 'fullscreen))
-      (frame-restore))
-     ((or (and (eq system-type 'windows-nt) (not nt-fullscreen-p))
-          (not (frame-parameter nil 'fullscreen)))
-      (frame-fullscreen))))
-
-  (global-set-key [(meta return)] 'elim:toggle-fullscreen)
-
-  (add-hook 'window-setup-hook #'elim:toggle-fullscreen))
+  (add-hook 'window-setup-hook #'frame-fullscreen))
