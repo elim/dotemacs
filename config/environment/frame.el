@@ -50,6 +50,4 @@
 
   (global-set-key [(control c)(control x)(a)] 'change-interactive-alpha)
 
-  (setq ns-use-native-fullscreen nil)
-
   (add-hook 'window-setup-hook #'frame-fullscreen))
