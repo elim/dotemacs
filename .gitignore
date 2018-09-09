@@ -6,6 +6,7 @@
 /.emacs.desktop*
 /ac-comphist.dat
 /auto-save-list
+/bookmarks
 /customize.el
 /el-get
 /elpa
