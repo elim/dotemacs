@@ -5,7 +5,7 @@
 (use-package smart-mode-line
   :custom
   (sml/no-confirm-load-theme t)
-  (sml/theme 'respectful)
+  (sml/theme 'automatic)
 
   :config
   (sml/setup))
