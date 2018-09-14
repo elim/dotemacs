@@ -107,7 +107,7 @@
               ("C-c l"     . hs-hide-level)))
 
 (use-package hl-line
-  :config (global-hl-line-mode 1))
+  :config (global-hl-line-mode -1))
 
 (use-package isearch
   :bind (:map isearch-mode-map
