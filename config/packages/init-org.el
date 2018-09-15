@@ -37,6 +37,7 @@
      ("n" "Note" entry
       (file+headline ,(expand-file-name "notes.org" elim:org-directory) "Notes")
       "* %?\nEntered on %U\n %i\n %a")))
+  (org-image-actual-width '(400))
   (org-startup-truncated nil))
 
 ;;; init-org-mode.el ends here
