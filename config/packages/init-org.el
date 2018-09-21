@@ -20,24 +20,34 @@
   (interactive)
   (elim:show-org-buffer "journal.org"))
 
-(use-package org
-  :bind (("C-c a" . org-agenda)
-         ("C-c c" . org-capture)
-         ("C-c l" . org-store-link)
-         ("C-M-C" . elim:show-org-journal-buffer))
+(let*
+    ((journal-file (expand-file-name "journal.org" elim:org-directory))
+     (note-file    (expand-file-name "notes.org"   elim:org-directory))
 
-  :custom
-  (org-capture-templates
-   `(("j" "Journal" entry
-      (file+datetree ,(expand-file-name "journal.org" elim:org-directory))
-      "* %U\n%?"
-      :unnarrowed t
-      :jump-to-captured t)
+     (journal-template-common `(entry
+                                (file+datetree ,journal-file)
+                                "* %U\n%?"
+                                :jump-to-captured t
+                                :unnarrowed t))
 
-     ("n" "Note" entry
-      (file+headline ,(expand-file-name "notes.org" elim:org-directory) "Notes")
-      "* %?\nEntered on %U\n %i\n %a")))
-  (org-image-actual-width '(400))
-  (org-startup-truncated nil))
+     (capture-templates-journal
+      `(,(append '("j" "Journal")                  journal-template-common)
+        ,(append '("J" "Journal with time-prompt") journal-template-common '(:time-prompt t))))
+
+     (capture-templates-others
+      '(("n" "Note" entry (file+headline ,note-file "Notes")
+         "* %?\nEntered on %U\n %i\n %a"))))
+
+  (use-package org
+    :bind (("C-c a" . org-agenda)
+           ("C-c c" . org-capture)
+           ("C-c l" . org-store-link)
+           ("C-M-C" . elim:show-org-journal-buffer))
+
+    :custom
+    (org-capture-templates
+     (append capture-templates-journal capture-templates-others))
+    (org-image-actual-width '(400))
+    (org-startup-truncated nil)))
 
 ;;; init-org-mode.el ends here
