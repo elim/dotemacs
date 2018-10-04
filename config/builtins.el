@@ -33,6 +33,10 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
+(use-package autorevert
+  :config
+  (global-auto-revert-mode t))
+
 (use-package browse-url
   :bind ("C-x m" . browse-url-at-point))
 
