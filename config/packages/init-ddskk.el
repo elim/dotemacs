@@ -4,21 +4,21 @@
 
 ;; このファイル自体を SKK の初期設定ファイルにする
 ;; skk-restart 時に読み直す対象になる
-(setq skk-init-file load-file-name)
+(set-variable 'skk-init-file load-file-name)
 
 (global-set-key "\C-x\C-j" 'skk-mode)
 (global-set-key "\C-xt" nil)
 (global-set-key "\C-xj" nil)
 
-(setq skk-jisyo-code 'utf-8)
-(setq skk-count-private-jisyo-candidates-exactly t)
+(set-variable 'skk-jisyo-code 'utf-8)
+(set-variable 'skk-count-private-jisyo-candidates-exactly t)
 
 ;; 複数の Emacsen を起動して個人辞書を共有する
-(setq skk-share-private-jisyo t)
+(set-variable 'skk-share-private-jisyo t)
 
 ;; サーバを使うための設定
-(setq skk-server-host "localhost")
-(setq skk-server-portnum 1178)
+(set-variable 'skk-server-host "localhost")
+(set-variable 'skk-server-portnum 1178)
 
 (condition-case nil
     (skk-server-version)
@@ -26,37 +26,37 @@
    (let
        ((dic-file "/usr/share/skk/SKK-JISYO.L"))
      (and (file-exists-p dic-file)
-          (setq skk-jisyo-code nil)
-          (setq skk-large-jisyo dic-file)))))
+          (set-variable 'skk-jisyo-code nil)
+          (set-variable 'skk-large-jisyo dic-file)))))
 
 ;; メッセージを日本語で通知する
-(setq skk-japanese-message-and-error t)
+(set-variable 'skk-japanese-message-and-error t)
 
 ;; 変換時に註釈 (annotation) を表示する
-(setq skk-show-annotation t)
+(set-variable 'skk-show-annotation t)
 
 ;; 句読点
-(setq-default skk-kutouten-type 'jp)
+(set-default 'skk-kutouten-type 'jp)
 
 ;; @@ 変換動作の調整
 
 ;; 送り仮名が厳密に正しい候補を優先して表示する
-(setq skk-henkan-strict-okuri-precedence t)
+(set-variable 'skk-henkan-strict-okuri-precedence t)
 
 ;; 辞書登録のとき、余計な送り仮名を送らないようにする
-(setq skk-check-okurigana-on-touroku 'auto)
+(set-variable 'skk-check-okurigana-on-touroku 'auto)
 
 ;; サ行変格活用の動詞も送りあり変換出来るようにする
 (with-eval-after-load-feature 'ddskk
-  (setq skk-search-prog-list
-        (skk-nunion skk-search-prog-list
+  (set-variable 'skk-search-prog-list
+        (skk-nunionx skk-search-prog-list
                     '((skk-search-sagyo-henkaku)))))
 
 ;; SKK を Emacs の input method として使用する
-(setq default-input-method "japanese-skk")
+(set-variable 'default-input-method "japanese-skk")
 
 ;; migemo を使うから skk-isearch にはおとなしくしていて欲しい
-(setq skk-isearch-start-mode 'latin)
+(set-variable 'skk-isearch-start-mode 'latin)
 
 ;; 辞書を 10 分毎に自動保存
 (with-eval-after-load-feature 'ddskk
