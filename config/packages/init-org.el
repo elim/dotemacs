@@ -48,6 +48,9 @@
     (org-capture-templates
      (append capture-templates-journal capture-templates-others))
     (org-image-actual-width '(400))
-    (org-startup-truncated nil)))
+    (org-startup-folded 'showeverything)
+    (org-startup-indented t)
+    (org-startup-truncated nil)
+    (org-startup-with-inline-images t)))
 
 ;;; init-org-mode.el ends here
