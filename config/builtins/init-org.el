@@ -38,10 +38,11 @@
          "* %?\nEntered on %U\n %i\n %a"))))
 
   (use-package org
-    :bind (("C-c a" . org-agenda)
-           ("C-c c" . org-capture)
-           ("C-c l" . org-store-link)
-           ("C-M-C" . elim:show-org-journal-buffer))
+    :bind (("C-c a"   . org-agenda)
+           ("C-c c"   . org-capture)
+           ("C-c C-l" . org-insert-link)
+           ("C-c l"   . org-store-link)
+           ("C-M-C"   . elim:show-org-journal-buffer))
 
     :custom
     (org-capture-templates
@@ -50,6 +51,11 @@
     (org-startup-folded 'showeverything)
     (org-startup-indented t)
     (org-startup-truncated nil)
-    (org-startup-with-inline-images t)))
+    (org-startup-with-inline-images t))
+
+  (use-package org-id
+    :custom
+    (org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
+    (org-id-track-globally t)))
 
 ;;; init-org-mode.el ends here
