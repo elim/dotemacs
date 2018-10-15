@@ -1,9 +1,8 @@
-;;; init-org-mode.el --- A setting of the org-mode.
+;;; init-org-mode.el --- A setting of the org-mode -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
-(defvar elim:org-directory "~/Dropbox/org/"
-  "The directory of my org files.")
+(set-variable 'org-directory "~/Dropbox/org/")
 
 ;; https://qiita.com/takaxp/items/0b717ad1d0488b74429d
 (defun elim:show-org-buffer (file)
@@ -13,7 +12,7 @@
       (let ((buffer (get-buffer file)))
         (switch-to-buffer buffer)
         (message "%s" file))
-    (find-file (concat elim:org-directory file))))
+    (find-file (concat org-directory file))))
 
 (defun elim:show-org-journal-buffer ()
   "Show a journal on the current buffer."
@@ -21,8 +20,8 @@
   (elim:show-org-buffer "journal.org"))
 
 (let*
-    ((journal-file (expand-file-name "journal.org" elim:org-directory))
-     (note-file    (expand-file-name "notes.org"   elim:org-directory))
+    ((journal-file (expand-file-name "journal.org" org-directory))
+     (note-file    (expand-file-name "notes.org"   org-directory))
 
      (journal-template-common `(entry
                                 (file+datetree ,journal-file)

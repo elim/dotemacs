@@ -9,6 +9,6 @@
   (org-journal-file-format "%Y-%m-%d.org")
   (org-journal-hide-entries-p nil)
   (org-journal-time-format "[%F %a %R]")
-  (org-journal-dir (expand-file-name "journals" elim:org-directory)))
+  (org-journal-dir (expand-file-name "journals" org-directory)))
 
 ;;; init-org-journal.el ends here
