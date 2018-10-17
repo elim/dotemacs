@@ -44,7 +44,6 @@
 (el-get-bundle markdown-mode)
 (el-get-bundle migemo)
 (el-get-bundle mmm-mode)
-(el-get-bundle nabinno/esa.el)
 (el-get-bundle open-junk-file)
 (el-get-bundle php-mode)
 (el-get-bundle popwin)
