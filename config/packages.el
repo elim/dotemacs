@@ -8,7 +8,6 @@
 (el-get-bundle AdamNiederer/vue-html-mode)
 (el-get-bundle AdamNiederer/vue-mode)
 
-(el-get-bundle alpaca :type http :url "http://www.mew.org/~kazu/proj/cipher/alpaca.el")
 (el-get-bundle anzu)
 (el-get-bundle atomic-chrome)
 (el-get-bundle bastibe/org-journal)
