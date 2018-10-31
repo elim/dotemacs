@@ -55,7 +55,8 @@
     (org-startup-folded 'showeverything)
     (org-startup-indented t)
     (org-startup-truncated nil)
-    (org-startup-with-inline-images t))
+    (org-startup-with-inline-images t)
+    (org-use-speed-commands t))
 
   (use-package org-id
     :custom
