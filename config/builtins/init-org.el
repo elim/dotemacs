@@ -45,9 +45,13 @@
            ("C-M-C"   . elim:show-org-journal-buffer))
 
     :custom
+    (org-agenda-files (list org-directory))
     (org-capture-templates
      (append capture-templates-journal capture-templates-others))
     (org-image-actual-width '(400))
+    (org-refile-targets
+     (quote ((nil :maxlevel . 3)
+             (org-agenda-files :maxlevel . 3))))
     (org-startup-folded 'showeverything)
     (org-startup-indented t)
     (org-startup-truncated nil)
