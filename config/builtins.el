@@ -207,6 +207,7 @@
 (load "builtins/dictionary")
 (load "builtins/diff-mode")
 (load "builtins/dired")
+(load "builtins/init-js-mode")
 (load "builtins/init-org")
 (load "builtins/paren")
 (load "builtins/text-mode")
