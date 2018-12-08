@@ -47,7 +47,6 @@
 (el-get-bundle open-junk-file)
 (el-get-bundle php-mode)
 (el-get-bundle popwin)
-(el-get-bundle puppet-mode)
 (el-get-bundle rainbow-mode)
 (el-get-bundle rspec-mode)
 (el-get-bundle ruby-end)
