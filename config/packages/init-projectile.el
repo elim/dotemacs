@@ -5,6 +5,6 @@
 (use-package projectile
   :config (projectile-global-mode t)
   :custom (projectile-enable-caching t)
-  :delight '(:eval (concat " [" (projectile-project-name) "]")))
+  :diminish projectile-mode)
 
 ;;; init-projectile.el ends here

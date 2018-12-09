@@ -38,7 +38,7 @@
 
 ;; Preferred libraries
 (el-get-bundle tarao/with-eval-after-load-feature-el)
-(el-get-bundle use-package :depends (delight))
+(el-get-bundle use-package :depends (delight diminish))
 
 (load "environment")
 (load "builtins")
