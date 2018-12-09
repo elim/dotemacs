@@ -4,21 +4,6 @@
 
 (set-variable 'org-directory "~/Dropbox/org/")
 
-;; https://qiita.com/takaxp/items/0b717ad1d0488b74429d
-(defun elim:show-org-buffer (file)
-  "Show an org-file FILE on the current buffer."
-  (interactive)
-  (if (get-buffer file)
-      (let ((buffer (get-buffer file)))
-        (switch-to-buffer buffer)
-        (message "%s" file))
-    (find-file (concat org-directory file))))
-
-(defun elim:show-org-journal-buffer ()
-  "Show a journal on the current buffer."
-  (interactive)
-  (elim:show-org-buffer "journal.org"))
-
 (let*
     ((journal-file (expand-file-name "journal.org" org-directory))
      (note-file    (expand-file-name "notes.org"   org-directory))
@@ -41,8 +26,7 @@
     :bind (("C-c a"   . org-agenda)
            ("C-c c"   . org-capture)
            ("C-c C-l" . org-insert-link)
-           ("C-c l"   . org-store-link)
-           ("C-M-C"   . elim:show-org-journal-buffer))
+           ("C-c l"   . org-store-link))
 
     :custom
     (org-agenda-files (list org-directory))
