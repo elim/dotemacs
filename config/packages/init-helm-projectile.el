@@ -2,15 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package projectile
-  :delight '(:eval (concat " [" (projectile-project-name) "]")))
-
 (use-package helm-projectile
   :bind ("M-t" . helm-projectile)
-  :config
-  (projectile-global-mode t)
-  (helm-projectile-on)
-  :custom (projectile-enable-caching t)
+  :config (helm-projectile-on)
   :demand t)
 
 ;;; init-helm-projectile.el ends here
