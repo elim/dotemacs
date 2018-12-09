@@ -53,7 +53,7 @@
      (quote ((nil :maxlevel . 3)
              (org-agenda-files :maxlevel . 3))))
     (org-startup-folded 'showeverything)
-    (org-startup-indented t)
+    (org-startup-indented nil)
     (org-startup-truncated nil)
     (org-startup-with-inline-images t)
     (org-use-speed-commands t))
