@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package projectile
-  :config (projectile-global-mode t)
+  :config (projectile-mode +1)
   :custom (projectile-enable-caching t)
   :diminish projectile-mode)
 
