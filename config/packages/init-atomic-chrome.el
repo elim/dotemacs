@@ -2,14 +2,15 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'atomic-chrome)
+(use-package atomic-chrome
+  :custom
+  (atomic-chrome-default-major-mode 'markdown-mode)
+  (atomic-chrome-url-major-mode-alist
+   '(("github\\.com" . gfm-mode)
+     ("esa\\.io"     . gfm-mode)
+     ("redmine"      . textile-mode)))
 
-(setq atomic-chrome-default-major-mode 'markdown-mode
-  atomic-chrome-url-major-mode-alist
-  '(("github\\.com" . gfm-mode)
-     ("esa\\.io" . gfm-mode)
-     ("redmine" . textile-mode)))
-
-(atomic-chrome-start-server)
+  :config
+  (atomic-chrome-start-server))
 
 ;;; init-atomic-chrome.el ends here
