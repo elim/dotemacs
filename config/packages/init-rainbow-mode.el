@@ -2,10 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(when (require 'rainbow-mode nil t)
-  (add-hook 'css-mode-hook 'rainbow-mode)
-  (add-hook 'scss-mode-hook 'rainbow-mode)
-  (add-hook 'php-mode-hook 'rainbow-mode)
-  (add-hook 'html-mode-hook 'rainbow-mode))
+(use-package rainbow-mode
+  :hook
+  (css-mode  . rainbow-mode)
+  (css-mode  . rainbow-mode)
+  (scss-mode . rainbow-mode)
+  (php-mode  . rainbow-mode)
+  (html-mode . rainbow-mode))
 
 ;;; init-rainbow-mode.el ends here
