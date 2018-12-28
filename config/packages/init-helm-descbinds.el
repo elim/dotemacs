@@ -2,6 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'helm-descbinds)
+(use-package helm-descbinds)
 
 ;;; init-helm-descbinds.el ends here
