@@ -1,8 +1,8 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil -*-
 
 ;; http://d.hatena.ne.jp/rubikitch/20080227/1204051280
-(when (require 'align nil t)
-
+(use-package align
+  :config
   (add-to-list 'align-rules-list
                '(ruby-comma-delimiter
                  (regexp . ",\\(\\s-*\\)[^# \t\n]")
