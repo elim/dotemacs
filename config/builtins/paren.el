@@ -2,7 +2,8 @@
 
 ;; http://0xcc.net/unimag/10/
 
-(when (require 'paren nil t)
+(use-package paren
+  :config
   (show-paren-mode 1)
 
   ;; 小括弧 () の色を定義
