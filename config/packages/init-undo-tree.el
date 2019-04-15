@@ -3,6 +3,10 @@
 ;;; Code:
 
 (use-package undo-tree
-  :config (global-undo-tree-mode t))
+  :custom
+  (undo-tree-enable-undo-in-region nil)
+
+  :config
+  (global-undo-tree-mode t))
 
 ;;; init-undo-tree.el ends here
