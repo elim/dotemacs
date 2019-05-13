@@ -19,5 +19,6 @@
 /server
 /session-save.el
 /tramp
+/transient
 /url
 request
