@@ -24,6 +24,8 @@
 
 ;;; el-get
 ;;
+;; Use the HEAD instead of the elpa version because this Emacs
+;; configuratfion depends many recipes of HEAD on currently.
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (let (el-get-master-branch)
   (unless (require 'el-get nil t)
@@ -33,12 +35,44 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
-(setq el-get-user-package-directory
-      (locate-user-emacs-file "config/packages"))
+;;; leaf.el
+;;
+(prog1 "prepare leaf"
+  (prog1 "package"
+    (custom-set-variables
+     '(package-archives '(("melpa" . "https://melpa.org/packages/")
+                          ("gnu"   . "https://elpa.gnu.org/packages/"))))
+    (package-initialize))
+
+  (prog1 "leaf"
+    (unless (package-installed-p 'leaf)
+      (unless (assoc 'leaf package-archive-contents)
+        (package-refresh-contents))
+      (condition-case err
+          (package-install 'leaf)
+        (error
+         (package-refresh-contents)       ; renew local melpa cache if fail
+         (package-install 'leaf))))
+
+    (leaf leaf-keywords
+      :ensure t
+      :config (leaf-keywords-init)))
+
+  (prog1 "optional packages for leaf-keywords"
+    ;; optional packages if you want to use :hydra, :el-get,,,
+    (leaf hydra :ensure t)
+    (leaf delight :ensure t)
+    (leaf diminish :ensure t))
+
+  (prog1 "el-get settings"
+    (leaf el-get
+      :custom
+      ((el-get-git-shallow-clone  . t)
+       (el-get-user-package-directory . (locate-user-emacs-file "config/packages"))))))
 
 ;; Preferred libraries
 (el-get-bundle tarao/with-eval-after-load-feature-el)
-(el-get-bundle use-package :depends (delight diminish))
+(el-get-bundle use-package)
 
 (load "environment")
 (load "builtins")
