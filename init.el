@@ -73,6 +73,7 @@
 (leaf google-translate
   :ensure t
   :bind (("C-c t" . google-translate-enja-or-jaen))
+  :custom (google-translate-backend-method . 'curl)
   :config
   ;; http://emacs.rubikitch.com/google-translate/
   (defvar google-translate-english-chars "[:ascii:]"
