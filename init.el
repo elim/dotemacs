@@ -105,6 +105,14 @@
        (if asciip "ja" "en")
        string))))
 
+(leaf *major-modes
+  :config
+  (leaf elisp-mode
+    :hook (emacs-lisp-mode-hook . elim:emacs-lisp-mode-hook-func)
+    :config
+    (defun elim:emacs-lisp-mode-hook-func ()
+      (set-variable 'indent-tabs-mode nil))))
+
 ;; Preferred libraries
 (el-get-bundle tarao/with-eval-after-load-feature-el)
 (el-get-bundle use-package)

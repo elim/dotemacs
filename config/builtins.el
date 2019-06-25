@@ -67,12 +67,6 @@
    (lisp-interaction-mode . turn-on-eldoc-mode)
    (ielm-mode-hook . turn-on-eldoc-mode)))
 
-(use-package elisp-mode
-  :hook (emacs-lisp-mode . elim:indent-space-mode)
-  :config
-  (defun elim:indent-space-mode ()
-    (set 'indent-tabs-mode nil)))
-
 (use-package executable
   :hook (after-save . elim:executable-make-buffer-file-executable-if-script-p)
   :config
