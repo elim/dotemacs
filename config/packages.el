@@ -30,7 +30,6 @@
 (el-get-bundle glynnforrest/mmm-jinja2)
 (el-get-bundle glynnforrest/salt-mode)
 (el-get-bundle go-mode)
-(el-get-bundle google-translate)
 (el-get-bundle helm)
 (el-get-bundle helm-ag)
 (el-get-bundle helm-css-scss)
