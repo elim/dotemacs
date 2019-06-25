@@ -76,10 +76,10 @@
   :config
   ;; http://emacs.rubikitch.com/google-translate/
   (defvar google-translate-english-chars "[:ascii:]"
-  "これらの文字が含まれているときは英語とみなす")
+    "If the target string consists of that pattern, it is assumed to be English.")
 
   (defun google-translate-enja-or-jaen (&optional string)
-    "regionか、現在のセンテンスを言語自動判別でGoogle翻訳する。"
+    "Translates the region, sentence or STRING by Google(with automatic language detection)."
     (interactive)
     (setq string
           (cond ((stringp string) string)
