@@ -70,40 +70,46 @@
       ((el-get-git-shallow-clone  . t)
        (el-get-user-package-directory . (locate-user-emacs-file "config/packages"))))))
 
-(leaf google-translate
-  :ensure t
-  :bind (("C-c t" . google-translate-enja-or-jaen))
-  :custom (google-translate-backend-method . 'curl)
+(leaf *minor-modes
   :config
-  ;; http://emacs.rubikitch.com/google-translate/
-  (defvar google-translate-english-chars "[:ascii:]"
-    "If the target string consists of that pattern, it is assumed to be English.")
-
-  (defun google-translate-enja-or-jaen (&optional string)
-    "Translates the region, sentence or STRING by Google(with automatic language detection)."
-    (interactive)
-    (setq string
-          (cond ((stringp string) string)
-                (current-prefix-arg
-                 (read-string "Google Translate: "))
-                ((use-region-p)
-                 (buffer-substring (region-beginning) (region-end)))
-                (t
-                 (save-excursion
-                   (let (s)
-                     (forward-char 1)
-                     (backward-sentence)
-                     (setq s (point))
-                     (forward-sentence)
-                     (buffer-substring s (point)))))))
-    (let* ((asciip (string-match
-                    (format "\\`[%s]+\\'" google-translate-english-chars)
-                    string)))
-      (run-at-time 0.1 nil 'deactivate-mark)
-      (google-translate-translate
-       (if asciip "en" "ja")
-       (if asciip "ja" "en")
-       string))))
+  (leaf google-translate
+    :ensure t
+    :bind (("C-c t" . google-translate-enja-or-jaen))
+    :custom (google-translate-backend-method . 'curl)
+    :config
+    ;; http://emacs.rubikitch.com/google-translate/
+    (defvar google-translate-english-chars "[:ascii:]"
+      "If the target string consists of that pattern, it is assumed to be English.")
+    (defun google-translate-enja-or-jaen (&optional string)
+      "Translates the region, sentence or STRING by Google(with automatic language detection)."
+      (interactive)
+      (setq string
+            (cond ((stringp string) string)
+                  (current-prefix-arg
+                   (read-string "Google Translate: "))
+                  ((use-region-p)
+                   (buffer-substring (region-beginning) (region-end)))
+                  (t
+                   (save-excursion
+                     (let (s)
+                       (forward-char 1)
+                       (backward-sentence)
+                       (setq s (point))
+                       (forward-sentence)
+                       (buffer-substring s (point)))))))
+      (let* ((asciip (string-match
+                      (format "\\`[%s]+\\'" google-translate-english-chars)
+                      string)))
+        (run-at-time 0.1 nil 'deactivate-mark)
+        (google-translate-translate
+         (if asciip "en" "ja")
+         (if asciip "ja" "en")
+         string))))
+  (leaf hideshow
+    :bind ((:hs-minor-mode-map
+            ("C-c C-M-c" . hs-toggle-hiding)
+            ("C-c h"     . hs-toggle-hiding)
+            ("C-c l"     . hs-hide-level))))
 
 (leaf *major-modes
   :config

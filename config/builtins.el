@@ -98,12 +98,6 @@
 (use-package help
   :config (temp-buffer-resize-mode t))
 
-(use-package hideshow
-  :bind (:map hs-minor-mode-map
-              ("C-c C-M-c" . hs-toggle-hiding)
-              ("C-c h"     . hs-toggle-hiding)
-              ("C-c l"     . hs-hide-level)))
-
 (use-package hl-line
   :config (global-hl-line-mode -1))
 
