@@ -109,7 +109,8 @@
     :bind ((:hs-minor-mode-map
             ("C-c C-M-c" . hs-toggle-hiding)
             ("C-c h"     . hs-toggle-hiding)
-            ("C-c l"     . hs-hide-level))))
+            ("C-c l"     . hs-hide-level)))
+    :hook (emacs-lisp-mode-hook . hs-minor-mode)))
 
 (leaf *major-modes
   :config
