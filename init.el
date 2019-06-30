@@ -109,8 +109,7 @@
     :bind ((:hs-minor-mode-map
             ("C-c C-M-c" . hs-toggle-hiding)
             ("C-c h"     . hs-toggle-hiding)
-            ("C-c l"     . hs-hide-level)))
-    :hook (emacs-lisp-mode-hook . hs-minor-mode))
+            ("C-c l"     . hs-hide-level))))
   (leaf persistent-scratch
     :ensure t
     :init
@@ -141,7 +140,9 @@ Environment-dependent value is generated as initial values.")
     :hook (emacs-lisp-mode-hook . elim:emacs-lisp-mode-hook-func)
     :config
     (defun elim:emacs-lisp-mode-hook-func ()
-      (set-variable 'indent-tabs-mode nil))))
+      (set-variable 'indent-tabs-mode nil)
+      (hs-minor-mode +1)
+      (hs-hide-level 3))))
 
 ;; Preferred libraries
 (el-get-bundle tarao/with-eval-after-load-feature-el)
