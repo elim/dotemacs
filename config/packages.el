@@ -18,7 +18,6 @@
 (el-get-bundle docker-tramp)
 (el-get-bundle dockerfile-mode)
 (el-get-bundle editorconfig)
-(el-get-bundle elim/auto-save-buffers-enhanced)
 (el-get-bundle elpa:ddskk)
 (el-get-bundle elpa:undo-tree)
 (el-get-bundle elscreen)

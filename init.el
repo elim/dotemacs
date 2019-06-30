@@ -110,7 +110,22 @@
             ("C-c C-M-c" . hs-toggle-hiding)
             ("C-c h"     . hs-toggle-hiding)
             ("C-c l"     . hs-hide-level)))
-    :hook (emacs-lisp-mode-hook . hs-minor-mode)))
+    :hook (emacs-lisp-mode-hook . hs-minor-mode))
+  (leaf persistent-scratch
+    :ensure t
+    :init
+    (defvar elim:persistent-scratch-save-file
+      ((lambda ()
+         (expand-file-name
+          (format ".persistent-scratch.%s" (system-name)) "~/Dropbox/var/")))
+      "Specify the location of the scratch to the file.
+Environment-dependent value is generated as initial values.")
+    :custom (persistent-scratch-save-file . elim:persistent-scratch-save-file)
+    :config (persistent-scratch-setup-default))
+  (leaf real-auto-save
+    :ensure t
+    :custom ((real-auto-save-interval . 0.5))
+    :hook (find-file-hook . real-auto-save-mode)))
 
 (leaf *major-modes
   :config
