@@ -32,7 +32,6 @@
 (el-get-bundle jinja2-mode)
 (el-get-bundle js2-mode)
 (el-get-bundle json-mode)
-(el-get-bundle magit)
 (el-get-bundle markdown-mode)
 (el-get-bundle migemo)
 (el-get-bundle open-junk-file)

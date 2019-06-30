@@ -143,6 +143,17 @@ Environment-dependent value is generated as initial values.")
       (set-variable 'indent-tabs-mode nil)
       (hs-minor-mode +1)
       (hs-hide-level 3)))
+  (leaf magit
+    :ensure t
+    :bind ("C-x v s" . magit-status)
+    :hook (git-commit-setup-hook . elim:git-commit-setup-hook-func)
+    :init (add-to-list 'process-coding-system-alist '("git" utf-8 . utf-8))
+    :config
+    (defun elim:git-commit-setup-hook-func ()
+      (flyspell-mode +1)
+      (set (make-local-variable
+            'elim:auto-delete-trailing-whitespace-enable-p) nil))
+    :delight auto-revert-mode)
   (leaf vue-mode
     :ensure t))
 
