@@ -70,6 +70,22 @@
       ((el-get-git-shallow-clone  . t)
        (el-get-user-package-directory . (locate-user-emacs-file "config/packages"))))))
 
+(leaf elscreen
+  :ensure t
+  :require t
+  :config
+  (elscreen-set-prefix-key [(control z)])
+  (elscreen-start)
+  :custom
+  ((elscreen-tab-display-control . nil)
+   (elscreen-tab-display-kill-screen . nil)
+   (elscreen-display-tab . t))
+  :custom-face
+  (elscreen-tab-background-face     . '((nil (:foreground "#112" :background "#ccc" :underline nil :box nil))))
+  (elscreen-tab-control-face        . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil))))
+  (elscreen-tab-current-screen-face . '((nil (:foreground "#ccc" :background "#336" :underline nil :box nil))))
+  (elscreen-tab-other-screen-face   . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil)))))
+
 (leaf *minor-modes
   :config
   (leaf google-translate
@@ -105,6 +121,47 @@
          (if asciip "en" "ja")
          (if asciip "ja" "en")
          string))))
+  (leaf *helm
+    :config
+    (leaf helm :ensure t
+      :require helm-config helm-files
+      :bind (("M-x"     . helm-M-x)
+             ("C-:"     . helm-mini)
+             ("C-;"     . helm-mini)
+             ("C-x :"   . helm-mini)
+             ("C-x ;"   . helm-mini)
+             ("C-x C-:" . helm-mini)
+             ("C-x C-;" . helm-mini)
+             ("C-x C-y" . helm-show-kill-ring)
+             ("C-x C-f" . helm-find-files)
+             (:helm-map
+              ("C-h" . delete-backward-char)
+              ("TAB" . helm-execute-persistent-action)))
+      :config (helm-mode 1)
+      :custom ((helm-input-idle-delay . 0.3)
+               (helm-candidate-number-limit . 200)
+               (helm-buffer-max-length . 40)
+               (helm-ff-auto-update-initial-value . nil)
+               (helm-mini-default-sources
+                . '(helm-source-buffers-list
+                    helm-source-recentf
+                    helm-source-buffer-not-found)))
+      :delight helm-mode)
+    (leaf helm-ag :ensure t
+      :bind ("C-x g" . helm-projectile-ag)
+      :custom ((helm-ag-base-command . "ag --nocolor --nogroup --ignore-case")
+               (helm-ag-command-option . "--all-text")
+               (helm-ag-insert-at-point 'symbol)))
+    (leaf helm-css-scss :ensure t)
+    (leaf helm-descbinds :ensure t)
+    (leaf helm-elscreen :ensure t
+      :after helm elscreen
+      :bind ("C-z h" . helm-elscreen))
+    (leaf helm-git-grep :ensure t)
+    (leaf helm-projectile :ensure t
+      :after projectile
+      :bind ("M-t" . helm-projectile)
+      :config (helm-projectile-on)))
   (leaf hideshow
     :bind ((:hs-minor-mode-map
             ("C-c C-M-c" . hs-toggle-hiding)
@@ -121,6 +178,11 @@
 Environment-dependent value is generated as initial values.")
     :custom (persistent-scratch-save-file . elim:persistent-scratch-save-file)
     :config (persistent-scratch-setup-default))
+  (leaf projectile
+    :ensure t
+    :config (projectile-mode +1)
+    :custom (projectile-enable-caching . t)
+    :diminish projectile-mode)
   (leaf real-auto-save
     :ensure t
     :preface
