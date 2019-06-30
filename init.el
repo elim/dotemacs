@@ -142,7 +142,9 @@ Environment-dependent value is generated as initial values.")
     (defun elim:emacs-lisp-mode-hook-func ()
       (set-variable 'indent-tabs-mode nil)
       (hs-minor-mode +1)
-      (hs-hide-level 3))))
+      (hs-hide-level 3)))
+  (leaf vue-mode
+    :ensure t))
 
 ;; Preferred libraries
 (el-get-bundle tarao/with-eval-after-load-feature-el)

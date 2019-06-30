@@ -2,12 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; For vue-mode.
-(el-get-bundle Fanael/edit-indirect)
-(el-get-bundle AdamNiederer/ssass-mode)
-(el-get-bundle AdamNiederer/vue-html-mode)
-(el-get-bundle AdamNiederer/vue-mode)
-
 (el-get-bundle anzu)
 (el-get-bundle atomic-chrome)
 (el-get-bundle bastibe/org-journal)
@@ -41,7 +35,6 @@
 (el-get-bundle magit)
 (el-get-bundle markdown-mode)
 (el-get-bundle migemo)
-(el-get-bundle mmm-mode)
 (el-get-bundle open-junk-file)
 (el-get-bundle php-mode)
 (el-get-bundle popwin)
