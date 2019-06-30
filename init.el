@@ -124,6 +124,14 @@ Environment-dependent value is generated as initial values.")
     :config (persistent-scratch-setup-default))
   (leaf real-auto-save
     :ensure t
+    :preface
+    ;; http://emacs.rubikitch.com/real-auto-save-buffers-enhanced-bug/
+    (defun elim:real-auto-save-start-timer--idle-timer ()
+      "Start real-auto-save-timer."
+      (set-variable 'real-auto-save-timer
+                    (run-with-idle-timer real-auto-save-interval
+                                         real-auto-save-interval 'real-auto-save-buffers)))
+    :advice (:override real-auto-save-start-timer elim:real-auto-save-start-timer--idle-timer)
     :custom ((real-auto-save-interval . 0.5))
     :hook (find-file-hook . real-auto-save-mode)))
 
