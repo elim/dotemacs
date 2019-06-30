@@ -132,7 +132,11 @@ Environment-dependent value is generated as initial values.")
                                          real-auto-save-interval 'real-auto-save-buffers)))
     :advice (:override real-auto-save-start-timer elim:real-auto-save-start-timer--idle-timer)
     :custom ((real-auto-save-interval . 0.5))
-    :hook (find-file-hook . real-auto-save-mode)))
+    :hook (find-file-hook . real-auto-save-mode))
+  (leaf undo-tree
+    :ensure t
+    :custom (undo-tree-enable-undo-in-region . nil)
+    :config (global-undo-tree-mode t)))
 
 (leaf *major-modes
   :config

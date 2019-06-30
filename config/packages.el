@@ -13,7 +13,6 @@
 (el-get-bundle dockerfile-mode)
 (el-get-bundle editorconfig)
 (el-get-bundle elpa:ddskk)
-(el-get-bundle elpa:undo-tree)
 (el-get-bundle elscreen)
 (el-get-bundle emacs-helm/helm-elscreen :depends (elscreen helm))
 (el-get-bundle flycheck)
