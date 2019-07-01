@@ -347,6 +347,7 @@ Environment-dependent value is generated as initial values.")
                   "require" "$" "_" "angular" "Backbone" "JSON" "setTimeout" "jasmine"
                   "beforeEach" "afterEach" "spyOn")))
     :hook (js2-mode-hook . elim:js2-mode-hook-func))
+  (leaf json-mode :ensure t)
   (leaf magit
     :ensure t
     :bind ("C-x v s" . magit-status)
