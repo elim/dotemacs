@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(el-get-bundle dockerfile-mode)
 (el-get-bundle editorconfig)
 (el-get-bundle flycheck)
 (el-get-bundle gist:5457732:ginger-api :depends (json popwin request))

@@ -280,6 +280,7 @@ Environment-dependent value is generated as initial values.")
 
 (leaf *major-modes
   :config
+  (leaf dockerfile-mode :ensure t)
   (leaf elisp-mode
     :hook (emacs-lisp-mode-hook . elim:emacs-lisp-mode-hook-func)
     :config
