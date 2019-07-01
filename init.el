@@ -88,6 +88,15 @@
 
 (leaf *minor-modes
   :config
+  (leaf anzu
+    :ensure t
+    :bind (([remap query-replace]        . anzu-query-replace)
+           ([remap query-replace-regexp] . anzu-query-replace-regexp))
+    :custom ((anzu-use-migemo . t)
+             (anzu-mode-lighter . "")
+             (anzu-deactivate-region . t)
+             (anzu-search-threshold . 1000))
+    :config (global-anzu-mode +1))
   (leaf atomic-chrome
     :ensure t
     :custom ((atomic-chrome-default-major-mode . 'markdown-mode)

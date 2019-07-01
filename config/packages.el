@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(el-get-bundle anzu)
 (el-get-bundle bastibe/org-journal)
 (el-get-bundle buffer-move)
 (el-get-bundle company-mode)
