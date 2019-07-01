@@ -70,6 +70,27 @@
       ((el-get-git-shallow-clone  . t)
        (el-get-user-package-directory . (locate-user-emacs-file "config/packages"))))))
 
+(leaf *libraries
+  :config t
+  (leaf deferred :ensure t))
+
+(leaf *utilities
+  :config t
+  (leaf clipboard-to-kill-ring
+    :after deferred
+    :el-get gist:666807b53f2b2cf503c1:clipboard-to-kill-ring
+    :bind (("C-x ck" . elim:toggle-clipboard-to-kill-ring))
+    :preface
+    (defun elim:toggle-clipboard-to-kill-ring ()
+      "Toggle `clipboard-to-kill-ring' activity."
+      (interactive)
+      (let* ((enabled-p clipboard-to-kill-ring:timer)
+             (after-value (not enabled-p)))
+        (clipboard-to-kill-ring after-value)
+        (message "clipboard-to-kill-ring %s" (if after-value "on" "off"))))
+    :config
+    (clipboard-to-kill-ring +1)))
+
 (leaf *interfaces
   :config
   (leaf buffer-move
