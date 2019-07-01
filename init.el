@@ -319,6 +319,7 @@ Environment-dependent value is generated as initial values.")
       (set-variable 'indent-tabs-mode nil)
       (hs-minor-mode +1)
       (hs-hide-level 3)))
+  (leaf git-modes :el-get magit/git-modes)
   (leaf magit
     :ensure t
     :bind ("C-x v s" . magit-status)
