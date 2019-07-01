@@ -88,6 +88,15 @@
 
 (leaf *minor-modes
   :config
+  (leaf atomic-chrome
+    :ensure t
+    :custom ((atomic-chrome-default-major-mode . 'markdown-mode)
+             (atomic-chrome-url-major-mode-alist
+              . '(("github\\.com" . gfm-mode)
+                  ("esa\\.io"     . gfm-mode)
+                  ("redmine"      . textile-mode))))
+    :config
+    (atomic-chrome-start-server))
   (leaf google-translate
     :ensure t
     :bind (("C-c t" . google-translate-enja-or-jaen))
