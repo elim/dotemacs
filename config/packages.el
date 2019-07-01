@@ -12,7 +12,6 @@
 (el-get-bundle docker-tramp)
 (el-get-bundle dockerfile-mode)
 (el-get-bundle editorconfig)
-(el-get-bundle elpa:ddskk)
 (el-get-bundle flycheck)
 (el-get-bundle gist:5457732:ginger-api :depends (json popwin request))
 (el-get-bundle gist:666807b53f2b2cf503c1:clipboard-to-kill-ring :depends (deferred))

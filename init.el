@@ -195,6 +195,39 @@ Environment-dependent value is generated as initial values.")
     :advice (:override real-auto-save-start-timer elim:real-auto-save-start-timer--idle-timer)
     :custom ((real-auto-save-interval . 0.5))
     :hook (find-file-hook . real-auto-save-mode))
+  (leaf skk
+    :ensure ddskk
+    :require t
+    :bind (("C-x C-j" . skk-mode)
+           ("C-x t" . nil)
+           ("C-x j" . nil))
+    :custom ((default-input-method . "japanese-skk")
+             (skk-jisyo-code . 'utf-8)
+             (skk-count-private-jisyo-candidates-exactly . t)
+             (skk-share-private-jisyo . t)
+             (skk-server-host . "localhost")
+             (skk-server-portnum . 1178)
+             (skk-japanese-message-and-error . t)
+             (skk-kutouten-type . 'jp)
+             (skk-show-annotation . t)
+             (skk-henkan-strict-okuri-precedence . t)
+             (skk-check-okurigana-on-touroku . 'auto)
+             (skk-isearch-start-mode . 'latin)
+             (skk-search-sagyo-henkaku . t))
+    :config
+    (condition-case nil
+        (skk-server-version)
+      (error
+       (let
+           ((dic-file "/usr/share/skk/SKK-JISYO.L"))
+         (and (file-exists-p dic-file)
+              (set-variable 'skk-jisyo-code nil)
+              (set-variable 'skk-large-jisyo dic-file)))))
+    (let
+        ((skk-auto-save-jisyo-interval 6))
+      (run-with-idle-timer skk-auto-save-jisyo-interval t
+                           #'skk-save-jisyo))
+    (skk-mode -1))
   (leaf undo-tree
     :ensure t
     :custom (undo-tree-enable-undo-in-region . nil)
