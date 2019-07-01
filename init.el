@@ -70,21 +70,21 @@
       ((el-get-git-shallow-clone  . t)
        (el-get-user-package-directory . (locate-user-emacs-file "config/packages"))))))
 
-(leaf elscreen
-  :ensure t
-  :require t
+(leaf *interfaces
   :config
-  (elscreen-set-prefix-key [(control z)])
-  (elscreen-start)
-  :custom
-  ((elscreen-tab-display-control . nil)
-   (elscreen-tab-display-kill-screen . nil)
-   (elscreen-display-tab . t))
-  :custom-face
-  (elscreen-tab-background-face     . '((nil (:foreground "#112" :background "#ccc" :underline nil :box nil))))
-  (elscreen-tab-control-face        . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil))))
-  (elscreen-tab-current-screen-face . '((nil (:foreground "#ccc" :background "#336" :underline nil :box nil))))
-  (elscreen-tab-other-screen-face   . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil)))))
+  (leaf elscreen
+    :ensure t
+    :require t
+    :config
+    (elscreen-set-prefix-key [(control z)])
+    (elscreen-start)
+    :custom ((elscreen-tab-display-control . nil)
+             (elscreen-tab-display-kill-screen . nil)
+             (elscreen-display-tab . t))
+    :custom-face ((elscreen-tab-background-face     . '((nil (:foreground "#112" :background "#ccc" :underline nil :box nil))))
+                  (elscreen-tab-control-face        . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil))))
+                  (elscreen-tab-current-screen-face . '((nil (:foreground "#ccc" :background "#336" :underline nil :box nil))))
+                  (elscreen-tab-other-screen-face   . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil)))))))
 
 (leaf *minor-modes
   :config
