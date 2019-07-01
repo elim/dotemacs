@@ -132,6 +132,14 @@
                   (elscreen-tab-control-face        . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil))))
                   (elscreen-tab-current-screen-face . '((nil (:foreground "#ccc" :background "#336" :underline nil :box nil))))
                   (elscreen-tab-other-screen-face   . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil))))))
+  (leaf migemo
+    :ensure t
+    :require t
+    :custom ((migemo-coding-system . 'utf-8-unix)
+             (migemo-command . "/usr/local/bin/cmigemo")
+             (migemo-options . '("-q" "--emacs"))
+             (migemo-dictionary . "/usr/local/share/migemo/utf-8/migemo-dict"))
+    :config (migemo-init))
   (leaf rotate :ensure t))
 
 (leaf *minor-modes
