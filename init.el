@@ -405,14 +405,16 @@ Environment-dependent value is generated as initial values.")
       (php-enable-psr2-coding-style)
       (hs-minor-mode +1))
     :hook (php-mode-hook . elim:php-mode-hook-func))
-  (leaf ruby-mode
-    :ensure t
-    :bind (:ruby-mode-map
-           ("C-m" . reindent-then-newline-and-indent))
-    :custom ((ruby-deep-indent-paren-style . nil)
-             (ruby-flymake-use-rubocop-if-available . nil)
-             (ruby-insert-encoding-magic-comment . nil)
-             (ruby-use-smie . nil)))
+  (leaf *ruby
+    (leaf ruby-end :ensure t)
+    (leaf ruby-mode
+      :ensure t
+      :bind (:ruby-mode-map
+             ("C-m" . reindent-then-newline-and-indent))
+      :custom ((ruby-deep-indent-paren-style . nil)
+               (ruby-flymake-use-rubocop-if-available . nil)
+               (ruby-insert-encoding-magic-comment . nil)
+               (ruby-use-smie . nil))))
   (leaf salt-mode
     :ensure t
     :mode ("\\.sls\\'" "\\master\\'" "\\roster\\'" "\\Saltfile\\'"))
