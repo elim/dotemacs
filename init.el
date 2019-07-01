@@ -326,6 +326,27 @@ Environment-dependent value is generated as initial values.")
     (defun elim:go-mode-hook-func ()
       (set (make-local-variable 'tab-width) 4))
     :hook (go-mode-hook . elim:go-mode-hook-func))
+  (leaf js2-mode
+    :ensure t
+    :mode ("\\.js\\'" "\\.es6\\'")
+    :preface
+    (defun elim:js2-mode-hook-func ()
+      (set-face-underline 'js2-warning nil)
+      (set-variable 'indent-tabs-mode nil)
+      (set-variable 'show-trailing-whitespace t)
+      (hs-minor-mode +1))
+    :custom ((js2-basic-offset . 2)
+             (js2-include-browser-externs . t)
+             (js2-include-node-externs . t)
+             (js2-mode-deactivate-region . t)
+             (js2-mode-mode-lighter . "")
+             (js2-mode-search-threshold . 1000)
+             (js2-mode-use-migemo . t)
+             (js2-global-externs
+              . '("define" "describe" "xdescribe" "expect" "it" "xit"
+                  "require" "$" "_" "angular" "Backbone" "JSON" "setTimeout" "jasmine"
+                  "beforeEach" "afterEach" "spyOn")))
+    :hook (js2-mode-hook . elim:js2-mode-hook-func))
   (leaf magit
     :ensure t
     :bind ("C-x v s" . magit-status)
