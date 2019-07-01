@@ -72,6 +72,12 @@
 
 (leaf *interfaces
   :config
+  (leaf buffer-move
+    :ensure t
+    :bind (("M-g h" . buf-move-left)
+           ("M-g j" . buf-move-down)
+           ("M-g k" . buf-move-up)
+           ("M-g l" . buf-move-right)))
   (leaf elscreen
     :ensure t
     :require t
