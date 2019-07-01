@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(el-get-bundle go-mode)
 (el-get-bundle js2-mode)
 (el-get-bundle json-mode)
 (el-get-bundle markdown-mode)
