@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(el-get-bundle open-junk-file)
 (el-get-bundle php-mode)
 (el-get-bundle popwin)
 (el-get-bundle rainbow-mode)

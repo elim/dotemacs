@@ -89,7 +89,12 @@
         (clipboard-to-kill-ring after-value)
         (message "clipboard-to-kill-ring %s" (if after-value "on" "off"))))
     :config
-    (clipboard-to-kill-ring +1)))
+    (clipboard-to-kill-ring +1))
+  (leaf open-junk-file
+    :ensure t
+    :bind (("C-x C-z" . open-junk-file))
+    :custom ((open-junk-file-format . "~/.junk/%Y/%m/%d-%H%M%S.")
+             (open-junk-file-find-file-function . 'find-file))))
 
 (leaf *interfaces
   :config
