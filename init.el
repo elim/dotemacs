@@ -331,6 +331,9 @@ Environment-dependent value is generated as initial values.")
       (set (make-local-variable
             'elim:auto-delete-trailing-whitespace-enable-p) nil))
     :delight auto-revert-mode)
+  (leaf salt-mode
+    :ensure t
+    :mode ("\\.sls\\'" "\\master\\'" "\\roster\\'" "\\Saltfile\\'"))
   (leaf vue-mode
     :ensure t)
   (leaf web-mode

@@ -2,10 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(el-get-bundle glynnforrest/mmm-jinja2)
-(el-get-bundle glynnforrest/salt-mode)
 (el-get-bundle go-mode)
-(el-get-bundle jinja2-mode)
 (el-get-bundle js2-mode)
 (el-get-bundle json-mode)
 (el-get-bundle markdown-mode)
