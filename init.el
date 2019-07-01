@@ -95,6 +95,9 @@
                   (company-tooltip-selection        . '((nil (:foreground "black" :background "steelblue")))))
     :delight t
     :hook (after-init-hook . global-company-mode))
+  (leaf company-quickhelp
+    :ensure t
+    :config (company-quickhelp-mode +1))
   (leaf elscreen
     :ensure t
     :require t
