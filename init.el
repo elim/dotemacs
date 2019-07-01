@@ -145,6 +145,14 @@
              (migemo-options . '("-q" "--emacs"))
              (migemo-dictionary . "/usr/local/share/migemo/utf-8/migemo-dict"))
     :config (migemo-init))
+  (leaf popwin
+    :ensure t
+    :require t
+    :custom ((popwin:popup-window-position . 'bottom)
+             (popwin:popup-window-height . 20))
+    :config
+    (push '("*Google Translate*") popwin:special-display-config)
+    (popwin-mode +1))
   (leaf rotate :ensure t))
 
 (leaf *minor-modes

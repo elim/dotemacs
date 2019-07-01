@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(el-get-bundle popwin)
 (el-get-bundle rainbow-mode)
 (el-get-bundle rejeep/ruby-end.el)
 (el-get-bundle rspec-mode)
