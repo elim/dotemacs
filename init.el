@@ -137,6 +137,12 @@
     :ensure t
     :delight t
     :config (editorconfig-mode 1))
+  (leaf flycheck
+    :ensure t
+    :hook (after-init-hook . global-flycheck-mode)
+    :custom ((flycheck-checker-error-threshold . 5000))
+    :init
+    (add-to-list 'exec-path (expand-file-name "bin" user-emacs-directory)))
   (leaf google-translate
     :ensure t
     :bind (("C-c t" . google-translate-enja-or-jaen))
