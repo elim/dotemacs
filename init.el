@@ -280,6 +280,12 @@ Environment-dependent value is generated as initial values.")
     :config (projectile-mode +1)
     :custom (projectile-enable-caching . t)
     :diminish projectile-mode)
+  (leaf rainbow-mode
+    :ensure t
+    :hook ((css-mode-hook
+            scss-mode-hook
+            php-mode-hook
+            html-mode-hook) . rainbow-mode))
   (leaf real-auto-save
     :ensure t
     :preface
