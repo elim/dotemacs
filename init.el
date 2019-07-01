@@ -378,6 +378,19 @@ Environment-dependent value is generated as initial values.")
             ("`" . self-insert-command)
             ([(meta return)] . elim:toggle-fullscreen)))
     :mode ("\\.md\\'" . gfm-mode))
+  (leaf php-mode
+    :ensure t
+    :bind (:php-mode-map
+           ("C-c C-[" . beginning-of-defun)
+           ("C-c C-]" . end-of-defun))
+    :custom ((php-mode-coding-style . 'psr2))
+    :preface
+    (defun elim:php-mode-hook-func ()
+      (setq-local shell-file-name "/bin/sh")
+      (setq-local flycheck-phpcs-standard "PSR2")
+      (php-enable-psr2-coding-style)
+      (hs-minor-mode +1))
+    :hook (php-mode-hook . elim:php-mode-hook-func))
   (leaf salt-mode
     :ensure t
     :mode ("\\.sls\\'" "\\master\\'" "\\roster\\'" "\\Saltfile\\'"))
