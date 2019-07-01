@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(el-get-bundle gist:5457732:ginger-api :depends (json popwin request))
 (el-get-bundle gist:666807b53f2b2cf503c1:clipboard-to-kill-ring :depends (deferred))
 (el-get-bundle git-modes)
 (el-get-bundle glynnforrest/mmm-jinja2)
