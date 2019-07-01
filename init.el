@@ -133,6 +133,10 @@
                   ("redmine"      . textile-mode))))
     :config
     (atomic-chrome-start-server))
+  (leaf editorconfig
+    :ensure t
+    :delight t
+    :config (editorconfig-mode 1))
   (leaf google-translate
     :ensure t
     :bind (("C-c t" . google-translate-enja-or-jaen))
