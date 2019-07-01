@@ -263,7 +263,16 @@ Environment-dependent value is generated as initial values.")
             'elim:auto-delete-trailing-whitespace-enable-p) nil))
     :delight auto-revert-mode)
   (leaf vue-mode
-    :ensure t))
+    :ensure t)
+  (leaf web-mode
+    :ensure t
+    :mode ("\\.ctp\\'" "\\.p?html?\\'" "\\.html.erb\\'")
+    :custom ((web-mode-block-padding . 2)
+             (web-mode-comment-style . 2)
+             (web-mode-enable-engine-detection . t)
+             (web-mode-indent-style . 2)
+             (web-mode-script-padding . 2)
+             (web-mode-style-padding . 2))))
 
 ;; Preferred libraries
 (el-get-bundle tarao/with-eval-after-load-feature-el)

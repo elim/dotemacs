@@ -36,7 +36,6 @@
 (el-get-bundle terraform-mode)
 (el-get-bundle tide)
 (el-get-bundle typescript-mode)
-(el-get-bundle web-mode)
 (el-get-bundle wgrep)
 (el-get-bundle yaml-mode)
 
