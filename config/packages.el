@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(el-get-bundle markdown-mode)
 (el-get-bundle migemo)
 (el-get-bundle open-junk-file)
 (el-get-bundle php-mode)

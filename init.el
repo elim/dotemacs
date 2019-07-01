@@ -359,6 +359,12 @@ Environment-dependent value is generated as initial values.")
       (set (make-local-variable
             'elim:auto-delete-trailing-whitespace-enable-p) nil))
     :delight auto-revert-mode)
+  (leaf markdown-mode
+    :ensure t
+    :bind ((:gfm-mode-map
+            ("`" . self-insert-command)
+            ([(meta return)] . elim:toggle-fullscreen)))
+    :mode ("\\.md\\'" . gfm-mode))
   (leaf salt-mode
     :ensure t
     :mode ("\\.sls\\'" "\\master\\'" "\\roster\\'" "\\Saltfile\\'"))
