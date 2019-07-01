@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(el-get-bundle company-mode)
 (el-get-bundle company-quickhelp :depends (pos-tip))
 (el-get-bundle daichirata/emacs-rotate)
 (el-get-bundle docker-tramp)

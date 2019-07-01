@@ -78,6 +78,23 @@
            ("M-g j" . buf-move-down)
            ("M-g k" . buf-move-up)
            ("M-g l" . buf-move-right)))
+  (leaf company
+    :ensure t
+    :bind (("C-M-i" . company-complete)
+           (:company-active-map
+            ("C-n" . company-select-next)
+            ("C-p" . company-select-previous)
+            ("C-s" . company-filter-candidates)
+            ("C-i" . company-complete-selection)))
+    :custom-face ((company-preview-common           . '((nil (:foreground "lightgrey" :underline t))))
+                  (company-scrollbar-bg             . '((nil (:background "gray40"))))
+                  (company-scrollbar-fg             . '((nil (:background "orange"))))
+                  (company-tooltip                  . '((nil (:foreground "black" :background "lightgrey"))))
+                  (company-tooltip-common           . '((nil (:foreground "black" :background "lightgrey"))))
+                  (company-tooltip-common-selection . '((nil (:foreground "white" :background "steelblue"))))
+                  (company-tooltip-selection        . '((nil (:foreground "black" :background "steelblue")))))
+    :delight t
+    :hook (after-init-hook . global-company-mode))
   (leaf elscreen
     :ensure t
     :require t
