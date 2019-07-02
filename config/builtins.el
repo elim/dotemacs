@@ -3,17 +3,6 @@
 ;;; Code:
 
 ;; Key settings
-(keyboard-translate ?\C-h ?\C-?)
-
-(bind-keys :map global-map
-           ("<ns-drag-file>" . ns-find-file)
-
-           ("<delete>" . delete-char)
-           ("C-h"      . delete-char)
-           ("C-m"      . newline-and-indent)
-
-           ("C-x |" . split-window-right)
-           ("C-x -" . split-window-below))
 
 ;; Enable mature methods
 (put 'narrow-to-region 'disabled nil)

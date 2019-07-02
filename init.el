@@ -65,6 +65,7 @@
 (leaf *environments
   :config
   (leaf cocoa
+    :bind (("<ns-drag-file>" . ns-find-file))
     :custom ((ns-use-native-fullscreen . nil)))
   (leaf frame
     :if window-system
@@ -75,7 +76,15 @@
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
     :custom ((line-spacing . 4))
-    :hook (window-setup-hook . elim:frame-fullscreen)))
+    :hook (window-setup-hook . elim:frame-fullscreen))
+  (leaf simple
+    :bind (("<delete>" . delete-char)
+           ("C-h"      . delete-char)
+           ("C-m"      . newline-and-indent)
+           ("C-x |"    . split-window-right)
+           ("C-x -"    . split-window-below))
+    :config
+    (keyboard-translate ?\C-h ?\C-?)))
 
 (leaf *libraries
   :config t
