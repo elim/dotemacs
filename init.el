@@ -449,6 +449,18 @@ Environment-dependent value is generated as initial values.")
     :mode ("\\.sls\\'" "\\master\\'" "\\roster\\'" "\\Saltfile\\'"))
   (leaf slim-mode :ensure t)
   (leaf terraform-mode :ensure t)
+  (leaf *typescript
+    (leaf typescript-mode
+      :ensure t
+      :preface
+      (defun elim:typescript-mode-hook-func ()
+        (tide-setup)
+        (flycheck-mode t)
+        (setq flycheck-check-syntax-automatically '(save mode-enabled))
+        (eldoc-mode t)
+        (company-mode-on))
+      :hook (typescript-mode-hook . elim:typescript-mode-hook-func))
+    (leaf tide :ensure t))
   (leaf vue-mode
     :ensure t)
   (leaf web-mode
