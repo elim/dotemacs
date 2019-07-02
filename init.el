@@ -153,7 +153,12 @@
     :config
     (push '("*Google Translate*") popwin:special-display-config)
     (popwin-mode +1))
-  (leaf rotate :ensure t))
+  (leaf rotate :ensure t)
+  (leaf smart-mode-line
+    :ensure t
+    :custom ((sml/no-confirm-load-theme . t)
+             (sml/theme . 'dark))
+    :config (sml/setup)))
 
 (leaf *minor-modes
   :config

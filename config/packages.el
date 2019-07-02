@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(el-get-bundle smart-mode-line)
 (el-get-bundle terraform-mode)
 (el-get-bundle tide)
 (el-get-bundle typescript-mode)
