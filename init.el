@@ -474,14 +474,14 @@ Environment-dependent value is generated as initial values.")
              (web-mode-enable-engine-detection . t)
              (web-mode-indent-style . 2)
              (web-mode-script-padding . 2)
-             (web-mode-style-padding . 2))))
+             (web-mode-style-padding . 2)))
+  (leaf yaml-mode :ensure t))
 
 ;; Preferred libraries
 (el-get-bundle use-package)
 
 (load "environment")
 (load "builtins")
-(load "packages")
 (load "theme")
 (load "local" t)
 
