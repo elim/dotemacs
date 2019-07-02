@@ -64,6 +64,8 @@
 
 (leaf *environments
   :config
+  (leaf cocoa
+    :custom ((ns-use-native-fullscreen . nil)))
   (leaf frame
     :if window-system
     :preface

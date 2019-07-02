@@ -7,6 +7,5 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (load "environment/fonts")
-(load "environment/init-cocoa")
 
 ;;; environment.el ends here
