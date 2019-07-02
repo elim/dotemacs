@@ -22,19 +22,6 @@
   (when (and (file-exists-p dir) (not (member dir load-path)))
     (setq load-path (append (list dir) load-path))))
 
-;;; el-get
-;;
-;; Use the HEAD instead of the elpa version because this Emacs
-;; configuratfion depends many recipes of HEAD on currently.
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(let (el-get-master-branch)
-  (unless (require 'el-get nil t)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-      (goto-char (point-max))
-      (eval-print-last-sexp))))
-
 ;;; leaf.el
 ;;
 (prog1 "prepare leaf"
@@ -66,6 +53,7 @@
 
   (prog1 "el-get settings"
     (leaf el-get
+      :ensure t
       :custom
       ((el-get-git-shallow-clone  . t)
        (el-get-user-package-directory . (locate-user-emacs-file "config/packages"))))))
