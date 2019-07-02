@@ -63,7 +63,9 @@
   (leaf use-package :ensure t))
 
 (leaf *environments
+  :custom ((select-enable-clipboard . t))
   :config
+  (defalias 'yes-or-no-p 'y-or-n-p)
   (leaf cocoa
     :bind (("<ns-drag-file>" . ns-find-file))
     :custom ((ns-use-native-fullscreen . nil)))
