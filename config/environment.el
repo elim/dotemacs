@@ -8,6 +8,5 @@
 
 (load "environment/fonts")
 (load "environment/init-cocoa")
-(load "environment/init-frame")
 
 ;;; environment.el ends here

@@ -62,6 +62,19 @@
   :config
   (leaf use-package :ensure t))
 
+(leaf *environments
+  :config
+  (leaf frame
+    :if window-system
+    :preface
+    (defun elim:frame-fullscreen ()
+      (set-frame-parameter nil 'fullscreen 'fullboth))
+    :config
+    (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+    (add-to-list 'default-frame-alist '(ns-appearance . dark))
+    :custom ((line-spacing . 4))
+    :hook (window-setup-hook . elim:frame-fullscreen)))
+
 (leaf *libraries
   :config t
   (leaf deferred :ensure t))
