@@ -414,7 +414,8 @@ Environment-dependent value is generated as initial values.")
       :custom ((ruby-deep-indent-paren-style . nil)
                (ruby-flymake-use-rubocop-if-available . nil)
                (ruby-insert-encoding-magic-comment . nil)
-               (ruby-use-smie . nil))))
+               (ruby-use-smie . nil)))
+    (leaf rspec-mode :ensure t))
   (leaf salt-mode
     :ensure t
     :mode ("\\.sls\\'" "\\master\\'" "\\roster\\'" "\\Saltfile\\'"))
