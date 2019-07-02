@@ -181,7 +181,10 @@
     :ensure t
     :custom ((sml/no-confirm-load-theme . t)
              (sml/theme . 'dark))
-    :config (sml/setup)))
+    :config (sml/setup))
+  (leaf wgrep
+    :ensure t
+    :custom ((wgrep-auto-save-buffer . t))))
 
 (leaf *minor-modes
   :config
