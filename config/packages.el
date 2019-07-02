@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(el-get-bundle slim-mode)
 (el-get-bundle smart-mode-line)
 (el-get-bundle terraform-mode)
 (el-get-bundle tide)

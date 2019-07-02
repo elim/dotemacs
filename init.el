@@ -419,6 +419,7 @@ Environment-dependent value is generated as initial values.")
   (leaf salt-mode
     :ensure t
     :mode ("\\.sls\\'" "\\master\\'" "\\roster\\'" "\\Saltfile\\'"))
+  (leaf slim-mode :ensure t)
   (leaf vue-mode
     :ensure t)
   (leaf web-mode
