@@ -70,6 +70,10 @@
       ((el-get-git-shallow-clone  . t)
        (el-get-user-package-directory . (locate-user-emacs-file "config/packages"))))))
 
+(leaf *backward-compatibles
+  :config
+  (leaf use-package :ensure t))
+
 (leaf *libraries
   :config t
   (leaf deferred :ensure t))
@@ -477,8 +481,6 @@ Environment-dependent value is generated as initial values.")
              (web-mode-style-padding . 2)))
   (leaf yaml-mode :ensure t))
 
-;; Preferred libraries
-(el-get-bundle use-package)
 
 (load "environment")
 (load "builtins")
