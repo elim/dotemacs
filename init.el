@@ -721,6 +721,10 @@ Environment-dependent value is generated as initial values.")
   (leaf salt-mode
     :ensure t
     :mode ("\\.sls\\'" "\\master\\'" "\\roster\\'" "\\Saltfile\\'"))
+  (leaf sh-script
+    :mode ("\\.env\\'" "\\.env.sample\\'")
+    :custom ((sh-basic-offset 2)
+             (sh-indentation 2)))
   (leaf slim-mode :ensure t)
   (leaf text-mode
     :preface

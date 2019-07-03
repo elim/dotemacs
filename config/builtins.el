@@ -22,12 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package sh-script
-  :mode ("\\.env\\'" "\\.env.sample\\'")
-  :custom
-  (sh-basic-offset 2)
-  (sh-indentation 2))
-
 (use-package time
   :custom (display-time-24hr-format t)
   :config (display-time))
