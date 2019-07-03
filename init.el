@@ -806,6 +806,4 @@ Environment-dependent value is generated as initial values.")
              (web-mode-style-padding . 2)))
   (leaf yaml-mode :ensure t))
 
-(load "local" t)
-
 ;;; init.el ends here
