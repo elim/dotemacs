@@ -134,6 +134,8 @@
 
 (leaf *utilities
   :config t
+  (leaf browse-url
+    :bind ("C-x m" . browse-url-at-point))
   (leaf clipboard-to-kill-ring
     :after deferred
     :el-get gist:666807b53f2b2cf503c1:clipboard-to-kill-ring

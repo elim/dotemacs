@@ -26,9 +26,6 @@
   :config
   (global-auto-revert-mode t))
 
-(use-package browse-url
-  :bind ("C-x m" . browse-url-at-point))
-
 (use-package bs
   :bind ("C-x C-b" . bs-show))
 
