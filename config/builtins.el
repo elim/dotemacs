@@ -22,14 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package server
-  :custom (server-window 'pop-to-buffer)
-  :config
-  (unless (server-running-p) (server-start))
-  (remove-hook
-   'kill-buffer-query-functions
-   'server-kill-buffer-query-function))
-
 (use-package sh-script
   :mode ("\\.env\\'" "\\.env.sample\\'")
   :custom

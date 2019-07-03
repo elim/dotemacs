@@ -540,6 +540,14 @@ Environment-dependent value is generated as initial values.")
     :advice (:override real-auto-save-start-timer elim:real-auto-save-start-timer--idle-timer)
     :custom ((real-auto-save-interval . 0.5))
     :hook (find-file-hook . real-auto-save-mode))
+  (leaf server
+    :require t
+    :custom (server-window . 'pop-to-buffer)
+    :config
+    (unless (server-running-p) (server-start))
+    (remove-hook
+     'kill-buffer-query-functions
+     'server-kill-buffer-query-function))
   (leaf skk
     :ensure ddskk
     :require t
