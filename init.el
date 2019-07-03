@@ -282,6 +282,36 @@
                   ("redmine"      . textile-mode))))
     :config
     (atomic-chrome-start-server))
+  (leaf *dired
+    :config
+    (leaf dired
+      :bind (:dired-mode-map
+             ("SPC" . elim:dired-toggle-mark))
+      :custom ((dired-recursive-copies . 'always)
+               (dired-recursive-deletes . 'always))
+      :preface
+      ;; Mark with space (like the FD)
+      (defun elim:dired-toggle-mark (arg)
+        "Toggle the current (or next ARG) files."
+        ;; S.Namba Sat Aug 10 12:20:36 1996
+        (interactive "P")
+        (let ((dired-marker-char
+               (if (save-excursion (beginning-of-line)
+                                   (looking-at " "))
+                   dired-marker-char ?\040)))
+          (dired-mark arg)
+          (dired-next-line 0))))
+    (leaf dired-x
+      :custom ((dired-bind-jump . nil)
+               (dired-guess-shell-alist-user
+                . '(("\\.tar\\.gz\\'"  "tar tzvf")
+                    ("\\.taz\\'" "tar ztvf")
+                    ("\\.tar\\.bz2\\'" "tar tjvf")
+                    ("\\.zip\\'" "unzip -l")
+                    ("\\.\\(g\\|\\) z\\'" "zcat")))))
+    (leaf wdired
+      :bind (:dired-mode-map
+             ("r" . wdired-change-to-wdired-mode))))
   (leaf diff-mode
     :preface
     (defun elim:diff-mode-refine-automatically ()
@@ -417,9 +447,9 @@ Environment-dependent value is generated as initial values.")
   (leaf skk
     :ensure ddskk
     :require t
-    :bind (("C-x C-j" . skk-mode)
-           ("C-x t" . nil)
-           ("C-x j" . nil))
+    :bind* (("C-x C-j" . skk-mode)
+            ("C-x t" . nil)
+            ("C-x j" . nil))
     :custom ((default-input-method . "japanese-skk")
              (skk-jisyo-code . 'utf-8)
              (skk-count-private-jisyo-candidates-exactly . t)
