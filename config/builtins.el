@@ -22,10 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package files
-  :if (executable-find "gls")
-  :custom (insert-directory-program "gls"))
-
 (use-package find-func
   :config
   ;; C-x F => Find Function

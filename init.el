@@ -161,6 +161,9 @@
     (add-to-list 'desktop-globals-to-save 'kill-ring)
     (add-to-list 'desktop-globals-to-save 'log-edit-comment-ring)
     (add-to-list 'desktop-globals-to-save 'read-expression-history))
+  (leaf files
+    :if (executable-find "gls")
+    :custom ((insert-directory-program . "gls")))
   (leaf dictionary
     :if (eq system-type 'darwin)
     :preface
