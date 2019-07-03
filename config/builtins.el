@@ -26,9 +26,6 @@
   :config
   (global-auto-revert-mode t))
 
-(use-package bs
-  :bind ("C-x C-b" . bs-show))
-
 (use-package css-mode
   :mode "\\.css\\'"
   :custom (css-indent-offset 2))
