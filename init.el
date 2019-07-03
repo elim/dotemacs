@@ -14,9 +14,6 @@
   (let ((sort-fold-case t))
     (call-interactively 'sort-lines)))
 
-(setq custom-file (expand-file-name "customize.el" user-emacs-directory))
-(load custom-file)
-
 ;;; leaf.el
 ;;
 (prog1 "prepare leaf"
