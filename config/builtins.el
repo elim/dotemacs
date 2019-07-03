@@ -22,10 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package autorevert
-  :config
-  (global-auto-revert-mode t))
-
 (use-package css-mode
   :mode "\\.css\\'"
   :custom (css-indent-offset 2))

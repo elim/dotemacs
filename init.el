@@ -284,6 +284,9 @@
                   ("redmine"      . textile-mode))))
     :config
     (atomic-chrome-start-server))
+  (leaf autorevert
+    :config
+    (global-auto-revert-mode t))
   (leaf *dired
     :config
     (leaf dired
