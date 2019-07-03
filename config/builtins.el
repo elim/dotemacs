@@ -22,10 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package time
-  :custom (display-time-24hr-format t)
-  :config (display-time))
-
 (use-package uniquify
   :custom
   (uniquify-buffer-name-style 'post-forward-angle-brackets)

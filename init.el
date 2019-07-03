@@ -298,7 +298,10 @@
     :config (sml/setup))
   (leaf wgrep
     :ensure t
-    :custom ((wgrep-auto-save-buffer . t))))
+    :custom ((wgrep-auto-save-buffer . t)))
+  (leaf time
+    :custom ((display-time-24hr-format . t))
+    :config (display-time))
 
 (leaf *minor-modes
   :config
