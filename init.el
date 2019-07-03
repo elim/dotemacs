@@ -8,6 +8,7 @@
 (set-variable 'user-full-name "Takeru Naito")
 (set-variable 'user-mail-address "takeru.naito@gmail.com")
 (set-variable 'custom-file "/dev/null")
+(set-variable 'gc-cons-threshold (* 128 1024 1024))
 
 ;;; leaf.el
 ;;
