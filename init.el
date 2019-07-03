@@ -53,10 +53,6 @@
       ((el-get-git-shallow-clone  . t)
        (el-get-user-package-directory . (locate-user-emacs-file "config/packages"))))))
 
-(leaf *backward-compatibles
-  :config
-  (leaf use-package :ensure t))
-
 (leaf *environments
   :custom ((select-enable-clipboard . t))
   :config
