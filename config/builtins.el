@@ -22,9 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package select
-  :custom (select-enable-primary t))
-
 (use-package server
   :custom (server-window 'pop-to-buffer)
   :config

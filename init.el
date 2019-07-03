@@ -289,6 +289,8 @@
      elim:openweathermap-city-id)
     (setq-default mode-line-format
                   (add-to-list 'mode-line-format '(:eval (sky-color-clock)) t)))
+  (leaf select
+    :custom (select-enable-primary . t))
   (leaf smart-mode-line
     :ensure t
     :custom ((sml/no-confirm-load-theme . t)
