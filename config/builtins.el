@@ -22,15 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package eldoc
-  :custom
-  (eldoc-idle-delay 0.2)
-  (eldoc-minor-mode-string "")
-  :hook
-  ((emacs-lisp-mode . turn-on-eldoc-mode)
-   (lisp-interaction-mode . turn-on-eldoc-mode)
-   (ielm-mode-hook . turn-on-eldoc-mode)))
-
 (use-package executable
   :hook (after-save . elim:executable-make-buffer-file-executable-if-script-p)
   :config

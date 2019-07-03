@@ -339,6 +339,12 @@
     :ensure t
     :delight t
     :config (editorconfig-mode 1))
+  (leaf eldoc
+    :custom ((eldoc-idle-delay . 0.2)
+             (eldoc-minor-mode-string . ""))
+    :hook ((emacs-lisp-mode
+            lisp-interaction-mode
+            ielm-mode-hook) . turn-on-eldoc-mode))
   (leaf flycheck
     :ensure t
     :hook (after-init-hook . global-flycheck-mode)
