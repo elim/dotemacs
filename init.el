@@ -563,6 +563,7 @@ Environment-dependent value is generated as initial values.")
   (leaf rainbow-mode
     :ensure t
     :hook ((css-mode-hook
+            emacs-lisp-mode-hook
             scss-mode-hook
             php-mode-hook
             html-mode-hook) . rainbow-mode))
