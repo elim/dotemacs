@@ -150,6 +150,22 @@
         (message "clipboard-to-kill-ring %s" (if after-value "on" "off"))))
     :config
     (clipboard-to-kill-ring +1))
+  (leaf dictionary
+    :if (eq system-type 'darwin)
+    :preface
+    (defun elim:dictionary-search (word)
+      (browse-url
+       (concat "dict:///" (url-hexify-string word))))
+    (defun elim:dictionary-word ()
+      (interactive)
+      (elim:dictionary-search
+       (substring-no-properties (thing-at-point 'word))))
+    (defun elim:dictionary-region (beg end)
+      (interactive "r")
+      (elim:dictionary-search
+       (buffer-substring-no-properties beg end)))
+    :bind (("C-x e" . elim:dictionary-word)
+           ("C-x y" . elim:dictionary-region)))
   (leaf open-junk-file
     :ensure t
     :bind (("C-x C-z" . open-junk-file))
