@@ -17,13 +17,6 @@
 (setq custom-file (expand-file-name "customize.el" user-emacs-directory))
 (load custom-file)
 
-;; path and filenames.
-(dolist (dir (list
-              (expand-file-name "config" user-emacs-directory)
-              "/usr/local/share/emacs/site-lisp/"))
-  (when (and (file-exists-p dir) (not (member dir load-path)))
-    (setq load-path (append (list dir) load-path))))
-
 ;;; leaf.el
 ;;
 (prog1 "prepare leaf"
