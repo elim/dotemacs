@@ -22,9 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package font-core
-  :config (global-font-lock-mode t))
-
 (use-package help
   :config (temp-buffer-resize-mode t))
 

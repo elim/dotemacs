@@ -239,6 +239,8 @@
       (unless (string-match tramp-file-name-regexp (buffer-file-name))
         (executable-make-buffer-file-executable-if-script-p)))
     :hook (after-save-hook . elim:executable-make-buffer-file-executable-if-script-p))
+  (leaf font-core
+    :config (global-font-lock-mode t))
   (leaf migemo
     :ensure t
     :require t
