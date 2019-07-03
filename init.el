@@ -7,6 +7,7 @@
 (set-variable 'load-prefer-newer t)
 (set-variable 'user-full-name "Takeru Naito")
 (set-variable 'user-mail-address "takeru.naito@gmail.com")
+(set-variable 'custom-file "/dev/null")
 
 ;;; leaf.el
 ;;
