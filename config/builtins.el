@@ -22,13 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package find-func
-  :config
-  ;; C-x F => Find Function
-  ;; C-x V => Find Variable
-  ;; C-x K => Find Function on Key
-  (find-function-setup-keys))
-
 (use-package flyspell
   :custom
   ;; M-TABのキーバインドを変更しない

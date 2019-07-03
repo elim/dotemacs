@@ -164,6 +164,12 @@
   (leaf files
     :if (executable-find "gls")
     :custom ((insert-directory-program . "gls")))
+  (leaf find-func
+    :config
+    ;; C-x F => Find Function
+    ;; C-x V => Find Variable
+    ;; C-x K => Find Function on Key
+    (find-function-setup-keys))
   (leaf dictionary
     :if (eq system-type 'darwin)
     :preface
