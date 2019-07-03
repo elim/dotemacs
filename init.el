@@ -429,6 +429,15 @@ Environment-dependent value is generated as initial values.")
 
 (leaf *major-modes
   :config
+  (leaf cc-mode
+    :preface
+    (defun elim:c-mode-common-hook-func ()
+      (c-set-style "bsd")
+      (set-variable indent-tabs-mode nil)
+      (set-variable c-basic-offset 2)
+      (c-toggle-auto-hungry-state -1)
+      (subword-mode 1))
+    :hook ((c-mode-common-hook . elim:c-mode-common-hook-func)))
   (leaf dockerfile-mode :ensure t)
   (leaf elisp-mode
     :hook (emacs-lisp-mode-hook . elim:emacs-lisp-mode-hook-func)

@@ -176,7 +176,6 @@
   :config
   (defun elim:disable-tool-bar () (tool-bar-mode -1)))
 
-(load "builtins/cc-mode")
 (load "builtins/dictionary")
 (load "builtins/diff-mode")
 (load "builtins/dired")
