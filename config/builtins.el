@@ -22,14 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package ns-win
-  :if (featurep 'ns)
-  :custom
-  (ns-pop-up-frames nil)
-  (ns-antialias-text t)
-  (ns-command-modifier 'meta)
-  (ns-alternate-modifier 'meta))
-
 (use-package select
   :custom (select-enable-primary t))
 

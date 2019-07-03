@@ -119,6 +119,12 @@
       (elim:set-text-height 180))
      ((eq window-system 'x)
       (elim:set-text-height 140))))
+  (leaf ns-win
+    :if (featurep 'ns)
+    :custom ((ns-pop-up-frames . nil)
+             (ns-antialias-text . t)
+             (ns-command-modifier . 'meta)
+             (ns-alternate-modifier . 'meta)))
   (leaf simple
     :bind (("<delete>" . delete-char)
            ("C-h"      . delete-char)
