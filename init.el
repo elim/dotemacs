@@ -302,6 +302,10 @@
   (leaf time
     :custom ((display-time-24hr-format . t))
     :config (display-time))
+  (leaf uniquify
+    :custom ((uniquify-buffer-name-style . 'post-forward-angle-brackets)
+             (uniquify-ignore-buffers-re . "*[^*]+*")
+             (uniquify-min-dir-content   . 1))))
 
 (leaf *minor-modes
   :config

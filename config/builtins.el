@@ -22,12 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package uniquify
-  :custom
-  (uniquify-buffer-name-style 'post-forward-angle-brackets)
-  (uniquify-ignore-buffers-re "*[^*]+*")
-  (uniquify-min-dir-content 1))
-
 (use-package scroll-bar
   :config
   (column-number-mode +1)
