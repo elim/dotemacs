@@ -49,9 +49,4 @@
          (not (elim:editorconfig-mode-enabled-p))
          (delete-trailing-whitespace))))
 
-(use-package tool-bar
-  :hook (window-setup . elim:disable-tool-bar)
-  :config
-  (defun elim:disable-tool-bar () (tool-bar-mode -1)))
-
 ;;; builtins.el ends here

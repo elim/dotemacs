@@ -307,6 +307,10 @@
   (leaf time
     :custom ((display-time-24hr-format . t))
     :config (display-time))
+  (leaf tool-bar
+    :preface
+    (defun elim:disable-tool-bar () (tool-bar-mode -1))
+    :hook (window-setup-hook . elim:disable-tool-bar))
   (leaf uniquify
     :custom ((uniquify-buffer-name-style . 'post-forward-angle-brackets)
              (uniquify-ignore-buffers-re . "*[^*]+*")
