@@ -282,6 +282,15 @@
                   ("redmine"      . textile-mode))))
     :config
     (atomic-chrome-start-server))
+  (leaf diff-mode
+    :preface
+    (defun elim:diff-mode-refine-automatically ()
+      (diff-auto-refine-mode t)) ; Highlight by character unit.
+    :hook (diff-mode-hook . elim:diff-mode-refine-automatically)
+    :custom-face
+    ((diff-added         . '((nil (:foreground "white" :background "dark green"))))
+     (diff-removed       . '((nil (:foreground "white" :background "dark red"))))
+     (diff-refine-change . '((nil (:foreground nil     :background nil :weight 'bold :inverse-video t))))))
   (leaf editorconfig
     :ensure t
     :delight t
