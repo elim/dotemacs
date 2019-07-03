@@ -9,11 +9,6 @@
 (setq user-full-name "Takeru Naito"
       user-mail-address "takeru.naito@gmail.com")
 
-(defun sort-lines-nocase ()
-  (interactive)
-  (let ((sort-fold-case t))
-    (call-interactively 'sort-lines)))
-
 ;;; leaf.el
 ;;
 (prog1 "prepare leaf"
@@ -200,7 +195,15 @@
     :ensure t
     :bind (("C-x C-z" . open-junk-file))
     :custom ((open-junk-file-format . "~/.junk/%Y/%m/%d-%H%M%S.")
-             (open-junk-file-find-file-function . 'find-file))))
+             (open-junk-file-find-file-function . 'find-file)))
+  (leaf sort
+    :config
+    (defun elim:sort-lines-nocase ()
+      "Ignore case when the sort the lines."
+      (interactive)
+      (let ((sort-fold-case t))
+        (call-interactively 'sort-lines)))
+    (defalias 'sort-lines-nocase #'elim:sort-lines-nocase)))
 
 (leaf *interfaces
   :custom ((frame-title-format . `(" %b " (buffer-file-name "( %f )")))
