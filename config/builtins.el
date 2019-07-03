@@ -22,10 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package css-mode
-  :mode "\\.css\\'"
-  :custom (css-indent-offset 2))
-
 (use-package dabbrev
   :custom (dabbrev-abbrev-skip-leading-regexp "\\$"))
 

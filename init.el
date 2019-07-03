@@ -528,6 +528,8 @@ Environment-dependent value is generated as initial values.")
       (c-toggle-auto-hungry-state -1)
       (subword-mode 1))
     :hook ((c-mode-common-hook . elim:c-mode-common-hook-func)))
+  (leaf css-mode
+    :custom ((css-indent-offset . 2)))
   (leaf dockerfile-mode :ensure t)
   (leaf elisp-mode
     :hook (emacs-lisp-mode-hook . elim:emacs-lisp-mode-hook-func)
