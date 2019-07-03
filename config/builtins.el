@@ -22,9 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package menu-bar
-  :config (menu-bar-mode +1))
-
 (use-package ns-win
   :if (featurep 'ns)
   :custom

@@ -241,6 +241,8 @@
     :hook (after-save-hook . elim:executable-make-buffer-file-executable-if-script-p))
   (leaf font-core
     :config (global-font-lock-mode t))
+  (leaf menu-bar
+    :config (menu-bar-mode +1))
   (leaf migemo
     :ensure t
     :require t
