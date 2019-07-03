@@ -126,13 +126,29 @@
              (ns-command-modifier . 'meta)
              (ns-alternate-modifier . 'meta)))
   (leaf simple
+    :preface
+    (defvar elim:auto-delete-trailing-whitespace-enable-p t)
+    (defun elim:dedup-kill-new (arg)
+      (set-variable 'kill-ring (delete arg kill-ring)))
+    (defun elim:editorconfig-mode-enabled-p ()
+      (not (not (memq 'editorconfig-mode (mapcar #'car minor-mode-alist)))))
+    (defun elim:auto-delete-trailing-whitespace ()
+      (and elim:auto-delete-trailing-whitespace-enable-p
+           (not (elim:editorconfig-mode-enabled-p))
+           (delete-trailing-whitespace)))
     :bind (("<delete>" . delete-char)
            ("C-h"      . delete-char)
            ("C-m"      . newline-and-indent)
            ("C-x |"    . split-window-right)
            ("C-x -"    . split-window-below))
+    :custom ((kill-ring-max . 300)
+             (line-move-visual . t))
     :config
-    (keyboard-translate ?\C-h ?\C-?)))
+    (keyboard-translate ?\C-h ?\C-?)
+    (line-number-mode +1)
+    (transient-mark-mode t)
+    :hook (before-save-hook . elim:auto-delete-trailing-whitespace)
+    :advice (:before kill-new elim:dedup-kill-new)))
 
 (leaf *libraries
   :config t
@@ -199,7 +215,22 @@
              (open-junk-file-find-file-function . 'find-file))))
 
 (leaf *interfaces
+  :custom ((frame-title-format . `(" %b " (buffer-file-name "( %f )")))
+           (inhibit-startup-screen . t)
+           (read-buffer-completion-ignore-case . t)
+           (read-file-name-completion-ignore-case .  t)
+           (require-final-newline . t)
+           (ring-bell-function . 'ignore)
+           (scroll-conservatively . 1)
+           (select-active-regions . nil)
+           (show-trailing-whitespace . nil)
+           (truncate-lines . nil)
+           (visible-bell . t))
   :config
+  (put 'narrow-to-region 'disabled nil)
+  (put 'dired-find-alternate-file 'disabled nil)
+  (set-default 'indent-tabs-mode nil)
+  (set-default 'cursor-in-non-selected-windows nil)
   (leaf buffer-move
     :ensure t
     :bind (("M-g h" . buf-move-left)
@@ -773,7 +804,6 @@ Environment-dependent value is generated as initial values.")
              (web-mode-style-padding . 2)))
   (leaf yaml-mode :ensure t))
 
-(load "builtins")
 (load "theme")
 (load "local" t)
 
