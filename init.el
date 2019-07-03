@@ -360,6 +360,10 @@
   (leaf autorevert
     :config
     (global-auto-revert-mode t))
+  (leaf auto-save-visited-mode
+    :config
+    (auto-save-visited-mode)
+    :custom ((auto-save-visited-interval . 0.5)))
   (leaf *dired
     :config
     (leaf dired
@@ -566,18 +570,6 @@ Environment-dependent value is generated as initial values.")
             scss-mode-hook
             php-mode-hook
             html-mode-hook) . rainbow-mode))
-  (leaf real-auto-save
-    :ensure t
-    :preface
-    ;; http://emacs.rubikitch.com/real-auto-save-buffers-enhanced-bug/
-    (defun elim:real-auto-save-start-timer--idle-timer ()
-      "Start real-auto-save-timer."
-      (set-variable 'real-auto-save-timer
-                    (run-with-idle-timer real-auto-save-interval
-                                         real-auto-save-interval 'real-auto-save-buffers)))
-    :advice (:override real-auto-save-start-timer elim:real-auto-save-start-timer--idle-timer)
-    :custom ((real-auto-save-interval . 0.5))
-    :hook (find-file-hook . real-auto-save-mode))
   (leaf server
     :require t
     :custom (server-window . 'pop-to-buffer)
