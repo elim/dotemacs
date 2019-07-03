@@ -288,29 +288,27 @@
     (push '("*Google Translate*") popwin:special-display-config)
     (popwin-mode +1))
   (leaf rotate :ensure t)
-  (leaf sky-color-clock
-    :el-get zk-phi/sky-color-clock
-    :after smart-mode-line
-    :require t
-    :preface
-    (defcustom elim:openweathermap-api-key ""
-      "The API key of the OpenWeatherMap."
-      :type 'string
-      :group 'elim)
-    (defcustom elim:openweathermap-city-id nil
-      "The city ID of OpenWeatherMap."
-      :type 'integer
-      :group 'elim)
-    :custom ((sky-color-clock-format . "")
-             (sky-color-clock-enable-emoji-icon . t)
-             (sky-color-clock-enable-temperature-indicator . t))
+  (leaf *sky-color-clock
+    :require json
     :config
-    (sky-color-clock-initialize 35)
-    (sky-color-clock-initialize-openweathermap-client
-     elim:openweathermap-api-key
-     elim:openweathermap-city-id)
-    (setq-default mode-line-format
-                  (add-to-list 'mode-line-format '(:eval (sky-color-clock)) t)))
+    (let*
+        ((credential-file "~/.config/openweathermap/credential.json")
+         (json (json-read-file credential-file))
+         (api-key (alist-get 'apiKey json))
+         (city-id (alist-get 'cityId json)))
+      (leaf sky-color-clock
+        :el-get zk-phi/sky-color-clock
+        :after smart-mode-line
+        :require t
+        :preface
+        :custom ((sky-color-clock-format . "")
+                 (sky-color-clock-enable-emoji-icon . t)
+                 (sky-color-clock-enable-temperature-indicator . t))
+        :config
+        (sky-color-clock-initialize 35)
+        (sky-color-clock-initialize-openweathermap-client api-key city-id)
+        (setq-default mode-line-format
+                      (add-to-list 'mode-line-format '(:eval (sky-color-clock)) t)))))
   (leaf scroll-bar
     :config
     (column-number-mode +1)
