@@ -22,9 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package hl-line
-  :config (global-hl-line-mode -1))
-
 (use-package isearch
   :bind (:map isearch-mode-map
               ("C-o" . elim:occur-in-isearch))

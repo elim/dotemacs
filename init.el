@@ -452,6 +452,8 @@
             ("C-c C-M-c" . hs-toggle-hiding)
             ("C-c h"     . hs-toggle-hiding)
             ("C-c l"     . hs-hide-level))))
+  (leaf hl-line
+    :config (global-hl-line-mode -1))
   (leaf paren
     :url http://0xcc.net/unimag/10/
     :config
