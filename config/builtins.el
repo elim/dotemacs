@@ -22,9 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package help
-  :config (temp-buffer-resize-mode t))
-
 (use-package hl-line
   :config (global-hl-line-mode -1))
 

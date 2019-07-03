@@ -445,6 +445,8 @@
       :after projectile
       :bind ("M-t" . helm-projectile)
       :config (helm-projectile-on)))
+  (leaf help
+    :config (temp-buffer-resize-mode t))
   (leaf hideshow
     :bind ((:hs-minor-mode-map
             ("C-c C-M-c" . hs-toggle-hiding)
