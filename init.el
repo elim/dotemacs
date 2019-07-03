@@ -410,6 +410,36 @@
             ("C-c C-M-c" . hs-toggle-hiding)
             ("C-c h"     . hs-toggle-hiding)
             ("C-c l"     . hs-hide-level))))
+  (leaf paren
+    :url http://0xcc.net/unimag/10/
+    :config
+    (show-paren-mode 1)
+    (defvar elim:paren-face   'paren-face)
+    (defvar elim:brace-face   'brace-face)
+    (defvar elim:bracket-face 'bracket-face)
+    (make-face 'paren-face)
+    (make-face 'brace-face)
+    (make-face 'bracket-face)
+    (set-face-foreground 'paren-face "#88aaff")
+    (set-face-foreground 'brace-face "#ffaa88")
+    (set-face-foreground 'bracket-face "#aaaa00")
+    (leaf lisp-mode
+      :config
+      (add-to-list 'lisp-el-font-lock-keywords-2 '("(\\|)" . elim:paren-face)))
+    (leaf scheme-mode
+      :defvar scheme-font-lock-keywords-2
+      :config
+      (defun elim:scheme-mode-hook-func ()
+        (add-to-list 'scheme-font-lock-keywords-2 '("(\\|)" . elim:paren-face)))
+      :hook (scheme-mode-hook . elim:scheme-mode-hook-func))
+    (leaf cc-mode
+      :defvar c-font-lock-keywords-3
+      :config
+      (defun elim:c-mode-common-hook-funck-paren ()
+        (add-to-list 'c-font-lock-keywords-3 '("(\\|)"     . elim:paren-face))
+        (add-to-list 'c-font-lock-keywords-3 '("{\\|}"     . elim:brace-face))
+        (add-to-list 'c-font-lock-keywords-3 '("\\[\\|\\]" . elim:bracket-face)))
+      :hook ((c-mode-common-hook . elim:c-mode-common-hook-ffunck-paren))))
   (leaf persistent-scratch
     :ensure t
     :init
