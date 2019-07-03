@@ -22,13 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package flyspell
-  :custom
-  ;; M-TABのキーバインドを変更しない
-  (flyspell-use-meta-tab nil)
-  ;; スペルチェックには英語の辞書を使う
-  (ispell-dictionary "american"))
-
 (use-package font-core
   :config (global-font-lock-mode t))
 

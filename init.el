@@ -366,6 +366,9 @@
     :custom ((flycheck-checker-error-threshold . 5000))
     :init
     (add-to-list 'exec-path (expand-file-name "bin" user-emacs-directory)))
+  (leaf flyspell
+    :custom ((ispell-dictionary . "american")
+             (flyspell-use-meta-tab . nil)))
   (leaf google-translate
     :ensure t
     :bind (("C-c t" . google-translate-enja-or-jaen))
