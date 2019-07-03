@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(load-theme 'tango-dark t)
+
 (setq load-prefer-newer t)
 
 (setq user-full-name "Takeru Naito"
@@ -804,7 +806,6 @@ Environment-dependent value is generated as initial values.")
              (web-mode-style-padding . 2)))
   (leaf yaml-mode :ensure t))
 
-(load "theme")
 (load "local" t)
 
 ;;; init.el ends here
