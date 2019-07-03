@@ -22,13 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package executable
-  :hook (after-save . elim:executable-make-buffer-file-executable-if-script-p)
-  :config
-  (defun elim:executable-make-buffer-file-executable-if-script-p ()
-    (unless (string-match tramp-file-name-regexp (buffer-file-name))
-      (executable-make-buffer-file-executable-if-script-p))))
-
 (use-package files
   :if (executable-find "gls")
   :custom (insert-directory-program "gls"))

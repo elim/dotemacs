@@ -224,6 +224,12 @@
                   (elscreen-tab-control-face        . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil))))
                   (elscreen-tab-current-screen-face . '((nil (:foreground "#ccc" :background "#336" :underline nil :box nil))))
                   (elscreen-tab-other-screen-face   . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil))))))
+  (leaf executable
+    :config
+    (defun elim:executable-make-buffer-file-executable-if-script-p ()
+      (unless (string-match tramp-file-name-regexp (buffer-file-name))
+        (executable-make-buffer-file-executable-if-script-p)))
+    :hook (after-save-hook . elim:executable-make-buffer-file-executable-if-script-p))
   (leaf migemo
     :ensure t
     :require t
