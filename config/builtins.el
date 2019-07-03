@@ -176,7 +176,6 @@
   :config
   (defun elim:disable-tool-bar () (tool-bar-mode -1)))
 
-(load "builtins/init-org")
 (load "builtins/paren")
 (load "builtins/text-mode")
 
