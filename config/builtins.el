@@ -22,9 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package dabbrev
-  :custom (dabbrev-abbrev-skip-leading-regexp "\\$"))
-
 (use-package desktop
   :custom (desktop-save-mode +1)
   :config

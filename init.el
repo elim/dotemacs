@@ -152,6 +152,8 @@
         (message "clipboard-to-kill-ring %s" (if after-value "on" "off"))))
     :config
     (clipboard-to-kill-ring +1))
+  (leaf dabbrev
+    :custom ((dabbrev-abbrev-skip-leading-regexp . "\\$")))
   (leaf dictionary
     :if (eq system-type 'darwin)
     :preface
