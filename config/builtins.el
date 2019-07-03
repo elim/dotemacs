@@ -176,6 +176,4 @@
   :config
   (defun elim:disable-tool-bar () (tool-bar-mode -1)))
 
-(load "builtins/text-mode")
-
 ;;; builtins.el ends here

@@ -646,6 +646,11 @@ Environment-dependent value is generated as initial values.")
     :ensure t
     :mode ("\\.sls\\'" "\\master\\'" "\\roster\\'" "\\Saltfile\\'"))
   (leaf slim-mode :ensure t)
+  (leaf text-mode
+    :preface
+    (defun elim:text-mode-hook-func ()
+      (set-variable 'indent-tabs-mode nil))
+    :hook (text-mode-hook . elim:text-mode-hook-func))
   (leaf terraform-mode :ensure t)
   (leaf *typescript
     (leaf typescript-mode
