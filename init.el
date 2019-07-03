@@ -154,6 +154,13 @@
     (clipboard-to-kill-ring +1))
   (leaf dabbrev
     :custom ((dabbrev-abbrev-skip-leading-regexp . "\\$")))
+  (leaf desktop
+    :custom ((desktop-save-mode . +1))
+    :config
+    (add-to-list 'desktop-globals-to-save 'extended-command-history)
+    (add-to-list 'desktop-globals-to-save 'kill-ring)
+    (add-to-list 'desktop-globals-to-save 'log-edit-comment-ring)
+    (add-to-list 'desktop-globals-to-save 'read-expression-history))
   (leaf dictionary
     :if (eq system-type 'darwin)
     :preface
