@@ -22,12 +22,6 @@
 (set-variable 'truncate-lines nil)
 (set-variable 'visible-bell t)
 
-(use-package scroll-bar
-  :config
-  (column-number-mode +1)
-  (set-scroll-bar-mode 'right)
-  (scroll-bar-mode -1))
-
 (use-package simple
   :hook (before-save . elim:auto-delete-trailing-whitespace)
 

@@ -289,6 +289,11 @@
      elim:openweathermap-city-id)
     (setq-default mode-line-format
                   (add-to-list 'mode-line-format '(:eval (sky-color-clock)) t)))
+  (leaf scroll-bar
+    :config
+    (column-number-mode +1)
+    (set-scroll-bar-mode 'right)
+    (scroll-bar-mode -1))
   (leaf select
     :custom (select-enable-primary . t))
   (leaf smart-mode-line
