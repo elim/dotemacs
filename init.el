@@ -4,10 +4,9 @@
 
 (load-theme 'tango-dark t)
 
-(setq load-prefer-newer t)
-
-(setq user-full-name "Takeru Naito"
-      user-mail-address "takeru.naito@gmail.com")
+(set-variable 'load-prefer-newer t)
+(set-variable 'user-full-name "Takeru Naito")
+(set-variable 'user-mail-address "takeru.naito@gmail.com")
 
 ;;; leaf.el
 ;;
