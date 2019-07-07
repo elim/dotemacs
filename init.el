@@ -3,10 +3,6 @@
 ;;; Code:
 
 (set-variable 'load-prefer-newer t)
-(set-variable 'user-full-name "Takeru Naito")
-(set-variable 'user-mail-address "takeru.naito@gmail.com")
-(set-variable 'custom-file "/dev/null")
-(set-variable 'gc-cons-threshold (* 128 1024 1024))
 
 ;;; leaf.el
 ;;
@@ -45,7 +41,11 @@
        (el-get-user-package-directory . (locate-user-emacs-file "config/packages"))))))
 
 (leaf *environments
-  :custom ((select-enable-clipboard . t))
+  :custom ((user-full-name . "Takeru Naito")
+           (user-mail-address . "takeru.naito@gmail.com")
+           (custom-file . "/dev/null")
+           (gc-cons-threshold . (* 128 1024 1024))
+           (select-enable-clipboard . t))
   :config
   (defalias 'yes-or-no-p 'y-or-n-p)
   (leaf cocoa
