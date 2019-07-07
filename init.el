@@ -2,8 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(load-theme 'tango-dark t)
-
 (set-variable 'load-prefer-newer t)
 (set-variable 'user-full-name "Takeru Naito")
 (set-variable 'user-mail-address "takeru.naito@gmail.com")
@@ -325,6 +323,24 @@
   (leaf wgrep
     :ensure t
     :custom ((wgrep-auto-save-buffer . t)))
+  (leaf *theme
+    :config
+    (leaf *builtins
+      :disabled t
+      :config
+      (load-theme 'tango-dark t))
+    (leaf doom-themes
+      :ensure t
+      :custom ((doom-themes-enable-italic . t)
+               (doom-themes-enable-bold . t))
+      :config
+      ;; (load-theme 'doom-city-lights t)
+      ;; (load-theme 'doom-dracula t)
+      ;; (load-theme 'doom-nord t)
+      (load-theme 'doom-one t)
+      ;; (doom-themes-neotree-config)
+      ;; (doom-themes-org-config)
+      (set-face-attribute 'show-paren-match nil :weight 'normal)))
   (leaf time
     :custom ((display-time-24hr-format . t))
     :config (display-time))
