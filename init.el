@@ -627,7 +627,7 @@ Environment-dependent value is generated as initial values.")
       (let
           ((skk-auto-save-jisyo-interval 6))
         (run-with-idle-timer skk-auto-save-jisyo-interval t
-                             #'skk-save-jisyo))
+                             #'(lambda () (skk-save-jisyo +1))))
       (skk-mode -1))
     (leaf ddskk-posframe
       :doc "Show Henkan tooltip for ddskk via posframe"
