@@ -332,7 +332,7 @@
     (leaf doom-themes
       :ensure t
       :custom ((doom-themes-enable-italic . t)
-               (doom-themes-enable-bold . t))
+               (doom-themes-enable-bold . nil))
       :config
       ;; (load-theme 'doom-city-lights t)
       ;; (load-theme 'doom-dracula t)
