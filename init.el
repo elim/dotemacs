@@ -41,13 +41,23 @@
        (el-get-user-package-directory . (locate-user-emacs-file "config/packages"))))))
 
 (leaf *environments
+  :preface
+  (defvar elim:user-variables-directory
+    (expand-file-name (format "%s/%s/" "~/Dropbox/var/emacs" (system-name)))
+    "Store variable files into this directory.")
+  (make-directory elim:user-variables-directory t)
   :custom ((user-full-name . "Takeru Naito")
            (user-mail-address . "takeru.naito@gmail.com")
-           (custom-file . "/dev/null")
            (gc-cons-threshold . (* 128 1024 1024))
            (select-enable-clipboard . t))
   :config
   (defalias 'yes-or-no-p 'y-or-n-p)
+  (leaf *customize
+    :custom `((custom-file
+               . ,(expand-file-name "customize.el"
+                                     elim:user-variables-directory)))
+    :config
+    (load custom-file))
   (leaf cocoa
     :bind (("<ns-drag-file>" . ns-find-file))
     :custom ((ns-use-native-fullscreen . nil)))
