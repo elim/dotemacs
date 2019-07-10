@@ -575,14 +575,9 @@
       :hook ((c-mode-common-hook . elim:c-mode-common-hook-ffunck-paren))))
   (leaf persistent-scratch
     :ensure t
-    :init
-    (defvar elim:persistent-scratch-save-file
-      ((lambda ()
-         (expand-file-name
-          (format ".persistent-scratch.%s" (system-name)) "~/Dropbox/var/")))
-      "Specify the location of the scratch to the file.
-Environment-dependent value is generated as initial values.")
-    :custom (persistent-scratch-save-file . elim:persistent-scratch-save-file)
+    :custom `((persistent-scratch-save-file
+               . ,(expand-file-name "scratch"
+                                     elim:user-variables-directory)))
     :config (persistent-scratch-setup-default))
   (leaf projectile
     :ensure t
