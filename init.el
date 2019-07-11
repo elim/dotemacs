@@ -482,6 +482,7 @@
          (if asciip "ja" "en")
          string))))
   (leaf *helm
+    :disabled t
     :config
     (leaf helm :ensure t
       :require helm-config helm-files
@@ -547,6 +548,28 @@
       (let ((case-fold-search isearch-case-fold-search))
         (occur (if isearch-regexp isearch-string
                  (regexp-quote isearch-string))))))
+  (leaf *ivy/counsel
+    :config
+    (leaf counsel
+      :ensure t
+      :custom ((ivy-use-virtual-buffers . t))
+      :bind (("C-:"     . counsel-recentf)
+             ("C-;"     . counsel-recentf)
+             ("C-x :"   . counsel-recentf)
+             ("C-x ;"   . counsel-recentf)
+             ("C-x C-:" . counsel-recentf)
+             ("C-x C-;" . counsel-recentf)
+             ("C-x C-f" . counsel-find-file)
+	     ("C-x C-y" . counsel-yank-pop)
+	     (:ivy-minibuffer-map
+	      ("TAB" . ivy-alt-done)))
+      :config
+      (ivy-mode 1)
+      (counsel-mode 1))
+    (leaf counsel-projectile
+      :require t
+      :ensure t
+      :bind ("M-t" . counsel-projectile)))
   (leaf paren
     :url http://0xcc.net/unimag/10/
     :config
