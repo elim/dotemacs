@@ -142,30 +142,16 @@
     :hook (before-save-hook . elim:auto-delete-trailing-whitespace)
     :advice (:before kill-new elim:dedup-kill-new)))
 
-(leaf *libraries
-  :config t
-  (leaf deferred :ensure t))
-
 (leaf *utilities
   :config t
   (leaf browse-url
     :bind ("C-x m" . browse-url-at-point))
   (leaf bs
     :bind ("C-x C-b" . bs-show))
-  (leaf clipboard-to-kill-ring
-    :after deferred
-    :el-get gist:666807b53f2b2cf503c1:clipboard-to-kill-ring
-    :bind (("C-x ck" . elim:toggle-clipboard-to-kill-ring))
-    :preface
-    (defun elim:toggle-clipboard-to-kill-ring ()
-      "Toggle `clipboard-to-kill-ring' activity."
-      (interactive)
-      (let* ((enabled-p clipboard-to-kill-ring:timer)
-             (after-value (not enabled-p)))
-        (clipboard-to-kill-ring after-value)
-        (message "clipboard-to-kill-ring %s" (if after-value "on" "off"))))
-    :config
-    (clipboard-to-kill-ring +1))
+  (leaf clipmon
+    :ensure t
+    :hook (after-init-hook . clipmon-mode-start))
+
   (leaf dabbrev
     :custom ((dabbrev-abbrev-skip-leading-regexp . "\\$")))
   (leaf desktop
