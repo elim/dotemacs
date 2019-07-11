@@ -518,6 +518,10 @@
       :after helm elscreen
       :bind ("C-z h" . helm-elscreen))
     (leaf helm-git-grep :ensure t)
+    (leaf helm-posframe
+      :ensure t
+      :custom ((helm-posframe-poshandler . #'posframe-poshandler-frame-center))
+      :config (helm-posframe-enable))
     (leaf helm-projectile :ensure t
       :after projectile
       :bind ("M-t" . helm-projectile)
