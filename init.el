@@ -36,9 +36,7 @@
   (prog1 "el-get settings"
     (leaf el-get
       :ensure t
-      :custom
-      ((el-get-git-shallow-clone  . t)
-       (el-get-user-package-directory . (locate-user-emacs-file "config/packages"))))))
+      :custom (el-get-git-shallow-clone  . t))))
 
 (leaf *environments
   :preface
