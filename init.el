@@ -46,10 +46,10 @@
     (expand-file-name (format "%s/%s/" "~/Dropbox/var/emacs" (system-name)))
     "Store variable files into this directory.")
   (make-directory elim:user-variables-directory t)
-  :custom ((user-full-name . "Takeru Naito")
-           (user-mail-address . "takeru.naito@gmail.com")
-           (gc-cons-threshold . (* 128 1024 1024))
-           (select-enable-clipboard . t))
+  :custom `((gc-cons-threshold . ,(* 128 1024 1024))
+            (select-enable-clipboard . t)
+            (user-mail-address . "takeru.naito@gmail.com")
+            (user-full-name . "Takeru Naito"))
   :config
   (defalias 'yes-or-no-p 'y-or-n-p)
   (leaf *customize
