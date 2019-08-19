@@ -290,6 +290,7 @@
     (popwin-mode +1))
   (leaf rotate :ensure t)
   (leaf *sky-color-clock
+    :disabled t
     :require json
     :config
     (let*
