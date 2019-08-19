@@ -804,8 +804,8 @@
     :mode ("\\.sls\\'" "\\master\\'" "\\roster\\'" "\\Saltfile\\'"))
   (leaf sh-script
     :mode ("\\.env\\'" "\\.env.sample\\'")
-    :custom ((sh-basic-offset 2)
-             (sh-indentation 2)))
+    :custom ((sh-basic-offset . 2)
+             (sh-indentation . 2)))
   (leaf slim-mode :ensure t)
   (leaf text-mode
     :preface
