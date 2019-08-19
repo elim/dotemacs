@@ -784,8 +784,7 @@
              ("C-m" . reindent-then-newline-and-indent))
       :custom ((ruby-deep-indent-paren-style . nil)
                (ruby-flymake-use-rubocop-if-available . nil)
-               (ruby-insert-encoding-magic-comment . nil)
-               (ruby-use-smie . nil)))
+               (ruby-insert-encoding-magic-comment . nil)))
     (leaf rspec-mode :ensure t))
   (leaf salt-mode
     :ensure t
