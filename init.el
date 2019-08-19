@@ -439,12 +439,16 @@
     :hook ((emacs-lisp-mode
             lisp-interaction-mode
             ielm-mode-hook) . turn-on-eldoc-mode))
-  (leaf flycheck
-    :ensure t
-    :hook (after-init-hook . global-flycheck-mode)
-    :custom ((flycheck-checker-error-threshold . 5000))
-    :init
-    (add-to-list 'exec-path (expand-file-name "bin" user-emacs-directory)))
+  (leaf *flycheck
+    :config
+    (leaf flycheck
+      :ensure t
+      :hook (after-init-hook . global-flycheck-mode)
+      :init (add-to-list 'exec-path (expand-file-name "bin" user-emacs-directory)))
+    (leaf flycheck-posframe
+      :ensure t
+      :after flycheck
+      :hook (flycheck-mode-hook . flycheck-posframe-mode)))
   (leaf flyspell
     :custom ((ispell-dictionary . "american")
              (flyspell-use-meta-tab . nil)))
