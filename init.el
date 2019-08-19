@@ -126,8 +126,6 @@
   (leaf simple
     :preface
     (defvar elim:auto-delete-trailing-whitespace-enable-p t)
-    (defun elim:dedup-kill-new (arg)
-      (set-variable 'kill-ring (delete arg kill-ring)))
     (defun elim:editorconfig-mode-enabled-p ()
       (not (not (memq 'editorconfig-mode (mapcar #'car minor-mode-alist)))))
     (defun elim:auto-delete-trailing-whitespace ()
@@ -145,8 +143,7 @@
     (keyboard-translate ?\C-h ?\C-?)
     (line-number-mode +1)
     (transient-mark-mode t)
-    :hook (before-save-hook . elim:auto-delete-trailing-whitespace)
-    :advice (:before kill-new elim:dedup-kill-new)))
+    :hook (before-save-hook . elim:auto-delete-trailing-whitespace)))
 
 (leaf *utilities
   :config t
