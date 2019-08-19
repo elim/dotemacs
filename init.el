@@ -530,18 +530,6 @@
             ("C-c l"     . hs-hide-level))))
   (leaf hl-line
     :config (global-hl-line-mode -1))
-  (leaf isearch
-    :bind (:isearch-mode-map
-           ("C-o" . elim:occur-in-isearch))
-    :config
-    ;; Quick Tip: Add occur to isearch
-    ;; http://www.emacsblog.org/2007/02/27/quick-tip-add-occur-to-isearch/
-    (defun elim:occur-in-isearch ()
-      "Call the occur function during an incremental search."
-      (interactive)
-      (let ((case-fold-search isearch-case-fold-search))
-        (occur (if isearch-regexp isearch-string
-                 (regexp-quote isearch-string))))))
   (leaf *ivy/counsel
     :config
     (leaf counsel
