@@ -516,6 +516,7 @@
       :bind ("C-z h" . helm-elscreen))
     (leaf helm-git-grep :ensure t)
     (leaf helm-posframe
+      :disabled t
       :ensure t
       :custom ((helm-posframe-poshandler . #'posframe-poshandler-frame-center))
       :config (helm-posframe-enable))
