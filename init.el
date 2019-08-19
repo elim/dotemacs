@@ -478,7 +478,6 @@
          (if asciip "ja" "en")
          string))))
   (leaf *helm
-    :disabled t
     :config
     (leaf helm :ensure t
       :require helm-config helm-files
@@ -534,6 +533,7 @@
   (leaf hl-line
     :config (global-hl-line-mode -1))
   (leaf *ivy/counsel
+    :disabled t
     :config
     (leaf counsel
       :ensure t
