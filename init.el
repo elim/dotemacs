@@ -686,8 +686,7 @@
     :config
     (defun elim:emacs-lisp-mode-hook-func ()
       (set-variable 'indent-tabs-mode nil)
-      (hs-minor-mode +1)
-      (hs-hide-level 3)))
+      (hs-minor-mode +1)))
   (leaf git-modes :el-get magit/git-modes)
   (leaf go-mode
     :ensure t
