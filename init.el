@@ -38,18 +38,25 @@
       :ensure t
       :custom (el-get-git-shallow-clone  . t))))
 
-(leaf *environments
+(leaf *first-priority
+  :doc
+  Those are the minimal setting and/or another setting depend on that.
+  Do not nest the other settings because of that prevent the confusion
+  the valuation order.
   :preface
   (defvar elim:user-variables-directory
     (expand-file-name (format "%s/%s/" "~/Dropbox/var/emacs" (system-name)))
     "Store variable files into this directory.")
   (make-directory elim:user-variables-directory t)
-  :custom ((user-full-name . "Takeru Naito")
-           (user-mail-address . "takeru.naito@gmail.com")
-           (gc-cons-threshold . (* 128 1024 1024))
-           (select-enable-clipboard . t))
+  :custom `((gc-cons-threshold . ,(* 128 1024 1024))
+            (select-enable-clipboard . t)
+            (user-mail-address . "takeru.naito@gmail.com")
+            (user-full-name . "Takeru Naito"))
   :config
-  (defalias 'yes-or-no-p 'y-or-n-p)
+  (defalias 'yes-or-no-p 'y-or-n-p))
+
+(leaf *environments
+  :config
   (leaf *customize
     :custom `((custom-file
                . ,(expand-file-name "customize.el"
