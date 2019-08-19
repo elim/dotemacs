@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(set-variable 'debug-on-error t)
+(set-variable 'init-file-debug t)
 (set-variable 'load-prefer-newer t)
 
 ;;; leaf.el
