@@ -386,7 +386,8 @@
     :config
     (leaf dired
       :bind (:dired-mode-map
-             ("SPC" . elim:dired-toggle-mark))
+             ("SPC" . elim:dired-toggle-mark)
+             ("r" . dired-toggle-read-only))
       :custom ((dired-recursive-copies . 'always)
                (dired-recursive-deletes . 'always))
       :preface
@@ -408,10 +409,7 @@
                     ("\\.taz\\'" "tar ztvf")
                     ("\\.tar\\.bz2\\'" "tar tjvf")
                     ("\\.zip\\'" "unzip -l")
-                    ("\\.\\(g\\|\\) z\\'" "zcat")))))
-    (leaf wdired
-      :bind (:dired-mode-map
-             ("r" . wdired-change-to-wdired-mode))))
+                    ("\\.\\(g\\|\\) z\\'" "zcat"))))))
   (leaf diff-mode
     :preface
     (defun elim:diff-mode-refine-automatically ()
