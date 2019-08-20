@@ -497,11 +497,8 @@
       :custom ((helm-input-idle-delay . 0.3)
                (helm-candidate-number-limit . 200)
                (helm-buffer-max-length . 40)
-               (helm-ff-auto-update-initial-value . nil)
-               (helm-mini-default-sources
-                . '(helm-source-buffers-list
-                    helm-source-recentf
-                    helm-source-buffer-not-found)))
+               (helm-ff-auto-update-initial-value . nil))
+
       :delight helm-mode)
     (leaf helm-ag :ensure t
       :bind ("C-x g" . helm-projectile-ag)
@@ -522,7 +519,15 @@
     (leaf helm-projectile :ensure t
       :after projectile
       :bind ("M-t" . helm-projectile)
-      :config (helm-projectile-on)))
+      :config (helm-projectile-on)
+      :custom (helm-mini-default-sources
+               . '(helm-source-buffers-list
+                   helm-source-recentf
+                   helm-source-projectile-recentf-list
+                   helm-source-projectile-buffers-list
+                   helm-source-projectile-files-list
+                   helm-source-projectile-projects
+                   helm-source-buffer-not-found))))
   (leaf help
     :config (temp-buffer-resize-mode t))
   (leaf hideshow
