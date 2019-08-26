@@ -44,7 +44,7 @@
   :doc
   Those are the minimal setting and/or another setting depend on that.
   Do not nest the other settings because of that prevent the confusion
-  the valuation order.
+  the evaluation order.
   :preface
   (defvar elim:user-variables-directory
     (expand-file-name (format "%s/%s/" "~/Dropbox/var/emacs" (system-name)))
