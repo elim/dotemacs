@@ -379,8 +379,8 @@
     :config
     (global-auto-revert-mode t))
   (leaf auto-save-visited-mode
-    :config
-    (auto-save-visited-mode)
+    :bind ("C-x as" . auto-save-visited-mode)
+    :config (auto-save-visited-mode)
     :custom ((auto-save-visited-interval . 0.5)))
   (leaf *dired
     :config
