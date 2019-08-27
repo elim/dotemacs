@@ -525,7 +525,8 @@
                    helm-source-projectile-buffers-list
                    helm-source-projectile-files-list
                    helm-source-projectile-projects
-                   helm-source-buffer-not-found))))
+                   helm-source-buffer-not-found))
+      :hook (helm-mode-hook . helm-projectile-on)))
   (leaf help
     :config (temp-buffer-resize-mode t))
   (leaf hideshow
