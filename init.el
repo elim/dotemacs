@@ -207,6 +207,7 @@
 (leaf *interfaces
   :custom ((frame-title-format . `(" %b " (buffer-file-name "( %f )")))
            (inhibit-startup-screen . t)
+           (mouse-drag-copy-region . t)
            (read-buffer-completion-ignore-case . t)
            (read-file-name-completion-ignore-case .  t)
            (require-final-newline . t)
