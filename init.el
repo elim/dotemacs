@@ -139,7 +139,7 @@
            ("C-m"      . newline-and-indent)
            ("C-x |"    . split-window-right)
            ("C-x -"    . split-window-below))
-    :custom ((kill-ring-max . 300))
+    :custom ((kill-ring-max . 8192))
     :config
     (keyboard-translate ?\C-h ?\C-?)
     (line-number-mode +1)
