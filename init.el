@@ -144,7 +144,9 @@
     (keyboard-translate ?\C-h ?\C-?)
     (line-number-mode +1)
     (transient-mark-mode t)
-    :hook (before-save-hook . elim:auto-delete-trailing-whitespace)))
+    :hook (before-save-hook . elim:auto-delete-trailing-whitespace))
+  (leaf vc
+    :custom (vc-follow-symlinks . t)))
 
 (leaf *utilities
   :config t
