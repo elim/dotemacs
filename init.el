@@ -32,7 +32,6 @@
   (prog1 "optional packages for leaf-keywords"
     ;; optional packages if you want to use :hydra, :el-get,,,
     (leaf hydra :ensure t)
-    (leaf delight :ensure t)
     (leaf diminish :ensure t))
 
   (prog1 "el-get settings"
@@ -245,7 +244,7 @@
                   (company-tooltip-common           . '((nil (:foreground "black" :background "lightgrey"))))
                   (company-tooltip-common-selection . '((nil (:foreground "white" :background "steelblue"))))
                   (company-tooltip-selection        . '((nil (:foreground "black" :background "steelblue")))))
-    :delight t
+    :diminish company-mode
     :hook (after-init-hook . global-company-mode))
   (leaf company-quickhelp
     :ensure t
@@ -423,7 +422,7 @@
      (diff-refine-change . '((nil (:foreground nil     :background nil :weight 'bold :inverse-video t))))))
   (leaf editorconfig
     :ensure t
-    :delight t
+    :diminish editorconfig-mode
     :config (editorconfig-mode 1))
   (leaf eldoc
     :custom ((eldoc-idle-delay . 0.2)
@@ -499,7 +498,7 @@
                (helm-buffer-max-length . 40)
                (helm-ff-auto-update-initial-value . nil))
 
-      :delight helm-mode)
+      :diminish helm-mode)
     (leaf helm-ag :ensure t
       :bind ("C-x g" . helm-projectile-ag)
       :custom ((helm-ag-base-command . "ag --nocolor --nogroup --ignore-case")
@@ -604,6 +603,7 @@
     :diminish projectile-mode)
   (leaf rainbow-mode
     :ensure t
+    :diminish t
     :hook ((css-mode-hook
             emacs-lisp-mode-hook
             scss-mode-hook
@@ -656,11 +656,13 @@
       :doc "Show Henkan tooltip for ddskk via posframe"
       :after skk
       :el-get conao3/ddskk-posframe.el
-      :custom ((ddskk-posframe-mode . t))))
+      :custom ((ddskk-posframe-mode . t))
+      :diminish ddskk-posframe-mode))
   (leaf undo-tree
     :ensure t
     :custom (undo-tree-enable-undo-in-region . nil)
-    :config (global-undo-tree-mode t)))
+    :config (global-undo-tree-mode t)
+    :diminish undo-tree-mode))
 
 (leaf *major-modes
   :config
@@ -723,7 +725,7 @@
       (flyspell-mode +1)
       (set (make-local-variable
             'elim:auto-delete-trailing-whitespace-enable-p) nil))
-    :delight auto-revert-mode)
+    :diminish auto-revert-mode)
   (leaf markdown-mode
     :ensure t
     :bind ((:gfm-mode-map
