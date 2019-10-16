@@ -46,7 +46,13 @@
             (user-mail-address . "takeru.naito@gmail.com")
             (user-full-name . "Takeru Naito"))
   :config
-  (defalias 'yes-or-no-p 'y-or-n-p))
+  (defalias 'yes-or-no-p 'y-or-n-p)
+
+  (leaf smart-mode-line
+    :ensure t
+    :custom ((sml/no-confirm-load-theme . t)
+             (sml/theme . 'dark))
+    :config (sml/setup)))
 
 (leaf *environments
   :config
@@ -309,11 +315,6 @@
     (scroll-bar-mode -1))
   (leaf select
     :custom (select-enable-primary . t))
-  (leaf smart-mode-line
-    :ensure t
-    :custom ((sml/no-confirm-load-theme . t)
-             (sml/theme . 'dark))
-    :config (sml/setup))
   (leaf wgrep
     :ensure t
     :custom ((wgrep-auto-save-buffer . t)))
