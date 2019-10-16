@@ -777,6 +777,7 @@
       (hs-minor-mode +1))
     :hook (php-mode-hook . elim:php-mode-hook-func))
   (leaf *ruby
+    :config
     (leaf ruby-end :ensure t)
     (leaf ruby-mode
       :ensure t
