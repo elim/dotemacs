@@ -490,8 +490,7 @@
              ("C-x C-y" . helm-show-kill-ring)
              ("C-x C-f" . helm-find-files)
              (:helm-map
-              ("C-h" . delete-backward-char)
-              ("TAB" . helm-execute-persistent-action)))
+              ("C-h" . delete-backward-char)))
       :config (helm-mode 1)
       :custom ((helm-input-idle-delay . 0.3)
                (helm-candidate-number-limit . 200)
