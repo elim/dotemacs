@@ -254,6 +254,12 @@
     :config
     (elscreen-set-prefix-key [(control z)])
     (elscreen-start)
+    (mapcar (lambda (i)
+              (global-set-key (kbd (format "M-%d" i))
+                              `(lambda ()
+                                 (interactive)
+                                 (elscreen-goto ,i))))
+            (number-sequence 0 9))
     :custom ((elscreen-tab-display-control . nil)
              (elscreen-tab-display-kill-screen . nil)
              (elscreen-display-tab . t))
