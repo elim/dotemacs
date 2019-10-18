@@ -659,6 +659,20 @@
       :diminish ddskk-posframe-mode))
   (leaf undo-tree
     :ensure t
+    :preface
+    (defvar elim:before:auto-save-visited-mode nil
+      "Store the value of auto-save-visited-mode.")
+    (defun elim:advice:undo-tree-visualize:before ()
+      (set-variable (quote elim:before:auto-save-visited-mode)
+                    auto-save-visited-mode)
+      (auto-save-visited-mode -1))
+    (defun elim:advice:undo-tree-visualizer-quit:after ()
+      (auto-save-visited-mode elim:before:auto-save-visited-mode))
+    :advice
+    (:before undo-tree-visualize       elim:advice:undo-tree-visualize:before)
+    (:after  undo-tree-visualizer-quit elim:advice:undo-tree-visualizer-quit:after)
+    :bind ((:undo-tree-visualizer-mode-map
+            ("C-g" . undo-tree-visualizer-quit)))
     :custom (undo-tree-enable-undo-in-region . nil)
     :config (global-undo-tree-mode t)
     :diminish undo-tree-mode))
