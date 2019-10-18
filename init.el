@@ -112,7 +112,7 @@
       (elim:set-text-height 180))
      ((eq window-system 'x)
       (elim:set-text-height 140))))
-  (leaf ns-win
+  (leaf ns
     :if (featurep 'ns)
     :custom ((ns-pop-up-frames . nil)
              (ns-antialias-text . t)
