@@ -118,7 +118,9 @@
              (ns-antialias-text . t)
              (ns-command-modifier . 'meta)
              (ns-alternate-modifier . 'meta)
-             (ns-use-native-fullscreen . nil)))
+             (ns-use-native-fullscreen . nil)
+             (ns-right-alternate-modifier . 'hyper)
+             (ns-right-command-modifier . 'super)))
   (leaf simple
     :preface
     (defvar elim:auto-delete-trailing-whitespace-enable-p t)
