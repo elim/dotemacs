@@ -664,8 +664,8 @@
     :preface
     (defun elim:c-mode-common-hook-func ()
       (c-set-style "bsd")
-      (set-variable indent-tabs-mode nil)
-      (set-variable c-basic-offset 2)
+      (set-variable 'indent-tabs-mode nil)
+      (set-variable 'c-basic-offset 2)
       (c-toggle-auto-hungry-state -1)
       (subword-mode 1))
     :hook ((c-mode-common-hook . elim:c-mode-common-hook-func)))
