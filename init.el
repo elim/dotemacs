@@ -62,8 +62,6 @@
                                      elim:user-variables-directory)))
     :config
     (load custom-file))
-  (leaf cocoa
-    :custom ((ns-use-native-fullscreen . nil)))
   (leaf frame
     :if window-system
     :preface
@@ -119,7 +117,8 @@
     :custom ((ns-pop-up-frames . nil)
              (ns-antialias-text . t)
              (ns-command-modifier . 'meta)
-             (ns-alternate-modifier . 'meta)))
+             (ns-alternate-modifier . 'meta)
+             (ns-use-native-fullscreen . nil)))
   (leaf simple
     :preface
     (defvar elim:auto-delete-trailing-whitespace-enable-p t)
