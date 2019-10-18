@@ -63,7 +63,6 @@
     :config
     (load custom-file))
   (leaf cocoa
-    :bind (("<ns-drag-file>" . ns-find-file))
     :custom ((ns-use-native-fullscreen . nil)))
   (leaf frame
     :if window-system
