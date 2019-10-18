@@ -577,11 +577,11 @@
     (leaf cc-mode
       :defvar c-font-lock-keywords-3
       :config
-      (defun elim:c-mode-common-hook-funck-paren ()
+      (defun elim:c-mode-common-hook-func-paren ()
         (add-to-list 'c-font-lock-keywords-3 '("(\\|)"     . elim:paren-face))
         (add-to-list 'c-font-lock-keywords-3 '("{\\|}"     . elim:brace-face))
         (add-to-list 'c-font-lock-keywords-3 '("\\[\\|\\]" . elim:bracket-face)))
-      :hook ((c-mode-common-hook . elim:c-mode-common-hook-ffunck-paren))))
+      :hook ((c-mode-common-hook . elim:c-mode-common-hook-func-paren))))
   (leaf persistent-scratch
     :ensure t
     :custom `((persistent-scratch-save-file
