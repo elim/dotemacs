@@ -726,6 +726,17 @@
             ("`" . self-insert-command)
             ([(meta return)] . elim:toggle-fullscreen)))
     :mode ("\\.md\\'" . gfm-mode))
+  (leaf mmm-mode
+    :ensure t
+    :config
+    (leaf *hack-indentation
+      ;; https://github.com/AdamNiederer/vue-mode/issues/74#issuecomment-539711083
+      :preface
+      (defun elim:disable-syntax-ppss-table ()
+        (set-variable 'syntax-ppss-table nil))
+      :hook
+      ((mmm-js-mode-enter-hook         . elim:disable-syntax-ppss-table)
+       (mmm-typescript-mode-enter-hook . elim:disable-syntax-ppss-table))))
   (leaf *org
     :custom (org-directory . "~/Dropbox/org/")
     :config
