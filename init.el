@@ -190,6 +190,11 @@
        (buffer-substring-no-properties beg end)))
     :bind (("C-x e" . elim:dictionary-word)
            ("C-x y" . elim:dictionary-region)))
+  (leaf help-fns
+    :bind (("H-b" . describe-binding)
+           ("H-f" . describe-function)
+           ("H-k" . describe-key)
+           ("H-v" . describe-variable)))
   (leaf open-junk-file
     :ensure t
     :bind (("C-x C-z" . open-junk-file))
