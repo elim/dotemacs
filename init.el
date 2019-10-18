@@ -147,7 +147,7 @@
     :custom (vc-follow-symlinks . t)))
 
 (leaf *utilities
-  :config t
+  :config
   (leaf browse-url
     :bind ("C-x m" . browse-url-at-point))
   (leaf bs
