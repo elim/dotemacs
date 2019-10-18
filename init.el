@@ -299,28 +299,6 @@
     (push '("*Google Translate*") popwin:special-display-config)
     (popwin-mode +1))
   (leaf rotate :ensure t)
-  (leaf *sky-color-clock
-    :disabled t
-    :require json
-    :config
-    (let*
-        ((credential-file "~/.config/openweathermap/credential.json")
-         (json (json-read-file credential-file))
-         (api-key (alist-get 'apiKey json))
-         (city-id (alist-get 'cityId json)))
-      (leaf sky-color-clock
-        :el-get zk-phi/sky-color-clock
-        :after smart-mode-line
-        :require t
-        :preface
-        :custom ((sky-color-clock-format . "")
-                 (sky-color-clock-enable-emoji-icon . t)
-                 (sky-color-clock-enable-temperature-indicator . t))
-        :config
-        (sky-color-clock-initialize 35)
-        (sky-color-clock-initialize-openweathermap-client api-key city-id)
-        (setq-default mode-line-format
-                      (add-to-list 'mode-line-format '(:eval (sky-color-clock)) t)))))
   (leaf scroll-bar
     :config
     (column-number-mode +1)
@@ -333,10 +311,7 @@
     :custom ((wgrep-auto-save-buffer . t)))
   (leaf *theme
     :config
-    (leaf *builtins
-      :disabled t
-      :config
-      (load-theme 'tango-dark t))
+    ;; (load-theme 'tango-dark t))
     (leaf doom-themes
       :ensure t
       :custom ((doom-themes-enable-italic . t)
@@ -514,11 +489,6 @@
       :after helm elscreen
       :bind ("C-z h" . helm-elscreen))
     (leaf helm-git-grep :ensure t)
-    (leaf helm-posframe
-      :disabled t
-      :ensure t
-      :custom ((helm-posframe-poshandler . #'posframe-poshandler-frame-center))
-      :config (helm-posframe-enable))
     (leaf helm-projectile :ensure t
       :after projectile
       :bind ("M-t" . helm-projectile)
@@ -541,29 +511,6 @@
             ("C-c l"     . hs-hide-level))))
   (leaf hl-line
     :config (global-hl-line-mode -1))
-  (leaf *ivy/counsel
-    :disabled t
-    :config
-    (leaf counsel
-      :ensure t
-      :custom ((ivy-use-virtual-buffers . t))
-      :bind (("C-:"     . counsel-recentf)
-             ("C-;"     . counsel-recentf)
-             ("C-x :"   . counsel-recentf)
-             ("C-x ;"   . counsel-recentf)
-             ("C-x C-:" . counsel-recentf)
-             ("C-x C-;" . counsel-recentf)
-             ("C-x C-f" . counsel-find-file)
-	     ("C-x C-y" . counsel-yank-pop)
-	     (:ivy-minibuffer-map
-	      ("TAB" . ivy-alt-done)))
-      :config
-      (ivy-mode 1)
-      (counsel-mode 1))
-    (leaf counsel-projectile
-      :require t
-      :ensure t
-      :bind ("M-t" . counsel-projectile)))
   (leaf paren
     :url http://0xcc.net/unimag/10/
     :config
