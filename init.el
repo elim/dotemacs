@@ -114,13 +114,15 @@
       (elim:set-text-height 140))))
   (leaf ns
     :if (featurep 'ns)
-    :custom ((ns-pop-up-frames . nil)
-             (ns-antialias-text . t)
-             (ns-command-modifier . 'meta)
-             (ns-alternate-modifier . 'meta)
-             (ns-use-native-fullscreen . nil)
-             (ns-right-alternate-modifier . 'hyper)
-             (ns-right-command-modifier . 'super)))
+    :custom
+    ((ns-antialias-text        . t)
+     (ns-pop-up-frames         . nil)
+     (ns-use-native-fullscreen . nil)
+
+     (ns-alternate-modifier       . 'meta)
+     (ns-command-modifier         . 'meta)
+     (ns-right-alternate-modifier . 'hyper)
+     (ns-right-command-modifier   . 'super)))
   (leaf simple
     :preface
     (defvar elim:auto-delete-trailing-whitespace-enable-p t)
