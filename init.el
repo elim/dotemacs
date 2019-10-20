@@ -160,7 +160,6 @@
   (leaf clipmon
     :ensure t
     :hook (after-init-hook . clipmon-mode-start))
-
   (leaf dabbrev
     :custom ((dabbrev-abbrev-skip-leading-regexp . "\\$")))
   (leaf desktop
