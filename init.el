@@ -264,7 +264,6 @@
     :ensure t
     :require t
     :config
-    (elscreen-set-prefix-key [(control z)])
     (elscreen-start)
     (mapcar (lambda (i)
               (global-set-key (kbd (format "M-%d" i))
@@ -272,9 +271,10 @@
                                  (interactive)
                                  (elscreen-goto ,i))))
             (number-sequence 0 9))
-    :custom ((elscreen-tab-display-control . nil)
-             (elscreen-tab-display-kill-screen . nil)
-             (elscreen-display-tab . t))
+    :custom `((elscreen-set-prefix-key . ,(kbd "C-z"))
+              (elscreen-tab-display-control . nil)
+              (elscreen-tab-display-kill-screen . nil)
+              (elscreen-display-tab . t))
     :custom-face ((elscreen-tab-background-face     . '((nil (:foreground "#112" :background "#ccc" :underline nil :box nil))))
                   (elscreen-tab-control-face        . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil))))
                   (elscreen-tab-current-screen-face . '((nil (:foreground "#ccc" :background "#336" :underline nil :box nil))))
