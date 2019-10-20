@@ -705,7 +705,11 @@
     :bind ((:gfm-mode-map
             ("`" . self-insert-command)
             ([(meta return)] . elim:toggle-fullscreen)))
-    :mode ("\\.md\\'" . gfm-mode))
+    :custom
+    `((markdown-asymmetric-header   . t)
+      (markdown-header-scaling      . t)
+      (markdown-hr-strings          . `("* * *\n\n"))
+      (markdown-marginalize-headers . nil)))
   (leaf mmm-mode
     :ensure t
     :config
