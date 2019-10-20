@@ -263,6 +263,8 @@
   (leaf elscreen
     :ensure t
     :require t
+    :bind (("M-{" . elscreen-previous)
+           ("M-}" . elscreen-next))
     :config
     (elscreen-start)
     (mapcar (lambda (i)
