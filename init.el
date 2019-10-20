@@ -148,6 +148,11 @@
 
 (leaf *utilities
   :config
+  (leaf add-node-modules-path
+    :ensure t
+    :hook ((js-mode-hook . add-node-modules-path)
+           (vue-mode-hook . add-node-modules-path)))
+
   (leaf browse-url
     :bind ("C-x m" . browse-url-at-point))
   (leaf bs
@@ -165,6 +170,8 @@
     (add-to-list 'desktop-globals-to-save 'kill-ring)
     (add-to-list 'desktop-globals-to-save 'log-edit-comment-ring)
     (add-to-list 'desktop-globals-to-save 'read-expression-history))
+  (leaf eslint-fix
+    :ensure t)
   (leaf files
     :if (executable-find "gls")
     :custom ((insert-directory-program . "gls")))
