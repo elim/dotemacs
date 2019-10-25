@@ -26,6 +26,7 @@
     (leaf hydra :ensure t)
     (leaf el-get :ensure t
       :custom ((el-get-git-shallow-clone . t)))
+    (leaf diminish :ensure t)
 
     ;; initialize leaf-keywords.el
     (leaf-keywords-init)))
