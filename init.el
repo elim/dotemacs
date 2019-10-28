@@ -565,15 +565,16 @@
       :hook ((c-mode-common-hook . elim:c-mode-common-hook-func-paren))))
   (leaf persistent-scratch
     :ensure t
-    :preface
+    :leaf-defer nil
+    :hook (kill-buffer-query-functions . elim:preserve-scratch-buffer)
+    :custom `((persistent-scratch-save-file
+               . ,(expand-file-name "scratch"
+                                    elim:user-variables-directory)))
+    :config
     (defun elim:preserve-scratch-buffer ()
       "Prevent deletion of the scratch buffer."
       (not (string= "*scratch*" (buffer-name))))
-    :custom `((persistent-scratch-save-file
-               . ,(expand-file-name "scratch"
-                                     elim:user-variables-directory)))
-    :hook ((kill-buffer-query-functions . elim:preserve-scratch-buffer))
-    :config (persistent-scratch-setup-default))
+    (persistent-scratch-setup-default))
   (leaf projectile
     :ensure t
     :config (projectile-mode +1)
