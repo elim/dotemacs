@@ -47,13 +47,7 @@
             (user-mail-address . "takeru.naito@gmail.com")
             (user-full-name . "Takeru Naito"))
   :config
-  (defalias 'yes-or-no-p 'y-or-n-p)
-
-  (leaf smart-mode-line
-    :ensure t
-    :custom ((sml/no-confirm-load-theme . t)
-             (sml/theme . 'dark))
-    :config (sml/setup)))
+  (defalias 'yes-or-no-p 'y-or-n-p))
 
 (leaf *environments
   :config
@@ -260,6 +254,18 @@
   (leaf company-quickhelp
     :ensure t
     :config (company-quickhelp-mode +1))
+  (leaf doom-modeline
+    :ensure t
+    :leaf-defer nil
+    :custom
+    ((doom-modeline-buffer-file-name-style . 'truncate-with-project)
+     (doom-modeline-major-mode-icon . nil)
+     (doom-modeline-minor-modes . nil)
+     (inhibit-compacting-font-caches . t))
+    :custom-face
+    ((mode-line  . '((t (:height 160))))
+     (mode-line-inactive . '((t (:height 160)))))
+    :config (doom-modeline-mode))
   (leaf elscreen
     :ensure t
     :require t
