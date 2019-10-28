@@ -489,6 +489,7 @@
              ("C-x ;"   . helm-mini)
              ("C-x C-:" . helm-mini)
              ("C-x C-;" . helm-mini)
+             ("C-M-;"   . helm-resume)
              ("C-x C-y" . helm-show-kill-ring)
              ("C-x C-f" . helm-find-files)
              (:helm-map
