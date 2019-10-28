@@ -305,6 +305,12 @@
              (migemo-options . '("-q" "--emacs"))
              (migemo-dictionary . "/usr/local/share/migemo/utf-8/migemo-dict"))
     :config (migemo-init))
+  (leaf nyan-mode
+    :ensure t
+    :leaf-defer nil
+    :config (nyan-mode +1)
+    :custom ((nyan-animate-nyancat . nil)
+             (nyan-wavy-trail . nil)))
   (leaf popwin
     :ensure t
     :require t
