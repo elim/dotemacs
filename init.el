@@ -268,17 +268,9 @@
     :config (doom-modeline-mode))
   (leaf elscreen
     :ensure t
-    :require t
     :bind (("M-{" . elscreen-previous)
            ("M-}" . elscreen-next))
-    :config
-    (elscreen-start)
-    (mapcar (lambda (i)
-              (global-set-key (kbd (format "M-%d" i))
-                              `(lambda ()
-                                 (interactive)
-                                 (elscreen-goto ,i))))
-            (number-sequence 0 9))
+    :leaf-defer nil
     :custom `((elscreen-set-prefix-key . ,(kbd "C-z"))
               (elscreen-tab-display-control . nil)
               (elscreen-tab-display-kill-screen . nil)
@@ -286,7 +278,15 @@
     :custom-face ((elscreen-tab-background-face     . '((nil (:foreground "#112" :background "#ccc" :underline nil :box nil))))
                   (elscreen-tab-control-face        . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil))))
                   (elscreen-tab-current-screen-face . '((nil (:foreground "#ccc" :background "#336" :underline nil :box nil))))
-                  (elscreen-tab-other-screen-face   . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil))))))
+                  (elscreen-tab-other-screen-face   . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil)))))
+    :config
+    (mapcar (lambda (i)
+              (global-set-key (kbd (format "M-%d" i))
+                              `(lambda ()
+                                 (interactive)
+                                 (elscreen-goto ,i))))
+            (number-sequence 0 9))
+    (elscreen-start))
   (leaf executable
     :config
     (defun elim:executable-make-buffer-file-executable-if-script-p ()
