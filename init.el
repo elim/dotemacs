@@ -54,7 +54,7 @@
   (leaf *customize
     :custom `((custom-file
                . ,(expand-file-name "customize.el"
-                                     elim:user-variables-directory)))
+                                    elim:user-variables-directory)))
     :config
     (load custom-file))
   (leaf frame
