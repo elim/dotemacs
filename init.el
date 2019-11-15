@@ -201,6 +201,8 @@
     :bind (("C-x C-z" . open-junk-file))
     :custom ((open-junk-file-format . "~/.junk/%Y/%m/%d-%H%M%S.")
              (open-junk-file-find-file-function . 'find-file)))
+  (leaf recentf
+    :custom (recentf-max-saved-items . 512))
   (leaf sort
     :config
     (defun elim:sort-lines-nocase ()
