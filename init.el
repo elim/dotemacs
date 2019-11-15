@@ -309,8 +309,8 @@
     :ensure t
     :leaf-defer nil
     :config (nyan-mode +1)
-    :custom ((nyan-animate-nyancat . nil)
-             (nyan-wavy-trail . nil)))
+    :custom ((nyan-animate-nyancat . t)
+             (nyan-wavy-trail . t)))
   (leaf popwin
     :ensure t
     :require t
