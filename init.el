@@ -506,7 +506,7 @@
       :bind ("C-x g" . helm-projectile-ag)
       :custom ((helm-ag-base-command . "ag --nocolor --nogroup --ignore-case")
                (helm-ag-command-option . "--all-text")
-               (helm-ag-insert-at-point 'symbol)))
+               (helm-ag-insert-at-point . 'symbol)))
     (leaf helm-css-scss :ensure t)
     (leaf helm-descbinds :ensure t)
     (leaf helm-elscreen :ensure t
