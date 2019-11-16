@@ -501,7 +501,6 @@
                (helm-candidate-number-limit . 200)
                (helm-buffer-max-length . 40)
                (helm-ff-auto-update-initial-value . nil))
-
       :diminish helm-mode)
     (leaf helm-ag :ensure t
       :bind ("C-x g" . helm-projectile-ag)
