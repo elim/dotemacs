@@ -51,12 +51,11 @@
 
 (leaf *environments
   :config
-  (leaf *customize
+  (leaf cus-edit
+    :doc "Just prevent appending to this file (not load at startup)."
     :custom `((custom-file
                . ,(expand-file-name "customize.el"
-                                    elim:user-variables-directory)))
-    :config
-    (load custom-file))
+                                    elim:user-variables-directory))))
   (leaf frame
     :if window-system
     :preface
