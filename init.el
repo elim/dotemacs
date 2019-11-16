@@ -569,14 +569,12 @@
   (leaf persistent-scratch
     :ensure t
     :leaf-defer nil
-    :hook (kill-buffer-query-functions . elim:preserve-scratch-buffer)
     :custom `((persistent-scratch-save-file
                . ,(expand-file-name "scratch"
                                     elim:user-variables-directory)))
     :config
-    (defun elim:preserve-scratch-buffer ()
-      "Prevent deletion of the scratch buffer."
-      (not (string= "*scratch*" (buffer-name))))
+    (with-current-buffer "*scratch*"
+      (emacs-lock-mode 'kill))
     (persistent-scratch-setup-default))
   (leaf projectile
     :ensure t
