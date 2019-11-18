@@ -46,6 +46,7 @@
     :if window-system
     :preface
     (defun elim:frame-fullscreen ()
+      (when (eq system-type 'darwin) (sit-for 0.5))
       (set-frame-parameter nil 'fullscreen 'fullboth))
     :config
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
