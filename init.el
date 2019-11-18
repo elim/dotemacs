@@ -708,6 +708,7 @@
     :diminish auto-revert-mode)
   (leaf markdown-mode
     :ensure t
+    :mode (("\\.md\\'" "\\ISSUE_EDITMSG\\'") . gfm-mode)
     :custom
     ((markdown-asymmetric-header   . t)
      (markdown-header-scaling      . t)
