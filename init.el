@@ -132,7 +132,8 @@
     :ensure t
     :hook ((js-mode-hook . add-node-modules-path)
            (vue-mode-hook . add-node-modules-path)))
-
+  (leaf auth-source
+    :custom `(auth-sources . '(,(locate-user-emacs-file ".authinfo.plist"))))
   (leaf browse-url
     :bind ("C-x m" . browse-url-at-point))
   (leaf bs

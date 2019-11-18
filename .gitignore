@@ -2,6 +2,7 @@
 *elc
 *stuckdump
 *~
+/.authinfo.plist
 /.custom.el
 /.history.el
 /.recentf.el
