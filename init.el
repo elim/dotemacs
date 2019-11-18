@@ -31,31 +31,17 @@
     ;; initialize leaf-keywords.el
     (leaf-keywords-init)))
 
-(leaf *first-priority
-  :doc
-  Those are the minimal setting and/or another setting depend on that.
-  Do not nest the other settings because of that prevent the confusion
-  the evaluation order.
-  :preface
-  (defvar elim:user-variables-directory
-    (expand-file-name (format "%s/%s/" "~/Dropbox/var/emacs" (system-name)))
-    "Store variable files into this directory.")
-  (make-directory elim:user-variables-directory t)
+(leaf *environments
   :custom `((enable-recursive-minibuffers . t)
             (gc-cons-threshold . ,(* 128 1024 1024))
             (select-enable-clipboard . t)
             (user-mail-address . "takeru.naito@gmail.com")
             (user-full-name . "Takeru Naito"))
   :config
-  (defalias 'yes-or-no-p 'y-or-n-p))
-
-(leaf *environments
-  :config
+  (defalias 'yes-or-no-p 'y-or-n-p)
   (leaf cus-edit
     :doc "Just prevent appending to this file (not load at startup)."
-    :custom `((custom-file
-               . ,(expand-file-name "customize.el"
-                                    elim:user-variables-directory))))
+    :custom `((custom-file . ,(locate-user-emacs-file ".custom.el"))))
   (leaf frame
     :if window-system
     :preface
@@ -194,13 +180,15 @@
     :custom ((open-junk-file-format . "~/.junk/%Y/%m/%d-%H%M%S.")
              (open-junk-file-find-file-function . 'find-file)))
   (leaf recentf
-    :custom (recentf-max-saved-items . 512))
+    :custom `((recentf-max-saved-items . 512)
+              (recentf-save-file . ,(locate-user-emacs-file ".recentf.el"))))
   (leaf savehist
-    :custom (savehist-additional-variables
-             . '(extended-command-history
-                kill-ring
-                log-edit-comment-ring
-                read-expression-history))
+    :custom `((savehist-additional-variables
+               . '(extended-command-history
+                   kill-ring
+                   log-edit-comment-ring
+                   read-expression-history))
+              (savehist-file . ,(locate-user-emacs-file ".history.el")))
     :config
     (savehist-mode 1))
   (leaf sort
@@ -568,9 +556,7 @@
   (leaf persistent-scratch
     :ensure t
     :leaf-defer nil
-    :custom `((persistent-scratch-save-file
-               . ,(expand-file-name "scratch"
-                                    elim:user-variables-directory)))
+    :custom `(persistent-scratch-save-file . ,(locate-user-emacs-file ".scratch.el"))
     :config
     (with-current-buffer "*scratch*"
       (emacs-lock-mode 'kill))
