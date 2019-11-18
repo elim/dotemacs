@@ -2,9 +2,6 @@
 *elc
 *stuckdump
 *~
-.org-id-locations
-/.emacs.desktop*
-/ac-comphist.dat
 /.custom.el
 /.history.el
 /.recentf.el
@@ -18,9 +15,6 @@
 /network-security.data
 /projectile-bookmarks.eld
 /projectile.cache
-/riece/log
-/server
-/session-save.el
 /tramp
 /transient
 /url
