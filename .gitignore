@@ -4,6 +4,7 @@
 *~
 /.authinfo.plist
 /.custom.el
+/.forge-database.sqlite
 /.history.el
 /.recentf.el
 /.scratch.el
