@@ -708,9 +708,6 @@
     :diminish auto-revert-mode)
   (leaf markdown-mode
     :ensure t
-    :bind ((:gfm-mode-map
-            ("`" . self-insert-command)
-            ([(meta return)] . elim:toggle-fullscreen)))
     :custom
     ((markdown-asymmetric-header   . t)
      (markdown-header-scaling      . t)
