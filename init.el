@@ -712,10 +712,10 @@
             ("`" . self-insert-command)
             ([(meta return)] . elim:toggle-fullscreen)))
     :custom
-    `((markdown-asymmetric-header   . t)
-      (markdown-header-scaling      . t)
-      (markdown-hr-strings          . `("* * *\n\n"))
-      (markdown-marginalize-headers . nil)))
+    ((markdown-asymmetric-header   . t)
+     (markdown-header-scaling      . t)
+     (markdown-hr-strings          . '("* * *\n\n"))
+     (markdown-marginalize-headers . nil)))
   (leaf mmm-mode
     :ensure t
     :config
