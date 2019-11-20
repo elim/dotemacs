@@ -46,7 +46,9 @@
     :if window-system
     :preface
     (defun elim:frame-fullscreen ()
-      (when (eq system-type 'darwin) (sit-for 0.5))
+      ;; FIXME: Sometimes may become native full screen on macOS even
+      ;;        the ns-use-native-fullscreen is nil (especially on
+      ;;        startup).
       (set-frame-parameter nil 'fullscreen 'fullboth))
     :config
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
