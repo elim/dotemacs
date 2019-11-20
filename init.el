@@ -123,7 +123,6 @@
     (keyboard-translate ?\C-h ?\C-?)
     (line-number-mode +1)
     (transient-mark-mode t)
-    :advice (:before kill-new substring-no-properties)
     :hook (before-save-hook . elim:auto-delete-trailing-whitespace))
   (leaf vc
     :custom (vc-follow-symlinks . t)))
@@ -145,6 +144,18 @@
     :hook (after-init-hook . clipmon-mode-start))
   (leaf dabbrev
     :custom ((dabbrev-abbrev-skip-leading-regexp . "\\$")))
+  (leaf desktop
+    :defvar desktop-globals-to-save
+    :custom `((desktop-base-file-name . ,(locate-user-emacs-file ".desktop.el"))
+              (desktop-base-lock-name . ,(locate-user-emacs-file ".desktop.lock"))
+              (desktop-restore-eager  . 0)
+              (desktop-restore-frames . nil)
+              (desktop-save-mode      . +1))
+    :config
+    (add-to-list 'desktop-globals-to-save 'extended-command-history)
+    (add-to-list 'desktop-globals-to-save 'kill-ring)
+    (add-to-list 'desktop-globals-to-save 'log-edit-comment-ring)
+    (add-to-list 'desktop-globals-to-save 'read-expression-history))
   (leaf eslint-fix
     :ensure t)
   (leaf files
@@ -188,23 +199,6 @@
   (leaf recentf
     :custom `((recentf-max-saved-items . 512)
               (recentf-save-file . ,(locate-user-emacs-file ".recentf.el"))))
-  (leaf savehist
-    :preface
-    (defun elim:unpropertize-kill-ring ()
-      "Prevent failures to save kill rings with the savehist.
- Based on https://emacs.stackexchange.com/a/4191"
-      (set-variable 'kill-ring
-                    (mapcar 'substring-no-properties kill-ring)))
-    :leaf-defer nil
-    :custom `((savehist-additional-variables
-               . '(extended-command-history
-                   kill-ring
-                   log-edit-comment-ring
-                   read-expression-history))
-              (savehist-file . ,(locate-user-emacs-file ".history.el")))
-    :hook (kill-emacs-hook . elim:unpropertize-kill-ring)
-    :config
-    (savehist-mode 1))
   (leaf sort
     :config
     (defun elim:sort-lines-nocase ()

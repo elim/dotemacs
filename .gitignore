@@ -4,8 +4,9 @@
 *~
 /.authinfo.plist
 /.custom.el
+/.desktop.el
+/.desktop.lock
 /.forge-database.sqlite
-/.history.el
 /.recentf.el
 /.scratch.el
 /auto-save-list
