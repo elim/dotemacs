@@ -793,13 +793,19 @@
     :ensure t)
   (leaf web-mode
     :ensure t
-    :mode ("\\.ctp\\'" "\\.p?html?\\'" "\\.html.erb\\'")
+    :preface
+    (defun elim:web-mode-hook-func ()
+      (when (string-equal "tsx" (file-name-extension buffer-file-name))
+        (tide-setup)))
+    :mode ("\\.ctp\\'" "\\.p?html?\\'" "\\.html.erb\\'" "\\.tsx\\'")
+    :url "https://github.com/ananthakumaran/tide/tree/6faea517957f56467cac5be689277d6365f3aa1a#tsx"
     :custom ((web-mode-block-padding . 2)
              (web-mode-comment-style . 2)
              (web-mode-enable-engine-detection . t)
              (web-mode-indent-style . 2)
              (web-mode-script-padding . 2)
-             (web-mode-style-padding . 2)))
+             (web-mode-style-padding . 2))
+    :hook (web-mode-hook . elim:web-mode-hook-func))
   (leaf yaml-mode :ensure t))
 
 ;;; init.el ends here
