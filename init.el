@@ -785,7 +785,7 @@
       (defun elim:typescript-mode-hook-func ()
         (tide-setup)
         (flycheck-mode t)
-        (setq flycheck-check-syntax-automatically '(save mode-enabled))
+        (set-variable 'flycheck-check-syntax-automatically '(save mode-enabled))
         (eldoc-mode t)
         (company-mode-on))
       :hook (typescript-mode-hook . elim:typescript-mode-hook-func))
