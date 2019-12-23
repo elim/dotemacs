@@ -778,6 +778,7 @@
     :hook (text-mode-hook . elim:text-mode-hook-func))
   (leaf terraform-mode :ensure t)
   (leaf *typescript
+    :config
     (leaf typescript-mode
       :ensure t
       :preface
