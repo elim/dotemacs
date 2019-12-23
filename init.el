@@ -724,7 +724,7 @@
     :mode (("\\.md\\'" "\\ISSUE_EDITMSG\\'") . gfm-mode)
     :custom
     ((markdown-asymmetric-header   . t)
-     (markdown-header-scaling      . t)
+     (markdown-header-scaling      . nil)
      (markdown-hr-strings          . '("* * *\n\n"))
      (markdown-marginalize-headers . nil)))
   (leaf mmm-mode
