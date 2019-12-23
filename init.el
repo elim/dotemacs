@@ -208,7 +208,10 @@
       (interactive)
       (let ((sort-fold-case t))
         (call-interactively 'sort-lines)))
-    (defalias 'sort-lines-nocase #'elim:sort-lines-nocase)))
+    (defalias 'sort-lines-nocase #'elim:sort-lines-nocase))
+  (leaf sqlformat
+    :ensure t
+    :custom (sqlformat-command . 'pgformatter)))
 
 (leaf *interfaces
   :custom ((frame-title-format . `(" %b " (buffer-file-name "( %f )")))
