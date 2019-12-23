@@ -710,7 +710,8 @@
   (leaf json-mode :ensure t)
   (leaf magit
     :ensure t
-    :bind ("C-x v s" . magit-status)
+    :bind (("C-x v s" . magit-status)
+           ("C-x v f" . magit-diff-buffer-file))
     :hook (git-commit-setup-hook . elim:git-commit-setup-hook-func)
     :init (add-to-list 'process-coding-system-alist '("git" utf-8 . utf-8))
     :config
