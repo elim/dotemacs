@@ -518,18 +518,13 @@
       :bind ("C-z h" . helm-elscreen))
     (leaf helm-git-grep :ensure t)
     (leaf helm-projectile :ensure t
-      :after projectile
       :bind ("M-t" . helm-projectile)
       :config (helm-projectile-on)
-      :custom (helm-mini-default-sources
-               . '(helm-source-buffers-list
-                   helm-source-recentf
+      :custom (helm-projectile-sources-list
+               . '(helm-source-projectile-buffers-list
                    helm-source-projectile-recentf-list
-                   helm-source-projectile-buffers-list
                    helm-source-projectile-files-list
-                   helm-source-projectile-projects
-                   helm-source-buffer-not-found))
-      :hook (helm-mode-hook . helm-projectile-on)))
+                   helm-source-projectile-projects))))
   (leaf help
     :config (temp-buffer-resize-mode t))
   (leaf hideshow
