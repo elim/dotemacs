@@ -358,7 +358,10 @@
   (leaf uniquify
     :custom ((uniquify-buffer-name-style . 'post-forward-angle-brackets)
              (uniquify-ignore-buffers-re . "*[^*]+*")
-             (uniquify-min-dir-content   . 1))))
+             (uniquify-min-dir-content   . 1)))
+  (leaf which-key
+    :ensure t
+    :hook (after-init-hook . which-key-mode)))
 
 (leaf *minor-modes
   :config
