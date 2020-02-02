@@ -487,18 +487,22 @@
   (leaf *helm
     :config
     (leaf helm :ensure t
-      :require helm-config helm-files
+      :leaf-defer nil
+      :require helm-config
       :bind (("M-x"     . helm-M-x)
+             ("C-;"     . helm-command-prefix)
              ("C-:"     . helm-mini)
-             ("C-;"     . helm-mini)
              ("C-x :"   . helm-mini)
              ("C-x ;"   . helm-mini)
              ("C-x C-:" . helm-mini)
              ("C-x C-;" . helm-mini)
-             ("C-M-;"   . helm-resume)
              ("C-x C-y" . helm-show-kill-ring)
              ("C-x C-f" . helm-find-files)
+             (:helm-command-map
+              :package helm-config
+              ("C-;" . helm-mini))
              (:helm-map
+              ("C-;" . helm-next-source)
               ("C-h" . delete-backward-char)))
       :config (helm-mode 1)
       :custom ((helm-input-idle-delay . 0.3)
