@@ -726,10 +726,11 @@
     :ensure t
     :mode (("\\.md\\'" "\\ISSUE_EDITMSG\\'") . gfm-mode)
     :custom
-    ((markdown-asymmetric-header   . t)
-     (markdown-header-scaling      . nil)
-     (markdown-hr-strings          . '("* * *\n\n"))
-     (markdown-marginalize-headers . nil)))
+    ((markdown-asymmetric-header          . t)
+     (markdown-gfm-use-electric-backquote . nil)
+     (markdown-header-scaling             . nil)
+     (markdown-hr-strings                 . '("* * *\n\n"))
+     (markdown-marginalize-headers        . nil)))
   (leaf mmm-mode
     :ensure t
     :config
