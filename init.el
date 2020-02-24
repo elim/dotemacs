@@ -6,6 +6,10 @@
 (set-variable 'init-file-debug t)
 (set-variable 'load-prefer-newer t)
 
+(defun elim:first-existing-path-in (list)
+  "Return first existing path in LIST."
+  (car (remove-if-not #'file-exists-p list)))
+
 ;;; leaf.el
 ;;
 (prog1 "leaf"
@@ -303,11 +307,17 @@
   (leaf migemo
     :ensure t
     :require t
-    :custom ((migemo-coding-system . 'utf-8-unix)
-             (migemo-command . "/usr/local/bin/cmigemo")
-             (migemo-options . '("-q" "--emacs"))
-             (migemo-dictionary . "/usr/local/share/migemo/utf-8/migemo-dict"))
-    :config (migemo-init))
+    :custom `((migemo-coding-system . 'utf-8-unix)
+              (migemo-options . '("-q" "--emacs"))
+              (migemo-dictionary
+               . ,(elim:first-existing-path-in
+                   '("/usr/local/share/migemo/utf-8/migemo-dict"
+                     "/usr/share/cmigemo/utf-8/migemo-dict")))
+              (migemo-command
+               . ,(elim:first-existing-path-in
+                   '("/usr/local/bin/cmigemo"
+                     "/usr/bin/cmigemo"))))
+  :config (migemo-init))
   (leaf nyan-mode
     :ensure t
     :leaf-defer nil
