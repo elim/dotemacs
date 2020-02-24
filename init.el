@@ -334,6 +334,7 @@
     (popwin-mode +1))
   (leaf rotate :ensure t)
   (leaf scroll-bar
+    :if (fboundp 'scroll-bar-mode)
     :config
     (column-number-mode +1)
     (set-scroll-bar-mode 'right)
