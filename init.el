@@ -202,6 +202,12 @@
     :bind (("C-x C-z" . open-junk-file))
     :custom ((open-junk-file-format . "~/.junk/%Y/%m/%d-%H%M%S.")
              (open-junk-file-find-file-function . 'find-file)))
+  (leaf paradox
+    :ensure t
+    :custom `((paradox-github-token
+               . ,(cadr (auth-source-user-and-password
+                         "api.github.com" "elim^paradox"))))
+    :config (paradox-enable))
   (leaf recentf
     :custom `((recentf-max-saved-items . 512)
               (recentf-save-file . ,(locate-user-emacs-file ".recentf.el"))))
