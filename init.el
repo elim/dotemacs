@@ -393,11 +393,16 @@
     :config (global-anzu-mode +1))
   (leaf atomic-chrome
     :ensure t
+    :preface
+    (defun elim:atomic-chrome-edit-done-hook-func ()
+      (kill-new (buffer-string)))
     :custom ((atomic-chrome-default-major-mode . 'markdown-mode)
              (atomic-chrome-url-major-mode-alist
               . '(("github\\.com" . gfm-mode)
                   ("esa\\.io"     . gfm-mode)
                   ("redmine"      . textile-mode))))
+    :hook ((atomic-chrome-edit-done-hook
+            . elim:atomic-chrome-edit-done-hook-func))
     :config
     (atomic-chrome-start-server))
   (leaf autorevert
