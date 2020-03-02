@@ -623,7 +623,6 @@
     :config
     (leaf skk
       :ensure ddskk
-      :require t
       :bind* (("C-x C-j" . skk-mode)
               ("C-x t" . nil)
               ("C-x j" . nil))
