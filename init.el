@@ -700,7 +700,9 @@
     (defun elim:emacs-lisp-mode-hook-func ()
       (set-variable 'indent-tabs-mode nil)
       (hs-minor-mode +1)))
-  (leaf git-modes :el-get magit/git-modes)
+  (leaf gitattributes-mode :ensure t)
+  (leaf gitconfig-mode :ensure t)
+  (leaf gitignore-mode :ensure t)
   (leaf go-mode
     :ensure t
     :preface
