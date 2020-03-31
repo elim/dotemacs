@@ -174,6 +174,7 @@
     ;; C-x K => Find Function on Key
     (find-function-setup-keys))
   (leaf forge
+    :after magit
     :ensure t
     :custom `(forge-database-file . ,(locate-user-emacs-file ".forge-database.sqlite")))
   (leaf dictionary
