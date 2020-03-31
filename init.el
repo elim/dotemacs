@@ -656,7 +656,7 @@
     (leaf ddskk-posframe
       :doc "Show Henkan tooltip for ddskk via posframe"
       :after skk
-      :el-get conao3/ddskk-posframe.el
+      :ensure t
       :custom ((ddskk-posframe-mode . t))
       :diminish ddskk-posframe-mode))
   (leaf undo-tree
