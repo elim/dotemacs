@@ -315,6 +315,7 @@
     :ensure t
     :require t
     :custom `((migemo-coding-system . 'utf-8-unix)
+              (migemo-isearch-min-length . 2)
               (migemo-options . '("-q" "--emacs"))
               (migemo-dictionary
                . ,(elim:first-existing-path-in
