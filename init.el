@@ -403,10 +403,10 @@
               . '(("github\\.com" . gfm-mode)
                   ("esa\\.io"     . gfm-mode)
                   ("redmine"      . textile-mode))))
-    :hook ((atomic-chrome-edit-done-hook
-            . elim:atomic-chrome-edit-done-hook-func))
-    :config
-    (atomic-chrome-start-server))
+    :hook ((after-init-hook
+            . atomic-chrome-start-server)
+           (atomic-chrome-edit-done-hook
+            . elim:atomic-chrome-edit-done-hook-func)))
   (leaf autorevert
     :config
     (global-auto-revert-mode t))
