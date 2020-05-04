@@ -138,7 +138,7 @@
   (leaf add-node-modules-path
     :ensure t
     :hook ((js-mode-hook . add-node-modules-path)
-           (vue-mode-hook . add-node-modules-path)))
+           (www-mode-hook . add-node-modules-path)))
   (leaf auth-source
     :custom `(auth-sources . '(,(locate-user-emacs-file ".authinfo.plist"))))
   (leaf browse-url
@@ -454,8 +454,16 @@
      (diff-refine-change . '((nil (:foreground nil     :background nil :weight 'bold :inverse-video t))))))
   (leaf editorconfig
     :ensure t
-    :diminish editorconfig-mode
-    :config (editorconfig-mode 1))
+    :init
+    (defun elim:coordinate-editorconfig-with-web-mode (props)
+      "When using web mode, leaves the code format to prettifiers."
+      (when (derived-mode-p 'web-mode)
+        (set-variable 'web-mode-script-padding 0)
+        (set-variable 'web-mode-style-padding  0)))
+    :hook (editorconfig-after-apply-functions
+           . elim:coordinate-editorconfig-with-web-mode)
+    :config (editorconfig-mode 1)
+    :diminish editorconfig-mode)
   (leaf eldoc
     :custom ((eldoc-idle-delay . 0.2)
              (eldoc-minor-mode-string . ""))
@@ -818,23 +826,31 @@
         (company-mode-on))
       :hook (typescript-mode-hook . elim:typescript-mode-hook-func))
     (leaf tide :ensure t))
-  (leaf vue-mode
-    :ensure t)
   (leaf web-mode
+    :after flycheck
     :ensure t
+    :doc "https://github.com/ananthakumaran/tide/tree/6faea517957f56467cac5be689277d6365f3aa1a#tsx"
     :preface
     (defun elim:web-mode-hook-func ()
       (when (string-equal "tsx" (file-name-extension buffer-file-name))
         (tide-setup)))
-    :mode ("\\.ctp\\'" "\\.p?html?\\'" "\\.html.erb\\'" "\\.tsx\\'")
-    :url "https://github.com/ananthakumaran/tide/tree/6faea517957f56467cac5be689277d6365f3aa1a#tsx"
-    :custom ((web-mode-block-padding . 2)
-             (web-mode-comment-style . 2)
+    :mode ("\\.ctp\\'" "\\.p?html?\\'" "\\.html.erb\\'" "\\.tsx\\'" "\\.vue\\'")
+    :custom (;; general
+             (web-mode-enable-auto-indentation . nil)
              (web-mode-enable-engine-detection . t)
-             (web-mode-indent-style . 2)
-             (web-mode-script-padding . 2)
-             (web-mode-style-padding . 2))
-    :hook (web-mode-hook . elim:web-mode-hook-func))
+             ;; offsets
+             (web-mode-code-indent-offset . 2)
+             (web-mode-css-indent-offset . 2)
+             (web-mode-markup-indent-offset . 2)
+             ;; paddings
+             (web-mode-block-padding . 2)
+             (web-mode-script-padding . 0)
+             (web-mode-style-padding . 0)
+             ;; styles
+             (web-mode-comment-style . 1)
+             (web-mode-indent-style . 1))
+    :hook (web-mode-hook . elim:web-mode-hook-func)
+    :config (flycheck-add-mode 'javascript-eslint 'web-mode))
   (leaf yaml-mode :ensure t))
 
 ;;; init.el ends here
