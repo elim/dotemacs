@@ -521,7 +521,7 @@
              ("C-x C-y" . helm-show-kill-ring)
              ("C-x C-f" . helm-find-files)
              (:helm-command-map
-              :package helm-config
+              :package helm-global-bindings
               ("C-;" . helm-mini))
              (:helm-map
               ("C-;" . helm-next-source)
