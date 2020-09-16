@@ -311,21 +311,6 @@
     :config (global-font-lock-mode t))
   (leaf menu-bar
     :config (menu-bar-mode +1))
-  (leaf migemo
-    :ensure t
-    :require t
-    :custom `((migemo-coding-system . 'utf-8-unix)
-              (migemo-isearch-min-length . 2)
-              (migemo-options . '("-q" "--emacs"))
-              (migemo-dictionary
-               . ,(elim:first-existing-path-in
-                   '("/usr/local/share/migemo/utf-8/migemo-dict"
-                     "/usr/share/cmigemo/utf-8/migemo-dict")))
-              (migemo-command
-               . ,(elim:first-existing-path-in
-                   '("/usr/local/bin/cmigemo"
-                     "/usr/bin/cmigemo"))))
-  :config (migemo-init))
   (leaf nyan-mode
     :ensure t
     :leaf-defer nil
@@ -388,8 +373,7 @@
     :ensure t
     :bind (([remap query-replace]        . anzu-query-replace)
            ([remap query-replace-regexp] . anzu-query-replace-regexp))
-    :custom ((anzu-use-migemo . t)
-             (anzu-mode-lighter . "")
+    :custom ((anzu-mode-lighter . "")
              (anzu-deactivate-region . t)
              (anzu-search-threshold . 1000))
     :config (global-anzu-mode +1))
@@ -734,7 +718,6 @@
              (js2-mode-deactivate-region . t)
              (js2-mode-mode-lighter . "")
              (js2-mode-search-threshold . 1000)
-             (js2-mode-use-migemo . t)
              (js2-global-externs
               . '("define" "describe" "xdescribe" "expect" "it" "xit"
                   "require" "$" "_" "angular" "Backbone" "JSON" "setTimeout" "jasmine"
@@ -835,7 +818,12 @@
     (defun elim:web-mode-hook-func ()
       (when (string-equal "tsx" (file-name-extension buffer-file-name))
         (tide-setup)))
-    :mode ("\\.ctp\\'" "\\.p?html?\\'" "\\.html.erb\\'" "\\.tsx\\'" "\\.vue\\'")
+    :mode ("\\.ctp\\'"
+           "\\.html.erb\\'"
+           "\\.js.erb\\'"
+           "\\.p?html?\\'"
+           "\\.tsx\\'"
+           "\\.vue\\'")
     :custom (;; general
              (web-mode-enable-auto-indentation . nil)
              (web-mode-enable-engine-detection . t)
