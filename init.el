@@ -700,6 +700,9 @@
       (set-variable 'indent-tabs-mode nil)
       (hs-minor-mode +1)))
   (leaf elm-mode :ensure t)
+  (leaf feature-mode
+    :ensure t
+    :after org org-table)
   (leaf gitattributes-mode :ensure t)
   (leaf gitconfig-mode :ensure t)
   (leaf gitignore-mode :ensure t)
@@ -764,6 +767,7 @@
       :hook
       ((mmm-js-mode-enter-hook         . elim:disable-syntax-ppss-table)
        (mmm-typescript-mode-enter-hook . elim:disable-syntax-ppss-table))))
+  (leaf org :require org org-table)
   (leaf php-mode
     :ensure t
     :bind (:php-mode-map
