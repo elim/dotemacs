@@ -365,7 +365,13 @@
              (uniquify-min-dir-content   . 1)))
   (leaf which-key
     :ensure t
-    :hook (after-init-hook . which-key-mode)))
+    :hook (after-init-hook . which-key-mode))
+  (leaf windmove
+    :custom ((windmove-wrap-around . t))
+    :bind (("C-c C-b" . windmove-left)
+           ("C-c C-n" . windmove-down)
+           ("C-c C-p" . windmove-up)
+           ("C-c C-f" . windmove-right))))
 
 (leaf *minor-modes
   :config
