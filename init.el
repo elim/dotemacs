@@ -294,12 +294,12 @@
                   (elscreen-tab-current-screen-face . '((nil (:foreground "#ccc" :background "#336" :underline nil :box nil))))
                   (elscreen-tab-other-screen-face   . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil)))))
     :config
-    (mapcar (lambda (i)
-              (global-set-key (kbd (format "M-%d" i))
-                              `(lambda ()
-                                 (interactive)
-                                 (elscreen-goto ,i))))
-            (number-sequence 0 9))
+    (mapc (lambda (i)
+            (global-set-key (kbd (format "M-%d" i))
+                            `(lambda ()
+                               (interactive)
+                               (elscreen-goto ,i))))
+          (number-sequence 0 9))
     (elscreen-start))
   (leaf executable
     :config
