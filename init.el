@@ -751,6 +751,9 @@
   (leaf markdown-mode
     :ensure t
     :mode (("\\.md\\'" "\\ISSUE_EDITMSG\\'") . gfm-mode)
+    :bind (:markdown-mode-map
+           ("C-c 1" . markdown-insert-header-setext-1)
+           ("C-c 2" . markdown-insert-header-setext-2))
     :custom
     ((markdown-asymmetric-header          . t)
      (markdown-gfm-use-electric-backquote . nil)
