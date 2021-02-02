@@ -855,4 +855,6 @@
     :config (flycheck-add-mode 'javascript-eslint 'web-mode))
   (leaf yaml-mode :ensure t))
 
+(provide 'init)
+
 ;;; init.el ends here
