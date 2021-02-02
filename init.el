@@ -506,51 +506,6 @@
          (if asciip "en" "ja")
          (if asciip "ja" "en")
          string))))
-  (leaf *helm
-    :config
-    (leaf helm :ensure t
-      :leaf-defer nil
-      :require helm-config
-      :bind (("M-x"     . helm-M-x)
-             ("C-;"     . helm-command-prefix)
-             ("C-:"     . helm-mini)
-             ("C-x :"   . helm-mini)
-             ("C-x ;"   . helm-mini)
-             ("C-x C-:" . helm-mini)
-             ("C-x C-;" . helm-mini)
-             ("C-x C-y" . helm-show-kill-ring)
-             ("C-x C-f" . helm-find-files)
-             (:helm-command-map
-              :package helm-global-bindings
-              ("C-;" . helm-mini))
-             (:helm-map
-              ("C-;" . helm-next-source)
-              ("C-h" . delete-backward-char)))
-      :config (helm-mode 1)
-      :custom ((helm-input-idle-delay . 0.3)
-               (helm-candidate-number-limit . 200)
-               (helm-buffer-max-length . 40)
-               (helm-ff-auto-update-initial-value . nil))
-      :diminish helm-mode)
-    (leaf helm-ag :ensure t
-      :bind ("C-x g" . helm-projectile-ag)
-      :custom ((helm-ag-base-command . "ag --nocolor --nogroup --ignore-case")
-               (helm-ag-command-option . "--all-text")
-               (helm-ag-insert-at-point . 'symbol)))
-    (leaf helm-css-scss :ensure t)
-    (leaf helm-descbinds :ensure t)
-    (leaf helm-elscreen :ensure t
-      :after helm elscreen
-      :bind ("C-z h" . helm-elscreen))
-    (leaf helm-git-grep :ensure t)
-    (leaf helm-projectile :ensure t
-      :bind ("M-t" . helm-projectile)
-      :config (helm-projectile-on)
-      :custom (helm-projectile-sources-list
-               . '(helm-source-projectile-buffers-list
-                   helm-source-projectile-recentf-list
-                   helm-source-projectile-files-list
-                   helm-source-projectile-projects))))
   (leaf help
     :config (temp-buffer-resize-mode t))
   (leaf hideshow
@@ -560,6 +515,52 @@
             ("C-c l"     . hs-hide-level))))
   (leaf hl-line
     :config (global-hl-line-mode +1))
+  (leaf counsel
+    :ensure t
+    :defun ivy-re-builders-alist
+    :defvar ivy-re-builders-alist
+    :config
+    (setf (alist-get 'counsel-M-x ivy-re-builders-alist)
+          #'ivy--regex-ignore-order)
+    :custom ((counsel-yank-pop-separator . "\n────────\n")
+             (ivy-count-format . "(%d/%d) ")
+             (ivy-initial-inputs-alist . nil)
+             (ivy-use-virtual-buffers . t)
+             (ivy-wrap . t))
+    :bind (("C-:")
+           ("C-;")
+           ("C-; ;"   . ivy-switch-buffer)
+           ("C-; i"   . counsel-imenu)
+           ("C-; p"   . projectile-command-map)
+           ("C-x ;"   . ivy-switch-buffer)
+           ("C-x C-:" . ivy-switch-buffer)
+           ("C-x C-;" . ivy-switch-buffer)
+           ("C-x C-f" . counsel-find-file)
+	   ("C-x C-y" . counsel-yank-pop)
+	   (:ivy-minibuffer-map
+            ("TAB" . ivy-alt-done))
+           (:counsel-find-file-map
+            ("C-l" . counsel-up-directory)))
+    :config
+    (ivy-mode +1)
+    (counsel-mode +1)
+    (leaf ivy-prescient
+      :ensure t
+      :custom `((ivy-prescient-sort-commands
+                . '(:not counsel-yank-pop
+                         ivy-switch-buffer
+                         swiper-isearch
+                         swiper))
+                 (prescient-save-file
+                  . ,(expand-file-name ".prescient-save.el" user-emacs-directory)))
+      :config
+      (ivy-prescient-mode +1)
+      (prescient-persist-mode +1))
+    (leaf counsel-projectile
+      :require t
+      :ensure t
+      :bind ("M-t" . projectile-command-map)
+      :config (counsel-projectile-mode +1)))
   (leaf paren
     :url http://0xcc.net/unimag/10/
     :config
