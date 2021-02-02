@@ -755,11 +755,12 @@
            ("C-c 1" . markdown-insert-header-setext-1)
            ("C-c 2" . markdown-insert-header-setext-2))
     :custom
-    ((markdown-asymmetric-header          . t)
-     (markdown-gfm-use-electric-backquote . nil)
-     (markdown-header-scaling             . nil)
-     (markdown-hr-strings                 . '("* * *\n\n"))
-     (markdown-marginalize-headers        . nil)))
+    ((markdown-asymmetric-header            . t)
+     (markdown-fontify-code-blocks-natively . t)
+     (markdown-gfm-use-electric-backquote   . nil)
+     (markdown-header-scaling               . nil)
+     (markdown-hr-strings                   . '("* * *\n\n"))
+     (markdown-marginalize-headers          . nil)))
   (leaf mmm-mode
     :ensure t
     :config
