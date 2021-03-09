@@ -35,7 +35,7 @@
     :config
     ;; optional packages if you want to use :hydra, :el-get,,,
     (leaf hydra :ensure t)
-    (leaf diminish :ensure t)
+    (leaf blackout :ensure t)
 
     ;; initialize leaf-keywords.el
     (leaf-keywords-init)))
@@ -268,7 +268,7 @@
                   (company-tooltip-common           . '((nil (:foreground "black" :background "lightgrey"))))
                   (company-tooltip-common-selection . '((nil (:foreground "white" :background "steelblue"))))
                   (company-tooltip-selection        . '((nil (:foreground "black" :background "steelblue")))))
-    :diminish company-mode
+    :blackout company-mode
     :hook (after-init-hook . global-company-mode))
   (leaf company-quickhelp
     :ensure t
@@ -458,7 +458,7 @@
     :hook (editorconfig-after-apply-functions
            . elim:coordinate-editorconfig-with-web-mode)
     :config (editorconfig-mode 1)
-    :diminish editorconfig-mode)
+    :blackout editorconfig-mode)
   (leaf eldoc
     :custom ((eldoc-idle-delay . 0.2)
              (eldoc-minor-mode-string . ""))
@@ -608,10 +608,10 @@
     :ensure t
     :config (projectile-mode +1)
     :custom (projectile-enable-caching . t)
-    :diminish projectile-mode)
+    :blackout projectile-mode)
   (leaf rainbow-mode
     :ensure t
-    :diminish t
+    :blackout t
     :hook ((css-mode-hook
             emacs-lisp-mode-hook
             scss-mode-hook
@@ -663,7 +663,7 @@
       :after skk
       :ensure t
       :custom ((ddskk-posframe-mode . t))
-      :diminish ddskk-posframe-mode))
+      :blackout ddskk-posframe-mode))
   (leaf undo-tree
     :ensure t
     :bind ((:undo-tree-visualizer-mode-map
@@ -673,7 +673,7 @@
     (:after  undo-tree-visualizer-quit elim:advice:undo-tree-visualizer-quit:after)
     :leaf-defer nil
     :custom (undo-tree-enable-undo-in-region . nil)
-    :diminish undo-tree-mode
+    :blackout undo-tree-mode
     :config
     (defvar elim:before:auto-save-visited-mode nil
       "Store the value of auto-save-visited-mode.")
@@ -753,7 +753,7 @@
       (flyspell-mode +1)
       (set (make-local-variable
             'elim:auto-delete-trailing-whitespace-enable-p) nil))
-    :diminish auto-revert-mode)
+    :blackout auto-revert-mode)
   (leaf markdown-mode
     :ensure t
     :mode (("\\.md\\'" "\\ISSUE_EDITMSG\\'") . gfm-mode)
