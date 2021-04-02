@@ -210,7 +210,8 @@
              (open-junk-file-find-file-function . 'find-file)))
   (leaf paradox
     :ensure t
-    :custom `((paradox-github-token
+    :custom `((paradox-execute-asynchronously . t)
+              (paradox-github-token
                . ,(cadr (auth-source-user-and-password
                          "api.github.com" "elim^paradox"))))
     :config (paradox-enable))
