@@ -179,7 +179,7 @@
       (set-variable 'ns-antialias-text t)
       (elim:set-text-height 180))
      ((eq window-system 'x)
-      (elim:set-text-height 140))))
+      (elim:set-text-height 160))))
   (leaf ns
     :if (featurep 'ns)
     :custom
