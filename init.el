@@ -208,8 +208,7 @@
     :custom ((kill-ring-max . 8192))
     :config
     (keyboard-translate ?\C-h ?\C-?)
-    (line-number-mode +1)
-    (transient-mark-mode t)
+    :global-minor-mode line-number-mode transient-mark-mode
     :hook (before-save-hook . elim:auto-delete-trailing-whitespace))
   (leaf vc
     :custom (vc-follow-symlinks . t)))
@@ -295,6 +294,7 @@
   (leaf recentf
     :custom `((recentf-max-saved-items . 512)
               (recentf-save-file . ,(locate-user-emacs-file ".recentf.el"))))
+    :global-minor-mode t)
   (leaf sort
     :config
     (defun elim:sort-lines-nocase ()
@@ -350,7 +350,7 @@
     :hook (after-init-hook . global-company-mode))
   (leaf company-quickhelp
     :ensure t
-    :config (company-quickhelp-mode +1))
+    :global-minor-mode company-quickhelp-mode)
   (leaf doom-modeline
     :ensure t
     :leaf-defer nil
@@ -394,11 +394,11 @@
     :config (global-font-lock-mode t))
   (leaf menu-bar
     :if (eq system-type 'darwin)
-    :config (menu-bar-mode +1))
+    :global-minor-mode t)
   (leaf nyan-mode
     :ensure t
     :leaf-defer nil
-    :config (nyan-mode +1)
+    :global-minor-mode t
     :custom ((nyan-animate-nyancat . t)
              (nyan-wavy-trail . t)))
   (leaf popwin
@@ -408,14 +408,14 @@
              (popwin:popup-window-height . 20))
     :config
     (push '("*Google Translate*") popwin:special-display-config)
-    (popwin-mode +1))
+    :global-minor-mode t)
   (leaf rotate :ensure t)
   (leaf scroll-bar
     :if (fboundp 'scroll-bar-mode)
     :config
-    (column-number-mode +1)
     (set-scroll-bar-mode 'right)
-    (scroll-bar-mode -1))
+    (scroll-bar-mode -1)
+    :global-minor-mode column-number-mode)
   (leaf select
     :custom (select-enable-primary . t))
   (leaf wgrep
@@ -462,7 +462,7 @@
     :custom ((anzu-mode-lighter . "")
              (anzu-deactivate-region . t)
              (anzu-search-threshold . 1000))
-    :config (global-anzu-mode +1))
+    :global-minor-mode global-anzu-mode)
   (leaf atomic-chrome
     :ensure t
     :preface
@@ -478,13 +478,12 @@
            (atomic-chrome-edit-done-hook
             . elim:atomic-chrome-edit-done-hook-func)))
   (leaf autorevert
-    :config
-    (global-auto-revert-mode t))
+    :global-minor-mode global-auto-revert-mode)
   (leaf auto-save-visited-mode
     :bind ("C-x as" . auto-save-visited-mode)
     :leaf-defer nil
     :custom ((auto-save-visited-interval . 0.5))
-    :config (auto-save-visited-mode +1))
+    :global-minor-mode t)
   (leaf *dired
     :config
     (leaf dired
@@ -532,7 +531,7 @@
         (set-variable 'web-mode-style-padding  0)))
     :hook (editorconfig-after-apply-functions
            . elim:coordinate-editorconfig-with-web-mode)
-    :config (editorconfig-mode 1)
+    :global-minor-mode editorconfig-mode
     :blackout editorconfig-mode)
   (leaf eldoc
     :custom ((eldoc-idle-delay . 0.2)
@@ -597,8 +596,8 @@
     :global-minor-mode global-hl-line-mode)
   (leaf paren
     :url http://0xcc.net/unimag/10/
+    :global-minor-mode show-paren-mode
     :config
-    (show-paren-mode 1)
     (defvar elim:paren-face   'paren-face)
     (defvar elim:brace-face   'brace-face)
     (defvar elim:bracket-face 'bracket-face)
@@ -635,7 +634,7 @@
     (persistent-scratch-setup-default))
   (leaf projectile
     :ensure t
-    :config (projectile-mode +1)
+    :global-minor-mode t
     :custom (projectile-enable-caching . t)
     :blackout projectile-mode)
   (leaf rainbow-mode
