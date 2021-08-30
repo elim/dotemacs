@@ -66,6 +66,80 @@
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
     :custom ((line-spacing . 4))
     :hook (window-setup-hook . elim:frame-fullscreen))
+  (leaf *completion
+    :url https://blog.tomoya.dev/posts/a-new-wave-has-arrived-at-emacs
+    :url https://emacs-jp.slack.com/archives/C1B5WTJLQ/p1623851956426000
+    :url https://github.com/uwabami/emacs
+    :config
+    (leaf affe
+      :ensure t
+      :after orderless
+      :custom
+      ((affe-highlight-function . 'orderless-highlight-matches)
+       (affe-regexp-function  . 'orderless-pattern-compiler)))
+    (leaf consult
+      :ensure t
+      :preface
+      ;; C-uを付けるとカーソル位置の文字列を使うmy-consult-lineコマンドを定義する
+      (defun tomoya:consult-line (&optional at-point)
+        "Consult-line uses things-at-point if set C-u prefix."
+        (interactive "P")
+        (if at-point
+            (consult-line (thing-at-point 'symbol))
+          (consult-line)))
+      :bind (([remap apropos-command]               . consult-apropos)             ; F1 a
+             ([remap switch-to-buffer]              . consult-buffer)              ; C-x b
+             ([remap switch-to-buffer-other-window] . consult-buffer-other-window) ; C-x 4 b
+             ([remap display-buffer-other-frame]    . consult-buffer-other-frame)  ; C-x 5 b
+             ([remap repeat-complex-command]        . consult-complex-command)     ; C-x C-:
+             ([remap pop-global-mark]               . consult-global-mark)         ; C-x C-SPC
+             ([remap goto-line]                     . consult-goto-line)           ; M-g g
+             ([remap yank-pop]                      . consult-yank-pop)            ; M-y
+
+             ("C-;" . consult-buffer)
+             ("C-x C-;" . consult-buffer)
+
+             ("C-x C-o" . consult-file-externally) ; orig. delete-blank-lines
+             ("C-x C-p" . consult-find)            ; orig. mark-page
+             ("M-s M-s" . tomoya:consult-line)
+             ("C-S-s"   . consult-imenu)           ; orig. imenu
+             ))
+    (leaf embark-consult
+      :ensure t
+      :require t
+      :after consult)
+    (leaf marginalia
+      :ensure t
+      :global-minor-mode t)
+    (leaf orderless
+      :ensure t
+      :custom (completion-styles . '(orderless)))
+    (leaf savehist
+      :global-minor-mode t)
+    (leaf vertico
+      :url https://github.com/uwabami/emacs
+      :preface
+      (defun uwabami:filename-upto-parent ()
+        "Move to parent directory like \"cd ..\" in find-file."
+        (interactive)
+        (let ((sep (eval-when-compile (regexp-opt '("/" "\\")))))
+          (save-excursion
+            (left-char 1)
+            (when (looking-at-p sep)
+              (delete-char 1)))
+          (save-match-data
+            (when (search-backward-regexp sep nil t)
+              (right-char 1)
+              (filter-buffer-substring (point)
+                                       (save-excursion (end-of-line) (point))
+                                       #'delete)))))
+      :ensure t
+      :bind (:vertico-map
+             (("C-l" . uwabami:filename-upto-parent)
+              ("C-r" . vertico-previous)
+              ("C-s" . vertico-next)))
+      :custom (vertico-count . 20)
+      :global-minor-mode t))
   (leaf *fonts
     :preface
     (defun elim:set-text-height (height)
@@ -520,53 +594,7 @@
             ("C-c h"     . hs-toggle-hiding)
             ("C-c l"     . hs-hide-level))))
   (leaf hl-line
-    :config (global-hl-line-mode +1))
-  (leaf counsel
-    :ensure t
-    :defun ivy-re-builders-alist
-    :defvar ivy-re-builders-alist
-    :config
-    (setf (alist-get 'counsel-M-x ivy-re-builders-alist)
-          #'ivy--regex-ignore-order)
-    :custom ((counsel-yank-pop-separator . "\n────────\n")
-             (ivy-count-format . "(%d/%d) ")
-             (ivy-initial-inputs-alist . nil)
-             (ivy-use-virtual-buffers . t)
-             (ivy-wrap . t))
-    :bind (("C-:")
-           ("C-;")
-           ("C-; ;"   . ivy-switch-buffer)
-           ("C-; i"   . counsel-imenu)
-           ("C-; p"   . projectile-command-map)
-           ("C-x ;"   . ivy-switch-buffer)
-           ("C-x C-:" . ivy-switch-buffer)
-           ("C-x C-;" . ivy-switch-buffer)
-           ("C-x C-f" . counsel-find-file)
-	   ("C-x C-y" . counsel-yank-pop)
-	   (:ivy-minibuffer-map
-            ("TAB" . ivy-alt-done))
-           (:counsel-find-file-map
-            ("C-l" . counsel-up-directory)))
-    :config
-    (ivy-mode +1)
-    (counsel-mode +1)
-    (leaf ivy-prescient
-      :ensure t
-      :custom `((ivy-prescient-sort-commands
-                . '(:not counsel-yank-pop
-                         ivy-switch-buffer
-                         swiper-isearch
-                         swiper))
-                 (prescient-save-file
-                  . ,(expand-file-name ".prescient-save.el" user-emacs-directory)))
-      :config
-      (ivy-prescient-mode +1)
-      (prescient-persist-mode +1))
-    (leaf counsel-projectile
-      :require t
-      :ensure t
-      :bind ("M-t" . projectile-command-map)
-      :config (counsel-projectile-mode +1)))
+    :global-minor-mode global-hl-line-mode)
   (leaf paren
     :url http://0xcc.net/unimag/10/
     :config
