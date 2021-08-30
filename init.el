@@ -48,6 +48,8 @@
             (user-full-name . "Takeru Naito"))
   :config
   (defalias 'yes-or-no-p 'y-or-n-p)
+  (leaf async
+    :ensure t)
   (leaf cus-edit
     :doc "Just prevent appending to this file (not load at startup)."
     :custom `((custom-file . ,(locate-user-emacs-file ".custom.el"))))
@@ -209,6 +211,7 @@
     :custom ((open-junk-file-format . "~/.junk/%Y/%m/%d-%H%M%S.")
              (open-junk-file-find-file-function . 'find-file)))
   (leaf paradox
+    :after async
     :ensure t
     :custom `((paradox-execute-asynchronously . t)
               (paradox-github-token
