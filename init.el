@@ -417,7 +417,8 @@
     (scroll-bar-mode -1)
     :global-minor-mode column-number-mode)
   (leaf select
-    :custom (select-enable-primary . t))
+    :custom ((select-enable-primary . t)
+             (selection-coding-system . 'utf-8)))
   (leaf wgrep
     :ensure t
     :custom ((wgrep-auto-save-buffer . t)))
