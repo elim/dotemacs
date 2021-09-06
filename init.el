@@ -635,6 +635,7 @@
     (persistent-scratch-setup-default))
   (leaf projectile
     :ensure t
+    :bind (("M-t" . projectile-command-map))
     :global-minor-mode t
     :custom (projectile-enable-caching . t)
     :blackout projectile-mode)
