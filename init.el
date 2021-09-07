@@ -44,6 +44,7 @@
   :custom `((enable-recursive-minibuffers . t)
             (gc-cons-threshold . ,(* 128 1024 1024))
             (select-enable-clipboard . t)
+            (use-dialog-box . nil)
             (user-mail-address . "takeru.naito@gmail.com")
             (user-full-name . "Takeru Naito"))
   :config
