@@ -211,6 +211,8 @@
     (keyboard-translate ?\C-h ?\C-?)
     :global-minor-mode line-number-mode transient-mark-mode
     :hook (before-save-hook . elim:auto-delete-trailing-whitespace))
+  (leaf timer-list
+    :config (put 'list-timers 'disabled nil))
   (leaf vc
     :custom (vc-follow-symlinks . t)))
 
