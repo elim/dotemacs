@@ -43,7 +43,6 @@
 (leaf *environments
   :custom `((enable-recursive-minibuffers . t)
             (gc-cons-threshold . ,(* 128 1024 1024))
-            (select-enable-clipboard . t)
             (use-dialog-box . nil)
             (user-mail-address . "takeru.naito@gmail.com")
             (user-full-name . "Takeru Naito"))
@@ -421,6 +420,7 @@
     :global-minor-mode column-number-mode)
   (leaf select
     :custom ((select-enable-primary . nil)
+             (select-enable-clipboard . t)
              (selection-coding-system . 'utf-8)))
   (leaf wgrep
     :ensure t
