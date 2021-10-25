@@ -294,8 +294,11 @@
                          "api.github.com" "elim^paradox"))))
     :config (paradox-enable))
   (leaf recentf
-    :custom `((recentf-max-saved-items . 512)
-              (recentf-save-file . ,(locate-user-emacs-file ".recentf.el"))))
+    :defvar recentf-auto-save-timer
+    :custom `((recentf-auto-save-timer
+               . ,(run-with-idle-timer 30 t #'recentf-save-list))
+              (recentf-max-saved-items . 512)
+              (recentf-save-file . ,(locate-user-emacs-file ".recentf.el")))
     :global-minor-mode t)
   (leaf sort
     :config
