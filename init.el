@@ -229,6 +229,38 @@
     :bind ("C-x C-b" . bs-show))
   (leaf clipmon
     :ensure t
+    :preface
+    (defun elim:advice:github-markdown-link-reformatter (args)
+      "Reformat a markdown form links of GitHub Pull Request, Issue
+      and Discussions for my format.
+
+Input example:
+[Extract the logic from the list recent repositories function by elim · Pull Request #102 · elim/dotfiles](https://github.com/elim/dotfiles/pull/102)
+
+Output example:
+[#102 Extract the logic from the list recent repositories function](https://github.com/elim/dotfiles/pull/102)"
+
+      (let
+          ((str (car args)))
+        (if (string-match "https://github.com" str)
+            (progn
+              (setq str (with-temp-buffer
+                          (insert (car args))
+                          (goto-char (point-min))
+                          (while (re-search-forward
+                                  "\\[\\(.+\\)\\(#[0-9]*\\)" nil t)
+                            (replace-match "\[\\2 \\1"))
+                          (buffer-string)))
+              (setq str (replace-regexp-in-string " · .*]" "]"                  str))
+              (setq str (replace-regexp-in-string "by .* Pull Request *" ""     str))
+              (setq str (replace-regexp-in-string "(· Issue|· Discussion) *" "" str))
+              (setq str (replace-regexp-in-string "\pt] *" "\pt] "              str))
+              (gui-set-selection 'CLIPBOARD str)
+              (list str))
+          args)))
+    :advice
+    (:filter-args clipmon--on-clipboard-change
+                  elim:advice:github-markdown-link-reformatter)
     :hook (after-init-hook . clipmon-mode-start))
   (leaf dabbrev
     :custom ((dabbrev-abbrev-skip-leading-regexp . "\\$")))
