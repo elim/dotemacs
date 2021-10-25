@@ -397,6 +397,11 @@
   (leaf menu-bar
     :if (eq system-type 'darwin)
     :global-minor-mode t)
+  (leaf mouse
+    :bind (("C-<down-mouse-1>" . nil)
+           ("C-<drag-mouse-1>" . nil)
+           ("S-<down-mouse-1>" . nil)
+           ("S-<drag-mouse-1>" . nil)))
   (leaf nyan-mode
     :ensure t
     :leaf-defer nil
