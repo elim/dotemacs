@@ -265,9 +265,9 @@
     :bind ("C-x C-b" . bs-show))
   (leaf clipmon
     :ensure t
-    :defun elim:advice:github-markdown-link-reformatter
+    :defun elim:advice:reformat-github-markdown-link elim:reformat-github-markdown-link
     :preface
-    (defun elim:advice:github-markdown-link-reformatter (args)
+    (defun elim:reformat-github-markdown-link (str)
       "Reformat a markdown form links of GitHub Pull Request, Issue
       and Discussions for my format.
 
@@ -276,25 +276,25 @@ Input example:
 
 Output example:
 [#102 Extract the logic from the list recent repositories function](https://github.com/elim/dotfiles/pull/102)"
+      (when (string-match "^\\[.+?\\](https://github.com.+?)$" str)
+        (setq str (with-temp-buffer
+                    (insert str)
+                    (goto-char (point-min))
+                    (while (re-search-forward
+                            "\\[\\(.*\\)\\(#[0-9]*\\)" nil t)
+                      (replace-match "\[\\2 \\1"))
+                    (buffer-string)))
+        (setq str (replace-regexp-in-string "by .* Pull Request *" ""     str))
+        (setq str (replace-regexp-in-string "(· Issue|· Discussion) *" "" str))
+        (setq str (replace-regexp-in-string " · .*]" "]"                  str))
+        (setq str (replace-regexp-in-string "\pt] *" "\pt] "              str)))
+      str)
 
-      (let
-          ((str (car args)))
-        (if (string-match "https://github.com" str)
-            (progn
-              (setq str (with-temp-buffer
-                          (insert (car args))
-                          (goto-char (point-min))
-                          (while (re-search-forward
-                                  "\\[\\(.+\\)\\(#[0-9]*\\)" nil t)
-                            (replace-match "\[\\2 \\1"))
-                          (buffer-string)))
-              (setq str (replace-regexp-in-string " · .*]" "]"                  str))
-              (setq str (replace-regexp-in-string "by .* Pull Request *" ""     str))
-              (setq str (replace-regexp-in-string "(· Issue|· Discussion) *" "" str))
-              (setq str (replace-regexp-in-string "\pt] *" "\pt] "              str))
-              (gui-set-selection 'CLIPBOARD str)
-              (list str))
-          args)))
+    (defun elim:advice:reformat-github-markdown-link (args)
+      (let*
+          ((raw-str (car args))
+           (formatted-str (elim:reformat-github-markdown-link raw-str)))
+        (list formatted-str)))
     :advice
     (:filter-args clipmon--on-clipboard-change
                   elim:advice:github-markdown-link-reformatter)
