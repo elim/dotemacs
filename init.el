@@ -40,6 +40,30 @@
     ;; initialize leaf-keywords.el
     (leaf-keywords-init)))
 
+(leaf tab-bar
+  :doc "frame-local tabs with named persistent window configurations"
+  :tag "builtin"
+  :added "2022-02-09"
+  :bind-keymap ("C-z" . tab-bar-map)
+  :bind `(("M-{" . tab-previous)
+          ("M-}" . tab-next)
+          (:tab-bar-map
+           ("k" . tab-close)
+           ("c" . tab-new)
+           ("C-k" . tab-close)
+           ("n" . tab-next)
+           ("p" . tab-previous)
+           ("C-SPC" . tab-recent)
+           ,@(mapcar (lambda (i)
+                       (cons (number-to-string i) 'tab-select))
+                     (number-sequence 0 9))))
+  :custom ((tab-bar-new-tab-choice . "*scratch*")
+           (tab-bar-tab-hints . t))
+  :custom-face
+  ((tab-bar-tab .          '((nil (:foreground "#112" :background "#ccc" :underline nil :box nil))))
+   (tab-bar-tab-inactive . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil)))))
+  :global-minor-mode t)
+
 (leaf *environments
   :custom `((enable-recursive-minibuffers . t)
             (gc-cons-threshold . ,(* 128 1024 1024))
@@ -406,27 +430,6 @@ Output example:
     ((mode-line  . '((t (:height 160))))
      (mode-line-inactive . '((t (:height 160)))))
     :config (doom-modeline-mode))
-  (leaf elscreen
-    :ensure t
-    :bind (("M-{" . elscreen-previous)
-           ("M-}" . elscreen-next))
-    :leaf-defer nil
-    :custom `((elscreen-set-prefix-key . ,(kbd "C-z"))
-              (elscreen-tab-display-control . nil)
-              (elscreen-tab-display-kill-screen . nil)
-              (elscreen-display-tab . t))
-    :custom-face ((elscreen-tab-background-face     . '((nil (:foreground "#112" :background "#ccc" :underline nil :box nil))))
-                  (elscreen-tab-control-face        . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil))))
-                  (elscreen-tab-current-screen-face . '((nil (:foreground "#ccc" :background "#336" :underline nil :box nil))))
-                  (elscreen-tab-other-screen-face   . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil)))))
-    :config
-    (mapc (lambda (i)
-            (global-set-key (kbd (format "M-%d" i))
-                            `(lambda ()
-                               (interactive)
-                               (elscreen-goto ,i))))
-          (number-sequence 0 9))
-    (elscreen-start))
   (leaf executable
     :config
     (defun elim:executable-make-buffer-file-executable-if-script-p ()
