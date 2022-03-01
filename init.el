@@ -64,6 +64,17 @@
    (tab-bar-tab-inactive . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil)))))
   :global-minor-mode t)
 
+(leaf vertico-posframe
+  :doc "Using posframe to show Vertico"
+  :req "emacs-26.0" "posframe-1.1.4" "vertico-0.13.0"
+  :tag "vertico" "matching" "convenience" "abbrev" "emacs>=26.0"
+  :url "https://github.com/tumashu/vertico-posframe"
+  :added "2022-03-02"
+  :emacs>= 26.0
+  :ensure t
+  :after posframe vertico
+  :global-minor-mode t)
+
 (leaf *environments
   :custom `((enable-recursive-minibuffers . t)
             (gc-cons-threshold . ,(* 128 1024 1024))
