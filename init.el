@@ -265,7 +265,7 @@
     :bind ("C-x C-b" . bs-show))
   (leaf clipmon
     :ensure t
-    :defun elim:advice:github-markdown-link-reformatter elim:github-markdown-link-to-plist elim:reformat-github-markdown-link
+    :defun elim:github-markdown-link-to-plist elim:reformat-github-markdown-link
     :preface
     (cl-defun elim:github-markdown-link-to-plist (string)
       "Convert a Markdown-style link STRING to a plist. STRING should be a link to a
