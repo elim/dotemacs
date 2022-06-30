@@ -312,14 +312,16 @@ Output example:
             (_
              (format "[%s#%s %s](%s)" repository number title url))))))
 
-    (defun elim:advice:reformat-github-markdown-link (args)
+    (defun elim:advice:clipmon--on-clipboard-change (f &rest args)
       (let*
           ((raw-str (car args))
-           (formatted-str (elim:reformat-github-markdown-link raw-str)))
-        (list formatted-str)))
+           (formatted-str (elim:reformat-github-markdown-link raw-str))
+           (select-enable-clipboard (not (string= raw-str formatted-str))))
+        (apply f (list formatted-str))))
+
     :advice
-    (:filter-args clipmon--on-clipboard-change
-                  elim:advice:github-markdown-link-reformatter)
+    (:around clipmon--on-clipboard-change
+             elim:advice:clipmon--on-clipboard-change)
     :hook (after-init-hook . clipmon-mode-start)
     :config
     (when (fboundp 'gui-get-selection)
