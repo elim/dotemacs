@@ -320,7 +320,14 @@ Output example:
     :advice
     (:filter-args clipmon--on-clipboard-change
                   elim:advice:github-markdown-link-reformatter)
-    :hook (after-init-hook . clipmon-mode-start))
+    :hook (after-init-hook . clipmon-mode-start)
+    :config
+    (when (fboundp 'gui-get-selection)
+      (defun clipmon--get-selection ()
+        "Get the clipboard contents. With a hack for Mozilla products, to set
+         UTF8_STRING explicitly."
+        (ignore-errors (gui-get-selection 'CLIPBOARD 'UTF8_STRING))))
+    )
   (leaf dabbrev
     :custom ((dabbrev-abbrev-skip-leading-regexp . "\\$")))
   (leaf desktop
