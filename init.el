@@ -267,7 +267,7 @@
     :ensure t
     :defun elim:advice:reformat-github-markdown-link elim:reformat-github-markdown-link
     :preface
-    (defun elim:reformat-github-markdown-link (str)
+    (cl-defun elim:reformat-github-markdown-link (str)
       "Reformat a markdown form links of GitHub Pull Request, Issue
       and Discussions for my format.
 
@@ -276,19 +276,20 @@ Input example:
 
 Output example:
 [#102 Extract the logic from the list recent repositories function](https://github.com/elim/dotfiles/pull/102)"
-      (when (string-match "^\\[.+?\\](https://github.com.+?)$" str)
-        (setq str (with-temp-buffer
-                    (insert str)
-                    (goto-char (point-min))
-                    (while (re-search-forward
-                            "\\[\\(.*\\)\\(#[0-9]*\\)" nil t)
-                      (replace-match "\[\\2 \\1"))
-                    (buffer-string)))
-        (setq str (replace-regexp-in-string "by .* Pull Request *" ""     str))
-        (setq str (replace-regexp-in-string "(· Issue|· Discussion) *" "" str))
-        (setq str (replace-regexp-in-string " · .*]" "]"                  str))
-        (setq str (replace-regexp-in-string "\pt] *" "\pt] "              str)))
-      str)
+      (unless (string-match "^\\[.+?\\](https://github.com.+?)$" str)
+        (cl-return-from elim:reformat-github-markdown-link str))
+
+      (setq str (with-temp-buffer
+                  (insert str)
+                  (goto-char (point-min))
+                  (while (re-search-forward
+                          "\\[\\(.*\\)\\(#[0-9]*\\)" nil t)
+                    (replace-match "\[\\2 \\1"))
+                  (buffer-string)))
+      (setq str (replace-regexp-in-string "by .* Pull Request *" ""     str))
+      (setq str (replace-regexp-in-string "(· Issue|· Discussion) *" "" str))
+      (setq str (replace-regexp-in-string " · .*]" "]"                  str))
+      (setq str (replace-regexp-in-string "\pt] *" "\pt] "              str)))
 
     (defun elim:advice:reformat-github-markdown-link (args)
       (let*
