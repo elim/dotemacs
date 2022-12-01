@@ -267,7 +267,7 @@
     :ensure t
     :defun elim:advice:reformat-github-markdown-link elim:reformat-github-markdown-link
     :preface
-    (cl-defun elim:reformat-github-markdown-link (str)
+    (cl-defun elim:reformat-github-markdown-link (str &optional variant)
       "Reformat a markdown form links of GitHub Pull Request, Issue
       and Discussions for my format.
 
@@ -287,7 +287,12 @@ Output example:
             (repository   (match-string 4 str))
             (url          (match-string 5 str))
             (number       (match-string 6 str)))
-        (format "[%s#%s %s](%s)" repository number title url)))
+
+        (pcase variant
+          ('with-org
+           (format "[%s/%s#%s %s](%s)" organization repository number title url))
+          (_
+           (format "[%s#%s %s](%s)" repository number title url)))))
 
     (defun elim:advice:reformat-github-markdown-link (args)
       (let*
