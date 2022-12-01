@@ -272,10 +272,10 @@
       and Discussions for my format.
 
 Input example:
-[Extract the logic from the list recent repositories function by elim · Pull Request #102 · elim/dotfiles](https://github.com/elim/dotfiles/pull/102)
+[Sample by elim · Pull Request #1 · elim/nowhere](https://github.com/elim/nowhere/pull/1)
 
 Output example:
-[#102 Extract the logic from the list recent repositories function](https://github.com/elim/dotfiles/pull/102)"
+[#1 Sample](https://github.com/elim/nowhere/pull/1)"
 
       (unless (string-match "^\\[\\(.+?\\)\\(?: by \\(.*?\\) · \\| · \\).*· \\(.*\\)/\\(.*\\)](\\(https.+/\\(.+\\)\\))$" str)
         (cl-return-from elim:reformat-github-markdown-link str))
