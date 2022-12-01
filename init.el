@@ -770,7 +770,9 @@ Google(with automatic language detection)."
     (:before undo-tree-visualize       elim:advice:undo-tree-visualize:before)
     (:after  undo-tree-visualizer-quit elim:advice:undo-tree-visualizer-quit:after)
     :leaf-defer nil
-    :custom (undo-tree-enable-undo-in-region . nil)
+    :custom ((undo-tree-enable-undo-in-region . nil)
+             (undo-tree-history-directory-alist
+              . `(("." . ,(expand-file-name "undo" user-emacs-directory)))))
     :blackout undo-tree-mode
     :config
     (defvar elim:before:auto-save-visited-mode nil
