@@ -275,7 +275,7 @@ Input example:
 [Sample by elim · Pull Request #1 · elim/nowhere](https://github.com/elim/nowhere/pull/1)
 
 Output example:
-[#1 Sample](https://github.com/elim/nowhere/pull/1)"
+[nowhere#1 Sample](https://github.com/elim/nowhere/pull/1)"
 
       (unless (string-match "^\\[\\(.+?\\)\\(?: by \\(.*?\\) · \\| · \\).*· \\(.*\\)/\\(.*\\)](\\(https.+/\\(.+\\)\\))$" str)
         (cl-return-from elim:reformat-github-markdown-link str))
@@ -287,7 +287,7 @@ Output example:
             (repository   (match-string 4 str))
             (url          (match-string 5 str))
             (number       (match-string 6 str)))
-        (format "[#%s %s](%s)" number title url)))
+        (format "[%s#%s %s](%s)" repository number title url)))
 
     (defun elim:advice:reformat-github-markdown-link (args)
       (let*
