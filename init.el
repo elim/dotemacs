@@ -276,20 +276,18 @@ Input example:
 
 Output example:
 [#102 Extract the logic from the list recent repositories function](https://github.com/elim/dotfiles/pull/102)"
-      (unless (string-match "^\\[.+?\\](https://github.com.+?)$" str)
+
+      (unless (string-match "^\\[\\(.+?\\)\\(?: by \\(.*?\\) · \\| · \\).*· \\(.*\\)/\\(.*\\)](\\(https.+/\\(.+\\)\\))$" str)
         (cl-return-from elim:reformat-github-markdown-link str))
 
-      (setq str (with-temp-buffer
-                  (insert str)
-                  (goto-char (point-min))
-                  (while (re-search-forward
-                          "\\[\\(.*\\)\\(#[0-9]*\\)" nil t)
-                    (replace-match "\[\\2 \\1"))
-                  (buffer-string)))
-      (setq str (replace-regexp-in-string "by .* Pull Request *" ""     str))
-      (setq str (replace-regexp-in-string "(· Issue|· Discussion) *" "" str))
-      (setq str (replace-regexp-in-string " · .*]" "]"                  str))
-      (setq str (replace-regexp-in-string "\pt] *" "\pt] "              str)))
+      (let (
+            (title        (match-string 1 str))
+            (author       (match-string 2 str))
+            (organization (match-string 3 str))
+            (repository   (match-string 4 str))
+            (url          (match-string 5 str))
+            (number       (match-string 6 str)))
+        (format "[#%s %s](%s)" number title url)))
 
     (defun elim:advice:reformat-github-markdown-link (args)
       (let*
