@@ -578,10 +578,6 @@ Output example:
                     ("\\.zip\\'" "unzip -l")
                     ("\\.\\(g\\|\\) z\\'" "zcat"))))))
   (leaf diff-mode
-    :preface
-    (defun elim:diff-mode-refine-automatically ()
-      (diff-auto-refine-mode t)) ; Highlight by character unit.
-    :hook (diff-mode-hook . elim:diff-mode-refine-automatically)
     :custom-face
     ((diff-added         . '((nil (:foreground "white" :background "dark green"))))
      (diff-removed       . '((nil (:foreground "white" :background "dark red"))))
