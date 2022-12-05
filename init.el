@@ -122,8 +122,7 @@
         (if at-point
             (consult-line (thing-at-point 'symbol))
           (consult-line)))
-      :bind (([remap apropos-command]               . consult-apropos)             ; F1 a
-             ([remap switch-to-buffer]              . consult-buffer)              ; C-x b
+      :bind (([remap switch-to-buffer]              . consult-buffer)              ; C-x b
              ([remap switch-to-buffer-other-window] . consult-buffer-other-window) ; C-x 4 b
              ([remap display-buffer-other-frame]    . consult-buffer-other-frame)  ; C-x 5 b
              ([remap repeat-complex-command]        . consult-complex-command)     ; C-x C-:
