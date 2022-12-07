@@ -617,8 +617,8 @@ Output example:
     :defun google-translate-translate
     :bind (("C-c t" . google-translate-enja-or-jaen))
     :custom (google-translate-backend-method . 'curl)
+    :url http://emacs.rubikitch.com/google-translate/
     :config
-    ;; http://emacs.rubikitch.com/google-translate/
     (defvar google-translate-english-chars "[:ascii:]"
       "If the target string consists of that pattern, it is assumed to be English.")
     (defun google-translate-enja-or-jaen (&optional string)
