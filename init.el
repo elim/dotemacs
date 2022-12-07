@@ -8,7 +8,7 @@
 
 (defun elim:first-existing-path-in (list)
   "Return first existing path in LIST."
-  (car (remove-if-not #'file-exists-p list)))
+  (car (cl-remove-if-not #'file-exists-p list)))
 
 ;; this enables this running method
 ;;   emacs -q -l ~/.debug.emacs.d/init.el
@@ -141,6 +141,7 @@
       :custom (vertico-count . 20)
       :global-minor-mode t))
   (leaf *fonts
+    :defun elim:set-text-height
     :preface
     (defun elim:set-text-height (height)
       "Set to the HEIGHT and the family to the default face and some faces."
@@ -192,6 +193,7 @@
      (ns-right-alternate-modifier . 'hyper)
      (ns-right-command-modifier   . 'super)))
   (leaf simple
+    :defun elim:editorconfig-mode-enabled-p
     :preface
     (defvar elim:auto-delete-trailing-whitespace-enable-p t)
     (defun elim:editorconfig-mode-enabled-p ()
@@ -229,6 +231,7 @@
     :bind ("C-x C-b" . bs-show))
   (leaf clipmon
     :ensure t
+    :defun elim:advice:github-markdown-link-reformatter
     :preface
     (defun elim:advice:github-markdown-link-reformatter (args)
       "Reformat a markdown form links of GitHub Pull Request, Issue
@@ -293,6 +296,7 @@ Output example:
     :custom `(forge-database-file . ,(locate-user-emacs-file ".forge-database.sqlite")))
   (leaf dictionary
     :if (eq system-type 'darwin)
+    :defun elim:dictionary-search
     :preface
     (defun elim:dictionary-search (word)
       (browse-url
@@ -333,10 +337,12 @@ Output example:
               (recentf-save-file . ,(locate-user-emacs-file ".recentf.el")))
     :global-minor-mode t)
   (leaf sort
+    :defun elim:sort-lines-nocase
     :config
     (defun elim:sort-lines-nocase ()
       "Ignore case when the sort the lines."
       (interactive)
+      (defvar sort-fold-case)
       (let ((sort-fold-case t))
         (call-interactively 'sort-lines)))
     (defalias 'sort-lines-nocase #'elim:sort-lines-nocase))
@@ -445,6 +451,7 @@ Output example:
              (nyan-wavy-trail . t)))
   (leaf popwin
     :ensure t
+    :defvar popwin:special-display-config
     :require t
     :custom ((popwin:popup-window-position . 'bottom)
              (popwin:popup-window-height . 20))
@@ -568,7 +575,7 @@ Output example:
   (leaf editorconfig
     :ensure t
     :init
-    (defun elim:coordinate-editorconfig-with-web-mode (props)
+    (defun elim:coordinate-editorconfig-with-web-mode ()
       "When using web mode, leaves the code format to prettifiers."
       (when (derived-mode-p 'web-mode)
         (set-variable 'web-mode-script-padding 0)
@@ -598,6 +605,7 @@ Output example:
              (flyspell-use-meta-tab . nil)))
   (leaf google-translate
     :ensure t
+    :defun google-translate-translate
     :bind (("C-c t" . google-translate-enja-or-jaen))
     :custom (google-translate-backend-method . 'curl)
     :config
@@ -605,7 +613,8 @@ Output example:
     (defvar google-translate-english-chars "[:ascii:]"
       "If the target string consists of that pattern, it is assumed to be English.")
     (defun google-translate-enja-or-jaen (&optional string)
-      "Translates the region, sentence or STRING by Google(with automatic language detection)."
+      "Translates the region, sentence or STRING by
+Google(with automatic language detection)."
       (interactive)
       (setq string
             (cond ((stringp string) string)
@@ -692,6 +701,7 @@ Output example:
             html-mode-hook) . rainbow-mode))
   (leaf server
     :require t
+    :defun server-running-p
     :custom (server-window . 'pop-to-buffer)
     :config
     (unless (server-running-p) (server-start))
@@ -762,6 +772,7 @@ Output example:
 (leaf *major-modes
   :config
   (leaf cc-mode
+    :defun c-toggle-auto-hungry-state
     :preface
     (defun elim:c-mode-common-hook-func ()
       (c-set-style "bsd")
@@ -857,6 +868,7 @@ Output example:
   (leaf org :require org org-table)
   (leaf php-mode
     :ensure t
+    :defun php-enable-psr2-coding-style
     :bind (:php-mode-map
            ("C-c C-[" . beginning-of-defun)
            ("C-c C-]" . end-of-defun))
@@ -898,6 +910,7 @@ Output example:
     :config
     (leaf typescript-mode
       :ensure t
+      :defun company-mode-on
       :preface
       (defun elim:typescript-mode-hook-func ()
         (tide-setup)
@@ -911,6 +924,7 @@ Output example:
     :after flycheck
     :ensure t
     :doc "https://github.com/ananthakumaran/tide/tree/6faea517957f56467cac5be689277d6365f3aa1a#tsx"
+    :defun flycheck-add-mode
     :preface
     (defun elim:web-mode-hook-func ()
       (when (string-equal "tsx" (file-name-extension buffer-file-name))
