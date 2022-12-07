@@ -292,22 +292,24 @@ Input example:
 Output example:
 [nowhere#1 Sample](https://github.com/elim/nowhere/pull/1)"
 
-      (unless (string-match "^\\[\\(.+?\\)\\(?: by \\(.*?\\) · \\| · \\).*· \\(.*\\)/\\(.*\\)](\\(https.+/\\(.+\\)\\))$" str)
-        (cl-return-from elim:reformat-github-markdown-link str))
+      (let
+          ((plist (elim:github-markdown-link-to-plist str)))
 
-      (let (
-            (title        (match-string 1 str))
-            (author       (match-string 2 str))
-            (organization (match-string 3 str))
-            (repository   (match-string 4 str))
-            (url          (match-string 5 str))
-            (number       (match-string 6 str)))
+        (unless plist
+          (cl-return-from elim:reformat-github-markdown-link str))
 
-        (pcase variant
-          ('with-org
-           (format "[%s/%s#%s %s](%s)" organization repository number title url))
-          (_
-           (format "[%s#%s %s](%s)" repository number title url)))))
+        (let
+            ((organization (plist-get plist :organization))
+             (repository   (plist-get plist :repository))
+             (number       (plist-get plist :number))
+             (title        (plist-get plist :title))
+             (url          (plist-get plist :url)))
+
+          (pcase variant
+            ('with-org
+             (format "[%s/%s#%s %s](%s)" organization repository number title url))
+            (_
+             (format "[%s#%s %s](%s)" repository number title url))))))
 
     (defun elim:advice:reformat-github-markdown-link (args)
       (let*
