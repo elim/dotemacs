@@ -283,8 +283,9 @@
        :number       (match-string 6 string)))
 
     (cl-defun elim:reformat-github-markdown-link (str &optional variant)
-      "Reformat a markdown form links of GitHub Pull Request, Issue
-      and Discussions for my format.
+      "Reformat a title of a Markdown-style link STRING into identifier
+first. STRING should be a link to a GitHub pull request, issue, or
+discussion.
 
 Input example:
 [Sample by elim · Pull Request #1 · elim/nowhere](https://github.com/elim/nowhere/pull/1)
