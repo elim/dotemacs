@@ -265,8 +265,23 @@
     :bind ("C-x C-b" . bs-show))
   (leaf clipmon
     :ensure t
-    :defun elim:advice:reformat-github-markdown-link elim:reformat-github-markdown-link
+    :defun elim:advice:github-markdown-link-reformatter elim:github-markdown-link-to-plist elim:reformat-github-markdown-link
     :preface
+    (cl-defun elim:github-markdown-link-to-plist (string)
+      "Convert a Markdown-style link STRING to a plist. STRING should be a link to a
+ GitHub pull request, issue, or discussion."
+
+      (unless (string-match "^\\[\\(.+?\\)\\(?: by \\(.*?\\) · \\| · \\).*· \\(.*\\)/\\(.*\\)](\\(https.+/\\(.+\\)\\))$" string)
+        (cl-return-from elim:github-markdown-link-to-plist nil))
+
+      (list
+       :title        (match-string 1 string)
+       :author       (match-string 2 string)
+       :organization (match-string 3 string)
+       :repository   (match-string 4 string)
+       :url          (match-string 5 string)
+       :number       (match-string 6 string)))
+
     (cl-defun elim:reformat-github-markdown-link (str &optional variant)
       "Reformat a markdown form links of GitHub Pull Request, Issue
       and Discussions for my format.
