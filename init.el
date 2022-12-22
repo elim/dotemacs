@@ -40,6 +40,14 @@
     ;; initialize leaf-keywords.el
     (leaf-keywords-init)))
 
+(leaf browse-at-remote
+  :doc "Open github/gitlab/bitbucket/stash/gist/phab/sourcehut page from Emacs"
+  :req "f-0.17.2" "s-1.9.0" "cl-lib-0.5"
+  :tag "pagure" "sourcehut" "phabricator" "stash" "gist" "bitbucket" "gitlab" "github"
+  :url "https://github.com/rmuslimov/browse-at-remote"
+  :added "2022-12-22"
+  :ensure t)
+
 (leaf tab-bar
   :doc "frame-local tabs with named persistent window configurations"
   :tag "builtin"
