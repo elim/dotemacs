@@ -48,6 +48,12 @@
   :added "2022-12-22"
   :ensure t)
 
+(leaf comp
+  :doc "compilation of qLisp code into native code"
+  :tag "builtin" "lisp"
+  :added "2022-12-22"
+  :custom ((native-comp-async-report-warnings-errors . 'silent)))
+
 (leaf tab-bar
   :doc "frame-local tabs with named persistent window configurations"
   :tag "builtin"
