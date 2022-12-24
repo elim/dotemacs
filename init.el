@@ -70,6 +70,15 @@
   :custom-face
   ((tab-bar-tab .          '((nil (:foreground "#112" :background "#ccc" :underline nil :box nil))))
    (tab-bar-tab-inactive . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil)))))
+
+(leaf topsy
+  :doc "Simple sticky header"
+  :req "emacs-26.3"
+  :tag "convenience" "emacs>=26.3"
+  :url "https://github.com/alphapapa/topsy.el"
+  :added "2022-12-24"
+  :emacs>= 26.3
+  :ensure t
   :global-minor-mode t)
 
 (leaf vertico-posframe
