@@ -74,8 +74,9 @@
   :custom ((tab-bar-new-tab-choice . "*scratch*")
            (tab-bar-tab-hints . t))
   :custom-face
-  ((tab-bar-tab .          '((nil (:foreground "#112" :background "#ccc" :underline nil :box nil))))
-   (tab-bar-tab-inactive . '((nil (:foreground "#ccc" :background "#112" :underline nil :box nil)))))
+  ((tab-bar-tab .          '((nil (:foreground "#112" :background "#ccc"))))
+   (tab-bar-tab-inactive . '((nil (:foreground "#ccc" :background "#112")))))
+  :global-minor-mode t)
 
 (leaf topsy
   :doc "Simple sticky header"
