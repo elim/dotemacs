@@ -6,6 +6,8 @@
 (set-variable 'init-file-debug t)
 (set-variable 'load-prefer-newer t)
 
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
 (defun elim:first-existing-path-in (list)
   "Return first existing path in LIST."
   (car (cl-remove-if-not #'file-exists-p list)))
@@ -53,6 +55,13 @@
   :tag "builtin" "lisp"
   :added "2022-12-22"
   :custom ((native-comp-async-report-warnings-errors . 'silent)))
+
+(leaf reformat-github-markdown-link
+  :commands reformat-github-markdown-link
+  :doc "self-made"
+  :tag "out-of-MELPA"
+  :added "2022-12-24"
+  :custom ((rgml-reformat-style . 'with-repository)))
 
 (leaf tab-bar
   :doc "frame-local tabs with named persistent window configurations"
@@ -289,57 +298,12 @@
     :bind ("C-x C-b" . bs-show))
   (leaf clipmon
     :ensure t
-    :defun elim:github-markdown-link-to-plist elim:reformat-github-markdown-link
+    :defun reformat-github-markdown-link
     :preface
-    (cl-defun elim:github-markdown-link-to-plist (string)
-      "Convert a Markdown-style link STRING to a plist. STRING should be a link to a
- GitHub pull request, issue, or discussion."
-
-      (unless (string-match "^\\[\\(.+?\\)\\(?: by \\(.*?\\) · \\| · \\).*· \\(.*\\)/\\(.*\\)](\\(https.+/\\(.+\\)\\))$" string)
-        (cl-return-from elim:github-markdown-link-to-plist nil))
-
-      (list
-       :title        (match-string 1 string)
-       :author       (match-string 2 string)
-       :organization (match-string 3 string)
-       :repository   (match-string 4 string)
-       :url          (match-string 5 string)
-       :number       (match-string 6 string)))
-
-    (cl-defun elim:reformat-github-markdown-link (str &optional variant)
-      "Reformat a title of a Markdown-style link STRING into identifier
-first. STRING should be a link to a GitHub pull request, issue, or
-discussion.
-
-Input example:
-[Sample by elim · Pull Request #1 · elim/nowhere](https://github.com/elim/nowhere/pull/1)
-
-Output example:
-[nowhere#1 Sample](https://github.com/elim/nowhere/pull/1)"
-
-      (let
-          ((plist (elim:github-markdown-link-to-plist str)))
-
-        (unless plist
-          (cl-return-from elim:reformat-github-markdown-link str))
-
-        (let
-            ((organization (plist-get plist :organization))
-             (repository   (plist-get plist :repository))
-             (number       (plist-get plist :number))
-             (title        (plist-get plist :title))
-             (url          (plist-get plist :url)))
-
-          (pcase variant
-            ('with-org
-             (format "[%s/%s#%s %s](%s)" organization repository number title url))
-            (_
-             (format "[%s#%s %s](%s)" repository number title url))))))
-
     (defun elim:advice:clipmon--on-clipboard-change (f &rest args)
       (let*
           ((raw-str (car args))
-           (formatted-str (elim:reformat-github-markdown-link raw-str))
+           (formatted-str (reformat-github-markdown-link raw-str))
            (select-enable-clipboard (not (string= raw-str formatted-str))))
         (apply f (list formatted-str))))
 
