@@ -603,7 +603,7 @@
   (leaf editorconfig
     :ensure t
     :init
-    (defun elim:coordinate-editorconfig-with-web-mode ()
+    (defun elim:coordinate-editorconfig-with-web-mode (_props)
       "When using web mode, leaves the code format to prettifiers."
       (when (derived-mode-p 'web-mode)
         (set-variable 'web-mode-script-padding 0)
