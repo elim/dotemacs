@@ -264,7 +264,7 @@
     :preface
     (defvar elim:auto-delete-trailing-whitespace-enable-p t)
     (defun elim:editorconfig-mode-enabled-p ()
-      (not (not (memq 'editorconfig-mode (mapcar #'car minor-mode-alist)))))
+      (assoc 'editorconfig-mode minor-mode-alist))
     (defun elim:auto-delete-trailing-whitespace ()
       (and elim:auto-delete-trailing-whitespace-enable-p
            (not (elim:editorconfig-mode-enabled-p))
