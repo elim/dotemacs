@@ -374,14 +374,6 @@
     :bind (("C-x C-z" . open-junk-file))
     :custom ((open-junk-file-format . "~/.junk/%Y/%m/%d-%H%M%S.")
              (open-junk-file-find-file-function . 'find-file)))
-  (leaf paradox
-    :after async
-    :ensure t
-    :custom `((paradox-execute-asynchronously . t)
-              (paradox-github-token
-               . ,(cadr (auth-source-user-and-password
-                         "api.github.com" "elim^paradox"))))
-    :config (paradox-enable))
   (leaf recentf
     :defvar recentf-auto-save-timer
     :custom `((recentf-auto-save-timer
