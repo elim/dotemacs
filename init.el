@@ -128,6 +128,13 @@
   :after posframe vertico
   :global-minor-mode t)
 
+(leaf window
+    :doc "GNU Emacs window commands aside from those written in C"
+    :tag "builtin" "internal"
+    :added "2023-04-18"
+    :config
+    (put 'scroll-left 'disabled nil))
+
 (leaf *environments
   :custom `((enable-recursive-minibuffers . t)
             (gc-cons-threshold . ,(* 128 1024 1024))
