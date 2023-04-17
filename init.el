@@ -66,6 +66,16 @@
   :ensure t
   :after compat)
 
+(leaf nix-mode
+  :doc "Major mode for editing .nix files"
+  :req "emacs-25.1" "magit-section-0" "transient-0.3"
+  :tag "unix" "tools" "languages" "nix" "emacs>=25.1"
+  :url "https://github.com/NixOS/nix-mode"
+  :added "2023-03-28"
+  :emacs>= 25.1
+  :ensure t
+  :after magit-section)
+
 (leaf reformat-github-markdown-link
   :commands reformat-github-markdown-link
   :doc "self-made"
