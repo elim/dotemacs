@@ -56,6 +56,16 @@
   :added "2022-12-22"
   :custom ((native-comp-async-report-warnings-errors . 'silent)))
 
+(leaf git-modes
+  :doc "Major modes for editing Git configuration files"
+  :req "emacs-25.1" "compat-29.1.3.4"
+  :tag "git" "vc" "convenience" "emacs>=25.1"
+  :url "https://github.com/magit/git-modes"
+  :added "2023-04-14"
+  :emacs>= 25.1
+  :ensure t
+  :after compat)
+
 (leaf reformat-github-markdown-link
   :commands reformat-github-markdown-link
   :doc "self-made"
@@ -816,7 +826,6 @@ Google(with automatic language detection)."
   (leaf feature-mode
     :ensure t
     :after org org-table)
-  (leaf gitattributes-mode :ensure t)
   (leaf gitconfig-mode :ensure t)
   (leaf gitignore-mode :ensure t)
   (leaf go-mode
