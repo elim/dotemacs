@@ -18,7 +18,7 @@
 Matches REGEXP to STRING, allocates NAMES to matches, and returns
 them in alist."
   (unless (string-match regexp string)
-    (cl-return-from string-match-to-alist nil))
+    (cl-return-from rgml-string-match-to-alist nil))
 
   (let ((index 1) (match) (alist))
     (dolist (name names alist)
