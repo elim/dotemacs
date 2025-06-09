@@ -872,10 +872,11 @@ Google(with automatic language detection)."
     :ensure t
     :mode (("\\.md\\'" "\\ISSUE_EDITMSG\\'") . gfm-mode)
     :bind (:markdown-mode-map
-           ("C-c 1" . markdown-insert-header-atx-1)
-           ("C-c 2" . markdown-insert-header-atx-2)
-           ("C-c b" . markdown-insert-bold)
-           ("C-c i" . markdown-insert-italic))
+           ("<S-tab>" . markdown-shifttab)
+           ("C-c 1"   . markdown-insert-header-atx-1)
+           ("C-c 2"   . markdown-insert-header-atx-2)
+           ("C-c b"   . markdown-insert-bold)
+           ("C-c i"   . markdown-insert-italic))
     :custom
     ((markdown-asymmetric-header            . t)
      (markdown-fontify-code-blocks-natively . t)
