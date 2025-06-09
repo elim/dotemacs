@@ -943,13 +943,11 @@ Google(with automatic language detection)."
       :defun company-mode-on
       :preface
       (defun elim:typescript-mode-hook-func ()
-        (tide-setup)
         (flycheck-mode t)
         (set-variable 'flycheck-check-syntax-automatically '(save mode-enabled))
         (eldoc-mode t)
         (company-mode-on))
-      :hook (typescript-mode-hook . elim:typescript-mode-hook-func))
-    (leaf tide :ensure t))
+      :hook (typescript-mode-hook . elim:typescript-mode-hook-func)))
   (leaf web-mode
     :after flycheck
     :ensure t
