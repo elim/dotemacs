@@ -222,10 +222,15 @@
   (leaf *fonts
     :defun elim:set-text-height
     :preface
+    (leaf frame
+      :if window-system
+      :preface
+      (add-to-list 'default-frame-alist '(font . "HackGen Console NF-14")))
+
     (defun elim:set-text-height (height)
       "Set to the HEIGHT and the family to the default face and some faces."
-      (let* ((asciifont "Cica") ; ASCII fonts
-             (jpfont "Cica") ; Japanese fonts
+      (let* ((asciifont "HackGen NF") ; ASCII fonts
+             (jpfont "HackGen NF")    ; Japanese fonts
              (fontspec (font-spec :family asciifont :weight 'normal))
              (jp-fontspec (font-spec :family jpfont :weight 'normal)))
         (set-face-attribute 'default     nil :family asciifont :height height)
@@ -233,13 +238,15 @@
         (set-fontset-font nil 'japanese-jisx0213.2004-1 jp-fontspec)
         (set-fontset-font nil 'japanese-jisx0213-2      jp-fontspec)
         (set-fontset-font nil 'katakana-jisx0201        jp-fontspec)
-        (set-fontset-font nil '(#x0080 . #x024F)           fontspec)
-        (set-fontset-font nil '(#x0370 . #x03FF)           fontspec)))
+        (set-fontset-font nil '(#x0080  .  #x024F)         fontspec)
+        (set-fontset-font nil '(#x0370  .  #x03FF)         fontspec)
+        (set-fontset-font nil '(#x1f809 . #x1f80a)         fontspec)
+        (set-fontset-font nil 'unicode                     fontspec)))
     (defun elim:change-interactive-text-height ()
       (interactive)
       (let
           ((height (face-attribute 'default :height))
-           (step 10) (char nil))
+           (step 1) (char nil))
         (catch 'end:flag
           (while t
             (message "change text height. p:up n:down height:%s" height)
@@ -258,8 +265,9 @@
      ((eq window-system 'ns)
       (set-variable 'ns-antialias-text t)
       (elim:set-text-height 180))
-     ((eq window-system 'x)
-      (elim:set-text-height 160))))
+     ((or (eq window-system 'x)
+          (eq window-system 'pgtk))
+      (elim:set-text-height 129))))
   (leaf ns
     :if (featurep 'ns)
     :custom
