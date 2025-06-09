@@ -783,7 +783,10 @@ Google(with automatic language detection)."
     :leaf-defer nil
     :custom ((undo-tree-enable-undo-in-region . nil)
              (undo-tree-history-directory-alist
-              . `(("." . ,(expand-file-name "undo" user-emacs-directory)))))
+              . `(("." . ,(expand-file-name "undo" user-emacs-directory))))
+             (undo-tree-visualizer-diff . t)
+             (undo-tree-visualizer-timestamp . t))
+
     :blackout undo-tree-mode
     :config
     (defvar elim:before:auto-save-visited-mode nil
