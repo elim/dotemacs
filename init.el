@@ -6,10 +6,6 @@
 (set-variable 'init-file-debug t)
 (set-variable 'load-prefer-newer t)
 
-(defun elim:first-existing-path-in (list)
-  "Return first existing path in LIST."
-  (car (cl-remove-if-not #'file-exists-p list)))
-
 ;; this enables this running method
 ;;   emacs -q -l ~/.debug.emacs.d/init.el
 (eval-and-compile
