@@ -413,8 +413,9 @@
            (truncate-lines . nil)
            (visible-bell . t))
   :config
-  (put 'narrow-to-region 'disabled nil)
   (put 'dired-find-alternate-file 'disabled nil)
+  (put 'narrow-to-region 'disabled nil)
+  (put 'set-goal-column 'disabled nil)
   (set-default 'indent-tabs-mode nil)
   (set-default 'cursor-in-non-selected-windows nil)
   (leaf buffer-move
