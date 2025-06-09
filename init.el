@@ -62,6 +62,12 @@
   :ensure t
   :after magit-section)
 
+(leaf so-long
+  :doc "Say farewell to performance problems with minified code."
+  :tag "builtin"
+  :added "2024-08-24"
+  :custom ((global-so-long-mode . t)))
+
 (leaf tab-bar
   :doc "frame-local tabs with named persistent window configurations"
   :tag "builtin"
