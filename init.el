@@ -329,11 +329,12 @@
     :custom ((dabbrev-abbrev-skip-leading-regexp . "\\$")))
   (leaf desktop
     :defvar desktop-globals-to-save
-    :custom `((desktop-base-file-name . ,(locate-user-emacs-file ".desktop.el"))
-              (desktop-base-lock-name . ,(locate-user-emacs-file ".desktop.lock"))
-              (desktop-restore-eager  . 0)
-              (desktop-restore-frames . nil)
-              (desktop-save-mode      . +1))
+    :custom `((desktop-base-file-name      . ,(locate-user-emacs-file ".desktop.el"))
+              (desktop-base-lock-name      . ,(locate-user-emacs-file ".desktop.lock"))
+              (desktop-load-locked-desktop . 'check-pid)
+              (desktop-restore-eager       . 0)
+              (desktop-restore-frames      . nil)
+              (desktop-save-mode           . +1))
     :config
     (add-to-list 'desktop-globals-to-save 'extended-command-history)
     (add-to-list 'desktop-globals-to-save 'kill-ring)
