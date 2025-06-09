@@ -350,10 +350,6 @@
     ;; C-x V => Find Variable
     ;; C-x K => Find Function on Key
     (find-function-setup-keys))
-  (leaf forge
-    :after magit
-    :ensure t
-    :custom `(forge-database-file . ,(locate-user-emacs-file ".forge-database.sqlite")))
   (leaf dictionary
     :if (eq system-type 'darwin)
     :defun elim:dictionary-search
