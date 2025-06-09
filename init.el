@@ -6,8 +6,6 @@
 (set-variable 'init-file-debug t)
 (set-variable 'load-prefer-newer t)
 
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-
 (defun elim:first-existing-path-in (list)
   "Return first existing path in LIST."
   (car (cl-remove-if-not #'file-exists-p list)))
@@ -76,13 +74,6 @@
   :ensure t
   :after magit-section)
 
-(leaf reformat-github-markdown-link
-  :commands reformat-github-markdown-link
-  :doc "self-made"
-  :tag "out-of-MELPA"
-  :added "2022-12-24"
-  :custom ((rgml-reformat-style . 'with-repository)))
-
 (leaf tab-bar
   :doc "frame-local tabs with named persistent window configurations"
   :tag "builtin"
@@ -129,11 +120,11 @@
   :global-minor-mode t)
 
 (leaf window
-    :doc "GNU Emacs window commands aside from those written in C"
-    :tag "builtin" "internal"
-    :added "2023-04-18"
-    :config
-    (put 'scroll-left 'disabled nil))
+  :doc "GNU Emacs window commands aside from those written in C"
+  :tag "builtin" "internal"
+  :added "2023-04-18"
+  :config
+  (put 'scroll-left 'disabled nil))
 
 (leaf *environments
   :custom `((enable-recursive-minibuffers . t)
@@ -325,26 +316,13 @@
     :bind ("C-x C-b" . bs-show))
   (leaf clipmon
     :ensure t
-    :defun reformat-github-markdown-link
-    :preface
-    (defun elim:advice:clipmon--on-clipboard-change (f &rest args)
-      (let*
-          ((raw-str (car args))
-           (formatted-str (reformat-github-markdown-link raw-str))
-           (select-enable-clipboard (not (string= raw-str formatted-str))))
-        (apply f (list formatted-str))))
-
-    :advice
-    (:around clipmon--on-clipboard-change
-             elim:advice:clipmon--on-clipboard-change)
     :hook (after-init-hook . clipmon-mode-start)
     :config
     (when (fboundp 'gui-get-selection)
       (defun clipmon--get-selection ()
         "Get the clipboard contents. With a hack for Mozilla products, to set
          UTF8_STRING explicitly."
-        (ignore-errors (gui-get-selection 'CLIPBOARD 'UTF8_STRING))))
-    )
+        (ignore-errors (gui-get-selection 'CLIPBOARD 'UTF8_STRING)))))
   (leaf dabbrev
     :custom ((dabbrev-abbrev-skip-leading-regexp . "\\$")))
   (leaf desktop
