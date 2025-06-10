@@ -824,8 +824,6 @@ Google(with automatic language detection)."
   (leaf feature-mode
     :ensure t
     :after org org-table)
-  (leaf gitconfig-mode :ensure t)
-  (leaf gitignore-mode :ensure t)
   (leaf go-mode
     :ensure t
     :preface
