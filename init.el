@@ -735,25 +735,28 @@ Google(with automatic language detection)."
      'server-kill-buffer-query-function))
   (leaf *skk
     :config
+    (let
+        ((xdg-based-skk-user-directory
+          (expand-file-name "ddskk" (getenv "XDG_CONFIG_HOME"))))
     (leaf skk
       :ensure ddskk
       :bind* (("C-x C-j" . skk-mode)
               ("C-x t" . nil)
               ("C-x j" . nil))
-      :custom `((default-input-method . "japanese-skk")
-                (skk-user-directory . ,(expand-file-name "ddskk" (getenv "XDG_CONFIG_HOME")))
-                (skk-jisyo-code . 'utf-8)
-                (skk-count-private-jisyo-candidates-exactly . t)
-                (skk-share-private-jisyo . t)
-                (skk-server-host . "localhost")
-                (skk-server-portnum . 1178)
-                (skk-japanese-message-and-error . t)
-                (skk-kutouten-type . 'jp)
-                (skk-show-annotation . t)
-                (skk-henkan-strict-okuri-precedence . t)
-                (skk-check-okurigana-on-touroku . 'auto)
-                (skk-isearch-start-mode . 'latin)
-                (skk-search-sagyo-henkaku . t))
+      :custom ((default-input-method . "japanese-skk")
+               (skk-user-directory . xdg-based-skk-user-directory)
+               (skk-jisyo-code . 'utf-8)
+               (skk-count-private-jisyo-candidates-exactly . t)
+               (skk-share-private-jisyo . t)
+               (skk-server-host . "localhost")
+               (skk-server-portnum . 1178)
+               (skk-japanese-message-and-error . t)
+               (skk-kutouten-type . 'jp)
+               (skk-show-annotation . t)
+               (skk-henkan-strict-okuri-precedence . t)
+               (skk-check-okurigana-on-touroku . 'auto)
+               (skk-isearch-start-mode . 'latin)
+               (skk-search-sagyo-henkaku . t))
       :config
       (condition-case nil
           (skk-server-version)
@@ -766,7 +769,7 @@ Google(with automatic language detection)."
       (let
           ((skk-auto-save-jisyo-interval 6))
         (run-with-idle-timer skk-auto-save-jisyo-interval t
-                             #'(lambda () (skk-save-jisyo +1)))))
+                             #'(lambda () (skk-save-jisyo +1))))))
     (leaf ddskk-posframe
       :doc "Show Henkan tooltip for ddskk via posframe"
       :after skk
